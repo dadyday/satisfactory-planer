@@ -21,6 +21,8 @@ export default {
       return this.data ? this.data.aProduction : {};
     },
   },
+  methods: {
+  },
 }
 </script>
 

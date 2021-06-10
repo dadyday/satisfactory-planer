@@ -1,0 +1,252 @@
+import Building from './building';
+import go from 'gojs';
+var $ = go.GraphObject.make;
+var oLastPoint = new go.Point(0,0);
+
+export default class BuildingType {
+
+	static aList = {};
+
+	static register(prod, oBuildingType) {
+		this.aList[prod] = oBuildingType;
+	}
+	
+	static registerAll(aBuildingType) {
+		for (const [prod, oType] of Object.entries(aBuildingType)) {
+			this.register(prod, oType);
+		}
+	}
+
+	static get(prod) {
+		return this.aList[prod];
+	}
+
+	static each(func) {
+		Object.entries(this.aList).forEach(([key, value]) => func(key, value));
+	}
+	
+	name = '';
+	aSize = { width: 100, height: 100 };
+	aInput = [];
+	aOutput = [];
+	aLayer = [];
+	
+	constructor(name, w, h, aInput, aOutput, layer = 2) {
+		this.name = name;
+		this.aSize = { width: w*10, height: h*10 };
+		this.aInput = aInput;
+		this.aOutput = aOutput;
+		if (layer & 1) this.aLayer.push('ground');
+		if (layer & 2) this.aLayer.push('elevated');
+	}
+
+	createProd(oReceipe) {
+		const oBuildingType = this.get(oReceipe.prod);
+		return new Building(oBuildingType, oReceipe);
+	}
+
+
+	// *********** gojs helper
+
+	static getTemplateMap() {
+		const aMap = new go.Map();
+		this.each((prod, oProd) => {
+			aMap.add(prod, oProd.makeTemplate())
+		});
+		return aMap;
+	}
+
+	getNodeData(prod) {
+		return {
+			text: this.name,
+			type: prod,
+			fill: "#fb0",
+			layer: this.aLayer[0],
+		};
+	}
+	
+	makeTemplate() {
+		var oPanel = $(go.Panel, "Auto",
+			this.aSize,
+			$(go.Shape, "RoundedRectangle", {
+				fill: "#fb04", stroke: "#430", strokeWidth: 2,
+			}),
+			$(go.Panel, "Table",
+				$(go.TextBlock, this.name, {
+					row: 0,
+					margin: 3,
+					maxSize: new go.Size(80, NaN),
+					stroke: "white",
+					font: "bold 11pt sans-serif",
+				}),
+				// $(go.Picture, icon, { row: 1, width: 16, height: 16, scale: 3.0 }),
+				$(go.TextBlock, 
+					{
+						row: 2,
+						margin: 3,
+						editable: true,
+						maxSize: new go.Size(80, 40),
+						stroke: "white",
+						font: "bold 9pt sans-serif"
+					}
+				//  new go.Binding("text", "name").makeTwoWay()
+				)
+			)
+		);
+
+		const aSide = {left:[], right:[], top:[], bottom:[]};
+		
+		for (var i in this.aInput) {
+			const oPort = this.aInput[i];
+			aSide[oPort.side].push(oPort.makePort("in"+i));
+		}
+		for (var o in this.aOutput) {
+			const oPort = this.aOutput[o];
+			aSide[oPort.side].push(oPort.makePort("out"+o));
+		}
+
+		var oNode = $(go.Node, "Spot",
+			{ 
+				locationSpot: go.Spot.Center,
+				dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, this.aLayer),
+				rotatable: true,
+			},
+			new go.Binding("layerName", "layer"),
+			oPanel,
+			$(go.Panel, "Vertical", {
+				alignment: go.Spot.Left,
+				alignmentFocus: new go.Spot(0, 0.5, 4, 0)
+			}, aSide.left),
+			$(go.Panel, "Vertical", {
+				alignment: go.Spot.Right,
+				alignmentFocus: new go.Spot(1, 0.5, -4, 0)
+			}, aSide.right),
+			$(go.Panel, "Horizontal", {
+				alignment: go.Spot.Top,
+				alignmentFocus: new go.Spot(0.5, 0, 0, 4)
+			}, aSide.top),
+			$(go.Panel, "Horizontal", {
+				alignment: go.Spot.Bottom,
+				alignmentFocus: new go.Spot(0.5, 1, 0, -4)
+			}, aSide.bottom)
+		);
+
+		return oNode;
+	}
+
+	avoidNodeOverlap(oNode, oPoint, oGridPoint, aLayer) {
+		const oBounds = oNode.actualBounds;
+		const oLoc = oNode.location;
+		const oRect = new go.Rect(
+			oGridPoint.x - (oLoc.x - oBounds.x),
+			oGridPoint.y - (oLoc.y - oBounds.y),
+			oBounds.width, 
+			oBounds.height
+		);
+		oRect.inflate(-15, -15);
+
+		//var oLayers = oNode.diagram.layers;
+		//while (oLayers.next()) {
+		
+		for (const layer of aLayer) {
+			//var oLayer = oLayers.value;
+			var oLayer = oNode.diagram.findLayer(layer)
+			if (!oLayer || oLayer.isTemporary) continue;
+			
+			var aObj = oLayer.findObjectsIn(oRect, (oObj) => {
+				var oPart = oObj.part;
+				if (oPart === oNode) return null;
+				if (oPart instanceof go.Link) return null;
+				if (oPart.isMemberOf(oNode)) return null;
+				if (oNode.isMemberOf(oPart)) return null;
+				return oPart;
+			}, null, true);
+			
+			if (aObj.count > 0) {
+				//console.log(aObj)
+				return oLastPoint;
+			}
+		}
+		oLastPoint.set(oGridPoint);
+		return oGridPoint;
+	}
+	
+	
+
+	/*
+	avoidNodeOverlap(oNode, oPoint, oGridPoint) {
+		if (oNode.diagram instanceof go.Palette) return oGridPoint;
+		
+		function isUnoccupied(oRect) {
+			
+			function navig(obj) {
+				var part = obj.part;
+				if (part === oNode) return null;
+				if (part instanceof go.Link) return null;
+				if (part.isMemberOf(oNode)) return null;
+				if (oNode.isMemberOf(part)) return null;
+				return part;
+			}
+
+			// only consider non-temporary Layers
+			var lit = oNode.diagram.layers;
+			while (lit.next()) {
+				var lay = lit.value;
+				if (lay.isTemporary) continue;
+				if (lay.findObjectsIn(oRect, navig, null, true).count > 0) return false;
+			}
+			return true;
+		}
+		
+		const oBounds = oNode.actualBounds;
+		const oLoc = oNode.location;
+		
+		const oRect = new go.Rect(
+			oGridPoint.x - (oLoc.x - oBounds.x),
+			oGridPoint.y - (oLoc.y - oBounds.y),
+			oBounds.width, 
+			oBounds.height
+		);
+		oRect.inflate(-10, -10);
+		
+		if (
+				!(oNode.diagram.currentTool instanceof go.DraggingTool) &&
+				(!oNode._temp || !oNode.layer.isTemporary)
+			) {
+			oNode._temp = true;
+			while (!isUnoccupied(oRect)) {
+				oRect.x += 10;  // note that this is an unimaginative search algorithm --
+				oRect.y += 10;  // you can improve the search here to be more appropriate for your app
+			}
+			oRect.inflate(-10, -10);  // restore to actual size
+			return new go.Point(
+				oRect.x - (oLoc.x - oBounds.x), 
+				oRect.y - (oLoc.y - oBounds.y)
+			);
+		}
+		if (isUnoccupied(oRect)) return oGridPoint;
+		return oLoc;
+	}
+
+
+	
+	makePort(name, inOut, side) {
+		var port = $(go.Shape, "RoundedRectangle", {
+			fill: inOut ? "#fc0" : "#0c0", 
+			stroke: null,
+			desiredSize: new go.Size(20, 20),
+			portId: name,  // declare this object to be a "port"
+			toMaxLinks: 1,  // don't allow more than one link into a port
+			cursor: "pointer",  // show a different cursor to indicate potential link point
+			toSpot: go.Spot[side],
+			toLinkable: true,
+		});
+
+		var panel = $(go.Panel, "Horizontal", { 
+			margin: new go.Margin(2, 0),
+			alignment: go.Spot['Top'+side],
+		}, port);
+		
+		return panel;
+	} //*/
+}
