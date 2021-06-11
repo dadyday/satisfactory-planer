@@ -26,21 +26,22 @@ export default class PortType {
 			return hor ? [x, y] : [y, x];
 		};
 		const side = this.side.charAt(0).toUpperCase() + this.side.substring(1);
+		const oSpot = go.Spot[side];
 		
 		const port = $(go.Shape, "RoundedRectangle", {
 			fill: this.inOut ? "#fc0" : "#0c0", 
 			stroke: "#555", 
 			strokeWidth: 0.5,
 			desiredSize: new go.Size(...swap(20, 10)),
-			margin: new go.Margin(...swap(0, 10)),
+			//margin: new go.Margin(...swap(0, 5)),
 			portId: name,
 			cursor: "pointer",
 			
-			fromSpot: go.Spot[side],
+			fromSpot: oSpot,
 			fromLinkable: !this.inOut,
 			fromMaxLinks: 1,
 			
-			toSpot: go.Spot[side],
+			toSpot: oSpot,
 			toLinkable: this.inOut,
 			toMaxLinks: 1,
 			//margin: new go.Margin(10, 0),

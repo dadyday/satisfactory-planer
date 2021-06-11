@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import BuildingType from '../lib/BuildingType';
+import Building from '../lib/Building';
 
 import go from 'gojs';
 var $ = go.GraphObject.make;
@@ -28,14 +28,14 @@ export default {
 	methods: {
 		init() {
 			const aModelData = [];
-			BuildingType.each((prod, oBuildingType) => {
-				aModelData.push(oBuildingType.getNodeData(prod));
+			Building.each((type, oBuilding) => {
+				aModelData.push(oBuilding.getNodeData(type));
 			});
 			
 
 			this.oPalette = $(go.Palette, "palette", {
 				maxSelectionCount: 1,
-				nodeTemplateMap: BuildingType.getTemplateMap(),
+				nodeTemplateMap: Building.getTemplateMap(),
 				model: new go.GraphLinksModel(aModelData),
 				initialAutoScale: go.Diagram.UniformToFill, 
 				

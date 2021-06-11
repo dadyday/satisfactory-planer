@@ -44,7 +44,7 @@ export default class Scheme {
 
 		const oReceipe = Receipe.getByOutput(item);
 		while (count > 0.0001) {
-			const oProd = oReceipe.createProd();
+			const oProd = oReceipe.createProduction();
 			oProd.productivity = 0.0;
 			count = this.addProdCapacity(oProd, item, count);
 			if (!this.aProduction[oReceipe.name]) this.aProduction[oReceipe.name] = [];

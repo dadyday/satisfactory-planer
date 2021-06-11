@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import BuildingType from '../lib/BuildingType';
+import Building from '../lib/Building';
 
 import go from 'gojs';
 var $ = go.GraphObject.make;
@@ -78,7 +78,7 @@ export default {
 				"rotatingTool.handleDistance": -10,
 				"rotatingTool.snapAngleMultiple": 90,
 				"rotatingTool.snapAngleEpsilon": 90,
-				"nodeTemplateMap": BuildingType.getTemplateMap(),
+				"nodeTemplateMap": Building.getTemplateMap(),
 			});
 
 			var oFore = this.oWorld.findLayer("Foreground");
@@ -93,6 +93,10 @@ export default {
 					//routing: go.Link.AvoidsNodes,
 					corner: 20,
 					curve: go.Link.JumpOver,
+					fromEndSegmentLength: 20, 
+					fromShortLength: -10,  
+					toEndSegmentLength: 20,
+					toShortLength: -10,  
 				},
 				$(go.Shape, // the link's path shape
 					{ strokeWidth: 16, stroke: "#555" }

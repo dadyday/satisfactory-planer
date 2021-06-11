@@ -13,5 +13,5 @@ export default {
 	wire:      ['Draht', {wire: 30}, {copperingot: 15}, 'constructor'],
 	cable:     ['Kabel', {cable: 30}, {wire: 60}, 'constructor'],
 
-	reinforced: ['Verstärkte Eisenplatte', {reinforcedironplate:5}, {ironplate:30, screw:60}, 'constructor'],
+	reinforced: ['Verstärkte Eisenplatte', {reinforcedironplate:5}, {ironplate:30, screw:60}, 'manufactor'],
 }

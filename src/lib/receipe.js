@@ -1,4 +1,4 @@
-import BuildingType from './BuildingType';
+import Building from './Building';
 
 export default class Receipe {
 
@@ -49,8 +49,8 @@ export default class Receipe {
 		this.prod = prod;
 	}
 
-	createProd() {
-		return BuildingType.get(this.prod).createProd(this);
+	createProduction() {
+		return Building.get(this.prod).createProduction(this);
 	}
 
 }

@@ -8,9 +8,29 @@
 		<div>
 			<button @click="run">Run!</button>
 			<ul>
-				<li v-for="oQuant, item in aQuantity" v-bind:key="item">
-					{{ item }}: {{ oQuant }}
+				<li v-for="oQuant, item in oScheme.aQuantity" :key="item">
+					{{ getItem(item) }}: {{ oQuant }}
 				</li>
+			</ul>
+			<ul>
+				<template v-for="aProd, item in oScheme.aProduction">
+					<li v-for="oProd, i in aProd" :key="item+i">
+						{{ oProd.oBuilding.name }} - 
+						{{ oProd.name }}: 
+						{{ (oProd.productivity*100.0).toFixed(1) }}%
+						(
+						<template v-for="count, item, i in oProd.oReceipe.aInput">
+							{{ i ? ', ' : '' }}
+							{{ (oProd.productivity*count).toFixed(0) }} {{ getItem(item) }}
+						</template>
+						&gt;
+						<template v-for="count, item, i in oProd.oReceipe.aOutput">
+							{{ i ? ', ' : '' }}
+							{{ (oProd.productivity*count).toFixed(0) }} {{ getItem(item) }}
+						</template>
+						)
+					</li>
+				</template>
 			</ul>
 		</div>
 	</div>
@@ -19,27 +39,29 @@
 <script>
 import Scheme from '../lib/Scheme';
 
-import BuildingType from '../lib/BuildingType';
+import Building from '../lib/Building';
 import aBuildingData from '../data/building';
-BuildingType.registerAll(aBuildingData);
+Building.registerAll(aBuildingData);
 
 import Receipe from '../lib/Receipe';
 import aReceipeData from '../data/receipe';
 Receipe.registerAll(aReceipeData);
 
+import Item from '../lib/Item';
+import aItemData from '../data/item';
+Item.registerAll(aItemData);
+
 
 export default {
 	data() {
 		return {
-			oScheme: null,
+			oScheme: new Scheme,
 		};
 	},
-	computed: {
-		aQuantity() {
-			return this.oScheme ? this.oScheme.aQuantity : [];
-		},
-	},
 	methods: {
+		getItem(item) {
+			return Item.get(item).name;
+		},
 		run() {
 			this.oScheme = Scheme.create({
 				//wire: 10,
