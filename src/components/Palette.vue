@@ -11,6 +11,7 @@ var $ = go.GraphObject.make;
 
 export default {
 	props: {
+		objects: Array,
 	},
 	data() {
 		return {
@@ -30,6 +31,7 @@ export default {
 			BuildingType.each((prod, oBuildingType) => {
 				aModelData.push(oBuildingType.getNodeData(prod));
 			});
+			
 
 			this.oPalette = $(go.Palette, "palette", {
 				maxSelectionCount: 1,

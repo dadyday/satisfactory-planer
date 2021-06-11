@@ -1,7 +1,18 @@
-import Receipe from './receipe';
-//import { dump } from 'dumper.js';
+import Receipe from './Receipe';
 
 export default class Scheme {
+
+	static create(aItem) {
+		const oScheme = new Scheme;
+		Object.entries(aItem).forEach(([item, count]) => {
+			oScheme.addNeeded(item, count);
+		});
+		oScheme.calcProduction();
+		return oScheme;
+	}
+
+	//*************************
+	
 	aQuantity = {};
 	aProduction = {};
 
@@ -74,18 +85,18 @@ export default class Scheme {
 			linkDataArray: [],
 		};
 		oModel.nodeDataArray = [
-			{ key: "ironore#0", type: "miner" },
-			{ key: "splitter#0", type: "splitter" },
-			{ key: "ironingot#0", type: "smelter" },
-			{ key: "ironingot#1", type: "smelter" },
-			{ key: "steelbeam#0", type: "foundry" },
+			{text: 'Test', type: 'split', layer: 'ground'},
+			//{ key: "ironore#0", type: "miner" },
+			//{ key: "splitter#0", type: "splitter" },
+			//{ key: "ironingot#0", type: "smelter" },
+			//{ key: "ironingot#1", type: "smelter" },
+			//{ key: "steelbeam#0", type: "foundry" },
 		];
 		oModel.linkDataArray = [
-			{ from: 'ironore#0', fromPortId: 'out', to: 'splitter#0', toPortId: 'in', },
-			{ from: 'splitter#0', fromPortId: 'out_left', to: 'ironingot#0', toPortId: 'in', },
-			{ from: 'splitter#0', fromPortId: 'out_mid', to: 'ironingot#1', toPortId: 'in', },
+			//{ from: 'ironore#0', fromPortId: 'out', to: 'splitter#0', toPortId: 'in', },
+			//{ from: 'splitter#0', fromPortId: 'out_left', to: 'ironingot#0', toPortId: 'in', },
+			//{ from: 'splitter#0', fromPortId: 'out_mid', to: 'ironingot#1', toPortId: 'in', },
 		];
 		return oModel;
 	}
 }
-

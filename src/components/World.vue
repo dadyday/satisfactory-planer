@@ -5,6 +5,7 @@
 
 <script>
 import BuildingType from '../lib/BuildingType';
+
 import go from 'gojs';
 var $ = go.GraphObject.make;
 
@@ -29,7 +30,9 @@ export default {
 	},
 	methods: {
 		draw() {
-			this.oWorld.model.modelData = this.scheme.getModel();
+			const data = this.scheme.getModel();
+			console.log(data);
+			this.oWorld.model.modelData = data;
 		},
 		init() {
 			this.oWorld = $(go.Diagram, "world", {
@@ -80,7 +83,7 @@ export default {
 
 			var oFore = this.oWorld.findLayer("Foreground");
 			this.oWorld.addLayerBefore($(go.Layer, { name: "ground" }), oFore);
-			this.oWorld.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: false }), oFore);
+			this.oWorld.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: true }), oFore);
 			//this.oWorld.findLayer("elevated").opacity = 0.5;
 			
 			//myDiagram.linkTemplateMap = createLinkTemplateMap();

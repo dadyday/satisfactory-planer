@@ -35,9 +35,12 @@ export default class PortType {
 			margin: new go.Margin(...swap(0, 10)),
 			portId: name,
 			cursor: "pointer",
+			
 			fromSpot: go.Spot[side],
-			toSpot: go.Spot[side],
 			fromLinkable: !this.inOut,
+			fromMaxLinks: 1,
+			
+			toSpot: go.Spot[side],
 			toLinkable: this.inOut,
 			toMaxLinks: 1,
 			//margin: new go.Margin(10, 0),

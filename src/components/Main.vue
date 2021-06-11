@@ -1,22 +1,32 @@
 <template>
 	<div id="main">
-		<button @click="run">Run!</button>
-		<Palette />
-		<World />
-		
-		<!--div>
+		<div id="diagram">
+			<Palette />
+			<World :scheme="oScheme" />
 		</div>
-		<ul>
-			<li v-for="oQuant, item in aQuantity" v-bind:key="item">
-				{{ item }}: {{ oQuant }}
-			</li>
-		</ul-->
+		
+		<div>
+			<button @click="run">Run!</button>
+			<ul>
+				<li v-for="oQuant, item in aQuantity" v-bind:key="item">
+					{{ item }}: {{ oQuant }}
+				</li>
+			</ul>
+		</div>
 	</div>
 </template>
 
 <script>
-import '../lib/World';
-import runner from '../lib';
+import Scheme from '../lib/Scheme';
+
+import BuildingType from '../lib/BuildingType';
+import aBuildingData from '../data/building';
+BuildingType.registerAll(aBuildingData);
+
+import Receipe from '../lib/Receipe';
+import aReceipeData from '../data/receipe';
+Receipe.registerAll(aReceipeData);
+
 
 export default {
 	data() {
@@ -31,7 +41,7 @@ export default {
 	},
 	methods: {
 		run() {
-			this.oScheme = runner({
+			this.oScheme = Scheme.create({
 				//wire: 10,
 				//cable: 10,
 				ironplate: 10,
@@ -39,18 +49,19 @@ export default {
 				screw: 10,
 				reinforcedironplate: 3,
 			});
+			console.log(this.oScheme);
 		},
 	},
 }
 </script>
 
 <style>
-#main {
+#diagram {
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
 }
-#main > * {
+#diagram > * {
 	margin: 5px;
 	border: solid 1px #889;
 }

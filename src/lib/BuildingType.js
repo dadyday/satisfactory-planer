@@ -1,4 +1,6 @@
-import Building from './building';
+import Building from './Building';
+import PortType from './PortType';
+
 import go from 'gojs';
 var $ = go.GraphObject.make;
 var oLastPoint = new go.Point(0,0);
@@ -7,13 +9,19 @@ export default class BuildingType {
 
 	static aList = {};
 
-	static register(prod, oBuildingType) {
+	static register(prod, aData) {
+		// prod: [name, width, height, layerFlags, [ [portType, in, offset, side], ...]]
+		// smelter: ['Smelter', 9, 6, [ ['belt', true, 0], ['belt', false, 0] ]]
+		for (const i in aData[4]) {
+			aData[4][i] = new PortType(...aData[4][i]);
+		}
+		const oBuildingType = new BuildingType(...aData);
 		this.aList[prod] = oBuildingType;
 	}
 	
-	static registerAll(aBuildingType) {
-		for (const [prod, oType] of Object.entries(aBuildingType)) {
-			this.register(prod, oType);
+	static registerAll(aBuildingData) {
+		for (const [prod, aData] of Object.entries(aBuildingData)) {
+			this.register(prod, aData);
 		}
 	}
 
@@ -24,25 +32,24 @@ export default class BuildingType {
 	static each(func) {
 		Object.entries(this.aList).forEach(([key, value]) => func(key, value));
 	}
+
+	//**********************************
 	
 	name = '';
 	aSize = { width: 100, height: 100 };
-	aInput = [];
-	aOutput = [];
+	aPort = [];
 	aLayer = [];
 	
-	constructor(name, w, h, aInput, aOutput, layer = 2) {
+	constructor(name, w, h, layer, aPort) {
 		this.name = name;
 		this.aSize = { width: w*10, height: h*10 };
-		this.aInput = aInput;
-		this.aOutput = aOutput;
+		this.aPort = aPort;
 		if (layer & 1) this.aLayer.push('ground');
 		if (layer & 2) this.aLayer.push('elevated');
 	}
 
 	createProd(oReceipe) {
-		const oBuildingType = this.get(oReceipe.prod);
-		return new Building(oBuildingType, oReceipe);
+		return new Building(this, oReceipe);
 	}
 
 
@@ -95,14 +102,11 @@ export default class BuildingType {
 		);
 
 		const aSide = {left:[], right:[], top:[], bottom:[]};
-		
-		for (var i in this.aInput) {
-			const oPort = this.aInput[i];
-			aSide[oPort.side].push(oPort.makePort("in"+i));
-		}
-		for (var o in this.aOutput) {
-			const oPort = this.aOutput[o];
-			aSide[oPort.side].push(oPort.makePort("out"+o));
+
+		var i = 0, o = 0; 
+		for (var oPort of this.aPort) {
+			const port = oPort.inOut ? 'in'+(i++) : 'out'+(o++);
+			aSide[oPort.side].push(oPort.makePort(port));
 		}
 
 		var oNode = $(go.Node, "Spot",
@@ -151,6 +155,7 @@ export default class BuildingType {
 		for (const layer of aLayer) {
 			//var oLayer = oLayers.value;
 			var oLayer = oNode.diagram.findLayer(layer)
+			if (!oLayer) console.error(`layer ${layer} not found!`);
 			if (!oLayer || oLayer.isTemporary) continue;
 			
 			var aObj = oLayer.findObjectsIn(oRect, (oObj) => {
