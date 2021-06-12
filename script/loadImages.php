@@ -1,7 +1,7 @@
 <?php
 $url = 'https://satisfactory.fandom.com/wiki/Category:Item_icons';
 $index = file_get_contents($url);
-preg_match_all('~https:.*images/\w/\w\w/(\w+).png/.*/scale-to-width-down/~', $index, $aMatches, PREG_SET_ORDER);
+preg_match_all('~https:.*images/\w/\w\w/(.*)\.png/.*/scale-to-width-down/~', $index, $aMatches, PREG_SET_ORDER);
 
 foreach ($aMatches as $i => $aMatch) {
 	[$url, $name] = $aMatch;
