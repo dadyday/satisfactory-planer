@@ -26,6 +26,7 @@ export default class Building {
 	}
 
 	static get(type) {
+		if (!this.aList[type]) throw `Building ${type} not found!`;
 		return this.aList[type];
 	}
 

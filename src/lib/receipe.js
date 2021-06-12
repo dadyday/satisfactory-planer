@@ -50,7 +50,8 @@ export default class Receipe {
 	}
 
 	createProduction() {
-		return Building.get(this.prod).createProduction(this);
+		const oBuilding = Building.get(this.prod);
+		return oBuilding.createProduction(this);
 	}
 
 }

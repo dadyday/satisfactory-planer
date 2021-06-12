@@ -4,14 +4,17 @@
 			<Palette />
 			<World :scheme="oScheme" />
 		</div>
-		
 		<div>
 			<button @click="run">Run!</button>
-			<ul>
-				<li v-for="oQuant, item in oScheme.aQuantity" :key="item">
-					{{ getItem(item) }}: {{ oQuant }}
-				</li>
-			</ul>
+			<table style="margin-left:1em;">
+				<tr v-for="oQuant, item in oScheme.aQuantity" :key="item">
+					<td><Item :item="item"/></td>
+					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td><Item :item="item" :count="oQuant.need" label="Benötigt" /></td>
+					<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
+					<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
+				</tr>
+			</table>
 			<ul>
 				<template v-for="aProd, item in oScheme.aProduction">
 					<li v-for="oProd, i in aProd" :key="item+i">
@@ -21,12 +24,12 @@
 						(
 						<template v-for="count, item, i in oProd.oReceipe.aInput">
 							{{ i ? ', ' : '' }}
-							{{ (oProd.productivity*count).toFixed(0) }} {{ getItem(item) }}
+							<Item :item="item" :count="oProd.productivity*count" short :key="i"/>
 						</template>
 						&gt;
 						<template v-for="count, item, i in oProd.oReceipe.aOutput">
 							{{ i ? ', ' : '' }}
-							{{ (oProd.productivity*count).toFixed(0) }} {{ getItem(item) }}
+							<Item :item="item" :count="oProd.productivity*count" :key="i"/>
 						</template>
 						)
 					</li>
@@ -60,16 +63,21 @@ export default {
 	},
 	methods: {
 		getItem(item) {
-			return Item.get(item).name;
+			const oItem = Item.get(item);
+			return oItem.name;
+		},
+		itemUrl(item) {
+			const oItem = Item.get(item);
+			return oItem.imageUrl();
 		},
 		run() {
 			this.oScheme = Scheme.create({
 				//wire: 10,
 				//cable: 10,
-				ironplate: 10,
-				ironrod: 10,
+				ironPlate: 10,
+				ironRod: 10,
 				screw: 10,
-				reinforcedironplate: 3,
+				reinforced: 3,
 			});
 			console.log(this.oScheme);
 		},
@@ -87,4 +95,5 @@ export default {
 	margin: 5px;
 	border: solid 1px #889;
 }
+
 </style>

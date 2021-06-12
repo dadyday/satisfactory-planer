@@ -2,6 +2,7 @@
 node_modules
 /dist
 _*
+script/img
 
 
 # local env files
