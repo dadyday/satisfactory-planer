@@ -1,9 +1,6 @@
 <template>
 	<div id="main">
-		<div id="diagram">
-			<Palette />
-			<World :scheme="oScheme" />
-		</div>
+		<World :scheme="oScheme" v-model="model" />
 		<div>
 			<button @click="run">Run!</button>
 			<table style="margin-left:1em;">
@@ -59,6 +56,7 @@ export default {
 	data() {
 		return {
 			oScheme: new Scheme,
+			model: {},
 		};
 	},
 	methods: {
@@ -86,14 +84,4 @@ export default {
 </script>
 
 <style>
-#diagram {
-	display: flex;
-	flex-direction: row;
-	align-items: stretch;
-}
-#diagram > * {
-	margin: 5px;
-	border: solid 1px #889;
-}
-
 </style>

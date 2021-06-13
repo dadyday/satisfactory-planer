@@ -1,6 +1,17 @@
 <template>
-	<div id="world">
-	</div>
+	<Rows id="world" >
+		<Cols>
+			<div id="palette" />
+			<div id="diagram" />
+		</Cols>
+		<Cols id="menu">
+			<button @click="load">Load</button>
+			<button @click="save">Save</button>
+			<Dropdown label="Data">
+				<textarea v-model="model" rows="8" style="width:30em" />
+			</Dropdown>
+		</Cols>
+	</Rows>
 </template>
 
 <script>
@@ -10,12 +21,18 @@ import go from 'gojs';
 var $ = go.GraphObject.make;
 
 export default {
+	model: {
+		prop: 'model',
+		event: 'save',
+	},
 	props: {
+		model: String,
 		scheme: Object,
 	},
 	data() {
 		return {
-			oWorld: null,
+			oPalette: null,
+			oDiagram: null,
 		};
 	},
 	computed: {
@@ -26,16 +43,40 @@ export default {
 		}
 	},
 	mounted() {
-		this.init();
+		this.initPalette();
+		this.initDiagram();
 	},
 	methods: {
+		save() {
+			this.$emit('save', this.oDiagram.model.toJson());
+			this.oDiagram.isModified = false;
+		},
+		load() {
+			this.oDiagram.model = go.Model.fromJson(this.model);
+		},
 		draw() {
 			const data = this.scheme.getModel();
 			console.log(data);
-			this.oWorld.model.modelData = data;
+			this.oDiagram.model.modelData = data;
 		},
-		init() {
-			this.oWorld = $(go.Diagram, "world", {
+		initPalette() {
+			const aModelData = [];
+			Building.each((type, oBuilding) => {
+				aModelData.push(oBuilding.getNodeData(type));
+			});
+			
+
+			this.oPalette = $(go.Palette, "palette", {
+				maxSelectionCount: 1,
+				nodeTemplateMap: Building.getTemplateMap(),
+				model: new go.GraphLinksModel(aModelData),
+				initialAutoScale: go.Diagram.UniformToFill, 
+				
+			});
+			this.oPalette.model.nodeCategoryProperty = "type";
+		},
+		initDiagram() {
+			this.oDiagram = $(go.Diagram, "diagram", {
 				"undoManager.isEnabled": true, // enable Ctrl-Z to undo and Ctrl-Y to redo
 				"draggingTool.gridSnapCellSize": new go.Size(20, 20),
 				"draggingTool.isGridSnapEnabled": true,
@@ -81,13 +122,13 @@ export default {
 				"nodeTemplateMap": Building.getTemplateMap(),
 			});
 
-			var oFore = this.oWorld.findLayer("Foreground");
-			this.oWorld.addLayerBefore($(go.Layer, { name: "ground" }), oFore);
-			this.oWorld.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: true }), oFore);
-			//this.oWorld.findLayer("elevated").opacity = 0.5;
+			var oFore = this.oDiagram.findLayer("Foreground");
+			this.oDiagram.addLayerBefore($(go.Layer, { name: "ground" }), oFore);
+			this.oDiagram.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: true }), oFore);
+			//this.oDiagram.findLayer("elevated").opacity = 0.5;
 			
 			//myDiagram.linkTemplateMap = createLinkTemplateMap();
-			this.oWorld.linkTemplate = $(go.Link,
+			this.oDiagram.linkTemplate = $(go.Link,
 				{ 
 					routing: go.Link.Orthogonal, 
 					//routing: go.Link.AvoidsNodes,
@@ -104,13 +145,13 @@ export default {
 			);
 			//*/
 
-			this.oWorld.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
+			this.oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
 
 			//*
-			this.oWorld.model = new go.GraphLinksModel([], []);
-			this.oWorld.model.nodeCategoryProperty = "type";
-			this.oWorld.model.linkFromPortIdProperty = "fromPortId";
-			this.oWorld.model.linkToPortIdProperty = "toPortId";
+			this.oDiagram.model = new go.GraphLinksModel([], []);
+			this.oDiagram.model.nodeCategoryProperty = "type";
+			this.oDiagram.model.linkFromPortIdProperty = "fromPortId";
+			this.oDiagram.model.linkToPortIdProperty = "toPortId";
 			//*/
 		},
 
@@ -191,10 +232,17 @@ export default {
 }
 </script>
 
-<style>
-#world {
-	width:1200px;
+<style lang="scss">
+#menu {
+}
+
+#palette, #diagram {
+	width:160px;
 	height:400px;
 	background-color: #dadae8;
+	border: solid 1px #889;
+}
+#diagram {
+	width:1200px;
 }
 </style>
