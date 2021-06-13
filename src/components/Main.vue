@@ -56,7 +56,7 @@ export default {
 	data() {
 		return {
 			oScheme: new Scheme,
-			model: {},
+			model: '',
 		};
 	},
 	methods: {

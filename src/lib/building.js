@@ -72,11 +72,10 @@ export default class Building {
 		return aMap;
 	}
 
-	getNodeData(type) {
+	getNodeData() {
 		return {
+			type: this.type,
 			text: this.name,
-			type: type,
-			fill: "#fb0",
 			layer: this.aLayer[0],
 		};
 	}

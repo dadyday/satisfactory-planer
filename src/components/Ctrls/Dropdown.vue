@@ -43,5 +43,6 @@ export default {
 }
 #content {
 	position: absolute;
+	z-index: 10000;
 }
 </style>

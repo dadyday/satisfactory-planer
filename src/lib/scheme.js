@@ -77,21 +77,14 @@ export default class Scheme {
 
 	getModel() {
 		const oModel = {
-			class: "GraphLinksModel",
-			nodeCategoryProperty: "type",
-			linkFromPortIdProperty: "fromPortId",
-			linkToPortIdProperty: "toPortId",
 			nodeDataArray: [],
 			linkDataArray: [],
 		};
-		oModel.nodeDataArray = [
-			{text: 'Test', type: 'split', layer: 'ground'},
-			//{ key: "ironore#0", type: "miner" },
-			//{ key: "splitter#0", type: "splitter" },
-			//{ key: "ironingot#0", type: "smelter" },
-			//{ key: "ironingot#1", type: "smelter" },
-			//{ key: "steelbeam#0", type: "foundry" },
-		];
+		for (const name in this.aProduction) {
+			for (const oProd of this.aProduction[name]) {
+				oModel.nodeDataArray.push(oProd.oBuilding.getNodeData());
+			}
+		}
 		oModel.linkDataArray = [
 			//{ from: 'ironore#0', fromPortId: 'out', to: 'splitter#0', toPortId: 'in', },
 			//{ from: 'splitter#0', fromPortId: 'out_left', to: 'ironingot#0', toPortId: 'in', },
