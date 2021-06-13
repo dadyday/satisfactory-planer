@@ -1,7 +1,7 @@
 
 export default {
-	ironOre:   ['Eisenerz', {ironOre: 60}, {}, 'miner'],
-	copperOre: ['Kupfererz', {copperOre: 60}, {}, 'miner'],
+	ironOre:   ['Eisenerz', {ironOre: 60}, {}, 'minerMk1'],
+	copperOre: ['Kupfererz', {copperOre: 60}, {}, 'minerMk1'],
 
 	ironIngot:    ['Eisenbarren', {ironIngot: 30}, {ironOre: 30}, 'smelter'],
 	copperIngot:  ['Kupferbarren', {copperIngot: 30}, {copperOre: 30}, 'smelter'],
@@ -13,5 +13,5 @@ export default {
 	wire:      ['Draht', {wire: 30}, {copperIngot: 15}, 'constructor'],
 	cable:     ['Kabel', {cable: 30}, {wire: 60}, 'constructor'],
 
-	reinforced: ['Verstärkte Eisenplatte', {reinforced:5}, {ironPlate:30, screw:60}, 'manufactor'],
+	reinforced: ['Verstärkte Eisenplatte', {reinforced:5}, {ironPlate:30, screw:60}, 'assembler'],
 }

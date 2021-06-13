@@ -14,14 +14,14 @@ export default {
 		['belt', true, 0, 'bottom'], 
 		['belt', false]
 	]],
-	miner:       ['Mine', 14, 6, 2, [
+	minerMk1:       ['Miner MK.1', 14, 6, 2, [
 		['belt', false, 0],
 	]],
 	smelter:     ['Schmelzer', 9, 6, 2, [
 		['belt', true, 0], 
 		['belt', false, 0]
 	]],
-	constructor: ['Konstrukt.', 10, 8, 2, [
+	constructor: ['Konstruktor', 10, 8, 2, [
 		['belt', true, 0], 
 		['belt', false, 0]
 	]],
@@ -30,7 +30,7 @@ export default {
 		['belt', true, +2], 
 		['belt', false, 0]
 	]],
-	manufactor:  ['Manufactor', 15, 10, 2, [
+	assembler:  ['Assembler', 15, 10, 2, [
 		['belt', true, 0], 
 		['belt', true, 0], 
 		['belt', false, 0]

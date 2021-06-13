@@ -1,7 +1,8 @@
 <?php
-$url = 'https://satisfactory.fandom.com/wiki/Category:Item_icons';
-$index = file_get_contents($url);
-preg_match_all('~https:.*images/\w/\w\w/(.*)\.png/.*/scale-to-width-down/~', $index, $aMatches, PREG_SET_ORDER);
+$imgBase = 'https://static.wikia.nocookie.net/satisfactory_gamepedia_en/images';
+
+//$aMatches = include(__DIR__.'/itemImages.php');
+$aMatches = include(__DIR__.'/buildingImages.php');
 
 foreach ($aMatches as $i => $aMatch) {
 	[$url, $name] = $aMatch;

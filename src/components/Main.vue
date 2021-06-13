@@ -18,18 +18,18 @@
 			<ul>
 				<template v-for="aProd, item in oScheme.aProduction">
 					<li v-for="oProd, i in aProd" :key="item+i">
-						{{ oProd.oBuilding.name }} - 
+						<Building :obj="oProd.oBuilding" /> - 
 						{{ oProd.name }}: 
 						{{ (oProd.productivity*100.0).toFixed(1) }}%
 						(
 						<template v-for="count, item, i in oProd.oReceipe.aInput">
 							{{ i ? ', ' : '' }}
-							<Item :item="item" :count="oProd.productivity*count" short :key="i"/>
+							<Item :item="item" :count="oProd.productivity*count" short :key="'in'+i"/>
 						</template>
 						&gt;
 						<template v-for="count, item, i in oProd.oReceipe.aOutput">
 							{{ i ? ', ' : '' }}
-							<Item :item="item" :count="oProd.productivity*count" :key="i"/>
+							<Item :item="item" :count="oProd.productivity*count" :key="'out'+i"/>
 						</template>
 						)
 					</li>

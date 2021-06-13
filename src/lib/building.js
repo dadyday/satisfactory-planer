@@ -15,7 +15,7 @@ export default class Building {
 		for (const i in aData[4]) {
 			aData[4][i] = new PortType(...aData[4][i]);
 		}
-		const oBuilding = new Building(...aData);
+		const oBuilding = new Building(type, ...aData);
 		this.aList[type] = oBuilding;
 	}
 	
@@ -35,14 +35,18 @@ export default class Building {
 	}
 
 	//**********************************
-	
+
+	type = '';
 	name = '';
+	imgName = '';
 	aSize = { width: 100, height: 100 };
 	aPort = [];
 	aLayer = [];
 	
-	constructor(name, w, h, layer, aPort) {
+	constructor(type, name, w, h, layer, aPort) {
+		this.type = type;
 		this.name = name;
+		this.imgName = type.replace(/([A-Z]+)/g, '_$1').toLowerCase();
 		this.aSize = { width: w*10, height: h*10 };
 		this.aPort = aPort;
 		if (layer & 1) this.aLayer.push('ground');
@@ -51,6 +55,10 @@ export default class Building {
 
 	createProduction(oReceipe) {
 		return new Production(this, oReceipe);
+	}
+
+	imageUrl() {
+		return `img/building/${this.imgName}.png`;
 	}
 
 
