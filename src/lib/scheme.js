@@ -80,9 +80,11 @@ export default class Scheme {
 			nodeDataArray: [],
 			linkDataArray: [],
 		};
+		let n = 1;
 		for (const name in this.aProduction) {
 			for (const oProd of this.aProduction[name]) {
-				oModel.nodeDataArray.push(oProd.oBuilding.getNodeData());
+				const oNode = oProd.oBuilding.getNodeData(n++);
+				oModel.nodeDataArray.push(oNode);
 			}
 		}
 		oModel.linkDataArray = [

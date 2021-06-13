@@ -30,9 +30,10 @@
 
 <script>
 import Building from '../lib/Building';
-
+import _ from 'underscore';
 import go from 'gojs';
 var $ = go.GraphObject.make;
+
 
 export default {
 	model: {
@@ -66,19 +67,36 @@ export default {
 				nodeDataArray: this.oDiagram.model.nodeDataArray,
 				linkDataArray: this.oDiagram.model.linkDataArray,
 			};
-			console.log(this.oDiagram.model.modelData);
 			this.$emit('save', JSON.stringify(data, null, "  "));
 			this.oDiagram.isModified = false;
 		},
 		load() {
-			const data = go.Model.fromJson(this.model);
-			this.oDiagram.model.nodeDataArray = data.nodeDataArray;
-			this.oDiagram.model.linkDataArray = data.linkDataArray;
+			const oModel = go.Model.fromJson(this.model);
+			this.applyModel(oModel);
 		},
 		draw() {
-			this.model = JSON.stringify(this.scheme.getModel(), null, "  ");
-			this.load();
+			const oModel = this.scheme.getModel();
+			this.applyNodePositions(oModel);
+			this.applyModel(oModel);
 		},
+		applyModel(oModel) {
+			this.oDiagram.model.nodeDataArray = oModel.nodeDataArray;
+			this.oDiagram.model.linkDataArray = oModel.linkDataArray;
+		},
+
+		applyNodePositions(oModel) {
+			const aType = _.groupBy(this.oDiagram.model.nodeDataArray, (oItem) => { 
+				return '_'+oItem.type;
+			});
+			_.map(oModel.nodeDataArray, (oNode) => {
+				const aOld = _.get(aType, '_'+oNode.type);
+				if (aOld) {
+					const oOld = aOld.shift(); 
+					if (oOld) oNode.pos = oOld.pos;
+				}
+			});
+		},
+		
 		initPalette() {
 			const aModelData = [];
 			Building.each((type, oBuilding) => {
@@ -144,8 +162,10 @@ export default {
 
 			this.oDiagram.model = new go.GraphLinksModel([], []);
 			this.oDiagram.model.nodeCategoryProperty = "type";
+			this.oDiagram.model.nodeKeyProperty = "id";
 			this.oDiagram.model.linkFromPortIdProperty = "fromPortId";
 			this.oDiagram.model.linkToPortIdProperty = "toPortId";
+			this.oDiagram.model.linkKeyProperty = "id";
 		},
 	}
 }

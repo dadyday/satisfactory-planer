@@ -72,14 +72,23 @@ export default class Building {
 		return aMap;
 	}
 
-	getNodeData() {
+	getNodeData(id) {
 		return {
+			id: id,
 			type: this.type,
 			text: this.name,
 			layer: this.aLayer[0],
 		};
 	}
-	
+
+	makePos(oPos) {
+		return [ oPos.x, oPos.y ];
+	}
+
+	getPos(aPos) {
+		return new go.Point(...aPos);
+	}
+
 	makeTemplate() {
 		var oPanel = $(go.Panel, "Auto",
 			this.aSize,
@@ -123,6 +132,7 @@ export default class Building {
 				dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, this.aLayer),
 				rotatable: true,
 			},
+			new go.Binding("location", "pos", this.getPos).makeTwoWay(this.makePos),
 			new go.Binding("layerName", "layer"),
 			oPanel,
 			$(go.Panel, "Vertical", {
