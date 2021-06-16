@@ -31,9 +31,10 @@
 <script>
 import Building from '../lib/Building';
 import _ from 'underscore';
+
 import go from 'gojs';
 var $ = go.GraphObject.make;
-
+// alternativ? https://konvajs.org/docs/vue/index.html
 
 export default {
 	model: {

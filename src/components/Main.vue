@@ -2,9 +2,31 @@
 	<div id="main">
 		<World :scheme="oScheme" v-model="model" />
 		<div>
+			<ul>
+				<li v-for="need, item in aNeed" :key="item+rdm">
+					<Item 
+						:item="item" 
+						:count="need" 
+						@update:count="setNeed(item, $event)" 
+						@delete="delNeed(item)" 
+						editable
+						deletable
+					/>
+					<!--input type="number" :value="need" style="width:4em; text-align:right;" />
+					<button @click="del">&times;</button-->
+				</li>
+				<hr/>
+				<li>
+					<Item item="" :count="0" 
+						editable
+						selectable
+						addable 
+						@add="addNeed(...$event)"
+					/></li>
+			</ul>
 			<button @click="run">Run!</button>
 			<table style="margin-left:1em;">
-				<tr v-for="oQuant, item in oScheme.aQuantity" :key="item">
+				<tr v-for="oQuant, item, i in oScheme.aQuantity" :key="i+rdm">
 					<td><Item :item="item"/></td>
 					<td>&nbsp;&nbsp;&nbsp;</td>
 					<td><Item :item="item" :count="oQuant.need" label="Benötigt" /></td>
@@ -55,7 +77,14 @@ Item.registerAll(aItemData);
 export default {
 	data() {
 		return {
+			aNeed: {
+				ironPlate: 10,
+				ironRod: 10,
+				screw: 10,
+				reinforced: 3,
+			},
 			oScheme: new Scheme,
+			rdm: 0,
 			model: '',
 		};
 	},
@@ -68,16 +97,23 @@ export default {
 			const oItem = Item.get(item);
 			return oItem.imageUrl();
 		},
+		setNeed(item, need) {
+			this.aNeed[item] = need;
+			this.run();
+		},
+		addNeed(item, count) {
+			if (this.aNeed[item]) {
+				count += this.aNeed[item];
+			}
+			this.setNeed(item, count);
+		},
+		delNeed(item) {
+			delete this.aNeed[item];
+			this.run();
+		},
 		run() {
-			this.oScheme = Scheme.create({
-				//wire: 10,
-				//cable: 10,
-				ironPlate: 10,
-				ironRod: 10,
-				screw: 10,
-				reinforced: 3,
-			});
-			console.log(this.oScheme);
+			this.oScheme = Scheme.create(this.aNeed);
+			this.rdm = Math.random() * 10000;
 		},
 	},
 }

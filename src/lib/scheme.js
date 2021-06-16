@@ -2,13 +2,8 @@ import Receipe from './Receipe';
 
 export default class Scheme {
 
-	static create(aItem) {
-		const oScheme = new Scheme;
-		Object.entries(aItem).forEach(([item, count]) => {
-			oScheme.addNeeded(item, count);
-		});
-		oScheme.calcProduction();
-		return oScheme;
+	static create(aNeed) {
+		return new Scheme(aNeed);
 	}
 
 	//*************************
@@ -16,14 +11,22 @@ export default class Scheme {
 	aQuantity = {};
 	aProduction = {};
 
-	addNeeded(item, count) {
-		const oQuant = this.getQuantity(item);
-		oQuant.need += count;
+	constructor(aNeed = {}) {
+		this.aQuantity = {};
+		this.aProduction = {};
+		for (var item in aNeed) {
+			this.addNeeded(item, aNeed[item]);
+		}
+		this.calcProduction();
 	}
 
-	getQuantity(item) {
+	addNeeded(item, count) {
+		this.initQuantity(item);
+		this.aQuantity[item].need += count;
+	}
+
+	initQuantity(item) {
 		if (!this.aQuantity[item]) this.aQuantity[item] = {need:0, in:0, out:0};
-		return this.aQuantity[item];
 	}
 
 	calcProduction() {
@@ -61,12 +64,12 @@ export default class Scheme {
 		oProd.productivity += eff;
 		
 		Object.entries(oProd.oReceipe.aOutput).forEach(([itm, cnt]) => {
-			const oQuant = this.getQuantity(itm);
-			oQuant.out += cnt * eff;
+			this.initQuantity(itm);
+			this.aQuantity[itm].out += cnt * eff;
 		});
 		Object.entries(oProd.oReceipe.aInput).forEach(([itm, cnt]) => {
-			const oQuant = this.getQuantity(itm);
-			oQuant.in += cnt * eff;
+			this.initQuantity(itm);
+			this.aQuantity[itm].in += cnt * eff;
 			self.addProductionFor(itm, cnt * eff);
 		});
 

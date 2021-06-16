@@ -18,7 +18,11 @@ export default class Item {
 	}
 
 	static get(item) {
-		return this.aList[item] ?? new Item(item, '', 0);
+		return this.aList[item] ?? new Item('none', null, 0, 'none');
+	}
+
+	static getAll() {
+		return this.aList;
 	}
 
 	//**********************************
