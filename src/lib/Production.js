@@ -1,5 +1,6 @@
 
 export default class Production {
+	id = null;
 	oBuilding;
 	name = '';
 	oReceipe;
@@ -9,6 +10,11 @@ export default class Production {
 		this.oBuilding = oBuilding;
 		this.name = oReceipe.name;
 		this.oReceipe = oReceipe;
+	}
+
+	getNodeData(id) {
+		this.id = this.name+id;
+		return this.oBuilding.getNodeData(this.id);
 	}
 
 }

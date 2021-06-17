@@ -78,10 +78,10 @@ export default {
 	data() {
 		return {
 			aNeed: {
-				ironPlate: 10,
-				ironRod: 10,
-				screw: 10,
-				reinforced: 3,
+				ironPlate: 15,
+				ironRod: 5,
+				screw: 0,
+				reinforced: 0,
 			},
 			oScheme: new Scheme,
 			rdm: 0,
@@ -113,6 +113,7 @@ export default {
 		},
 		run() {
 			this.oScheme = Scheme.create(this.aNeed);
+			console.log(this.oScheme);
 			this.rdm = Math.random() * 10000;
 		},
 	},

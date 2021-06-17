@@ -2,6 +2,9 @@
 export default {
 	lift:        ['', 3, 3, 3, [
 	]],
+	sink:        ['', 4, 4, 1, [
+		['belt', true],
+	]],
 	split:       ['', 4, 4, 1, [
 		['belt', true], 
 		['belt', false, 0, 'top'], 
