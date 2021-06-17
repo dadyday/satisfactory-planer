@@ -7,31 +7,32 @@ var oLastPoint = new go.Point(0,0);
 
 export default class Building {
 
-	static aList = {};
+	static mList = new Map();
 
 	static register(type, aData) {
 		// type: [name, width, height, layerFlags, [ [portType, in, offset, side], ...]]
 		// smelter: ['Smelter', 9, 6, [ ['belt', true, 0], ['belt', false, 0] ]]
-		for (const i in aData[4]) {
+		for (var i in aData[4]) {
 			aData[4][i] = new PortType(...aData[4][i]);
 		}
 		const oBuilding = new Building(type, ...aData);
-		this.aList[type] = oBuilding;
+		this.mList.set(type, oBuilding);
 	}
 	
-	static registerAll(aBuildingData) {
-		for (const [type, aData] of Object.entries(aBuildingData)) {
+	static registerAll(oBuildingData) {
+		new Map(Object.entries(oBuildingData)).forEach((aData, type) => {
+			console.log(type, aData);
 			this.register(type, aData);
-		}
+		});
 	}
 
 	static get(type) {
-		if (!this.aList[type]) throw `Building ${type} not found!`;
-		return this.aList[type];
+		if (!this.mList.has(type)) throw `Building ${type} not found!`;
+		return this.mList.get(type);
 	}
 
 	static each(func) {
-		Object.entries(this.aList).forEach(([key, value]) => func(key, value));
+		this.mList.forEach(func);
 	}
 
 	//**********************************
@@ -39,7 +40,7 @@ export default class Building {
 	type = '';
 	name = '';
 	imgName = '';
-	aSize = { width: 100, height: 100 };
+	oSize = { width: 100, height: 100 };
 	aPort = [];
 	aLayer = [];
 	
@@ -47,7 +48,7 @@ export default class Building {
 		this.type = type;
 		this.name = name;
 		this.imgName = type.replace(/([A-Z]+)/g, '_$1').toLowerCase();
-		this.aSize = { width: w*10, height: h*10 };
+		this.oSize = { width: w*10, height: h*10 };
 		this.aPort = aPort;
 		if (layer & 1) this.aLayer.push('ground');
 		if (layer & 2) this.aLayer.push('elevated');
@@ -65,11 +66,11 @@ export default class Building {
 	// *********** gojs helper
 
 	static getTemplateMap() {
-		const aMap = new go.Map();
-		this.each((type, oBuilding) => {
-			aMap.add(type, oBuilding.makeTemplate())
+		const oMap = new go.Map();
+		this.each((oBuilding, type) => {
+			oMap.add(type, oBuilding.makeTemplate())
 		});
-		return aMap;
+		return oMap;
 	}
 
 	getNodeData(id) {
@@ -91,7 +92,7 @@ export default class Building {
 
 	makeTemplate() {
 		var oPanel = $(go.Panel, "Auto",
-			this.aSize,
+			this.oSize,
 			$(go.Shape, "RoundedRectangle", {
 				fill: "#fb04", stroke: "#430", strokeWidth: 2,
 			}),
@@ -118,12 +119,12 @@ export default class Building {
 			)
 		);
 
-		const aSide = {left:[], right:[], top:[], bottom:[]};
+		const oSide = {left:[], right:[], top:[], bottom:[]};
 
 		var i = 0, o = 0; 
 		for (var oPort of this.aPort) {
 			const port = oPort.inOut ? 'in'+(i++) : 'out'+(o++);
-			aSide[oPort.side].push(oPort.makePort(port));
+			oSide[oPort.side].push(oPort.makePort(port));
 		}
 
 		var oNode = $(go.Node, "Spot",
@@ -138,19 +139,19 @@ export default class Building {
 			$(go.Panel, "Vertical", {
 				alignment: go.Spot.Left,
 				alignmentFocus: new go.Spot(0, 0.5, 4, 0)
-			}, aSide.left),
+			}, oSide.left),
 			$(go.Panel, "Vertical", {
 				alignment: go.Spot.Right,
 				alignmentFocus: new go.Spot(1, 0.5, -4, 0)
-			}, aSide.right),
+			}, oSide.right),
 			$(go.Panel, "Horizontal", {
 				alignment: go.Spot.Top,
 				alignmentFocus: new go.Spot(0.5, 0, 0, 4)
-			}, aSide.top),
+			}, oSide.top),
 			$(go.Panel, "Horizontal", {
 				alignment: go.Spot.Bottom,
 				alignmentFocus: new go.Spot(0.5, 1, 0, -4)
-			}, aSide.bottom)
+			}, oSide.bottom)
 		);
 
 		return oNode;

@@ -100,7 +100,7 @@ export default {
 		
 		initPalette() {
 			const aModelData = [];
-			Building.each((type, oBuilding) => {
+			Building.each((oBuilding, type) => {
 				aModelData.push(oBuilding.getNodeData(type));
 			});
 			

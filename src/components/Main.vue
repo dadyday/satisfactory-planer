@@ -3,7 +3,7 @@
 		<World :scheme="oScheme" v-model="model" />
 		<div>
 			<ul>
-				<li v-for="need, item in aNeed" :key="item+rdm">
+				<li v-for="need, item in oNeed" :key="item+rdm">
 					<Item 
 						:item="item" 
 						:count="need" 
@@ -26,7 +26,7 @@
 			</ul>
 			<button @click="run">Run!</button>
 			<table style="margin-left:1em;">
-				<tr v-for="oQuant, item, i in oScheme.aQuantity" :key="i+rdm">
+				<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 					<td><Item :item="item"/></td>
 					<td>&nbsp;&nbsp;&nbsp;</td>
 					<td><Item :item="item" :count="oQuant.need" label="Benötigt" /></td>
@@ -35,20 +35,20 @@
 				</tr>
 			</table>
 			<ul>
-				<template v-for="aProd, item in oScheme.aProduction">
+				<template v-for="[item, aProd] in oScheme.mProduction">
 					<li v-for="oProd, i in aProd" :key="item+i">
 						<Building :obj="oProd.oBuilding" /> - 
 						{{ oProd.name }}: 
 						{{ (oProd.productivity*100.0).toFixed(1) }}%
 						(
-						<template v-for="count, item, i in oProd.oReceipe.aInput">
+						<template v-for="[item, count], i in oProd.oReceipe.mInput">
 							{{ i ? ', ' : '' }}
-							<Item :item="item" :count="oProd.productivity*count" short :key="'in'+i"/>
+							<Item :item="item" :count="oProd.productivity*count" short :key="'in'+i+rdm"/>
 						</template>
 						&gt;
-						<template v-for="count, item, i in oProd.oReceipe.aOutput">
+						<template v-for="[item, count], i in oProd.oReceipe.mOutput">
 							{{ i ? ', ' : '' }}
-							<Item :item="item" :count="oProd.productivity*count" :key="'out'+i"/>
+							<Item :item="item" :count="oProd.productivity*count" :key="'out'+i+rdm"/>
 						</template>
 						)
 					</li>
@@ -77,7 +77,7 @@ Item.registerAll(aItemData);
 export default {
 	data() {
 		return {
-			aNeed: {
+			oNeed: {
 				ironPlate: 15,
 				ironRod: 5,
 				screw: 0,
@@ -98,21 +98,21 @@ export default {
 			return oItem.imageUrl();
 		},
 		setNeed(item, need) {
-			this.aNeed[item] = need;
+			this.oNeed[item] = need;
 			this.run();
 		},
 		addNeed(item, count) {
-			if (this.aNeed[item]) {
-				count += this.aNeed[item];
+			if (this.oNeed[item]) {
+				count += this.oNeed[item];
 			}
 			this.setNeed(item, count);
 		},
 		delNeed(item) {
-			delete this.aNeed[item];
+			delete this.oNeed[item];
 			this.run();
 		},
 		run() {
-			this.oScheme = Scheme.create(this.aNeed);
+			this.oScheme = Scheme.create(this.oNeed);
 			console.log(this.oScheme);
 			this.rdm = Math.random() * 10000;
 		},

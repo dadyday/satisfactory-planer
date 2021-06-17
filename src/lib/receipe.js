@@ -2,32 +2,32 @@ import Building from './Building';
 
 export default class Receipe {
 
-	static aOutputList = {};
-	static aInputList = {};
+	static mOutputList = new Map;
+	static mInputList = new Map;
 
 	static register(aData) {
 		// ironingot: ['Eisenbarren', {ironingot: 30}, {ironore: 30}, 'smelter'],
 		const oReceipe = new Receipe(...aData);
 		
-		for (const item in oReceipe.aOutput) {
-			if (!this.aOutputList[item]) this.aOutputList[item] = [];
-			this.aOutputList[item].push(oReceipe);
-		}
+		oReceipe.mOutput.forEach((count, item) => {
+			if (!this.mOutputList.has(item)) this.mOutputList.set(item, []);
+			this.mOutputList.get(item).push(oReceipe);
+		});
 		
-		for (const item in oReceipe.aInput) {
-			if (!this.aInputList[item]) this.aInputList[item] = [];
-			this.aInputList[item].push(oReceipe);
-		}
+		oReceipe.mInput.forEach((count, item) => {
+			if (!this.mInputList.has(item)) this.mInputList.set(item, []);
+			this.mInputList.get(item).push(oReceipe);
+		});
 	}
 
-	static registerAll(aReceipeData) {
-		for (const aData of Object.values(aReceipeData)) {
+	static registerAll(oReceipeData) {
+		new Map(Object.entries(oReceipeData)).forEach((aData) => {
 			this.register(aData);
-		}
+		});
 	}
 
 	static getByOutput(item, pos = 0) {
-		const aReceipe = this.aOutputList[item];
+		const aReceipe = this.mOutputList.get(item);
 		if (!aReceipe) {
 			console.warn(`no receipe found for item '${item}'`);
 			return null;
@@ -38,14 +38,14 @@ export default class Receipe {
 	//**********************************
 
 	name = 'none';
-	aOutput = {};
-	aInput = {};
+	mOutput = new Map;
+	mInput = new Map;
 	prod;
 
-	constructor(name, aOutput, aInput, prod) {
+	constructor(name, oOutput, oInput, prod) {
 		this.name = name;
-		this.aOutput = aOutput;
-		this.aInput = aInput;
+		this.mOutput = new Map(Object.entries(oOutput));
+		this.mInput = new Map(Object.entries(oInput));
 		this.prod = prod;
 	}
 

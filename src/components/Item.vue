@@ -23,7 +23,7 @@
 				@blur="selecting = false"
 			>
 				<option 
-					v-for="oSub, subItem in aItemList" 
+					v-for="[subItem, oSub] of itemList" 
 					:key="subItem" 
 					:value="subItem" 
 					:selected="subItem == itemValue"
@@ -148,7 +148,7 @@ export default {
 		src() {
 			return this.oItem.imageUrl();
 		},
-		aItemList() {
+		itemList() {
 			return Item.getAll();
 		},
 	},

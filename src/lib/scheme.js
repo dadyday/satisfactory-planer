@@ -1,4 +1,5 @@
 import Receipe from './Receipe';
+import _ from 'underscore';
 
 export default class Scheme {
 
@@ -8,37 +9,34 @@ export default class Scheme {
 
 	//*************************
 	
-	aQuantity = {};
-	aProduction = {};
+	mQuantity = new Map;
+	mProduction = new Map;
 	aSink = [];
 	aLink = [];
 
-	constructor(aNeed = {}) {
-		this.aQuantity = {};
-		this.aProduction = {};
-		for (var item in aNeed) {
-			this.addNeeded(item, aNeed[item]);
-		}
+	constructor(oNeed = {}) {
+		_.each(oNeed, (count, item) => {
+			this.addNeeded(item, count);
+		});
 		this.calcProduction();
 	}
 
 	addNeeded(item, count) {
 		this.initQuantity(item);
-		this.aQuantity[item].need += count;
+		this.mQuantity.get(item).need += count;
 	}
 
 	initQuantity(item) {
-		if (!this.aQuantity[item]) this.aQuantity[item] = {need:0, in:0, out:0};
+		if (!this.mQuantity.has(item)) this.mQuantity.set(item, { need:0, in:0, out:0 });
 	}
 
 	calcProduction() {
-		for (const item in this.aQuantity) {
-			const oQuant = this.aQuantity[item];
+		this.mQuantity.forEach((oQuant, item) => {
 			if (oQuant.need) {
 				const oTarget = this.addSinkFor(item, oQuant.need);
 				this.addProductionFor(item, oQuant.need, oTarget);
 			}
-		}
+		});
 	}
 
 	addSinkFor(item, count) {
@@ -49,40 +47,42 @@ export default class Scheme {
 	}
 
 	addProductionFor(item, count, oTarget) {
-		for (const name in this.aProduction) {
-			for (const oProd of this.aProduction[name]) {
-				if (oProd.productivity >= 1.0) continue;
-				if (!oProd.oReceipe.aOutput[item]) continue;
-				count = this.addProdCapacity(oProd, item, count, oTarget);
-			}
-		}
+		this.mProduction.forEach((aProd, name) => {
+			aProd.forEach((oProd) => {
+				if (oProd.productivity < .9999
+					&& oProd.oReceipe.mOutput.has(item)
+				) {
+					count = this.addProdCapacity(oProd, item, count, oTarget);
+				}
+			});
+		});
 
 		const oReceipe = Receipe.getByOutput(item);
 		while (count > 0.0001) {
 			const oProd = oReceipe.createProduction();
 			oProd.productivity = 0.0;
 			count = this.addProdCapacity(oProd, item, count, oTarget);
-			if (!this.aProduction[oReceipe.name]) this.aProduction[oReceipe.name] = [];
-			this.aProduction[oReceipe.name].push(oProd);
+			if (!this.mProduction.has(oReceipe.name)) this.mProduction.set(oReceipe.name, []);
+			this.mProduction.get(oReceipe.name).push(oProd);
 		}
 	}
 
 	addProdCapacity(oProd, item, count, oTarget) {
 		const self = this;
 		const cap = 1.0 - oProd.productivity;
-		const eff = Math.min(1.0 * count / oProd.oReceipe.aOutput[item], cap);
+		const eff = Math.min(1.0 * count / oProd.oReceipe.mOutput.get(item), cap);
 		
-		count -= eff * oProd.oReceipe.aOutput[item];
+		count -= eff * oProd.oReceipe.mOutput.get(item);
 		oProd.productivity += eff;
 		this.aLink.push([oProd, oTarget]);
 		
-		Object.entries(oProd.oReceipe.aOutput).forEach(([itm, cnt]) => {
+		oProd.oReceipe.mOutput.forEach((cnt, itm) => {
 			this.initQuantity(itm);
-			this.aQuantity[itm].out += cnt * eff;
+			this.mQuantity.get(itm).out += cnt * eff;
 		});
-		Object.entries(oProd.oReceipe.aInput).forEach(([itm, cnt]) => {
+		oProd.oReceipe.mInput.forEach((cnt, itm) => {
 			this.initQuantity(itm);
-			this.aQuantity[itm].in += cnt * eff;
+			this.mQuantity.get(itm).in += cnt * eff;
 			self.addProductionFor(itm, cnt * eff, oProd);
 		});
 
@@ -97,13 +97,14 @@ export default class Scheme {
 			linkDataArray: [],
 		};
 		let n = 1;
-		
-		for (const name in this.aProduction) {
-			for (const oProd of this.aProduction[name]) {
+
+		this.mProduction.forEach((aProd, name) => {
+			aProd.forEach((oProd) => {
 				const oNode = oProd.getNodeData(n++);
 				oModel.nodeDataArray.push(oNode);
-			}
-		}
+			});
+		});
+		
 		for (const oSink of this.aSink) {
 			const oNode = oSink.getNodeData(n++);
 			oModel.nodeDataArray.push(oNode);
