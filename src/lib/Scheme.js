@@ -40,14 +40,14 @@ export default class Scheme {
 	}
 
 	addSinkFor(item, count) {
-		const oReceipe = new Receipe('', [], {item: count}, 'sink');
+		const oReceipe = new Receipe('', [], {item: count}, 'container');
 		const oSink = oReceipe.createProduction();
 		this.aSink.push(oSink);
 		return oSink;
 	}
 
 	addProductionFor(item, count, oTarget) {
-		this.mProduction.forEach((aProd, name) => {
+		this.mProduction.forEach((aProd) => {
 			aProd.forEach((oProd) => {
 				if (oProd.productivity < .9999
 					&& oProd.oReceipe.mOutput.has(item)
@@ -98,7 +98,7 @@ export default class Scheme {
 		};
 		let n = 1;
 
-		this.mProduction.forEach((aProd, name) => {
+		this.mProduction.forEach((aProd) => {
 			aProd.forEach((oProd) => {
 				const oNode = oProd.getNodeData(n++);
 				oModel.nodeDataArray.push(oNode);
@@ -117,16 +117,21 @@ export default class Scheme {
 			//{ from: 'splitter#0', fromPortId: 'out_left', to: 'ironingot#0', toPortId: 'in', },
 			//{ from: 'splitter#0', fromPortId: 'out_mid', to: 'ironingot#1', toPortId: 'in', },
 		];
+		const mUsed = new Map;
 		for (const aProd of this.aLink) {
+			var key = aProd[0].id + '_' + aProd[1].id;
 			const oLink = {
 				from: aProd[0].id, 
 				fromPortId: "out0",
 				to: aProd[1].id, 
 				toPortId: "in0",
 			};
-			console.log(oLink);
-			oModel.linkDataArray.push(oLink);
+			if (!mUsed.has(key)) {
+				mUsed.set(key, oLink)
+			}
 		}
+
+		mUsed.forEach((oLink) => { oModel.linkDataArray.push(oLink); });
 		return oModel;
 	}
 }
