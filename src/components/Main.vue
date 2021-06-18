@@ -4,11 +4,11 @@
 		<div>
 			<ul>
 				<li v-for="need, item in oNeed" :key="item+rdm">
-					<Item 
-						:item="item" 
-						:count="need" 
-						@update:count="setNeed(item, $event)" 
-						@delete="delNeed(item)" 
+					<Item
+						:item="item"
+						:count="need"
+						@update:count="setNeed(item, $event)"
+						@delete="delNeed(item)"
 						editable
 						deletable
 					/>
@@ -17,43 +17,32 @@
 				</li>
 				<hr/>
 				<li>
-					<Item item="" :count="0" 
+					<Item item="" :count="0"
 						editable
 						selectable
-						addable 
+						addable
 						@add="addNeed(...$event)"
 					/></li>
 			</ul>
 			<button @click="run">Run!</button>
-			<table style="margin-left:1em;">
+			<table class="indent">
 				<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 					<td><Item :item="item"/></td>
-					<td>&nbsp;&nbsp;&nbsp;</td>
+					<td class="spacer"></td>
 					<td><Item :item="item" :count="oQuant.need" label="Benötigt" /></td>
 					<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
 					<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
 				</tr>
 			</table>
-			<ul>
+			<hr />
+			<table class="indent">
 				<template v-for="[item, aProd] in oScheme.mProduction">
-					<li v-for="oProd, i in aProd" :key="item+i">
-						<Building :obj="oProd.oBuilding" /> - 
-						{{ oProd.name }}: 
-						{{ (oProd.productivity*100.0).toFixed(1) }}%
-						(
-						<template v-for="[item, count], i in oProd.oReceipe.mInput">
-							{{ i ? ', ' : '' }}
-							<Item :item="item" :count="oProd.productivity*count" short :key="'in'+i+rdm"/>
-						</template>
-						&gt;
-						<template v-for="[item, count], i in oProd.oReceipe.mOutput">
-							{{ i ? ', ' : '' }}
-							<Item :item="item" :count="oProd.productivity*count" :key="'out'+i+rdm"/>
-						</template>
-						)
-					</li>
+					<tr v-for="oProd, i in aProd" :key="item+i">
+						<td><Production :obj="oProd" /></td>
+						<td class="spacer"></td>
+					</tr>
 				</template>
-			</ul>
+			</table>
 		</div>
 	</div>
 </template>
@@ -121,4 +110,10 @@ export default {
 </script>
 
 <style>
+.indent {
+	margin-left:1em;
+}
+.spacer {
+	content: "   "
+}
 </style>

@@ -1,14 +1,14 @@
 <template>
-	<div id="item">
+	<Entity>
 		<div class="icon">
 			<img :src="src" :alt="itemValue" />
 		</div>
-		<div class="times" v-show="hasCount" @click="startEditing">
+		<div class="times" v-show="hasCount" @mousedown="startEditing">
 			<span>&times;</span>
 			<input type="text"
-				ref="edit" 
+				ref="edit"
 				v-show="editable && editing"
-				v-model="countValue" 
+				v-model="countValue"
 				:style="{width:inputWidth}"
 				@blur="endEditing"
 			/>
@@ -16,16 +16,16 @@
 		</div>
 		<div class="name" v-if="!short" @click="startSelecting">
 			<select
-				ref="select" 
+				ref="select"
 				v-show="selectable && selecting"
-				v-model="itemValue" 
+				v-model="itemValue"
 				:style="{width:getWidth(this.$el, name)}"
 				@blur="selecting = false"
 			>
-				<option 
-					v-for="[subItem, oSub] of itemList" 
-					:key="subItem" 
-					:value="subItem" 
+				<option
+					v-for="[subItem, oSub] of itemList"
+					:key="subItem"
+					:value="subItem"
 					:selected="subItem == itemValue"
 				>
 					{{ oSub.name }}
@@ -35,45 +35,12 @@
 		</div>
 		<div class="button" >
 			<button class="add" v-if="addable" @click="addItem">&plus;</button>
-			<button class="remove" v-if="deletable" @click="deleteItem">&times;</button>
+			<button class="remove red" v-if="deletable" @click="deleteItem">&times;</button>
 		</div>
-	</div>
+	</Entity>
 </template>
 
 <style lang="scss">
-#item {
-	display: inline-block;
-	border: solid 0.5px #ccc;
-	border-radius: 0.2em;
-	box-shadow: 0.1em 0.1em 0.2em 0px #0008;
-	div {
-		display: inline-block;
-		line-height: 1.5em;
-		margin: 0 0.2em;
-		input, select, span {
-			font-weight: bold;
-			font-size: 10pt;
-		}
-	}
-	.icon img {
-		width: 24px;
-		height: 24px;
-		vertical-align: middle;
-		position: relative;
-		top: -1px;
-	}
-	.button button {
-		border-radius: 5em;
-		border: solid 0.5px;
-		padding: 0 0.25em;
-		vertical-align: text-bottom;
-		&.remove {
-			border-color: #f44;
-			background: #fee;
-			color: red;
-		}
-	}
-}
 </style>
 
 
@@ -82,7 +49,7 @@ import Item from '../lib/Item';
 
 var	inputSize = 0;
 const inputOffset = 0;
-function log(...args) { 
+function log(...args) {
 	console.log(...args);
 	return args[0];
 }
@@ -110,7 +77,7 @@ export default {
 			countVal: 0,
 			itemVal: this.item,
 			oItem: Item.get(this.item),
-			
+
 			editing: false,
 			selecting: false,
 		};
@@ -161,7 +128,7 @@ export default {
 	methods: {
 		startEditing() {
 			this.editing = this.editable;
-			setTimeout(() => { 
+			setTimeout(() => {
 				this.$refs.edit.focus();
 			}, 100);
 		},
@@ -171,7 +138,7 @@ export default {
 		},
 		startSelecting() {
 			this.selecting = this.selectable;
-			setTimeout(() => { 
+			setTimeout(() => {
 				this.$refs.select.focus();
 			}, 100);
 		},
@@ -195,4 +162,3 @@ export default {
 	},
 }
 </script>
-
