@@ -48,7 +48,7 @@ export default class Scheme {
 	}
 
 	addSinkFor(item, count) {
-		const oReceipe = new Receipe('', [], {item: count}, 'container');
+		const oReceipe = new Receipe('storage', [], {item: count}, 'container');
 		const oSink = oReceipe.createProduction();
 		this.aSink.push(oSink);
 		return oSink;
@@ -83,10 +83,6 @@ export default class Scheme {
 		});
 
 		return rest;
-	}
-
-	recalcFrom(oProd) {
-		console.log(oProd.mOutput);
 	}
 
 

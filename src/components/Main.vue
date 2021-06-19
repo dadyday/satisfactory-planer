@@ -42,7 +42,7 @@
 							<Production
 								:obj="oProd"
 								editable
-								@update="updateProd($event)"
+								@update:productivity="updateProd(oProd, $event)"
 							/>
 						</td>
 						<td class="spacer"></td>
@@ -111,9 +111,9 @@ export default {
 			console.log(this.oScheme);
 			this.rdm = Math.random() * 10000;
 		},
-		updateProd(oProd) {
-			this.oScheme.recalcFrom(oProd);
-		}
+		updateProd(oProd, productivity) {
+			oProd.changeProductivity(productivity);
+		},
 	},
 }
 </script>

@@ -42,6 +42,7 @@ export default {
 	data() {
 		return {
 			oProd: this.obj,
+			prodValue: 0,
 			editing: false,
 		};
 	},
@@ -60,7 +61,7 @@ export default {
 				return (this.oProd.productivity * 100.0).toFixed(0);
 			},
 			set(value) {
-				this.oProd.productivity = parseFloat(value)/100.0;
+				this.prodValue = parseFloat(value)/100.0;
 			}
 		},
 	},
@@ -73,7 +74,7 @@ export default {
 		},
 		endEditing() {
 			this.editing = false;
-			this.$emit('update', this.oProd);
+			this.$emit('update:productivity', this.prodValue);
 		},
 	},
 }

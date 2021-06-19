@@ -49,11 +49,6 @@ import Item from '../lib/Item';
 
 var	inputSize = 0;
 const inputOffset = 0;
-function log(...args) {
-	console.log(...args);
-	return args[0];
-}
-log('-----------')
 
 export default {
 	props: {
@@ -122,7 +117,7 @@ export default {
 	mounted() {
 		this.countVal = Math.ceil(this.count || 0).toFixed();
 		if (!inputSize) {
-			inputSize = log(this.getTextWidth(this.$refs.edit, '0123456789') / 10);
+			inputSize = this.getTextWidth(this.$refs.edit, '0123456789') / 10;
 		}
 	},
 	methods: {

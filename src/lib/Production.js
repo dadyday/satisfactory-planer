@@ -1,4 +1,5 @@
 import Transport from './Transport';
+import _ from 'underscore';
 
 export default class Production {
 	id = null;
@@ -21,6 +22,39 @@ export default class Production {
 
 	addInput(oTransport) {
 		this.aInput.push(oTransport);
+	}
+
+	/* p     d=0.5  d=-0.5
+		----- ------ ------
+		1.0   0      -0.5
+		0.66  0.33   -0.5
+		0.5   0.5    -0.5
+		0.33  0.5    -0.33
+		0     0.5    0
+	*/
+	setDelta(delta, aIgnore = []) {
+		if (this.name == 'storage') return delta;
+		if (_.contains(aIgnore, this)) return delta;
+		aIgnore.push(this);
+
+		delta = Math.min(delta, 1.0 - this.productivity);
+		delta = Math.max(delta, 0.0 - this.productivity);
+
+		this.aInput.forEach((oTransport) => {
+			delta = oTransport.oSource.setDelta(delta, aIgnore);
+		});
+
+		this.aOutput.forEach((oTransport) => {
+			delta = oTransport.oTarget.setDelta(delta, aIgnore);
+		});
+
+		console.log(this.name, delta)
+		this.productivity += delta;
+		return delta;
+	}
+
+	changeProductivity(newValue) {
+		this.setDelta(newValue - this.productivity);
 	}
 
 	increaseCapacity(item, count, oTarget, itemHandler) {

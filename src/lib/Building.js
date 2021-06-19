@@ -18,10 +18,9 @@ export default class Building {
 		const oBuilding = new Building(type, ...aData);
 		this.mList.set(type, oBuilding);
 	}
-	
+
 	static registerAll(oBuildingData) {
 		new Map(Object.entries(oBuildingData)).forEach((aData, type) => {
-			console.log(type, aData);
 			this.register(type, aData);
 		});
 	}
@@ -43,7 +42,7 @@ export default class Building {
 	oSize = { width: 100, height: 100 };
 	aPort = [];
 	aLayer = [];
-	
+
 	constructor(type, name, w, h, layer, aPort) {
 		this.type = type;
 		this.name = name;
@@ -105,7 +104,7 @@ export default class Building {
 					font: "bold 11pt sans-serif",
 				}),
 				// $(go.Picture, icon, { row: 1, width: 16, height: 16, scale: 3.0 }),
-				$(go.TextBlock, 
+				$(go.TextBlock,
 					{
 						row: 2,
 						margin: 3,
@@ -121,14 +120,14 @@ export default class Building {
 
 		const oSide = {left:[], right:[], top:[], bottom:[]};
 
-		var i = 0, o = 0; 
+		var i = 0, o = 0;
 		for (var oPort of this.aPort) {
 			const port = oPort.inOut ? 'in'+(i++) : 'out'+(o++);
 			oSide[oPort.side].push(oPort.makePort(port));
 		}
 
 		var oNode = $(go.Node, "Spot",
-			{ 
+			{
 				locationSpot: go.Spot.Center,
 				dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, this.aLayer),
 				rotatable: true,
@@ -163,20 +162,20 @@ export default class Building {
 		const oRect = new go.Rect(
 			oGridPoint.x - (oLoc.x - oBounds.x),
 			oGridPoint.y - (oLoc.y - oBounds.y),
-			oBounds.width, 
+			oBounds.width,
 			oBounds.height
 		);
 		oRect.inflate(-15, -15);
 
 		//var oLayers = oNode.diagram.layers;
 		//while (oLayers.next()) {
-		
+
 		for (const layer of aLayer) {
 			//var oLayer = oLayers.value;
 			var oLayer = oNode.diagram.findLayer(layer)
 			if (!oLayer) console.error(`layer ${layer} not found!`);
 			if (!oLayer || oLayer.isTemporary) continue;
-			
+
 			var aObj = oLayer.findObjectsIn(oRect, (oObj) => {
 				var oPart = oObj.part;
 				if (oPart === oNode) return null;
@@ -185,7 +184,7 @@ export default class Building {
 				if (oNode.isMemberOf(oPart)) return null;
 				return oPart;
 			}, null, true);
-			
+
 			if (aObj.count > 0) {
 				//console.log(aObj)
 				return oLastPoint;
@@ -194,15 +193,15 @@ export default class Building {
 		oLastPoint.set(oGridPoint);
 		return oGridPoint;
 	}
-	
-	
+
+
 
 	/*
 	avoidNodeOverlap(oNode, oPoint, oGridPoint) {
 		if (oNode.diagram instanceof go.Palette) return oGridPoint;
-		
+
 		function isUnoccupied(oRect) {
-			
+
 			function navig(obj) {
 				var part = obj.part;
 				if (part === oNode) return null;
@@ -221,18 +220,18 @@ export default class Building {
 			}
 			return true;
 		}
-		
+
 		const oBounds = oNode.actualBounds;
 		const oLoc = oNode.location;
-		
+
 		const oRect = new go.Rect(
 			oGridPoint.x - (oLoc.x - oBounds.x),
 			oGridPoint.y - (oLoc.y - oBounds.y),
-			oBounds.width, 
+			oBounds.width,
 			oBounds.height
 		);
 		oRect.inflate(-10, -10);
-		
+
 		if (
 				!(oNode.diagram.currentTool instanceof go.DraggingTool) &&
 				(!oNode._temp || !oNode.layer.isTemporary)
@@ -244,7 +243,7 @@ export default class Building {
 			}
 			oRect.inflate(-10, -10);  // restore to actual size
 			return new go.Point(
-				oRect.x - (oLoc.x - oBounds.x), 
+				oRect.x - (oLoc.x - oBounds.x),
 				oRect.y - (oLoc.y - oBounds.y)
 			);
 		}
@@ -253,10 +252,10 @@ export default class Building {
 	}
 
 
-	
+
 	makePort(name, inOut, side) {
 		var port = $(go.Shape, "RoundedRectangle", {
-			fill: inOut ? "#fc0" : "#0c0", 
+			fill: inOut ? "#fc0" : "#0c0",
 			stroke: null,
 			desiredSize: new go.Size(20, 20),
 			portId: name,  // declare this object to be a "port"
@@ -266,11 +265,11 @@ export default class Building {
 			toLinkable: true,
 		});
 
-		var panel = $(go.Panel, "Horizontal", { 
+		var panel = $(go.Panel, "Horizontal", {
 			margin: new go.Margin(2, 0),
 			alignment: go.Spot['Top'+side],
 		}, port);
-		
+
 		return panel;
 	} //*/
 }
