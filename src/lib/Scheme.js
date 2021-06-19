@@ -8,11 +8,10 @@ export default class Scheme {
 	}
 
 	//*************************
-	
+
 	mQuantity = new Map;
 	mProduction = new Map;
 	aSink = [];
-	aLink = [];
 
 	constructor(oNeed = {}) {
 		_.each(oNeed, (count, item) => {
@@ -21,13 +20,22 @@ export default class Scheme {
 		this.calcProduction();
 	}
 
-	addNeeded(item, count) {
-		this.initQuantity(item);
-		this.mQuantity.get(item).need += count;
+	getQuantity(item) {
+		if (!this.mQuantity.has(item)) this.mQuantity.set(item, { need:0, in:0, out:0 });
+		return this.mQuantity.get(item);
 	}
 
-	initQuantity(item) {
-		if (!this.mQuantity.has(item)) this.mQuantity.set(item, { need:0, in:0, out:0 });
+	getProduction(name) {
+		if (!this.mProduction.has(name)) this.mProduction.set(name, []);
+		return this.mProduction.get(name);
+	}
+
+	eachProduction(handler) {
+		this.mProduction.forEach((aProd) => { aProd.forEach(handler); });
+	}
+
+	addNeeded(item, count) {
+		this.getQuantity(item).need += count;
 	}
 
 	calcProduction() {
@@ -47,47 +55,40 @@ export default class Scheme {
 	}
 
 	addProductionFor(item, count, oTarget) {
-		this.mProduction.forEach((aProd) => {
-			aProd.forEach((oProd) => {
-				if (oProd.productivity < .9999
-					&& oProd.oReceipe.mOutput.has(item)
-				) {
-					count = this.addProdCapacity(oProd, item, count, oTarget);
-				}
-			});
+		this.eachProduction((oProd) => {
+			if (oProd.productivity < .9999
+				&& oProd.oReceipe.mOutput.has(item)
+			) {
+				count = this.addProdCapacity(oProd, item, count, oTarget);
+			}
 		});
 
 		const oReceipe = Receipe.getByOutput(item);
 		while (count > 0.0001) {
 			const oProd = oReceipe.createProduction();
-			oProd.productivity = 0.0;
 			count = this.addProdCapacity(oProd, item, count, oTarget);
-			if (!this.mProduction.has(oReceipe.name)) this.mProduction.set(oReceipe.name, []);
-			this.mProduction.get(oReceipe.name).push(oProd);
+			this.getProduction(oReceipe.name).push(oProd);
 		}
 	}
 
 	addProdCapacity(oProd, item, count, oTarget) {
 		const self = this;
-		const cap = 1.0 - oProd.productivity;
-		const eff = Math.min(1.0 * count / oProd.oReceipe.mOutput.get(item), cap);
-		
-		count -= eff * oProd.oReceipe.mOutput.get(item);
-		oProd.productivity += eff;
-		this.aLink.push([oProd, oTarget]);
-		
-		oProd.oReceipe.mOutput.forEach((cnt, itm) => {
-			this.initQuantity(itm);
-			this.mQuantity.get(itm).out += cnt * eff;
-		});
-		oProd.oReceipe.mInput.forEach((cnt, itm) => {
-			this.initQuantity(itm);
-			this.mQuantity.get(itm).in += cnt * eff;
-			self.addProductionFor(itm, cnt * eff, oProd);
+
+		const rest = oProd.increaseCapacity(item, count, oTarget, (inOut, itm, cnt) => {
+			if (inOut) {
+				this.getQuantity(itm).in += cnt;
+				self.addProductionFor(itm, cnt, oProd);
+			}
+			else this.getQuantity(itm).out += cnt;
 		});
 
-		return count;
+		return rest;
 	}
+
+	recalcFrom(oProd) {
+		console.log(oProd.mOutput);
+	}
+
 
 	// ***************** drawing
 
@@ -97,41 +98,25 @@ export default class Scheme {
 			linkDataArray: [],
 		};
 		let n = 1;
+		let l = 1;
 
-		this.mProduction.forEach((aProd) => {
-			aProd.forEach((oProd) => {
-				const oNode = oProd.getNodeData(n++);
-				oModel.nodeDataArray.push(oNode);
-			});
+		this.eachProduction((oProd) => {
+			const oNode = oProd.getNodeData(n++);
+			oModel.nodeDataArray.push(oNode);
 		});
-		
+
 		for (const oSink of this.aSink) {
 			const oNode = oSink.getNodeData(n++);
 			oModel.nodeDataArray.push(oNode);
 		}
-		
-		oModel.linkDataArray = [
-			//{ from: "minerMk1", to: "split", fromPortId: "out0", toPortId: "in0" },
-			//{ from: "split", to: "sink", fromPortId: "out2", toPortId: "in0" },
-			//{ from: 'ironore#0', fromPortId: 'out', to: 'splitter#0', toPortId: 'in', },
-			//{ from: 'splitter#0', fromPortId: 'out_left', to: 'ironingot#0', toPortId: 'in', },
-			//{ from: 'splitter#0', fromPortId: 'out_mid', to: 'ironingot#1', toPortId: 'in', },
-		];
-		const mUsed = new Map;
-		for (const aProd of this.aLink) {
-			var key = aProd[0].id + '_' + aProd[1].id;
-			const oLink = {
-				from: aProd[0].id, 
-				fromPortId: "out0",
-				to: aProd[1].id, 
-				toPortId: "in0",
-			};
-			if (!mUsed.has(key)) {
-				mUsed.set(key, oLink)
-			}
-		}
 
-		mUsed.forEach((oLink) => { oModel.linkDataArray.push(oLink); });
+		this.eachProduction((oProd) => {
+			oProd.aOutput.forEach((oTransport) => {
+				const oLink = oTransport.getLinkData(l++);
+				oModel.linkDataArray.push(oLink);
+			});
+		});
+
 		return oModel;
 	}
 }

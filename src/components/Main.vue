@@ -37,8 +37,14 @@
 			<hr />
 			<table class="indent">
 				<template v-for="[item, aProd] in oScheme.mProduction">
-					<tr v-for="oProd, i in aProd" :key="item+i">
-						<td><Production :obj="oProd" /></td>
+					<tr v-for="oProd, i in aProd" :key="item+i+rdm">
+						<td>
+							<Production
+								:obj="oProd"
+								editable
+								@update="updateProd($event)"
+							/>
+						</td>
 						<td class="spacer"></td>
 					</tr>
 				</template>
@@ -105,6 +111,9 @@ export default {
 			console.log(this.oScheme);
 			this.rdm = Math.random() * 10000;
 		},
+		updateProd(oProd) {
+			this.oScheme.recalcFrom(oProd);
+		}
 	},
 }
 </script>

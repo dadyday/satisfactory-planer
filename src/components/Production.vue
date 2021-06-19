@@ -6,16 +6,23 @@
 		<div class="name" v-if="!short">
 			<span >{{ name }}</span>
 		</div>
-		<div class="times" >
-			<span>{{ percentValue }}</span>
+		<div class="times" @mousedown="startEditing">
+			<input type="number"
+				ref="edit"
+				v-show="editable && editing"
+				v-model="percentValue"
+				:style="{width:'3em'}"
+				@blur="endEditing"
+			/>
+			<span v-show="!editable || !editing">{{ percentValue }}</span>
 			<span>%</span>
 		</div>
 		<div>
 			<Item v-for="[item, count], i in oProd.oReceipe.mInput"
-				:item="item" :count="oProd.productivity*count" short :key="'in'+i+rdm"/>
+				:item="item" :count="oProd.productivity*count" short :key="'in'+i"/>
 			&#10140;
 			<Item v-for="[item, count], i in oProd.oReceipe.mOutput"
-				:item="item" :count="oProd.productivity*count" short :key="'out'+i+rdm"/>
+				:item="item" :count="oProd.productivity*count" short :key="'out'+i"/>
 		</div>
 		<div>
 		</div>
@@ -30,10 +37,12 @@ export default {
 		short: Boolean,
 		obj: Object,
 		label: String,
+		editable: Boolean,
 	},
 	data() {
 		return {
 			oProd: this.obj,
+			editing: false,
 		};
 	},
 	computed: {
@@ -46,9 +55,26 @@ export default {
 		src() {
 			return this.oProd.oBuilding.imageUrl();
 		},
-		percentValue() {
-			return (this.oProd.productivity * 100.0).toFixed(0);
-		}
+		percentValue: {
+			get() {
+				return (this.oProd.productivity * 100.0).toFixed(0);
+			},
+			set(value) {
+				this.oProd.productivity = parseFloat(value)/100.0;
+			}
+		},
+	},
+	methods: {
+		startEditing() {
+			this.editing = this.editable;
+			setTimeout(() => {
+				this.$refs.edit.focus();
+			}, 100);
+		},
+		endEditing() {
+			this.editing = false;
+			this.$emit('update', this.oProd);
+		},
 	},
 }
 </script>
