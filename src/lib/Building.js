@@ -103,6 +103,7 @@ export default class Building {
 	}
 
 	makeTemplate() {
+		const sz = Math.min(this.oSize.width-10, this.oSize.height-10);
 		var oPanel = $(go.Panel, "Auto",
 			{
 				width: this.oSize.width,
@@ -112,9 +113,17 @@ export default class Building {
 			$(go.Shape, "RoundedRectangle", {
 				fill: "#fb04", stroke: "#430", strokeWidth: 2,
 			}),
+			$(go.Picture, this.imageUrl(), {
+				row: 0,
+				column: 0,
+				height: sz,
+				width: sz,
+			}, new go.Binding("source", "type", this.imageUrl)),
+
 			$(go.Panel, "Table",
 				$(go.TextBlock, this.name, {
 					row: 0,
+					column: 1,
 					margin: 3,
 					maxSize: new go.Size(80, NaN),
 					stroke: "white",
@@ -122,14 +131,15 @@ export default class Building {
 				}, new go.Binding("text", "name")),
 				// $(go.Picture, icon, { row: 1, width: 16, height: 16, scale: 3.0 }),
 				$(go.TextBlock, '', {
-					row: 2,
+					row: 1,
+					column: 1,
 					margin: 3,
 					editable: true,
 					maxSize: new go.Size(80, 40),
 					stroke: "white",
 					font: "9pt sans-serif"
 				}, new go.Binding("text", "detail"))
-			)
+			),
 		);
 
 		const oSide = {left:[], right:[], top:[], bottom:[]};

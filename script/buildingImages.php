@@ -15,13 +15,16 @@ $aBuilding = [
 	'Resource Well Pressurizer',
 	'Smelter',
 	'Water Extractor',
+	'Storage Container',
+	'Conveyor Merger',
+	'Conveyor Splitter',
 ];
 
 foreach ($aBuilding as &$item) {
 	$name = strtr($item, [' ' => '_', '.' => '']);
 	$url = "https://satisfactory.fandom.com/wiki/$name";
 	$content = file_get_contents($url);
-	
+
 	if (preg_match('~<img.*src="('.$imgBase.'/\w/\w\w/'.$name.'.png/.*/scale-to-width-down/)128~', $content, $aMatch)) {
 		//print_r($aMatch);
 		$item = [
