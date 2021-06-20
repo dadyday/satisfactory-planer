@@ -27,34 +27,36 @@ export default class PortType {
 		};
 		const side = this.side.charAt(0).toUpperCase() + this.side.substring(1);
 		const oSpot = go.Spot[side];
-		
+
 		const port = $(go.Shape, "RoundedRectangle", {
-			fill: this.inOut ? "#fc0" : "#0c0", 
-			stroke: "#555", 
+			fill: this.inOut ? "#fc0" : "#0c0",
+			stroke: "#555",
 			strokeWidth: 0.5,
 			desiredSize: new go.Size(...swap(20, 10)),
 			//margin: new go.Margin(...swap(0, 5)),
 			portId: name,
 			cursor: "pointer",
-			
+
 			fromSpot: oSpot,
 			fromLinkable: !this.inOut,
 			fromMaxLinks: 1,
-			
+
 			toSpot: oSpot,
 			toLinkable: this.inOut,
 			toMaxLinks: 1,
 			//margin: new go.Margin(10, 0),
 			//alignment: go.Spot.Left,
+
+			click: () => alert(1),
 		});
 
 		return port;
 		/*
-		var panel = $(go.Panel, "Horizontal", { 
+		var panel = $(go.Panel, "Horizontal", {
 			margin: new go.Margin(2, 0),
 			alignment: go.Spot['TopLeft'],
 		}, port);
-		
+
 		return panel; //*/
 	}
 

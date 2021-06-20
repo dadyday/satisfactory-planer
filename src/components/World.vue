@@ -43,8 +43,7 @@ export default {
 	},
 	data() {
 		return {
-			oPalette: null,
-			oDiagram: null,
+			go: null,
 		};
 	},
 	computed: {
@@ -55,25 +54,19 @@ export default {
 		}
 	},
 	mounted() {
-		[
-			this.oDiagram, 
-			this.oPalette
-		] = GoAdapter.createWorkspace(
-			'diagram',
-			'palette',
-		);
+		this.go = new GoAdapter('diagram', 'palette');
 	},
 	methods: {
 		save() {
 			const data = {
-				nodeDataArray: this.oDiagram.model.nodeDataArray,
-				linkDataArray: this.oDiagram.model.linkDataArray,
+				nodeDataArray: this.go.oDiagram.model.nodeDataArray,
+				linkDataArray: this.go.oDiagram.model.linkDataArray,
 			};
 			this.$emit('save', JSON.stringify(data, null, "  "));
-			this.oDiagram.isModified = false;
+			this.go.oDiagram.isModified = false;
 		},
 		load() {
-			const oModel = 	this.oDiagram.model.fromJson(this.model);
+			const oModel = 	this.go.oDiagram.model.fromJson(this.model);
 			this.applyModel(oModel);
 		},
 		draw() {
@@ -82,23 +75,23 @@ export default {
 			this.applyModel(oModel);
 		},
 		applyModel(oModel) {
-			this.oDiagram.model.nodeDataArray = oModel.nodeDataArray;
-			this.oDiagram.model.linkDataArray = oModel.linkDataArray;
+			this.go.oDiagram.model.nodeDataArray = oModel.nodeDataArray;
+			this.go.oDiagram.model.linkDataArray = oModel.linkDataArray;
 		},
 
 		applyNodePositions(oModel) {
-			const aType = _.groupBy(this.oDiagram.model.nodeDataArray, (oItem) => { 
+			const aType = _.groupBy(this.go.oDiagram.model.nodeDataArray, (oItem) => {
 				return '_'+oItem.type;
 			});
 			_.map(oModel.nodeDataArray, (oNode) => {
 				const aOld = _.get(aType, '_'+oNode.type);
 				if (aOld) {
-					const oOld = aOld.shift(); 
+					const oOld = aOld.shift();
 					if (oOld) oNode.pos = oOld.pos;
 				}
 			});
 		},
-		
+
 	}
 }
 

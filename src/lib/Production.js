@@ -77,9 +77,16 @@ export default class Production {
 		return rest;
 	}
 
+	createInput() {
+		console.log(this);
+	}
+
 	getNodeData(id) {
 		this.id = this.name+id;
-		return this.oBuilding.getNodeData(this.id);
+		const oData = this.oBuilding.getNodeData(this.id);
+		oData.detail = this.name;
+		oData.production = this;
+		return oData;
 	}
 
 	getLinkDataList() {

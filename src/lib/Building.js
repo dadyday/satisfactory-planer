@@ -76,7 +76,7 @@ export default class Building {
 		return {
 			id: id,
 			type: this.type,
-			text: this.name,
+			name: this.name,
 			layer: this.aLayer[0],
 		};
 	}
@@ -89,9 +89,26 @@ export default class Building {
 		return new go.Point(...aPos);
 	}
 
+	makeContextMenu(oProduction) {
+		return $("ContextMenu",
+			$("ContextMenuButton",
+				{
+					"ButtonBorder.fill": "white",
+					"_buttonFillOver": "skyblue",
+					click: oProduction.createInput.bind(oProduction)
+				},
+				$(go.TextBlock, "generiere Eingang")
+			)
+		);
+	}
+
 	makeTemplate() {
 		var oPanel = $(go.Panel, "Auto",
-			this.oSize,
+			{
+				width: this.oSize.width,
+				height: this.oSize.height,
+			},
+			new go.Binding("contextMenu", "production", this.makeContextMenu),
 			$(go.Shape, "RoundedRectangle", {
 				fill: "#fb04", stroke: "#430", strokeWidth: 2,
 			}),
@@ -101,20 +118,17 @@ export default class Building {
 					margin: 3,
 					maxSize: new go.Size(80, NaN),
 					stroke: "white",
-					font: "bold 11pt sans-serif",
-				}),
+					font: "bold 10pt sans-serif",
+				}, new go.Binding("text", "name")),
 				// $(go.Picture, icon, { row: 1, width: 16, height: 16, scale: 3.0 }),
-				$(go.TextBlock,
-					{
-						row: 2,
-						margin: 3,
-						editable: true,
-						maxSize: new go.Size(80, 40),
-						stroke: "white",
-						font: "bold 9pt sans-serif"
-					}
-				//  new go.Binding("text", "name").makeTwoWay()
-				)
+				$(go.TextBlock, '', {
+					row: 2,
+					margin: 3,
+					editable: true,
+					maxSize: new go.Size(80, 40),
+					stroke: "white",
+					font: "9pt sans-serif"
+				}, new go.Binding("text", "detail"))
 			)
 		);
 
@@ -173,7 +187,7 @@ export default class Building {
 		for (const layer of aLayer) {
 			//var oLayer = oLayers.value;
 			var oLayer = oNode.diagram.findLayer(layer)
-			if (!oLayer) console.error(`layer ${layer} not found!`);
+			// if (!oLayer) console.error(`layer ${layer} not found!`);
 			if (!oLayer || oLayer.isTemporary) continue;
 
 			var aObj = oLayer.findObjectsIn(oRect, (oObj) => {

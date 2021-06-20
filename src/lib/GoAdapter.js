@@ -6,35 +6,36 @@ import Building from './Building';
 
 export default class GoAdapter {
 
-	static createWorkspace(elIdDiagram, elIdPalette) {
+	oPalette;
+	oDiagram;
+	commandHandler;
+
+	constructor(elIdDiagram, elIdPalette) {
 		const oTemplateMap = Building.getTemplateMap();
-		
+
 		const aModelData = [];
 		Building.each((oBuilding, type) => {
 			aModelData.push(oBuilding.getNodeData(type));
 		});
 
-		return [
-			GoAdapter.createDiagram(elIdDiagram, oTemplateMap),
-			GoAdapter.createPalette(elIdPalette, oTemplateMap, aModelData),
-		];
+		this.initDiagram(elIdDiagram, oTemplateMap);
+		this.initPalette(elIdPalette, oTemplateMap, aModelData);
 	}
 
-	static createPalette(elId, oTemplateMap, aModelData) {
-		const oPalette = $(go.Palette, elId, {
+	initPalette(elId, oTemplateMap, aModelData) {
+		this.oPalette = $(go.Palette, elId, {
 			"maxSelectionCount": 1,
 			"nodeTemplateMap":   oTemplateMap,
 			"model":             new go.GraphLinksModel(aModelData),
-			"initialAutoScale":  go.Diagram.UniformToFill, 
+			"initialAutoScale":  go.Diagram.UniformToFill,
 		});
-		oPalette.model.nodeCategoryProperty = "type";
-		return oPalette;
+		this.oPalette.model.nodeCategoryProperty = "type";
 	}
 
-	static createDiagram(elId, oTemplateMap) {
-		
-		const oDiagram = $(go.Diagram, elId, {
-			"undoManager.isEnabled":                true,                                    // enable Ctrl-Z to undo and Ctrl-Y to redo
+	initDiagram(elId, oTemplateMap) {
+		this.oDiagram = $(go.Diagram, elId, {
+			"undoManager.isEnabled":                true, // enable Ctrl-Z to undo and Ctrl-Y to redo
+			"commandHandler.doKeyDown":             () => this.handleKey.call(this),
 			"draggingTool.gridSnapCellSize":        new go.Size(20, 20),
 			"draggingTool.isGridSnapEnabled":       true,
 			"draggingTool.gridSnapCellSpot":        new go.Spot(0,0,20,20),
@@ -55,76 +56,95 @@ export default class GoAdapter {
 			"rotatingTool.snapAngleEpsilon":        90,
 			"nodeTemplateMap":                      oTemplateMap,
 		});
+		this.commandHandler = new go.CommandHandler();
 
-		var oFore = oDiagram.findLayer("Foreground");
-		oDiagram.addLayerBefore($(go.Layer, { name: "ground" }), oFore);
-		oDiagram.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: true }), oFore);
-		//oDiagram.findLayer("elevated").opacity = 0.5;
-		
+
+		var oFore = this.oDiagram.findLayer("Foreground");
+		this.oDiagram.addLayerBefore($(go.Layer, { name: "ground" }), oFore);
+		this.oDiagram.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: true }), oFore);
+		//this.oDiagram.findLayer("elevated").opacity = 0.5;
+
 		//myDiagram.linkTemplateMap = createLinkTemplateMap();
-		oDiagram.linkTemplate = $(go.Link,
-			{ 
-				routing: go.Link.Orthogonal, 
+		this.oDiagram.linkTemplate = $(go.Link,
+			{
+				routing: go.Link.Orthogonal,
 				//routing: go.Link.AvoidsNodes,
 				corner: 20,
 				curve: go.Link.JumpOver,
-				fromEndSegmentLength: 20, 
-				fromShortLength: -10,  
+				fromEndSegmentLength: 20,
+				fromShortLength: -10,
 				toEndSegmentLength: 20,
-				toShortLength: -10,  
+				toShortLength: -10,
 			},
 			$(go.Shape, // the link's path shape
 				{ strokeWidth: 16, stroke: "#555" }
 			)
 		);
 
-		oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
+		this.oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
 
-		oDiagram.model = new go.GraphLinksModel([], []);
-		oDiagram.model.nodeCategoryProperty = "type";
-		oDiagram.model.nodeKeyProperty = "id";
-		oDiagram.model.linkFromPortIdProperty = "fromPortId";
-		oDiagram.model.linkToPortIdProperty = "toPortId";
-		oDiagram.model.linkKeyProperty = "id";
+		this.oDiagram.model = new go.GraphLinksModel([], []);
+		this.oDiagram.model.nodeCategoryProperty = "type";
+		this.oDiagram.model.nodeKeyProperty = "id";
+		this.oDiagram.model.linkFromPortIdProperty = "fromPortId";
+		this.oDiagram.model.linkToPortIdProperty = "toPortId";
+		this.oDiagram.model.linkKeyProperty = "id";
 
-		return oDiagram;
 	}
+
+	handleKey() {
+		const e = this.oDiagram.lastInput;
+		var key = e.key;
+		if (e.alt) key = 'alt-'+key;
+		if (e.control || e.meta) key = 'ctrl-'+key;
+		if (e.shift) key = 'shift-'+key;
+
+		switch (key) {
+			case 'R':
+				alert('R');
+				break;
+			default:
+				this.commandHandler.doKeyDown();
+		}
+	}
+
+
 }
 
 
 /*
 "relinkingTool.fromHandleArchetype":
-	$(go.Shape, "Diamond", { 
-		segmentIndex: 0, 
-		cursor: "pointer", 
-		desiredSize: new go.Size(8, 8), 
-		fill: "tomato", 
-		stroke: "darkred" 
+	$(go.Shape, "Diamond", {
+		segmentIndex: 0,
+		cursor: "pointer",
+		desiredSize: new go.Size(8, 8),
+		fill: "tomato",
+		stroke: "darkred"
 	}),
 "relinkingTool.toHandleArchetype":
-	$(go.Shape, "Diamond", { 
-		segmentIndex: -1, 
-		cursor: "pointer", 
-		desiredSize: new go.Size(8, 8), 
-		fill: "darkred", 
-		stroke: "tomato" 
+	$(go.Shape, "Diamond", {
+		segmentIndex: -1,
+		cursor: "pointer",
+		desiredSize: new go.Size(8, 8),
+		fill: "darkred",
+		stroke: "tomato"
 	}),
 "linkReshapingTool.handleArchetype":
-	$(go.Shape, "Diamond", { 
-		desiredSize: new go.Size(14, 14), 
-		fill: "#eee", 
-		stroke: "deepskyblue" 
+	$(go.Shape, "Diamond", {
+		desiredSize: new go.Size(14, 14),
+		fill: "#eee",
+		stroke: "deepskyblue"
 	}),
 
 
 	var myDiagram = $(
-		go.Diagram, 
+		go.Diagram,
 		"myDiagramDiv",  // create a Diagram for the DIV HTML element
 		{
 			initialAutoScale: go.Diagram.Uniform,  // scale to show all of the contents
 		//  "ChangedSelection": onSelectionChanged, // view additional information
-			
-			
+
+
 			"ModelChanged": function(e) {     // just for demonstration purposes,
 				if (e.isTransactionFinished) {  // show the model data in the page's TextArea
 					//document.getElementById("mySavedModel").textContent = e.model.toJson();
@@ -133,7 +153,7 @@ export default class GoAdapter {
 		}
 	);
 	myDiagram.nodeTemplate = $(
-		go.Node, 
+		go.Node,
 		"Spot",
 		{
 			locationObjectName: "PORT",
@@ -150,10 +170,10 @@ export default class GoAdapter {
 			// The main element of the Spot panel is a vertical panel housing an optional icon,
 			// plus a rectangle that acts as the port
 		$(
-			go.Panel, 
-			"Vertical", 
+			go.Panel,
+			"Vertical",
 			$(
-				go.Shape, 
+				go.Shape,
 				{
 					width: 40, height: 0,
 					stroke: null, strokeWidth: 0, fill: "gray"
@@ -162,7 +182,7 @@ export default class GoAdapter {
 				new go.Binding("fill", "color", colorFunc),
 				new go.Binding("geometry", "icon", geoFunc)),
 				$(
-					go.Shape, 
+					go.Shape,
 					{
 						name: "PORT",
 						width: 40, height: 24, margin: new go.Margin(-1, 0, 0, 0),
