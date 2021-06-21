@@ -53,32 +53,35 @@ export default class Production {
 		return delta;
 	}
 
-	changeProductivity(newValue) {
-		this.setDelta(newValue - this.productivity);
+	changeProductivity(newValue, oScheme) {
+		//this.setDelta(newValue - this.productivity);
+		oScheme.createNeeded(this, newValue - this.productivity);
+		this.productivity = newValue;
 	}
 
-	increaseCapacity(item, count, oTarget, itemHandler) {
-		const capacity = Math.min(
+	increaseCapacity(item, count, oTarget, oScheme) {
+		const delta = Math.min(
 			1.0 - this.productivity,
 			1.0 * count / this.oReceipe.mOutput.get(item)
 		);
-		const rest = count - (capacity * this.oReceipe.mOutput.get(item));
-		this.productivity += capacity;
-
+		const rest = count - (delta * this.oReceipe.mOutput.get(item));
 		new Transport(this, item, count-rest, oTarget);
 
-		this.oReceipe.mInput.forEach((cnt, itm) => {
-			itemHandler(true, itm, cnt * capacity);
-		});
-		this.oReceipe.mOutput.forEach((cnt, itm) => {
-			itemHandler(false, itm, cnt * capacity);
-		});
-
+		this.increaseProductivity(delta, oScheme)
 		return rest;
 	}
 
-	createInput() {
-		console.log(this);
+	increaseProductivity(delta, oScheme) {
+		this.productivity += delta;
+
+		this.oReceipe.mInput.forEach((cnt, itm) => {
+			oScheme.addInQuantity(itm, cnt * delta, this);
+			const rest = oScheme.addProduction(itm, cnt * delta, this);
+			oScheme.createProduction(itm, rest, this);
+		});
+		this.oReceipe.mOutput.forEach((cnt, itm) => {
+			oScheme.addOutQuantity(itm, cnt * delta, this);
+		});
 	}
 
 	getNodeData(id) {

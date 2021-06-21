@@ -32,6 +32,7 @@
 					<td><Item :item="item" :count="oQuant.need" label="Benötigt" /></td>
 					<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
 					<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
+					<td><Item :item="item" :count="oQuant.rest" label="Überschuss" /></td>
 				</tr>
 			</table>
 			<hr />
@@ -73,10 +74,10 @@ export default {
 	data() {
 		return {
 			oNeed: {
-				ironPlate: 15,
-				ironRod: 5,
-				screw: 0,
-				reinforced: 0,
+				ironPlate: 10,
+				ironRod: 10,
+				screw: 20,
+				reinforced: 5,
 			},
 			oScheme: new Scheme,
 			rdm: 0,
@@ -108,12 +109,16 @@ export default {
 		},
 		run() {
 			this.oScheme = Scheme.create(this.oNeed);
-			console.log(this.oScheme);
-			this.rdm = Math.random() * 10000;
+			//console.log(this.oScheme);
+			this.refresh();
 		},
 		updateProd(oProd, productivity) {
-			oProd.changeProductivity(productivity);
+			oProd.changeProductivity(productivity, this.oScheme);
+			this.refresh();
 		},
+		refresh() {
+			this.rdm = Math.random() * 10000;
+		}
 	},
 }
 </script>

@@ -21,8 +21,18 @@ export default class Scheme {
 	}
 
 	getQuantity(item) {
-		if (!this.mQuantity.has(item)) this.mQuantity.set(item, { need:0, in:0, out:0 });
+		if (!this.mQuantity.has(item)) this.mQuantity.set(item, { need:0, in:0, out:0, rest:0 });
 		return this.mQuantity.get(item);
+	}
+
+	addInQuantity(item, count) {
+		this.getQuantity(item).in += count;
+	}
+
+	addOutQuantity(item, count) {
+		const oQ = this.getQuantity(item);
+		oQ.out += count;
+		oQ.rest = oQ.out - oQ.in - oQ.need;
 	}
 
 	getProduction(name) {
@@ -41,48 +51,43 @@ export default class Scheme {
 	calcProduction() {
 		this.mQuantity.forEach((oQuant, item) => {
 			if (oQuant.need) {
-				const oTarget = this.addSinkFor(item, oQuant.need);
-				this.addProductionFor(item, oQuant.need, oTarget);
+				oQuant.in -= oQuant.need;
+				const oTarget = this.addStorageFor(item, oQuant.need);
+				this.createNeeded(oTarget);
 			}
 		});
 	}
 
-	addSinkFor(item, count) {
-		const oReceipe = new Receipe('storage', [], {item: count}, 'container');
+	addStorageFor(item, count) {
+		const oInput = {}; oInput[item] = count;
+		const oReceipe = new Receipe('storage', {}, oInput, 'container');
 		const oSink = oReceipe.createProduction();
 		this.aSink.push(oSink);
 		return oSink;
 	}
 
-	addProductionFor(item, count, oTarget) {
-		this.eachProduction((oProd) => {
-			if (oProd.productivity < .9999
-				&& oProd.oReceipe.mOutput.has(item)
-			) {
-				count = this.addProdCapacity(oProd, item, count, oTarget);
-			}
-		});
+	createNeeded(oProd, productivity = 1.0) {
+		oProd.increaseProductivity(productivity, this);
+	}
 
+	addProduction(item, count, oTarget) {
+		this.eachProduction((oProd) => {
+			if (!oProd.oReceipe.mOutput.has(item)) return true;
+			if (oProd.productivity >= .9999) return true;
+
+			count = oProd.increaseCapacity(item, count, oTarget, this);
+			return count >= .0001;
+		});
+		return count;
+	}
+
+	createProduction(item, count, oTarget) {
 		const oReceipe = Receipe.getByOutput(item);
 		while (count > 0.0001) {
 			const oProd = oReceipe.createProduction();
-			count = this.addProdCapacity(oProd, item, count, oTarget);
+			count = oProd.increaseCapacity(item, count, oTarget, this);
 			this.getProduction(oReceipe.name).push(oProd);
 		}
-	}
-
-	addProdCapacity(oProd, item, count, oTarget) {
-		const self = this;
-
-		const rest = oProd.increaseCapacity(item, count, oTarget, (inOut, itm, cnt) => {
-			if (inOut) {
-				this.getQuantity(itm).in += cnt;
-				self.addProductionFor(itm, cnt, oProd);
-			}
-			else this.getQuantity(itm).out += cnt;
-		});
-
-		return rest;
 	}
 
 
