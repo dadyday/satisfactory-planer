@@ -22,6 +22,19 @@ export default class GoAdapter {
 		this.initPalette(elIdPalette, oTemplateMap, aModelData);
 	}
 
+	load(oData) {
+		this.oDiagram.model.nodeDataArray = oData.nodeDataArray;
+		this.oDiagram.model.linkDataArray = oData.linkDataArray;
+	}
+
+	save() {
+		const oData = JSON.parse(this.oDiagram.model.toJson());
+		return {
+			nodeDataArray: oData.nodeDataArray,
+			linkDataArray: oData.linkDataArray,
+		};
+	}
+
 	initPalette(elId, oTemplateMap, aModelData) {
 		this.oPalette = $(go.Palette, elId, {
 			"maxSelectionCount": 1,
@@ -51,17 +64,22 @@ export default class GoAdapter {
 			"relinkingTool.isUnconnectedLinkValid": true,
 			"relinkingTool.portGravity":            20,
 			"rotatingTool.handleAngle":             45,
-			"rotatingTool.handleDistance":          -10,
+			"rotatingTool.handleDistance":          0,
 			"rotatingTool.snapAngleMultiple":       90,
-			"rotatingTool.snapAngleEpsilon":        90,
+			"rotatingTool.snapAngleEpsilon":        10,
 			"nodeTemplateMap":                      oTemplateMap,
 		});
 		this.commandHandler = new go.CommandHandler();
 
+		this.oDiagram.addDiagramListener('PartRotated', (ev) => {
+			ev.subject.angle = Math.round(ev.subject.angle / 90) * 90;
+		});
+
+
 
 		var oFore = this.oDiagram.findLayer("Foreground");
-		this.oDiagram.addLayerBefore($(go.Layer, { name: "ground" }), oFore);
-		this.oDiagram.addLayerBefore($(go.Layer, { name: "elevated", opacity: 0.5, pickable: true }), oFore);
+		this.oDiagram.addLayerBefore($(go.Layer, { name: "elevated", opacity: 1.0, pickable: true }), oFore);
+		this.oDiagram.addLayerBefore($(go.Layer, { name: "ground", opacity: 0.6, }), oFore);
 		//this.oDiagram.findLayer("elevated").opacity = 0.5;
 
 		//myDiagram.linkTemplateMap = createLinkTemplateMap();
@@ -108,7 +126,23 @@ export default class GoAdapter {
 		}
 	}
 
-
+	addNodeAndLink(e, b) {
+		// take a button panel in an Adornment, get its Adornment, and then get its adorned Node
+		var node = b.part.adornedPart;
+		// we are modifying the model, so conduct a transaction
+		var diagram = node.diagram;
+		diagram.startTransaction("add node and link");
+		// have the Model add the node data
+		var newnode = { key: "N" };
+		diagram.model.addNodeData(newnode);
+		// locate the node initially where the parent node is
+		diagram.findNodeForData(newnode).location = node.location;
+		// and then add a link data connecting the original node with the new one
+		var newlink = { from: node.data.key, to: newnode.key };
+		diagram.model.addLinkData(newlink);
+		// finish the transaction -- will automatically perform a layout
+		diagram.commitTransaction("add node and link");
+	}
 }
 
 

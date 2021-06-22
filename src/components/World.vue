@@ -58,15 +58,13 @@ export default {
 	},
 	methods: {
 		save() {
-			const data = {
-				nodeDataArray: this.go.oDiagram.model.nodeDataArray,
-				linkDataArray: this.go.oDiagram.model.linkDataArray,
-			};
-			this.$emit('save', JSON.stringify(data, null, "  "));
+			const oData = this.go.save();
+			const data = JSON.stringify(oData, null, "  ");
+			this.$emit('save', data);
 			this.go.oDiagram.isModified = false;
 		},
 		load() {
-			const oModel = 	this.go.oDiagram.model.fromJson(this.model);
+			const oModel = JSON.parse(this.model);
 			this.applyModel(oModel);
 		},
 		draw() {
@@ -75,8 +73,7 @@ export default {
 			this.applyModel(oModel);
 		},
 		applyModel(oModel) {
-			this.go.oDiagram.model.nodeDataArray = oModel.nodeDataArray;
-			this.go.oDiagram.model.linkDataArray = oModel.linkDataArray;
+			this.go.load(oModel);
 		},
 
 		applyNodePositions(oModel) {
@@ -87,7 +84,11 @@ export default {
 				const aOld = _.get(aType, '_'+oNode.type);
 				if (aOld) {
 					const oOld = aOld.shift();
-					if (oOld) oNode.pos = oOld.pos;
+					if (oOld) {
+						oNode.pos = oOld.pos;
+						oNode.orient = oOld.orient;
+						oNode.drawangle = oOld.drawangle;
+					}
 				}
 			});
 		},

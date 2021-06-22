@@ -61,7 +61,6 @@ export default class Building {
 		return `img/building/${this.imgName}.png`;
 	}
 
-
 	// *********** gojs helper
 
 	static getTemplateMap() {
@@ -78,7 +77,16 @@ export default class Building {
 			type: this.type,
 			name: this.name,
 			layer: this.aLayer[0],
+			orient: 0,
 		};
+	}
+
+	makeOrient(angle) {
+		return Math.round(angle / 90);
+	}
+
+	getAngle(orientation) {
+		return orientation * 90;
 	}
 
 	makePos(oPos) {
@@ -113,12 +121,16 @@ export default class Building {
 			$(go.Shape, "RoundedRectangle", {
 				fill: "#fb04", stroke: "#430", strokeWidth: 2,
 			}),
-			$(go.Picture, this.imageUrl(), {
-				row: 0,
-				column: 0,
-				height: sz,
-				width: sz,
-			}, new go.Binding("source", "type", this.imageUrl)),
+			$(go.Picture, this.imageUrl(),
+				{
+					row: 0,
+					column: 0,
+					height: sz,
+					width: sz,
+				},
+				new go.Binding("source", "type", this.imageUrl),
+				new go.Binding("angle", 'drawangle', (a) => { return -a; }),
+			),
 
 			$(go.Panel, "Table",
 				$(go.TextBlock, this.name, {
@@ -158,6 +170,8 @@ export default class Building {
 			},
 			new go.Binding("location", "pos", this.getPos).makeTwoWay(this.makePos),
 			new go.Binding("layerName", "layer"),
+			new go.Binding("angle", "orient", this.getAngle.bind(this)).makeTwoWay(this.makeOrient.bind(this)),
+			new go.Binding("angle", 'drawangle').makeTwoWay(),
 			oPanel,
 			$(go.Panel, "Vertical", {
 				alignment: go.Spot.Left,
