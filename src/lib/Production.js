@@ -20,6 +20,15 @@ export default class Production {
 		this.aOutput.push(oTransport);
 	}
 
+	findOutput(item, oTarget) {
+		for (var oTransp of this.aOutput) {
+			if (item && oTransp.item !== item) continue;
+			if (oTarget && oTransp.oTarget !== oTarget) continue;
+			return oTransp
+		}
+		return null;
+	}
+
 	addInput(oTransport) {
 		this.aInput.push(oTransport);
 	}
@@ -64,8 +73,16 @@ export default class Production {
 			1.0 - this.productivity,
 			1.0 * count / this.oReceipe.mOutput.get(item)
 		);
-		const rest = count - (delta * this.oReceipe.mOutput.get(item));
-		new Transport(this, item, count-rest, oTarget);
+		var cnt = delta * this.oReceipe.mOutput.get(item);
+		const rest = count - cnt;
+
+		const oTransp = this.findOutput(item, oTarget);
+		if (oTransp) {
+			oTransp.count += cnt;
+		}
+		else {
+			new Transport(this, item, cnt, oTarget);
+		}
 
 		this.increaseProductivity(delta, oScheme)
 		return rest;

@@ -3,20 +3,16 @@ import _ from 'underscore';
 
 export default class Scheme {
 
-	static create(aNeed) {
-		return new Scheme(aNeed);
-	}
-
-	//*************************
-
 	mQuantity = new Map;
 	mProduction = new Map;
 	aSink = [];
+	canCreate = true;
 
-	constructor(oNeed = {}) {
+	constructor(oNeed = {}, canCreate = true) {
 		_.each(oNeed, (count, item) => {
 			this.addNeeded(item, count);
 		});
+		this.canCreate = canCreate;
 		this.calcProduction();
 	}
 
@@ -82,6 +78,7 @@ export default class Scheme {
 	}
 
 	createProduction(item, count, oTarget) {
+		if (!this.canCreate) return;
 		const oReceipe = Receipe.getByOutput(item);
 		while (count > 0.0001) {
 			const oProd = oReceipe.createProduction();

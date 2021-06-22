@@ -25,6 +25,7 @@
 					/></li>
 			</ul>
 			<button @click="run">Run!</button>
+			<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
 			<table class="indent">
 				<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 					<td><Item :item="item"/></td>
@@ -80,6 +81,7 @@ export default {
 				reinforced: 5,
 			},
 			oScheme: new Scheme,
+			createProd: true,
 			rdm: 0,
 			model: '',
 		};
@@ -108,7 +110,7 @@ export default {
 			this.run();
 		},
 		run() {
-			this.oScheme = Scheme.create(this.oNeed);
+			this.oScheme = new Scheme(this.oNeed, this.createProd);
 			//console.log(this.oScheme);
 			this.refresh();
 		},
