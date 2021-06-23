@@ -85,18 +85,27 @@ export default class GoAdapter {
 		//myDiagram.linkTemplateMap = createLinkTemplateMap();
 		this.oDiagram.linkTemplate = $(go.Link,
 			{
-				routing: go.Link.Orthogonal,
-				//routing: go.Link.AvoidsNodes,
+				routing: go.Link.AvoidsNodes, // go.Link.Orthogonal,
 				corner: 20,
-				curve: go.Link.JumpOver,
-				fromEndSegmentLength: 20,
-				fromShortLength: -10,
-				toEndSegmentLength: 20,
-				toShortLength: -10,
+				//curve: go.Link.JumpOver,
+				fromEndSegmentLength: 10,
+				toEndSegmentLength: 10,
+				//fromShortLength: -10,
+				//toShortLength: -10,
 			},
-			$(go.Shape, // the link's path shape
-				{ strokeWidth: 16, stroke: "#555" }
-			)
+			$(go.Shape, {
+				isPanelMain: true,
+				stroke: "#6666",
+				strokeWidth: 16,
+			}),
+			$(go.Shape, {
+				isPanelMain: true,
+				stroke: "#888",
+				strokeWidth: 16,
+				strokeDashArray: [1, 10],
+			}),
+			$(go.Shape, { toArrow: "Triangle" }),
+			$(go.Shape, { fromArrow: "Triangle" })
 		);
 
 		this.oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;

@@ -31,9 +31,9 @@ export default class PortType {
 		const port = $(go.Shape, "RoundedRectangle", {
 			fill: this.inOut ? "#fc0" : "#0c0",
 			stroke: "#555",
-			strokeWidth: 0.5,
+			strokeWidth: 1,
 			desiredSize: new go.Size(...swap(20, 10)),
-			//margin: new go.Margin(...swap(0, 5)),
+
 			portId: name,
 			cursor: "pointer",
 
@@ -44,20 +44,12 @@ export default class PortType {
 			toSpot: oSpot,
 			toLinkable: this.inOut,
 			toMaxLinks: 1,
-			//margin: new go.Margin(10, 0),
-			//alignment: go.Spot.Left,
 
-			click: () => alert(1),
+			margin: new go.Margin(...swap(0, 9.5)),
+			click: () => alert("port clicked ..."),
 		});
 
 		return port;
-		/*
-		var panel = $(go.Panel, "Horizontal", {
-			margin: new go.Margin(2, 0),
-			alignment: go.Spot['TopLeft'],
-		}, port);
-
-		return panel; //*/
 	}
 
 }

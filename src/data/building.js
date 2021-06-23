@@ -30,9 +30,9 @@ export default {
 		['belt', false, 0]
 	]],
 	foundry:     ['Giesserei', 9, 10, 2, [
-		['belt', true, -2],
-		['belt', true, +2],
-		['belt', false, 0]
+		['belt', true, 0],
+		['belt', true, 0],
+		['belt', false, -4]
 	]],
 	assembler:  ['Assembler', 15, 10, 2, [
 		['belt', true, 0],
