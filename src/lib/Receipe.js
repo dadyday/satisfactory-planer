@@ -8,12 +8,12 @@ export default class Receipe {
 	static register(aData) {
 		// ironingot: ['Eisenbarren', {ironingot: 30}, {ironore: 30}, 'smelter'],
 		const oReceipe = new Receipe(...aData);
-		
+
 		oReceipe.mOutput.forEach((count, item) => {
 			if (!this.mOutputList.has(item)) this.mOutputList.set(item, []);
 			this.mOutputList.get(item).push(oReceipe);
 		});
-		
+
 		oReceipe.mInput.forEach((count, item) => {
 			if (!this.mInputList.has(item)) this.mInputList.set(item, []);
 			this.mInputList.get(item).push(oReceipe);
@@ -34,13 +34,13 @@ export default class Receipe {
 		}
 		return aReceipe[pos];
 	}
-	
+
 	//**********************************
 
 	name = 'none';
-	mOutput = new Map;
-	mInput = new Map;
-	prod;
+	mOutput = new Map; // Map of item: count
+	mInput = new Map; // Map of item: count
+	prod; // id of Building
 
 	constructor(name, oOutput, oInput, prod) {
 		this.name = name;
@@ -54,5 +54,11 @@ export default class Receipe {
 		return oBuilding.createProduction(this);
 	}
 
-}
+	getItems() {
+		const aRet =
+			Object.entries(this.mInput) +
+			Object.entries(this.mOutput);
+		return aRet;
+	}
 
+}

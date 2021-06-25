@@ -23,8 +23,8 @@ export default class GoAdapter {
 	}
 
 	load(oData) {
-		this.oDiagram.model.nodeDataArray = oData.nodeDataArray;
-		this.oDiagram.model.linkDataArray = oData.linkDataArray;
+		this.oDiagram.model.nodeDataArray = oData.nodeDataArray ?? [];
+		this.oDiagram.model.linkDataArray = oData.linkDataArray ?? [];
 	}
 
 	save() {
@@ -47,6 +47,9 @@ export default class GoAdapter {
 
 	initDiagram(elId, oTemplateMap) {
 		this.oDiagram = $(go.Diagram, elId, {
+			"initialDocumentSpot": go.Spot.Top,
+			"initialViewportSpot": go.Spot.Top,
+			"initialAutoScale": go.Diagram.Uniform,
 			"undoManager.isEnabled":                true, // enable Ctrl-Z to undo and Ctrl-Y to redo
 			"commandHandler.doKeyDown":             () => this.handleKey.call(this),
 			"draggingTool.gridSnapCellSize":        new go.Size(20, 20),
@@ -92,6 +95,9 @@ export default class GoAdapter {
 				toEndSegmentLength: 10,
 				//fromShortLength: -10,
 				//toShortLength: -10,
+				isShadowed: true,
+				shadowColor: '#aaa',
+				shadowOffset: new go.Point(5, 5),
 			},
 			$(go.Shape, {
 				isPanelMain: true,

@@ -42,6 +42,7 @@ export default class Building {
 	oSize = { width: 100, height: 100 };
 	aPort = [];
 	aLayer = [];
+	oProduction; // object of Production
 
 	constructor(type, name, w, h, layer, aPort) {
 		this.type = type;
@@ -49,12 +50,12 @@ export default class Building {
 		this.imgName = type.replace(/([A-Z]+)/g, '_$1').toLowerCase();
 		this.oSize = { width: w*10, height: h*10 };
 		this.aPort = aPort;
-		if (layer & 1) this.aLayer.push('ground');
 		if (layer & 2) this.aLayer.push('elevated');
+		if (layer & 1) this.aLayer.push('ground');
 	}
 
 	createProduction(oReceipe) {
-		return new Production(this, oReceipe);
+		return this.oProduction = new Production(this, oReceipe);
 	}
 
 	imageUrl() {
@@ -76,8 +77,11 @@ export default class Building {
 			id: id,
 			type: this.type,
 			name: this.name,
+			detail: this.oProduction?.name ?? '',
 			layer: this.aLayer[0],
 			orient: 0,
+			production: this.oProduction,
+			ports: this.oProduction?.oReceipe.getItems() ?? [],
 		};
 	}
 
@@ -97,17 +101,27 @@ export default class Building {
 		return new go.Point(...aPos);
 	}
 
-	makeContextMenu(oProduction) {
-		return $("ContextMenu",
+	makeContextMenu() {
+		// https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/customContextMenu.html
+		return $(go.HTMLInfo, {
+			show: (oNode, oDiagram, oTool) => {
+				console.log([obj, oDiagram, oTool])
+			},
+			hide: (oDiagram, oTool) => {
+				console.log([oDiagram, oTool])
+			},
+		});
+
+		/*return $("ContextMenu",
 			$("ContextMenuButton",
 				{
 					"ButtonBorder.fill": "white",
 					"_buttonFillOver": "skyblue",
-					click: oProduction.createInput.bind(oProduction)
+					//click: oProduction.createInput.bind(oProduction)
 				},
 				$(go.TextBlock, "generiere Eingang")
 			)
-		);
+		);//*/
 	}
 
 	makeTemplate() {
@@ -117,7 +131,7 @@ export default class Building {
 				width: this.oSize.width,
 				height: this.oSize.height,
 			},
-			new go.Binding("contextMenu", "production", this.makeContextMenu),
+			//new go.Binding("contextMenu", "production", this.makeContextMenu),
 			$(go.Shape, "RoundedRectangle", {
 				fill: "#fb04", stroke: "#430", strokeWidth: 2,
 			}),
@@ -150,7 +164,7 @@ export default class Building {
 					maxSize: new go.Size(80, 40),
 					stroke: "white",
 					font: "9pt sans-serif"
-				}, new go.Binding("text", "detail"))
+				}, new go.Binding("text", "detail")),
 			),
 		);
 
@@ -167,6 +181,8 @@ export default class Building {
 				locationSpot: go.Spot.Center,
 				dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, this.aLayer),
 				rotatable: true,
+				isShadowed: true,
+				contextMenu: this.makeContextMenu(),
 			},
 			new go.Binding("location", "pos", this.getPos).makeTwoWay(this.makePos),
 			new go.Binding("layerName", "layer"),
@@ -188,7 +204,7 @@ export default class Building {
 			$(go.Panel, "Horizontal", {
 				alignment: go.Spot.Bottom,
 				alignmentFocus: new go.Spot(0.5, 1, 0, -4)
-			}, oSide.bottom)
+			}, oSide.bottom),
 		);
 
 		return oNode;

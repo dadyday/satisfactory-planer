@@ -3,12 +3,12 @@ import _ from 'underscore';
 
 export default class Production {
 	id = null;
-	oBuilding;
-	name = '';
-	oReceipe;
+	oBuilding; // Building object
+	name = ''; // Receipe name
+	oReceipe; // Receipe object
 	productivity = 0.0;
-	aInput = [];
-	aOutput = [];
+	aInput = []; // Array of Transport objects
+	aOutput = []; // Array of Transport objects
 
 	constructor(oBuilding, oReceipe) {
 		this.oBuilding = oBuilding;
@@ -104,8 +104,6 @@ export default class Production {
 	getNodeData(id) {
 		this.id = this.name+id;
 		const oData = this.oBuilding.getNodeData(this.id);
-		oData.detail = this.name;
-		oData.production = this;
 		return oData;
 	}
 

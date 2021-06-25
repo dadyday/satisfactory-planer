@@ -5,6 +5,7 @@
 			<div id="diagram" />
 		</Cols>
 		<Cols id="menu">
+			<button @click="empty">New</button>
 			<button @click="load">Load</button>
 			<button @click="save">Save</button>
 			<Dropdown label="Data">
@@ -31,6 +32,7 @@
 <script>
 import GoAdapter from '../lib/GoAdapter';
 import _ from 'underscore';
+import Store from 'store';
 
 export default {
 	model: {
@@ -55,8 +57,26 @@ export default {
 	},
 	mounted() {
 		this.go = new GoAdapter('diagram', 'palette');
+		this.go.oDiagram.addModelChangedListener((ev) => {
+			if (ev.isTransactionFinished) this.pushModel();
+		});
+		this.popModel();
 	},
 	methods: {
+		pushModel() {
+			const aStore = Store.get('model', []);
+			aStore.push(this.go.save());
+			Store.set('model', aStore.slice(-20));
+		},
+		popModel() {
+			const aStore = Store.get('model', []);
+			this.applyModel(aStore.pop() ?? {});
+			Store.set('model', aStore.slice(-20));
+		},
+		empty() {
+			this.applyModel({});
+			this.pushModel();
+		},
 		save() {
 			const oData = this.go.save();
 			const data = JSON.stringify(oData, null, "  ");
