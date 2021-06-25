@@ -1,17 +1,17 @@
 
 export default {
-	ironOre:   ['Eisenerz', {ironOre: 60}, {}, 'minerMk1'],
-	copperOre: ['Kupfererz', {copperOre: 60}, {}, 'minerMk1'],
+	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
+	copperOre: ['minerMk1', 'Kupfererz', {copperOre: 60}, {} ],
 
-	ironIngot:    ['Eisenbarren', {ironIngot: 30}, {ironOre: 30}, 'smelter'],
-	copperIngot:  ['Kupferbarren', {copperIngot: 30}, {copperOre: 30}, 'smelter'],
-	copperIngot2: ['Kupferbarren Legierung', {copperIngot: 100}, {copperOre: 50, ironOre:25}, 'foundry'],
+	ironIngot:    ['smelter', 'Eisenbarren', {ironIngot: 30}, {ironOre: 30} ],
+	copperIngot:  ['smelter', 'Kupferbarren', {copperIngot: 30}, {copperOre: 30} ],
+	copperIngot2: ['foundry', 'Kupferbarren Legierung', {copperIngot: 100}, {copperOre: 50, ironOre:25} ],
 
-	ironPlate: ['Eisenplatte', {ironPlate: 20}, {ironIngot: 30}, 'constructor'],
-	ironRod:   ['Eisenstange', {ironRod: 15}, {ironIngot: 15}, 'constructor'],
-	screw:     ['Schrauben', {screw: 40}, {ironRod: 10}, 'constructor'],
-	wire:      ['Draht', {wire: 30}, {copperIngot: 15}, 'constructor'],
-	cable:     ['Kabel', {cable: 30}, {wire: 60}, 'constructor'],
+	ironPlate: ['constructor', 'Eisenplatte', {ironPlate: 20}, {ironIngot: 30} ],
+	ironRod:   ['constructor', 'Eisenstange', {ironRod: 15}, {ironIngot: 15} ],
+	screw:     ['constructor', 'Schrauben', {screw: 40}, {ironRod: 10} ],
+	wire:      ['constructor', 'Draht', {wire: 30}, {copperIngot: 15} ],
+	cable:     ['constructor', 'Kabel', {cable: 30}, {wire: 60} ],
 
-	reinforced: ['Verstärkte Eisenplatte', {reinforced:5}, {ironPlate:30, screw:60}, 'assembler'],
+	reinforced: ['assembler', 'Verstärkte Eisenplatte', {reinforced:5}, {ironPlate:30, screw:60} ],
 }

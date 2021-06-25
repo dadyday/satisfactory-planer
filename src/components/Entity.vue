@@ -7,6 +7,7 @@
 <style lang="scss">
 .entity {
 	display: inline-block;
+	background: white;
 	border-radius: 0.2em;
 	border: solid 0.5px #ccc;
 	box-shadow: 0.1em 0.1em 0.5em -0.2em #0008;

@@ -1,5 +1,9 @@
 import Production from './Production';
+import Receipe from './Receipe';
 import PortType from './PortType';
+
+import ProdComponent from "../components/Production.vue";
+import Vue from 'vue';
 
 import go from 'gojs';
 var $ = go.GraphObject.make;
@@ -52,6 +56,7 @@ export default class Building {
 		this.aPort = aPort;
 		if (layer & 2) this.aLayer.push('elevated');
 		if (layer & 1) this.aLayer.push('ground');
+		this.oProduction = this.createProduction(new Receipe(type));
 	}
 
 	createProduction(oReceipe) {
@@ -101,14 +106,50 @@ export default class Building {
 		return new go.Point(...aPos);
 	}
 
+	static oProdObj;
+	getProductionElement(oPos = null) {
+		const self = this.constructor;
+		if (!self.oProdObj) {
+			const ProdClass = Vue.extend(ProdComponent);
+			self.oProdObj = new ProdClass();
+			self.oProdObj.oProd = this.oProduction;
+			self.oProdObj.selectable = true;
+			self.oProdObj.editable = true;
+
+			const oEl = self.oProdObj.$mount().$el;
+			oEl.style.position = 'absolute';
+			oEl.style.zIndex = 1000;
+			//oEl.style.visibility = 'hidden';
+			oEl.addEventListener('contextmenu', (e) => { return e.preventDefault()});
+			document.body.appendChild(oEl);
+		}
+
+
+		self.oProdObj.oProd = this.oProduction;
+
+		const oEl = self.oProdObj.$el;
+		if (oPos) {
+			oEl.style.left = oPos.x + 5 + "px";
+			oEl.style.top = oPos.y + "px";
+			oEl.style.visibility = 'visible';
+		}
+		else {
+			oEl.style.visibility = 'hidden';
+		}
+
+		return self.oProdObj;
+	}
+
+
 	makeContextMenu() {
 		// https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/customContextMenu.html
 		return $(go.HTMLInfo, {
-			show: (oNode, oDiagram, oTool) => {
-				console.log([obj, oDiagram, oTool])
+			show: (oNode, oDiagram) => {
+				const oPos = oDiagram.lastInput.viewPoint;
+				this.getProductionElement(oPos);
 			},
-			hide: (oDiagram, oTool) => {
-				console.log([oDiagram, oTool])
+			hide: () => {
+				this.getProductionElement();
 			},
 		});
 

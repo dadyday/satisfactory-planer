@@ -6,7 +6,7 @@ export default class Receipe {
 	static mInputList = new Map;
 
 	static register(aData) {
-		// ironingot: ['Eisenbarren', {ironingot: 30}, {ironore: 30}, 'smelter'],
+		// ironingot: ['smelter', 'Eisenbarren', {ironingot: 30}, {ironore: 30}],
 		const oReceipe = new Receipe(...aData);
 
 		oReceipe.mOutput.forEach((count, item) => {
@@ -40,17 +40,17 @@ export default class Receipe {
 	name = 'none';
 	mOutput = new Map; // Map of item: count
 	mInput = new Map; // Map of item: count
-	prod; // id of Building
+	type; // id of Building
 
-	constructor(name, oOutput, oInput, prod) {
-		this.name = name;
+	constructor(type, name = null, oOutput = [], oInput = []) {
+		this.type = type;
+		this.name = name ?? 'none';
 		this.mOutput = new Map(Object.entries(oOutput));
 		this.mInput = new Map(Object.entries(oInput));
-		this.prod = prod;
 	}
 
 	createProduction() {
-		const oBuilding = Building.get(this.prod);
+		const oBuilding = Building.get(this.type);
 		return oBuilding.createProduction(this);
 	}
 

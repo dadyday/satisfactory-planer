@@ -50,11 +50,11 @@ export default class Production {
 		delta = Math.max(delta, 0.0 - this.productivity);
 
 		this.aInput.forEach((oTransport) => {
-			delta = oTransport.oSource.setDelta(delta, aIgnore);
+			delta = oTransport.oSource?.setDelta(delta, aIgnore) ?? 0;
 		});
 
 		this.aOutput.forEach((oTransport) => {
-			delta = oTransport.oTarget.setDelta(delta, aIgnore);
+			delta = oTransport.oTarget?.setDelta(delta, aIgnore) ?? 0;
 		});
 
 		console.log(this.name, delta)

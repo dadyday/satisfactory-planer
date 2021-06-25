@@ -17,7 +17,7 @@
 			<span v-show="!editable || !editing">{{ percentValue }}</span>
 			<span>%</span>
 		</div>
-		<div>
+		<div v-show="oProd.oReceipe.mInput.size || oProd.oReceipe.mOutput.size">
 			<Item v-for="[item, count], i in oProd.oReceipe.mInput"
 				:item="item" :count="oProd.productivity*count" short :key="'in'+i"/>
 			&#10140;
@@ -54,7 +54,7 @@ export default {
 			return this.oProd.name;
 		},
 		src() {
-			return this.oProd.oBuilding.imageUrl();
+			return this.oProd?.oBuilding?.imageUrl() ?? '';
 		},
 		percentValue: {
 			get() {
