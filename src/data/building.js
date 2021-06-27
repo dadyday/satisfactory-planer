@@ -25,7 +25,7 @@ export default {
 		['belt', true, 0],
 		['belt', false, 0]
 	]],
-	constructor: ['Konstruktor', 10, 8, 2, [
+	construct: ['Konstruktor', 10, 8, 2, [
 		['belt', true, 0],
 		['belt', false, 0]
 	]],
