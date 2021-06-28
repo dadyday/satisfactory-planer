@@ -3,8 +3,23 @@
 		<div class="icon">
 			<img :src="src" :alt="alt" />
 		</div>
-		<div class="name" v-if="!short">
-			<span >{{ name }}</span>
+		<div class="name" v-if="!short" @click="startSelecting">
+			<select
+				ref="select"
+				v-show="selectable && selecting"
+				v-model="receipeValue"
+				@blur="selecting = false"
+			>
+				<option
+					v-for="oReceipe in receipeList"
+					:key="oReceipe.name"
+					:value="oReceipe.name"
+					:selected="oReceipe.name == oProd.oReceipe.name"
+				>
+					{{ oReceipe.name }}
+				</option>
+			</select>
+			<span v-show="!selectable || !selecting">{{ name }}</span>
 		</div>
 		<div class="times" @mousedown="startEditing">
 			<input type="number"
@@ -30,6 +45,7 @@
 </template>
 
 <script>
+import Receipe from '../lib/Receipe';
 //import Production from '../lib/Production';
 
 export default {
@@ -38,23 +54,30 @@ export default {
 		obj: Object,
 		label: String,
 		editable: Boolean,
+		selectable: Boolean,
 	},
 	data() {
 		return {
 			oProd: this.obj,
 			prodValue: 0,
 			editing: false,
+			selecting: false,
 		};
+	},
+	watched: {
+		oProd() {
+			this.$forceUpdate();
+		}
 	},
 	computed: {
 		name() {
-			return this.label ?? this.oProd.oBuilding.name + ' - ' + this.oProd.name;
+			return this.label ?? this.oProd.oBuilding.name + ' - ' + this.oProd.oReceipe.name;
 		},
 		alt() {
 			return this.oProd.name;
 		},
 		src() {
-			return this.oProd?.oBuilding?.imageUrl() ?? '';
+			return this.oProd.oBuilding?.imageUrl() ?? '';
 		},
 		percentValue: {
 			get() {
@@ -63,6 +86,22 @@ export default {
 			set(value) {
 				this.prodValue = parseFloat(value)/100.0;
 			}
+		},
+		receipeValue: {
+			get: function() {
+				return this.oProd.oReceipe.name;
+			},
+			set: function(value) {
+				Receipe.getByBuilding(this.oProd.oBuilding.type).forEach((oReceipe) => {
+					if (oReceipe.name == value) {
+						this.oProd.oReceipe = oReceipe;
+					}
+				});
+				//this.$emit('update:receipe', value);
+			},
+		},
+		receipeList() {
+			return Receipe.getByBuilding(this.oProd.oBuilding.type);
 		},
 	},
 	methods: {
@@ -75,6 +114,12 @@ export default {
 		endEditing() {
 			this.editing = false;
 			this.$emit('update:productivity', this.prodValue);
+		},
+		startSelecting() {
+			this.selecting = this.selectable;
+			setTimeout(() => {
+				this.$refs.select.focus();
+			}, 100);
 		},
 	},
 }

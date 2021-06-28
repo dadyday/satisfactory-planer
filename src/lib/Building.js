@@ -2,7 +2,7 @@ import Production from './Production';
 import Receipe from './Receipe';
 import PortType from './PortType';
 
-import ProdComponent from "../components/Production.vue";
+import Card from "../components/BuildingCard.vue";
 import Vue from 'vue';
 
 import go from 'gojs';
@@ -30,8 +30,12 @@ export default class Building {
 	}
 
 	static get(type) {
-		if (!this.mList.has(type)) throw `Building ${type} not found!`;
-		return this.mList.get(type);
+		if (type && !this.mList.has(type)) console.warn(`Building ${type} not found!`, this.mList);
+		return this.mList.get(type) ?? null;
+	}
+
+	static getAll() {
+		return this.mList;
 	}
 
 	static each(func) {
@@ -56,11 +60,12 @@ export default class Building {
 		this.aPort = aPort;
 		if (layer & 2) this.aLayer.push('elevated');
 		if (layer & 1) this.aLayer.push('ground');
-		this.oProduction = this.createProduction(new Receipe(type));
+		//this.oProduction = this.createProduction(new Receipe(type));
 	}
 
 	createProduction(oReceipe) {
-		return this.oProduction = new Production(this, oReceipe);
+		if (oReceipe instanceof String) oReceipe = Receipe.get(oReceipe);
+		return this.oProduction = new Production(this.type, oReceipe);
 	}
 
 	imageUrl() {
@@ -106,50 +111,42 @@ export default class Building {
 		return new go.Point(...aPos);
 	}
 
-	static oProdObj;
-	getProductionElement(oPos = null) {
+	static oCardObj;
+	getProductionElement(elParent) {
 		const self = this.constructor;
-		if (!self.oProdObj) {
-			const ProdClass = Vue.extend(ProdComponent);
-			self.oProdObj = new ProdClass();
-			self.oProdObj.oProd = this.oProduction;
-			self.oProdObj.selectable = true;
-			self.oProdObj.editable = true;
+		if (!self.oCardObj) {
+			const CardClass = Vue.extend(Card);
+			self.oCardObj = new CardClass();
+			self.oCardObj.oBuilding = this;
 
-			const oEl = self.oProdObj.$mount().$el;
+			const oEl = self.oCardObj.$mount().$el;
 			oEl.style.position = 'absolute';
 			oEl.style.zIndex = 1000;
 			//oEl.style.visibility = 'hidden';
 			oEl.addEventListener('contextmenu', (e) => { return e.preventDefault()});
-			document.body.appendChild(oEl);
+			elParent.appendChild(oEl);
 		}
-
-
-		self.oProdObj.oProd = this.oProduction;
-
-		const oEl = self.oProdObj.$el;
-		if (oPos) {
-			oEl.style.left = oPos.x + 5 + "px";
-			oEl.style.top = oPos.y + "px";
-			oEl.style.visibility = 'visible';
-		}
-		else {
-			oEl.style.visibility = 'hidden';
-		}
-
-		return self.oProdObj;
+		return self.oCardObj;
 	}
-
 
 	makeContextMenu() {
 		// https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/customContextMenu.html
 		return $(go.HTMLInfo, {
 			show: (oNode, oDiagram) => {
+				const oCardObj = this.getProductionElement(oDiagram.div);
 				const oPos = oDiagram.lastInput.viewPoint;
-				this.getProductionElement(oPos);
+
+				oCardObj.oBuilding = this;
+
+				Object.assign(oCardObj.$el.style, {
+					left: oPos.x + "px",
+					top: oPos.y + "px",
+					visibility: 'visible',
+				});
 			},
-			hide: () => {
-				this.getProductionElement();
+			hide: (oNode, oDiagram) => {
+				const oCardObj = this.getProductionElement(oDiagram.div);
+				oCardObj.$el.visibility = 'hidden';
 			},
 		});
 

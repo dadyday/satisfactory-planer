@@ -4,10 +4,11 @@ export default class Receipe {
 
 	static mOutputList = new Map;
 	static mInputList = new Map;
+	static mBuildingList = new Map;
 
-	static register(aData) {
+	static register(id, aData) {
 		// ironingot: ['smelter', 'Eisenbarren', {ironingot: 30}, {ironore: 30}],
-		const oReceipe = new Receipe(...aData);
+		const oReceipe = new Receipe(id, ...aData);
 
 		oReceipe.mOutput.forEach((count, item) => {
 			if (!this.mOutputList.has(item)) this.mOutputList.set(item, []);
@@ -18,12 +19,19 @@ export default class Receipe {
 			if (!this.mInputList.has(item)) this.mInputList.set(item, []);
 			this.mInputList.get(item).push(oReceipe);
 		});
+
+		if (!this.mBuildingList.has(oReceipe.type)) this.mBuildingList.set(oReceipe.type, []);
+		this.mBuildingList.get(oReceipe.type).push(oReceipe);
 	}
 
 	static registerAll(oReceipeData) {
-		new Map(Object.entries(oReceipeData)).forEach((aData) => {
-			this.register(aData);
+		new Map(Object.entries(oReceipeData)).forEach((aData, id) => {
+			this.register(id, aData);
 		});
+	}
+
+	static getByBuilding(type) {
+		return this.mBuildingList.get(type);
 	}
 
 	static getByOutput(item, pos = 0) {
@@ -37,12 +45,14 @@ export default class Receipe {
 
 	//**********************************
 
+	id;
+	type; // id of Building
 	name = 'none';
 	mOutput = new Map; // Map of item: count
 	mInput = new Map; // Map of item: count
-	type; // id of Building
 
-	constructor(type, name = null, oOutput = [], oInput = []) {
+	constructor(id, type, name = null, oOutput = [], oInput = []) {
+		this.id = id;
 		this.type = type;
 		this.name = name ?? 'none';
 		this.mOutput = new Map(Object.entries(oOutput));

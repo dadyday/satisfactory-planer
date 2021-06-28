@@ -1,17 +1,19 @@
+import Building from './Building';
 import Transport from './Transport';
 import _ from 'underscore';
 
 export default class Production {
 	id = null;
-	oBuilding; // Building object
+	type; // Building id
 	name = ''; // Receipe name
 	oReceipe; // Receipe object
 	productivity = 0.0;
 	aInput = []; // Array of Transport objects
 	aOutput = []; // Array of Transport objects
 
-	constructor(oBuilding, oReceipe) {
-		this.oBuilding = oBuilding;
+	constructor(type, oReceipe) {
+		this.type = type;
+		this.oBuilding = Building.get(type);
 		this.name = oReceipe.name;
 		this.oReceipe = oReceipe;
 	}

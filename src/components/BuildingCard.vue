@@ -1,52 +1,59 @@
 <template>
-	<div class="entity">
-		<div v-if="icon" class="icon">
-			<img :src="icon" :alt="icon" />
-		</div>
-		<div v-if="name" class="name" @click="startSelecting">
-			<select
-				ref="select"
-				v-show="selecting"
-				v-model="nameValue"
-				@blur="endSelecting"
+	<div class="card">
+		<div>
+			<Select
+				:list="buildingList" listKey="type" listValue="name"
+				v-model="buildingValue"
 			>
-				<option
-					v-for="value, key in list"
-					:key="key"
-					:value="value"
-					:selected="name == value"
-				>
-					{{ value }}
-				</option>
-			</select>
-			<span v-show="!selecting">{{ name }}</span>
+			</Select>
 		</div>
-		<slot />
+		<div>
+			<Select
+				empty="- kein -"
+				:list="receipeList" listKey="id" listValue="name"
+				v-model="receipeValue"
+			>
+			</Select>
+		</div>
 	</div>
 </template>
 
 <script>
+import Building from '../lib/Building';
+import Receipe from '../lib/Receipe';
+
 export default {
 	props: {
-		icon: String,
-		name: String,
-		list: {},
-		listKey: null, // key from item property, otherwise list key
-		listValue: null, // value from item property, otherwise item itself
+		type: String,
+		obj: Object,
 	},
 	data() {
 		return {
-			nameVal: name,
+			oBuilding: this.obj ?? Building.get(this.type ?? null),
 			selecting: false,
 		};
 	},
 	computed: {
-		nameValue: {
+		buildingList() {
+			return Building.getAll();
+		},
+		buildingValue: {
 			get() {
-				return this.nameVal;
+				return this.oBuilding.type;
 			},
 			set(value) {
-				this.nameVal = value;
+				this.oBuilding = Building.get(value);
+			}
+		},
+		receipeList() {
+			return Receipe.getByBuilding(this.oBuilding.type);
+		},
+		receipeValue: {
+			get() {
+				return this.oBuilding.oProduction?.oReceipe.id ?? null;
+			},
+			set(value) {
+				this.oBuilding.createProduction(value);
 			}
 		}
 	},
@@ -59,13 +66,14 @@ export default {
 		},
 		endSelecting() {
 			this.selecting = false;
-		}
+		},
 	},
-}
+};
+
 </script>
 
 <style lang="scss">
-.entity {
+.card {
 	display: inline-block;
 	background: white;
 	border-radius: 0.2em;
@@ -74,7 +82,7 @@ export default {
 	padding: 0.2em;
 	margin: 0.1em 0.2em;
 	div {
-		display: inline-block;
+		display: block;
 		margin: 0 0.2em;
 		input, select, span {
 			font-weight: bold;

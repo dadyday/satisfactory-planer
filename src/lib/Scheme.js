@@ -56,7 +56,7 @@ export default class Scheme {
 
 	addStorageFor(item, count) {
 		const oInput = {}; oInput[item] = count;
-		const oReceipe = new Receipe('container', 'storage', {}, oInput);
+		const oReceipe = new Receipe('store', 'container', 'storage', {}, oInput);
 		const oSink = oReceipe.createProduction();
 		this.aSink.push(oSink);
 		return oSink;
