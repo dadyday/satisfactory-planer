@@ -1,5 +1,7 @@
 <template>
 	<div class="card">
+		<div><b>Produktion</b></div>
+		<hr/>
 		<div>
 			<Select
 				:list="buildingList" listKey="type" listValue="name"
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+import Production from '../lib/Production';
 import Building from '../lib/Building';
 import Receipe from '../lib/Receipe';
 
@@ -29,7 +32,7 @@ export default {
 	},
 	data() {
 		return {
-			oBuilding: this.obj ?? Building.get(this.type ?? null),
+			oProd: this.obj ?? new Production(this.type),
 			selecting: false,
 		};
 	},
@@ -39,21 +42,24 @@ export default {
 		},
 		buildingValue: {
 			get() {
-				return this.oBuilding.type;
+				return this.oProd.oBuilding.type;
 			},
 			set(value) {
-				this.oBuilding = Building.get(value);
+				this.oProd.oBuilding = Building.get(value);
+				if (value !== this.oProd.oReceipe?.type ?? null) {
+					delete this.oProd.oReceipe;
+				}
 			}
 		},
 		receipeList() {
-			return Receipe.getByBuilding(this.oBuilding.type);
+			return Receipe.getByBuilding(this.oProd.oBuilding.type);
 		},
 		receipeValue: {
 			get() {
-				return this.oBuilding.oProduction?.oReceipe.id ?? null;
+				return this.oProd.oReceipe?.id ?? null;
 			},
 			set(value) {
-				this.oBuilding.createProduction(value);
+				this.oProd.oReceipe = Receipe.get(value);
 			}
 		}
 	},
@@ -76,7 +82,7 @@ export default {
 .card {
 	display: inline-block;
 	background: white;
-	border-radius: 0.2em;
+	border-radius: 0.4em;
 	border: solid 0.5px #ccc;
 	box-shadow: 0.1em 0.1em 0.5em -0.2em #0008;
 	padding: 0.2em;

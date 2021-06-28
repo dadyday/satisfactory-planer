@@ -1,7 +1,9 @@
-import Building from './Building';
+import Production from './Production';
+//import Building from './Building';
 
 export default class Receipe {
 
+	static mList = new Map;
 	static mOutputList = new Map;
 	static mInputList = new Map;
 	static mBuildingList = new Map;
@@ -9,6 +11,7 @@ export default class Receipe {
 	static register(id, aData) {
 		// ironingot: ['smelter', 'Eisenbarren', {ironingot: 30}, {ironore: 30}],
 		const oReceipe = new Receipe(id, ...aData);
+		this.mList.set(id, oReceipe);
 
 		oReceipe.mOutput.forEach((count, item) => {
 			if (!this.mOutputList.has(item)) this.mOutputList.set(item, []);
@@ -28,6 +31,11 @@ export default class Receipe {
 		new Map(Object.entries(oReceipeData)).forEach((aData, id) => {
 			this.register(id, aData);
 		});
+	}
+
+	static get(id) {
+		if (id && !this.mList.has(id)) console.warn(`Receipe ${id} not found!`, this.mList);
+		return this.mList.get(id) ?? null;
 	}
 
 	static getByBuilding(type) {
@@ -60,8 +68,7 @@ export default class Receipe {
 	}
 
 	createProduction() {
-		const oBuilding = Building.get(this.type);
-		return oBuilding.createProduction(this);
+		return new Production(this.type, this);
 	}
 
 	getItems() {

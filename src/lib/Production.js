@@ -1,5 +1,6 @@
 import Building from './Building';
 import Transport from './Transport';
+import Receipe from './Receipe';
 import _ from 'underscore';
 
 export default class Production {
@@ -11,11 +12,15 @@ export default class Production {
 	aInput = []; // Array of Transport objects
 	aOutput = []; // Array of Transport objects
 
-	constructor(type, oReceipe) {
-		this.type = type;
-		this.oBuilding = Building.get(type);
-		this.name = oReceipe.name;
+	constructor(type, oReceipe = null) {
+		this.name = oReceipe?.name ?? 'none';
 		this.oReceipe = oReceipe;
+		this.oBuilding = Building.get(type);
+	}
+
+	setReceipe(oReceipe) {
+		if (oReceipe instanceof String) oReceipe = Receipe.get(oReceipe);
+		return this.oReceipe = oReceipe;
 	}
 
 	addOutput(oTransport) {
@@ -105,7 +110,14 @@ export default class Production {
 
 	getNodeData(id) {
 		this.id = this.name+id;
-		const oData = this.oBuilding.getNodeData(this.id);
+
+		const oData = {
+			id: this.id,
+			detail: this.name ?? '',
+			production: this,
+			ports: this.oReceipe?.getItems() ?? [],
+		};
+		Object.assign(oData, this.oBuilding.getNodeData());
 		return oData;
 	}
 

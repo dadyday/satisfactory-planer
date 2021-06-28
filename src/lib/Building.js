@@ -2,7 +2,7 @@ import Production from './Production';
 import Receipe from './Receipe';
 import PortType from './PortType';
 
-import Card from "../components/BuildingCard.vue";
+import Card from "../components/ProdCard.vue";
 import Vue from 'vue';
 
 import go from 'gojs';
@@ -50,7 +50,6 @@ export default class Building {
 	oSize = { width: 100, height: 100 };
 	aPort = [];
 	aLayer = [];
-	oProduction; // object of Production
 
 	constructor(type, name, w, h, layer, aPort) {
 		this.type = type;
@@ -60,12 +59,6 @@ export default class Building {
 		this.aPort = aPort;
 		if (layer & 2) this.aLayer.push('elevated');
 		if (layer & 1) this.aLayer.push('ground');
-		//this.oProduction = this.createProduction(new Receipe(type));
-	}
-
-	createProduction(oReceipe) {
-		if (oReceipe instanceof String) oReceipe = Receipe.get(oReceipe);
-		return this.oProduction = new Production(this.type, oReceipe);
 	}
 
 	imageUrl() {
@@ -82,16 +75,12 @@ export default class Building {
 		return oMap;
 	}
 
-	getNodeData(id) {
+	getNodeData() {
 		return {
-			id: id,
 			type: this.type,
 			name: this.name,
-			detail: this.oProduction?.name ?? '',
 			layer: this.aLayer[0],
 			orient: 0,
-			production: this.oProduction,
-			ports: this.oProduction?.oReceipe.getItems() ?? [],
 		};
 	}
 
@@ -117,7 +106,7 @@ export default class Building {
 		if (!self.oCardObj) {
 			const CardClass = Vue.extend(Card);
 			self.oCardObj = new CardClass();
-			self.oCardObj.oBuilding = this;
+			self.oCardObj.oProd.oBuilding = this;
 
 			const oEl = self.oCardObj.$mount().$el;
 			oEl.style.position = 'absolute';
@@ -136,7 +125,7 @@ export default class Building {
 				const oCardObj = this.getProductionElement(oDiagram.div);
 				const oPos = oDiagram.lastInput.viewPoint;
 
-				oCardObj.oBuilding = this;
+				oCardObj.oProd.oBuilding = this;
 
 				Object.assign(oCardObj.$el.style, {
 					left: oPos.x + "px",
