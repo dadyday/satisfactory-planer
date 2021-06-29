@@ -42,7 +42,7 @@ export default {
 		},
 		buildingValue: {
 			get() {
-				return this.oProd.oBuilding.type;
+				return this.oProd.oBuilding?.type ?? null;
 			},
 			set(value) {
 				this.oProd.oBuilding = Building.get(value);
@@ -52,7 +52,7 @@ export default {
 			}
 		},
 		receipeList() {
-			return Receipe.getByBuilding(this.oProd.oBuilding.type);
+			return Receipe.getByBuilding(this.oProd.oBuilding?.type ?? null);
 		},
 		receipeValue: {
 			get() {

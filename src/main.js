@@ -5,8 +5,8 @@ import App from './App.vue'
 import _ from 'underscore';
 
 Vue.config.productionTip = false
-Vue.prototype.$dump = (...args) => { console.log(...args); return args[0]; };
-Vue.prototype.$_ = _;
+Vue.prototype.$dump = window.$dump = (arg) => { console.log(arg); return arg; };
+Vue.prototype.$_ = window.$_ = _;
 
 
 new Vue({

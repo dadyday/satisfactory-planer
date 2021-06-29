@@ -1,4 +1,5 @@
 import Receipe from './Receipe';
+import Item from './Item';
 import _ from 'underscore';
 
 export default class Scheme {
@@ -56,7 +57,7 @@ export default class Scheme {
 
 	addStorageFor(item, count) {
 		const oInput = {}; oInput[item] = count;
-		const oReceipe = new Receipe('store', 'container', 'storage', {}, oInput);
+		const oReceipe = new Receipe('store', 'container', Item.get(item).name, {}, oInput);
 		const oSink = oReceipe.createProduction();
 		this.aSink.push(oSink);
 		return oSink;
