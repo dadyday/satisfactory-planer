@@ -4,7 +4,7 @@ var $ = go.GraphObject.make;
 //import Building from '../Building';
 import Production from '../Production';
 
-import Vue from 'vue';
+import vueHelper from '../vue/helper';
 import Card from "../../components/ProdCard.vue";
 
 
@@ -13,7 +13,8 @@ export default class Node {
 
 	static oLastPoint = new go.Point(0,0);
 
-	static getTemplate(oBuilding) {
+	static getTemplate(oProduction) {
+		const oBuilding = oProduction.oBuilding;
 		const sz = Math.min(oBuilding.oSize.width-10, oBuilding.oSize.height-10);
 
 		var oPanel = $(go.Panel, "Auto",
@@ -37,7 +38,7 @@ export default class Node {
 			),
 
 			$(go.Panel, "Table",
-				$(go.TextBlock, oBuilding.name, {
+				$(go.TextBlock, '', {
 					row: 0,
 					column: 1,
 					margin: 3,
@@ -54,7 +55,7 @@ export default class Node {
 					maxSize: new go.Size(80, 40),
 					stroke: "white",
 					font: "9pt sans-serif"
-				}, new go.Binding("text", "detail")),
+				}, new go.Binding("text", "receipe")),
 			),
 		);
 
@@ -72,12 +73,15 @@ export default class Node {
 				dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, oBuilding.aLayer),
 				rotatable: true,
 				isShadowed: true,
-				contextMenu: this.makeContextMenu(oBuilding),
+				contextMenu: this.makeContextMenu(oProduction),
 			},
 			new go.Binding("location", "pos", this.getPos).makeTwoWay(this.makePos),
 			new go.Binding("layerName", "layer"),
 			new go.Binding("angle", "orient", this.getAngle).makeTwoWay(this.makeOrient),
 			new go.Binding("angle", 'drawangle').makeTwoWay(),
+			//new go.Binding("contextMenu", "type", (oProd) => this.getContextMenu(oProd, oBuilding)).makeTwoWay(this.setProduction),
+			//new go.Binding("contextMenu", "production").makeTwoWay(this.setProduction),
+
 			oPanel,
 			$(go.Panel, "Vertical", {
 				alignment: go.Spot.Left,
@@ -100,44 +104,54 @@ export default class Node {
 		return oNode;
 	}
 
-	static oCardObj;
-	static createProductionElement(elParent) {
-		if (!this.oCardObj) {
-			const CardClass = Vue.extend(Card);
-			this.oCardObj = new CardClass({
-				obj: new Production(),
-			});
-
-
-			const oEl = this.oCardObj.$mount().$el;
-			oEl.style.position = 'absolute';
-			oEl.style.zIndex = 1000;
-			//oEl.style.visibility = 'hidden';
-			oEl.addEventListener('contextmenu', (e) => { return e.preventDefault()});
-			elParent.appendChild(oEl);
-		}
+	static getContextMenu(oProduction) {
+		$dump('get', oProduction);
 	}
 
-	static makeContextMenu(oBuilding) {
+	static setProduction(oContextMenu) {
+		$dump('set', oContextMenu);
+	}
+
+	static makeContextMenu(oProduction) {
 		// https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/customContextMenu.html
-		return $(go.HTMLInfo, {
-			show: (oNode, oDiagram) => {
-				this.createProductionElement(oDiagram.div);
-				const oPos = oDiagram.lastInput.viewPoint;
-
-				this.oCardObj.oProd.oBuilding = oBuilding;
-
-				Object.assign(this.oCardObj.$el.style, {
-					left: oPos.x + "px",
-					top: oPos.y + "px",
-					visibility: 'visible',
-				});
-			},
-			hide: (oNode, oDiagram) => {
-				this.createProductionElement(oDiagram.div);
-				this.oCardObj.$el.visibility = 'hidden';
-			},
-		});
+		$dump(oProduction);
+		let oMenu = null;
+		return $(go.HTMLInfo,
+			{
+				show: (oNode, oDiagram) => {
+					const oPos = oDiagram.lastInput.viewPoint;
+					oMenu = vueHelper.createComponent(oDiagram.div, Card, {
+						obj: oProduction,
+						x: oPos.x,
+						y: oPos.y,
+					}, {
+						update: (oProduction) => {
+							oDiagram.model.commit((oModel) => {
+								const oData = oProduction.getNodeData(oNode.data.id);
+								oModel.assignAllDataProperties(oNode.data, oData);
+							});
+						},
+					/*
+						building: (value) => {
+							//oNode.data.type = value;
+							oDiagram.model.commit((oModel) => {
+								oModel.setDataProperty(oNode.data, "type", value);
+							});
+						},
+						production: (value) => {
+							//$dump('chg prod', value, oNode, oDiagram.model.nodeDataArray)
+							oDiagram.model.commit((oModel) => {
+								oModel.setDataProperty(oNode.data, "detail", value);
+							});
+						},
+					//*/
+					});
+				},
+				hide: () => {
+					vueHelper.destroyComponent(oMenu);
+				}
+			}
+		);
 	}
 
 	static avoidNodeOverlap(oNode, oPoint, oGridPoint, aLayer) {

@@ -3,6 +3,7 @@ var $ = go.GraphObject.make;
 // alternativ? https://konvajs.org/docs/vue/index.html
 
 import Building from './Building';
+import Production from './Production';
 import Node from './go/Node';
 
 export default class GoAdapter {
@@ -15,9 +16,11 @@ export default class GoAdapter {
 		const oTemplateMap = new go.Map();
 		const aModelData = [];
 
+		var id = 1;
 		Building.each((oBuilding, type) => {
-			oTemplateMap.add(type, Node.getTemplate(oBuilding));
-			aModelData.push(oBuilding.getNodeData(type));
+			const oProduction = new Production(oBuilding.type);
+			oTemplateMap.add(type, Node.getTemplate(oProduction));
+			aModelData.push(oProduction.getNodeData(id++));
 		});
 
 		this.initDiagram(elIdDiagram, oTemplateMap);

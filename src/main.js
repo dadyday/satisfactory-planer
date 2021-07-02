@@ -5,7 +5,7 @@ import App from './App.vue'
 import _ from 'underscore';
 
 Vue.config.productionTip = false
-Vue.prototype.$dump = window.$dump = (arg) => { console.log(arg); return arg; };
+Vue.prototype.$dump = window.$dump = (...arg) => { console.log(...arg); return arg[0]; };
 Vue.prototype.$_ = window.$_ = _;
 
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="card">
+	<div class="card" :style="{ top, left }">
 		<div><b>Produktion</b></div>
 		<hr/>
 		<div>
@@ -29,6 +29,8 @@ export default {
 	props: {
 		type: String,
 		obj: Object,
+		x: Number,
+		y: Number,
 	},
 	data() {
 		return {
@@ -37,6 +39,9 @@ export default {
 		};
 	},
 	computed: {
+		left() { return this.x + 'px' },
+		top() { return this.y + 'px' },
+
 		buildingList() {
 			return Building.getAll();
 		},
@@ -49,6 +54,8 @@ export default {
 				if (value !== this.oProd.oReceipe?.type ?? null) {
 					delete this.oProd.oReceipe;
 				}
+				//this.$emit('building', value);
+				this.$emit('update', this.oProd);
 			}
 		},
 		receipeList() {
@@ -60,6 +67,8 @@ export default {
 			},
 			set(value) {
 				this.oProd.oReceipe = Receipe.get(value);
+				//this.$emit('production', value);
+				this.$emit('update', this.oProd);
 			}
 		}
 	},
@@ -80,6 +89,8 @@ export default {
 
 <style lang="scss">
 .card {
+	position: absolute;
+	z-index: 1000;
 	display: inline-block;
 	background: white;
 	border-radius: 0.4em;

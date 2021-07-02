@@ -33,7 +33,6 @@ export default {
 	},
 	methods: {
 		change(ev) {
-			this.$dump(ev.target.value);
 			this.$emit('change', ev.target.value);
 		},
 		getList() {

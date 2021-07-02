@@ -109,12 +109,11 @@ export default class Production {
 	}
 
 	getNodeData(id) {
-		this.id = this.name+id;
+		this.id = id;
 
-		const oData = {
+		var oData = {
 			id: this.id,
-			detail: this.name ?? '',
-			production: this,
+			receipe: this.oReceipe?.name ?? '',
 			ports: this.oReceipe?.getItems() ?? [],
 		};
 		Object.assign(oData, this.oBuilding.getNodeData());
