@@ -1,6 +1,5 @@
 import Receipe from './Receipe';
 import Item from './Item';
-import _ from 'underscore';
 
 export default class Scheme {
 
@@ -10,7 +9,7 @@ export default class Scheme {
 	canCreate = true;
 
 	constructor(oNeed = {}, canCreate = true) {
-		_.each(oNeed, (count, item) => {
+		$_.each(oNeed, (count, item) => {
 			this.addNeeded(item, count);
 		});
 		this.canCreate = canCreate;
@@ -96,16 +95,15 @@ export default class Scheme {
 			nodeDataArray: [],
 			linkDataArray: [],
 		};
-		let n = 1;
 		let l = 1;
 
 		this.eachProduction((oProd) => {
-			const oNode = oProd.getNodeData(n++);
+			const oNode = oProd.getNodeData();
 			oModel.nodeDataArray.push(oNode);
 		});
 
 		for (const oSink of this.aSink) {
-			const oNode = oSink.getNodeData(n++);
+			const oNode = oSink.getNodeData();
 			oModel.nodeDataArray.push(oNode);
 		}
 
