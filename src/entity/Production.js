@@ -1,7 +1,6 @@
 import Building from './Building';
 import Transport from './Transport';
 import Receipe from './Receipe';
-import _ from 'underscore';
 
 export default class Production {
 	id = null;
@@ -12,15 +11,25 @@ export default class Production {
 	aInput = []; // Array of Transport objects
 	aOutput = []; // Array of Transport objects
 
-	constructor(type, oReceipe = null) {
-		this.name = oReceipe?.name ?? 'none';
-		this.oReceipe = oReceipe;
-		this.oBuilding = Building.get(type);
+	constructor(type, receipe = null) {
+		this.setBuilding(type);
+		this.setReceipe(receipe);
 	}
 
-	setReceipe(oReceipe) {
-		if (oReceipe instanceof String) oReceipe = Receipe.get(oReceipe);
-		return this.oReceipe = oReceipe;
+	setBuilding(type = null) {
+		this.oBuilding = type instanceof Building ? type : Building.get(type);
+		this.type = this.oBuilding.type;
+		if (this.type != this.oReceipe?.type ?? null) {
+			this.setReceipe(null);
+		}
+	}
+
+	setReceipe(receipe = null) {
+		this.oReceipe = receipe instanceof Receipe ? receipe : Receipe.get(receipe);
+		this.name = this.oReceipe?.name ?? 'none';
+		if (this.oReceipe) {
+			this.setBuilding(this.oReceipe.type);
+		}
 	}
 
 	addOutput(oTransport) {
@@ -50,7 +59,7 @@ export default class Production {
 	*/
 	setDelta(delta, aIgnore = []) {
 		if (this.name == 'storage') return delta;
-		if (_.contains(aIgnore, this)) return delta;
+		if ($_.contains(aIgnore, this)) return delta;
 		aIgnore.push(this);
 
 		delta = Math.min(delta, 1.0 - this.productivity);
@@ -108,12 +117,19 @@ export default class Production {
 		});
 	}
 
-	getNodeData(id) {
-		this.id = id;
+	//** godata ***********
 
+	static createFromNodeData(oData) {
+		const oProd = new Production(oData.type, oData.receipe);
+		oProd.id = oData.id;
+		oProd.productivity = oData.productivity;
+		return oProd;
+	}
+
+	getNodeData() {
 		var oData = {
-			id: this.id,
-			receipe: this.oReceipe?.name ?? '',
+			id: this.id ?? (this.id = this.constructor.lastId++),
+			receipe: this.oReceipe?.id ?? '',
 			ports: this.oReceipe?.getItems() ?? [],
 		};
 		Object.assign(oData, this.oBuilding.getNodeData());
@@ -125,4 +141,7 @@ export default class Production {
 	}
 
 
+	//** static **********************
+
+	static lastId = 1;
 }

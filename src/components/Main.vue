@@ -1,6 +1,6 @@
 <template>
 	<div id="main">
-		<World :scheme="oScheme" v-model="model" />
+		<World :palette="modeNodes" :scheme="oScheme" v-model="model" />
 		<div>
 			<ul>
 				<li v-for="need, item in oNeed" :key="item+rdm">
@@ -26,7 +26,7 @@
 			</ul>
 			<button @click="run">Run!</button>
 			<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
-			<table class="indent">
+			<table v-if="oScheme" class="indent">
 				<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 					<td><Item :item="item"/></td>
 					<td class="spacer"></td>
@@ -37,7 +37,7 @@
 				</tr>
 			</table>
 			<hr />
-			<table class="indent">
+			<table v-if="oScheme" class="indent">
 				<template v-for="[item, aProd] in oScheme.mProduction">
 					<tr v-for="oProd, i in aProd" :key="item+i+rdm">
 						<td>
@@ -56,35 +56,27 @@
 </template>
 
 <script>
-import Scheme from '../lib/Scheme';
-
-import Building from '../lib/Building';
-import aBuildingData from '../data/building';
-Building.registerAll(aBuildingData);
-
-import Receipe from '../lib/Receipe';
-import aReceipeData from '../data/receipe';
-Receipe.registerAll(aReceipeData);
-
-import Item from '../lib/Item';
-import aItemData from '../data/item';
-Item.registerAll(aItemData);
-
+import {Item, Building, Scheme} from '../register';
 
 export default {
 	data() {
 		return {
 			oNeed: {
-				ironPlate: 10,
-				ironRod: 10,
+			//	ironPlate: 10,
+			//	ironRod: 10,
 				screw: 20,
-				reinforced: 5,
+			//	reinforced: 5,
 			},
-			oScheme: new Scheme,
+			oScheme: null,
 			createProd: true,
 			rdm: 0,
 			model: '',
 		};
+	},
+	computed: {
+		modeNodes() {
+			return Building.getAll();
+		}
 	},
 	methods: {
 		getItem(item) {
@@ -111,7 +103,6 @@ export default {
 		},
 		run() {
 			this.oScheme = new Scheme(this.oNeed, this.createProd);
-			//console.log(this.oScheme);
 			this.refresh();
 		},
 		updateProd(oProd, productivity) {

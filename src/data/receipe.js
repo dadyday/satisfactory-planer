@@ -1,5 +1,7 @@
 
 export default {
+	store: ['container', '', {}, {}],
+
 	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
 	copperOre: ['minerMk1', 'Kupfererz', {copperOre: 60}, {} ],
 

@@ -2,7 +2,7 @@ import go from 'gojs';
 var $ = go.GraphObject.make;
 
 
-export default class PortType {
+export default class Port {
 
 	type = null;
 	inOut = null;

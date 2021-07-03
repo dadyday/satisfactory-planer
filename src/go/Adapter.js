@@ -1,10 +1,7 @@
 import go from 'gojs';
 var $ = go.GraphObject.make;
-// alternativ? https://konvajs.org/docs/vue/index.html
 
-import Building from './Building';
-import Production from './Production';
-import Node from './go/Node';
+import Node from './Node';
 
 export default class GoAdapter {
 
@@ -12,15 +9,14 @@ export default class GoAdapter {
 	oDiagram;
 	commandHandler;
 
-	constructor(elIdDiagram, elIdPalette) {
+	constructor(elIdDiagram, elIdPalette, mBuilding) {
 		const oTemplateMap = new go.Map();
 		const aModelData = [];
 
-		var id = 1;
-		Building.each((oBuilding, type) => {
-			const oProduction = new Production(oBuilding.type);
-			oTemplateMap.add(type, Node.getTemplate(oProduction));
-			aModelData.push(oProduction.getNodeData(id++));
+		mBuilding.forEach((oBuilding, id) => {
+			const oProduction = oBuilding.createProduction();
+			oTemplateMap.add(id, Node.getTemplate(oBuilding));
+			aModelData.push(oProduction.getNodeData());
 		});
 
 		this.initDiagram(elIdDiagram, oTemplateMap);
@@ -146,6 +142,7 @@ export default class GoAdapter {
 		}
 	}
 
+	// demo
 	addNodeAndLink(e, b) {
 		// take a button panel in an Adornment, get its Adornment, and then get its adorned Node
 		var node = b.part.adornedPart;
@@ -164,100 +161,3 @@ export default class GoAdapter {
 		diagram.commitTransaction("add node and link");
 	}
 }
-
-
-/*
-"relinkingTool.fromHandleArchetype":
-	$(go.Shape, "Diamond", {
-		segmentIndex: 0,
-		cursor: "pointer",
-		desiredSize: new go.Size(8, 8),
-		fill: "tomato",
-		stroke: "darkred"
-	}),
-"relinkingTool.toHandleArchetype":
-	$(go.Shape, "Diamond", {
-		segmentIndex: -1,
-		cursor: "pointer",
-		desiredSize: new go.Size(8, 8),
-		fill: "darkred",
-		stroke: "tomato"
-	}),
-"linkReshapingTool.handleArchetype":
-	$(go.Shape, "Diamond", {
-		desiredSize: new go.Size(14, 14),
-		fill: "#eee",
-		stroke: "deepskyblue"
-	}),
-
-
-	var myDiagram = $(
-		go.Diagram,
-		"myDiagramDiv",  // create a Diagram for the DIV HTML element
-		{
-			initialAutoScale: go.Diagram.Uniform,  // scale to show all of the contents
-		//  "ChangedSelection": onSelectionChanged, // view additional information
-
-
-			"ModelChanged": function(e) {     // just for demonstration purposes,
-				if (e.isTransactionFinished) {  // show the model data in the page's TextArea
-					//document.getElementById("mySavedModel").textContent = e.model.toJson();
-				}
-			}
-		}
-	);
-	myDiagram.nodeTemplate = $(
-		go.Node,
-		"Spot",
-		{
-			locationObjectName: "PORT",
-			locationSpot: go.Spot.Top,  // location point is the middle top of the PORT
-			//linkConnected: updatePortHeight,
-			//linkDisconnected: updatePortHeight,
-			toolTip:
-				$("ToolTip",
-					$(go.TextBlock, { margin: 4, width: 140 },
-						new go.Binding("text", "", function(data) { return data.text + ":\n\n" + data.description; }))
-				)
-		},
-		new go.Binding("location", "pos", go.Point.parse).makeTwoWay(go.Point.stringify),
-			// The main element of the Spot panel is a vertical panel housing an optional icon,
-			// plus a rectangle that acts as the port
-		$(
-			go.Panel,
-			"Vertical",
-			$(
-				go.Shape,
-				{
-					width: 40, height: 0,
-					stroke: null, strokeWidth: 0, fill: "gray"
-				},
-				new go.Binding("height", "icon", function() { return 40; }),
-				new go.Binding("fill", "color", colorFunc),
-				new go.Binding("geometry", "icon", geoFunc)),
-				$(
-					go.Shape,
-					{
-						name: "PORT",
-						width: 40, height: 24, margin: new go.Margin(-1, 0, 0, 0),
-						stroke: null, strokeWidth: 0, fill: "gray",
-						portId: "", cursor: "pointer", fromLinkable: true, toLinkable: true
-					},
-					new go.Binding("fill", "color", colorFunc)
-				),
-				$(
-					go.TextBlock,
-					{
-						font: "Bold 14px Lato, sans-serif",
-						textAlign: "center",
-						margin: 3,
-						maxSize: new go.Size(100, NaN),
-						alignment: go.Spot.Top,
-						alignmentFocus: go.Spot.Bottom,
-						editable: true
-					},
-					new go.Binding("text").makeTwoWay()
-				)
-			)
-		);
-	*/

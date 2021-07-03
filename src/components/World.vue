@@ -30,8 +30,7 @@
 </style>
 
 <script>
-import GoAdapter from '../lib/GoAdapter';
-import _ from 'underscore';
+import GoAdapter from '../go/Adapter';
 import Store from 'store';
 
 export default {
@@ -42,6 +41,7 @@ export default {
 	props: {
 		model: String,
 		scheme: Object,
+		palette: Map,
 	},
 	data() {
 		return {
@@ -56,7 +56,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.go = new GoAdapter('diagram', 'palette');
+		this.go = new GoAdapter('diagram', 'palette', this.palette);
 		this.go.oDiagram.addModelChangedListener((ev) => {
 			if (ev.isTransactionFinished) this.pushModel();
 		});
@@ -97,11 +97,11 @@ export default {
 		},
 
 		applyNodePositions(oModel) {
-			const aType = _.groupBy(this.go.oDiagram.model.nodeDataArray, (oItem) => {
+			const aType = $_.groupBy(this.go.oDiagram.model.nodeDataArray, (oItem) => {
 				return '_'+oItem.type;
 			});
-			_.map(oModel.nodeDataArray, (oNode) => {
-				const aOld = _.get(aType, '_'+oNode.type);
+			$_.map(oModel.nodeDataArray, (oNode) => {
+				const aOld = $_.get(aType, '_'+oNode.type);
 				if (aOld) {
 					const oOld = aOld.shift();
 					if (oOld) {

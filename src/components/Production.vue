@@ -45,8 +45,7 @@
 </template>
 
 <script>
-import Receipe from '../lib/Receipe';
-//import Production from '../lib/Production';
+import Receipe from '../entity/Receipe';
 
 export default {
 	props: {

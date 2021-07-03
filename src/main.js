@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 // import 'normalize.css';
 // import '@/scss/main.scss';
+
 import _ from 'underscore';
 
 Vue.config.productionTip = false

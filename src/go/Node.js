@@ -1,11 +1,10 @@
 import go from 'gojs';
 var $ = go.GraphObject.make;
 
-//import Building from '../Building';
-import Production from '../Production';
-
-import vueHelper from '../vue/helper';
-import Card from "../../components/ProdCard.vue";
+import vueHelper from '../helper';
+import Card from "../components/ProdCard.vue";
+import Production from "../entity/Production";
+import Receipe from "../entity/Receipe";
 
 
 
@@ -13,8 +12,7 @@ export default class Node {
 
 	static oLastPoint = new go.Point(0,0);
 
-	static getTemplate(oProduction) {
-		const oBuilding = oProduction.oBuilding;
+	static getTemplate(oBuilding) {
 		const sz = Math.min(oBuilding.oSize.width-10, oBuilding.oSize.height-10);
 
 		var oPanel = $(go.Panel, "Auto",
@@ -55,7 +53,7 @@ export default class Node {
 					maxSize: new go.Size(80, 40),
 					stroke: "white",
 					font: "9pt sans-serif"
-				}, new go.Binding("text", "receipe")),
+				}, new go.Binding("text", "receipe", this.getReceipName)),
 			),
 		);
 
@@ -73,14 +71,12 @@ export default class Node {
 				dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, oBuilding.aLayer),
 				rotatable: true,
 				isShadowed: true,
-				contextMenu: this.makeContextMenu(oProduction),
+				contextMenu: this.makeContextMenu(),
 			},
 			new go.Binding("location", "pos", this.getPos).makeTwoWay(this.makePos),
 			new go.Binding("layerName", "layer"),
 			new go.Binding("angle", "orient", this.getAngle).makeTwoWay(this.makeOrient),
 			new go.Binding("angle", 'drawangle').makeTwoWay(),
-			//new go.Binding("contextMenu", "type", (oProd) => this.getContextMenu(oProd, oBuilding)).makeTwoWay(this.setProduction),
-			//new go.Binding("contextMenu", "production").makeTwoWay(this.setProduction),
 
 			oPanel,
 			$(go.Panel, "Vertical", {
@@ -104,21 +100,13 @@ export default class Node {
 		return oNode;
 	}
 
-	static getContextMenu(oProduction) {
-		$dump('get', oProduction);
-	}
-
-	static setProduction(oContextMenu) {
-		$dump('set', oContextMenu);
-	}
-
-	static makeContextMenu(oProduction) {
+	static makeContextMenu() {
 		// https://github.com/NorthwoodsSoftware/GoJS/blob/master/samples/customContextMenu.html
-		$dump(oProduction);
 		let oMenu = null;
 		return $(go.HTMLInfo,
 			{
 				show: (oNode, oDiagram) => {
+					const oProduction = Production.createFromNodeData(oNode.data);
 					const oPos = oDiagram.lastInput.viewPoint;
 					oMenu = vueHelper.createComponent(oDiagram.div, Card, {
 						obj: oProduction,
@@ -127,24 +115,11 @@ export default class Node {
 					}, {
 						update: (oProduction) => {
 							oDiagram.model.commit((oModel) => {
-								const oData = oProduction.getNodeData(oNode.data.id);
+								const oData = oProduction.getNodeData();
 								oModel.assignAllDataProperties(oNode.data, oData);
 							});
 						},
-					/*
-						building: (value) => {
-							//oNode.data.type = value;
-							oDiagram.model.commit((oModel) => {
-								oModel.setDataProperty(oNode.data, "type", value);
-							});
-						},
-						production: (value) => {
-							//$dump('chg prod', value, oNode, oDiagram.model.nodeDataArray)
-							oDiagram.model.commit((oModel) => {
-								oModel.setDataProperty(oNode.data, "detail", value);
-							});
-						},
-					//*/
+
 					});
 				},
 				hide: () => {
@@ -206,6 +181,10 @@ export default class Node {
 
 	static getPos(aPos) {
 		return new go.Point(...aPos);
+	}
+
+	static getReceipName(receipe) {
+		return Receipe.get(receipe).name;
 	}
 
 }

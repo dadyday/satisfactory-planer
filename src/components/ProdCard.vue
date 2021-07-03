@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import Production from '../lib/Production';
-import Building from '../lib/Building';
-import Receipe from '../lib/Receipe';
+import Production from '../entity/Production';
+import Building from '../entity/Building';
+import Receipe from '../entity/Receipe';
 
 export default {
 	props: {
@@ -50,11 +50,7 @@ export default {
 				return this.oProd.oBuilding?.type ?? null;
 			},
 			set(value) {
-				this.oProd.oBuilding = Building.get(value);
-				if (value !== this.oProd.oReceipe?.type ?? null) {
-					delete this.oProd.oReceipe;
-				}
-				//this.$emit('building', value);
+				this.oProd.setBuilding(value);
 				this.$emit('update', this.oProd);
 			}
 		},
