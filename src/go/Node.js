@@ -5,8 +5,7 @@ import Port from './Port';
 
 import vueHelper from '../helper';
 import Card from "../components/ProdCard.vue";
-import Production from "../entity/Production";
-import Receipe from "../entity/Receipe";
+import { Production, Receipe } from "../entity";
 
 
 

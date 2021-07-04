@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import Receipe from '../entity/Receipe';
+import { Receipe } from '../entity';
 
 export default {
 	props: {

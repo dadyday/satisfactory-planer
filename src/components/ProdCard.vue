@@ -21,9 +21,7 @@
 </template>
 
 <script>
-import Production from '../entity/Production';
-import Building from '../entity/Building';
-import Receipe from '../entity/Receipe';
+import { Production, Building, Receipe } from '../entity';
 
 export default {
 	props: {

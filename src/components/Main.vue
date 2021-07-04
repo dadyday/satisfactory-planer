@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import {Item, Building, Scheme} from '../register';
+import {Item, Building, Scheme} from '../entity';
 
 export default {
 	data() {

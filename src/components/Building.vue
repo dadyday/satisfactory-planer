@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Building from './entity/Building';
+import { Building } from '../entity';
 
 export default {
 	props: {

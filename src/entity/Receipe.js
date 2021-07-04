@@ -48,17 +48,14 @@ export default class Receipe {
 		this.mList.set(id, oReceipe);
 
 		oReceipe.mOutput.forEach((count, item) => {
-			if (!this.mOutputList.has(item)) this.mOutputList.set(item, []);
-			this.mOutputList.get(item).push(oReceipe);
+			this.mOutputList.getInit(item, []).push(oReceipe);
 		});
 
 		oReceipe.mInput.forEach((count, item) => {
-			if (!this.mInputList.has(item)) this.mInputList.set(item, []);
-			this.mInputList.get(item).push(oReceipe);
+			this.mInputList.getInit(item, []).push(oReceipe);
 		});
 
-		if (!this.mBuildingList.has(oReceipe.type)) this.mBuildingList.set(oReceipe.type, []);
-		this.mBuildingList.get(oReceipe.type).push(oReceipe);
+		this.mBuildingList.getInit(oReceipe.type, []).push(oReceipe);
 	}
 
 	static registerAll(oReceipeData) {

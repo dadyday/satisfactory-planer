@@ -45,7 +45,7 @@
 
 
 <script>
-import Item from '../entity/Item';
+import { Item } from '../entity';
 
 var	inputSize = 0;
 const inputOffset = 0;

@@ -17,8 +17,7 @@ export default class Scheme {
 	}
 
 	getQuantity(item) {
-		if (!this.mQuantity.has(item)) this.mQuantity.set(item, { need:0, in:0, out:0, rest:0 });
-		return this.mQuantity.get(item);
+		return this.mQuantity.getInit(item, { need:0, in:0, out:0, rest:0 });
 	}
 
 	addInQuantity(item, count) {
@@ -32,8 +31,7 @@ export default class Scheme {
 	}
 
 	getProduction(name) {
-		if (!this.mProduction.has(name)) this.mProduction.set(name, []);
-		return this.mProduction.get(name);
+		return this.mProduction.getInit(name, []);
 	}
 
 	eachProduction(handler) {

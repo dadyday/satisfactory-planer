@@ -1,8 +1,7 @@
 import go from 'gojs';
 var $ = go.GraphObject.make;
 
-import Receipe from "../entity/Receipe";
-import Item from "../entity/Item";
+import  { Receipe, Item } from "../entity";
 
 export default class Port {
 
@@ -67,7 +66,7 @@ export default class Port {
 
 	static getSource(oPort, oNodeData) {
 		const oReceipe = Receipe.get(oNodeData.receipe);
-		const [item, count] = oReceipe.getPortItem(oPort);
+		const [item, ] = oReceipe.getPortItem(oPort);
 		const oItem = Item.get(item);
 		//$dump('src', oPort, oNodeData, aItem);
 		return oItem.imageUrl();
