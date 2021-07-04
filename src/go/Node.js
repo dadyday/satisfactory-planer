@@ -1,6 +1,8 @@
 import go from 'gojs';
 var $ = go.GraphObject.make;
 
+import Port from './Port';
+
 import vueHelper from '../helper';
 import Card from "../components/ProdCard.vue";
 import Production from "../entity/Production";
@@ -57,13 +59,7 @@ export default class Node {
 			),
 		);
 
-		const oSide = {left:[], right:[], top:[], bottom:[]};
-
-		var i = 0, o = 0;
-		for (var oPort of oBuilding.aPort) {
-			const port = oPort.inOut ? 'in'+(i++) : 'out'+(o++);
-			oSide[oPort.side].push(oPort.makePort(port));
-		}
+		const oSide = Port.getTemplates(oBuilding.aPort);
 
 		var oNode = $(go.Node, "Spot",
 			{

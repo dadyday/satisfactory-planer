@@ -21,6 +21,13 @@ export default class Receipe {
 		return new Production(this.type, this);
 	}
 
+	getPortItem(oPort) {
+		const mPort = oPort.inOut ? this.mInput : this.mOutput;
+		const aKey = [...mPort.keys()];
+		const key = aKey[oPort.pos];
+		return [key, mPort.get(key)];
+	}
+
 	getItems() {
 		const aRet =
 			Object.entries(this.mInput) +

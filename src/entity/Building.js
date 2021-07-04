@@ -48,10 +48,11 @@ export default class Building {
 		// smelter: ['Smelter', 9, 6, 3, [ ['belt', true, 0, top], ['belt', false, 0] ]]
 		const [name, width, height, layerFlags, aPortData] = aData;
 
-		const aPort = [];
+		const aPort = []; var i = 0, o = 0;
 		$_.each(aPortData, (aData) => {
 			const [type, inOut, offset, side] = aData;
-			aPort.push(new Port(type, inOut, offset, side));
+			const pos = inOut ? i++ : o++;
+			aPort.push(new Port(type, inOut, pos, offset, side));
 		});
 
 		const oBuilding = new Building(type, name, width, height, layerFlags, aPort);
