@@ -64,8 +64,8 @@ export default {
 			oNeed: {
 			//	ironPlate: 10,
 			//	ironRod: 10,
-				screw: 20,
-			//	reinforced: 5,
+			//	screw: 20,
+				reinforced: 5,
 			},
 			oScheme: null,
 			createProd: true,

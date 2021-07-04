@@ -1,5 +1,8 @@
-import Receipe from './Receipe';
-import Item from './Item';
+import {
+	Receipe,
+	Item,
+} from '.';
+
 
 export default class Scheme {
 
@@ -93,7 +96,6 @@ export default class Scheme {
 			nodeDataArray: [],
 			linkDataArray: [],
 		};
-		let l = 1;
 
 		this.eachProduction((oProd) => {
 			const oNode = oProd.getNodeData();
@@ -107,7 +109,7 @@ export default class Scheme {
 
 		this.eachProduction((oProd) => {
 			oProd.aOutput.forEach((oTransport) => {
-				const oLink = oTransport.getLinkData(l++);
+				const oLink = oTransport.getLinkData();
 				oModel.linkDataArray.push(oLink);
 			});
 		});

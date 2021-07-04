@@ -1,6 +1,10 @@
-import Building from './Building';
-import Transport from './Transport';
-import Receipe from './Receipe';
+import {
+	Building,
+	Transport,
+	Receipe,
+	Item,
+} from '.';
+
 
 export default class Production {
 	id = null;
@@ -10,10 +14,15 @@ export default class Production {
 	productivity = 0.0;
 	aInput = []; // Array of Transport objects
 	aOutput = []; // Array of Transport objects
+	//mFreePort = new Map({true: new Map, false: new Map}); // map of inOut -> portType -> Port
+	//mPort = new Map({true: new Map, false: new Map}); // map of inOut -> item -> Port
+	mFreePort = new Map;
+	mPort = new Map;
 
 	constructor(type, receipe = null) {
 		this.setBuilding(type);
 		this.setReceipe(receipe);
+		this.initPorts();
 	}
 
 	setBuilding(type = null) {
@@ -30,6 +39,24 @@ export default class Production {
 		if (this.oReceipe) {
 			this.setBuilding(this.oReceipe.type);
 		}
+	}
+
+	initPorts() {
+		$_.each(this.oBuilding.aPort, (oPort) => {
+			const key = oPort.inOut + oPort.type;
+			this.mFreePort.getInit(key, []).push(oPort);
+		});
+	}
+
+	getItemPort(inOut, item) {
+		const key = inOut + item;
+		var oPort = this.mPort.get(key) ?? null;
+		if (!oPort) {
+			const free = inOut + Item.get(item).portType;
+			oPort = this.mFreePort.get(free)?.pop() ?? null;
+			if (oPort) this.mPort.set(key, oPort);
+		}
+		return oPort;
 	}
 
 	addOutput(oTransport) {
@@ -97,7 +124,7 @@ export default class Production {
 			oTransp.count += cnt;
 		}
 		else {
-			new Transport(this, item, cnt, oTarget);
+			new Transport(item, cnt, this, oTarget);
 		}
 
 		this.increaseProductivity(delta, oScheme)

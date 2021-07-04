@@ -1,6 +1,8 @@
-import Production from './Production';
-import Port from './Port';
-import $_ from 'underscore';
+import {
+	Production,
+	Port,
+} from '.';
+
 
 export default class Building {
 

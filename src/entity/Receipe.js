@@ -1,5 +1,8 @@
-import Production from './Production';
-//import Building from './Building';
+import {
+//	Building,
+	Production,
+} from '.';
+
 
 export default class Receipe {
 
