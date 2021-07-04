@@ -2,38 +2,41 @@
 	<div id="main">
 		<World :palette="modeNodes" :scheme="oScheme" v-model="model" />
 		<div>
-			<ul>
-				<li v-for="need, item in oNeed" :key="item+rdm">
-					<Item
-						:item="item"
-						:count="need"
-						@update:count="setNeed(item, $event)"
-						@delete="delNeed(item)"
-						editable
-						deletable
-					/>
-					<!--input type="number" :value="need" style="width:4em; text-align:right;" />
-					<button @click="del">&times;</button-->
-				</li>
-				<hr/>
-				<li>
-					<Item item="" :count="0"
-						editable
-						selectable
-						addable
-						@add="addNeed(...$event)"
-					/></li>
-			</ul>
+			<div class="indent">
+				<b style="display:inline-block; width:6em">Verfügbar:</b>
+				<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
+					:item="item" :count="count"
+					editable @update:count="setSupply(item, $event)"
+					deletable @delete="delSupply(item)"
+				/>
+				<Item item="" :count="0" editable selectable addable @add="addSupply(...$event)"/>
+			</div>
+
+			<hr/>
+
+			<div class="indent">
+				<b style="display:inline-block; width:6em">Benötigt:</b>
+				<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
+					:item="item" :count="count"
+					editable @update:count="setDemand(item, $event)"
+					deletable @delete="delDemand(item)"
+				/>
+				<Item item="" :count="0" editable selectable addable @add="addDemand(...$event)"/>
+			</div>
+
+			<hr/>
+
 			<button @click="run">Run!</button>
 			<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
 			<table v-if="oScheme" class="indent">
 				<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 					<td><Item :item="item"/></td>
 					<td class="spacer"></td>
-					<td><Item :item="item" :count="oQuant.need" label="Benötigt" /></td>
+					<td><Item :item="item" :count="oQuant.demand" label="Benötigt" /></td>
+					<td><Item :item="item" :count="oQuant.rest" label="Überschuss" /></td>
 					<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
 					<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
-					<td><Item :item="item" :count="oQuant.rest" label="Überschuss" /></td>
+					<td><Item :item="item" :count="oQuant.supply" label="Verfügbar" /></td>
 				</tr>
 			</table>
 			<hr />
@@ -56,12 +59,16 @@
 </template>
 
 <script>
-import {Item, Building, Scheme} from '../entity';
+import { Building, Scheme } from '../entity';
 
 export default {
 	data() {
 		return {
-			oNeed: {
+			oSupply: {
+				ironPlate: 20,
+				screw: 60,
+			},
+			oDemand: {
 			//	ironPlate: 10,
 			//	ironRod: 10,
 			//	screw: 20,
@@ -79,30 +86,40 @@ export default {
 		}
 	},
 	methods: {
-		getItem(item) {
-			const oItem = Item.get(item);
-			return oItem.name;
-		},
-		itemUrl(item) {
-			const oItem = Item.get(item);
-			return oItem.imageUrl();
-		},
-		setNeed(item, need) {
-			this.oNeed[item] = need;
+		setDemand(item, count) {
+			this.oDemand[item] = count;
 			this.run();
 		},
-		addNeed(item, count) {
-			if (this.oNeed[item]) {
-				count += this.oNeed[item];
+		addDemand(item, count) {
+			if (this.oDemand[item]) {
+				count += this.oDemand[item];
 			}
-			this.setNeed(item, count);
+			this.setDemand(item, count);
 		},
-		delNeed(item) {
-			delete this.oNeed[item];
+		delDemand(item) {
+			delete this.oDemand[item];
 			this.run();
 		},
+
+		setSupply(item, count) {
+			this.oSupply[item] = count;
+			this.run();
+		},
+		addSupply(item, count) {
+			if (this.oSupply[item]) {
+				count += this.oSupply[item];
+			}
+			this.setSupply(item, count);
+		},
+		delSupply(item) {
+			delete this.oSupply[item];
+			this.run();
+		},
+
+
+
 		run() {
-			this.oScheme = new Scheme(this.oNeed, this.createProd);
+			this.oScheme = new Scheme(this.oDemand, this.oSupply, this.createProd);
 			this.refresh();
 		},
 		updateProd(oProd, productivity) {
@@ -119,6 +136,9 @@ export default {
 <style>
 .indent {
 	margin-left:1em;
+}
+.inline {
+	display: inline-block;
 }
 .spacer {
 	content: "   "

@@ -136,8 +136,6 @@ export default class Production {
 
 		this.oReceipe.mInput.forEach((cnt, itm) => {
 			oScheme.addInQuantity(itm, cnt * delta, this);
-			const rest = oScheme.addProduction(itm, cnt * delta, this);
-			oScheme.createProduction(itm, rest, this);
 		});
 		this.oReceipe.mOutput.forEach((cnt, itm) => {
 			oScheme.addOutQuantity(itm, cnt * delta, this);
