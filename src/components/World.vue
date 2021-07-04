@@ -11,6 +11,9 @@
 			<Dropdown label="Data">
 				<textarea v-model="model" rows="8" style="width:30em" />
 			</Dropdown>
+			<Dropdown label="Rezept konvertieren">
+				<ParseReceipe />
+			</Dropdown>
 		</Cols>
 	</Rows>
 </template>
