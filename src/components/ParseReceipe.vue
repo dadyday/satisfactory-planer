@@ -77,6 +77,7 @@ Caterium Research - Caterium Ing`,
 		};
 	},
 	methods: {
+
 		convert(value) {
 			const makeId = (str) => {
 				switch (str) {
@@ -86,45 +87,59 @@ Caterium Research - Caterium Ing`,
 			};
 			const aResult = [];
 
-			value = value.replace(/\s*[\n\r]+/g, ';');
+			value = value.replace(/\s*[\n\r]+/g, ';')+';';
 			const
 				a = '[\\w ]+',
 				n = '[\\d\\.]+',
 				rest = `[^;]*;`,
-				item = `${n} × ${a}\\.png;${a};${n} \/ min;`;
+				item = `${n} × ${a}\\.png;${a};${n} / min;`;
 
 			const pattern =
 				`(${a});`+ 						//Coated Cable;
 				`(ALTERNATE;)?`+ 			//ALTERNATE;
 				`((?:${item})+)`+ 		//5 × Wire.png;Wire;37.5 / min;2 × Heavy Oil Residue.png;Heavy Oil Residue;15 / min;
 				`(${a});(${n}) sec;`+	//Refinery;8 sec;
-				`(?:Manual crafting\.png × ${n};)?`+
+				`(?:Manual crafting\\.png × ${n};)?`+
 				`((?:${item})+)`+			//9 × Cable.png;Cable;67.5 / min;
-				`(${n}) MJ / item`;		//26.67 MJ / item	Tier 5 - Oil Processing
+				`(${n}) MJ / item\t`+	//26.67 MJ / item	Tier 5 - Oil Processing
+				`(?:Tier (\\d+))?${rest}`+ //	Tier 7 - Bauxite Refinement
+				`((?:${item})+)`;			//1 × Computer.png;Computer;1.25 / min;
 
 			const oRegAll = new RegExp(pattern, 'g');
-			const oRegItem = new RegExp(`${n} × (${a})\\.png;${a};(${n}) \/ min;`, 'g');
+			const oRegItem = new RegExp(`${n} × (${a})\\.png;${a};(${n}) / min;`, 'g');
 			//$dump(oRegEx);
-			var aMatch;
-			while (aMatch = oRegAll.exec(value)) {
+			let aMatch;
+			while ((aMatch = oRegAll.exec(value))) {
 				//$dump(aMatch);
-				const [, receipeName, alt, ingredients, building, time, products, energy] = aMatch;
+				const [, receipeName, alt, ingredients, building, time, products, energy, tier, extra] = aMatch;
 
 				const aIn = [], aOut = [];
-				while (aMatch = oRegItem.exec(ingredients)) {
+				while ((aMatch = oRegItem.exec(ingredients+extra))) {
 					//$dump(aMatch);
 					const [, item, count] = aMatch;
 					aIn.push(makeId(item)+': '+count);
 				}
-				while (aMatch = oRegItem.exec(products)) {
+				while ((aMatch = oRegItem.exec(products))) {
 					//$dump(aMatch);
 					const [, item, count] = aMatch;
 					aOut.push(makeId(item)+': '+count);
 				}
 
 				// steelRotor: ['assembler', 'Stahl Rotor', {rotor:5}, {steelPipe:10, wire:30} ],
-				aResult.push(`${makeId(receipeName)}: ['${makeId(building)}', '${receipeName}', {${aOut.join(', ')}}, {${aIn.join(', ')}} ],`);
+				aResult.push(
+					`${makeId(receipeName)}: [`+
+						`'${makeId(building)}', `+
+						`'${receipeName}', `+
+						`{${aOut.join(', ')}}, `+
+						`{${aIn.join(', ')}}, `+
+						`${alt ? 'true' : 'false'}, `+
+						`${time}, `+
+						`${energy}, `+
+						`${tier}, `+
+					`],`
+				);
 			}
+			//return value;
 			return aResult.join("\n");
 		}
 	}
