@@ -54,7 +54,7 @@ export default class Production {
 		var oPort = this.mPort.get(key) ?? null;
 		if (!oPort) {
 			const free = inOut + Item.get(item).portType;
-			oPort = this.mFreePort.get(free)?.pop() ?? null;
+			oPort = this.mFreePort.get(free)?.shift() ?? null;
 			if (oPort) this.mPort.set(key, oPort);
 		}
 		return oPort;
