@@ -7,63 +7,118 @@ import {
 export default class Scheme {
 
 	mQuantity = new Map;
+	mSupply = new Map;
 	mProduction = new Map;
 	aDemand = [];
-	aSupply = [];
 	canCreate = true;
 
 	constructor(oDemand = {}, oSupply = {}, canCreate = true) {
-		$_.each(oSupply, (count, item) => {
-			this.getQuantity(item).supply += count;
-		});
-		$_.each(oDemand, (count, item) => {
-			this.getQuantity(item).demand += count;
-		});
 		this.canCreate = canCreate;
-		this.calcProduction();
+
+		$_.each(oSupply, (count, item) => {
+			const oQuantity = this.initQuantity(item);
+			oQuantity.supply += count;
+			oQuantity.out -= count;
+
+			const oStore = this.createStorage(item, count, false);
+			this.mSupply.getInit(item, []).push(oStore);
+		});
+
+		$_.each(oDemand, (count, item) => {
+			this.initQuantity(item).demand += count;
+
+			const oStore = this.createStorage(item, count, true);
+			this.aDemand.push(oStore);
+
+			count = this.findProduction(item, count, oStore);
+			this.createProduction(item, count, oStore);
+		});
+		//this.calcProduction();
 	}
 
-	getQuantity(item) {
+	initQuantity(item) {
 		return this.mQuantity.getInit(item, { demand:0, supply: 0, in:0, out:0, rest:0 });
 	}
 
-	addInQuantity(item, count, oProd) {
-		this.getQuantity(item).in += count;
 
-		if (this.getQuantity(item).rest) {
-			if (this.getQuantity(item).rest >= count) {
-				this.getQuantity(item).rest -= count;
-				count = 0;
+
+	/**
+	 * erzeugt Container für {count} {item}s /min.
+	 * zum einlagern {inOut: true} oder ausgeben {inOut: false}
+	 */
+	createStorage(item, count, inOut = true) {
+		const oInput = {}, oOutput = {};
+		if (inOut) oInput[item] = count; else oOutput[item] = count;
+		const oReceipe = new Receipe('store', 'container', Item.get(item).name, oOutput, oInput);
+		const oProd = oReceipe.createProduction();
+		return oProd;
+	}
+
+	/**
+	 * sucht Productions für {count} {item}s /min.
+	 * und verbindet sie mit {oTarget}
+	 * und liefert den rest
+	 */
+	findProduction(item, count, oTarget) {
+		[
+			...this.mSupply.getInit(item, []),
+			...this.mProduction.getInit(item, [])
+		].forEach((oProd) => {
+			if (oProd.productivity < .9999) {
+				count = oProd.increaseCapacity(item, count, oTarget, this);
 			}
-			else {
-				count -= this.getQuantity(item).rest;
-				this.getQuantity(item).rest = 0;
-			}
+		});
+		return count <= .0001 ? 0 : count;
+	}
+
+	/**
+	 * erzeugt genügend Productions für {count} {item}s /min.
+	 * und verbindet sie mit {oTarget}
+	 */
+	createProduction(item, count, oTarget) {
+		if (!this.canCreate) return;
+		const oReceipe = Receipe.getByOutput(item);
+		while (count > 0.0001) {
+			const oProd = oReceipe.createProduction();
+			count = oProd.increaseCapacity(item, count, oTarget, this);
+			oReceipe.mOutput.forEach((count, item) => {
+				this.mProduction.getInit(item, []).push(oProd);
+			})
 		}
+	}
 
-		count = this.addProduction(item, count, oProd);
+	/**
+	 * sucht bzw. erzeugt Productions für {count} {item}s /min.
+	 * und verbindet sie mit {oProd}
+	 */
+	addInputQuantity(item, count, oProd) {
+		const oQuantity = this.initQuantity(item);
+		oQuantity.in += count;
+
+		//const tx = count.minMax(0, oQuantity.rest + oQuantity.supply);
+		//oQuantity.rest -= tx;
+
+		count = this.findProduction(item, count, oProd);
 		this.createProduction(item, count, oProd);
 	}
 
-	addOutQuantity(item, count) {
-		const oQ = this.getQuantity(item);
-		oQ.out += count;
-		oQ.rest = oQ.out - oQ.in - oQ.demand + oQ.supply;
+	addOutputQuantity(item, count) {
+		const oQuantity = this.initQuantity(item)
+		oQuantity.out += count;
+		oQuantity.rest =
+			oQuantity.out -
+			oQuantity.in -
+			oQuantity.demand +
+			oQuantity.supply;
 	}
 
-	getProduction(name) {
-		return this.mProduction.getInit(name, []);
-	}
-
-	eachProduction(handler) {
-		this.mProduction.forEach((aProd) => { aProd.forEach(handler); });
-	}
-
+/*
 	calcProduction() {
 		this.mQuantity.forEach((oQuant, item) => {
 			if (oQuant.supply) {
 				oQuant.rest += oQuant.supply;
-				this.addStorageFor(item, oQuant.supply);
+				this.addStorageFor(item, oQuant.supply, false);
+				//this.getProduction('store').push(oProd);
 			}
 			if (oQuant.demand) {
 				oQuant.in -= oQuant.demand;
@@ -73,41 +128,13 @@ export default class Scheme {
 		});
 	}
 
-	addStorageFor(item, count, inOut = true) {
-		const oInput = {}, oOutput = {};
-		if (inOut) oInput[item] = count;
-		else oOutput[item] = count;
-		const oReceipe = new Receipe('store', 'container', Item.get(item).name, oOutput, oInput);
-		const oProd = oReceipe.createProduction();
-		if (inOut) this.aDemand.push(oProd);
-		else this.aSupply.push(oProd);
-		return oProd;
-	}
+
 
 	createNeeded(oProd, productivity = 1.0) {
 		oProd.increaseProductivity(productivity, this);
 	}
 
-	addProduction(item, count, oTarget) {
-		this.eachProduction((oProd) => {
-			if (!oProd.oReceipe.mOutput.has(item)) return true;
-			if (oProd.productivity >= .9999) return true;
-
-			count = oProd.increaseCapacity(item, count, oTarget, this);
-			return count >= .0001;
-		});
-		return count;
-	}
-
-	createProduction(item, count, oTarget) {
-		if (!this.canCreate) return;
-		const oReceipe = Receipe.getByOutput(item);
-		while (count > 0.0001) {
-			const oProd = oReceipe.createProduction();
-			count = oProd.increaseCapacity(item, count, oTarget, this);
-			this.getProduction(oReceipe.name).push(oProd);
-		}
-	}
+	*/
 
 
 	// ***************** drawing
@@ -118,29 +145,18 @@ export default class Scheme {
 			linkDataArray: [],
 		};
 
-		for (const oProd of this.aSupply) {
+		function addData(oProd) {
 			const oNode = oProd.getNodeData();
 			oModel.nodeDataArray.push(oNode);
-		}
-
-		this.eachProduction((oProd) => {
-			const oNode = oProd.getNodeData();
-			oModel.nodeDataArray.push(oNode);
-		});
-
-		for (const oProd of this.aDemand) {
-			const oNode = oProd.getNodeData();
-			oModel.nodeDataArray.push(oNode);
-		}
-
-
-
-		this.eachProduction((oProd) => {
 			oProd.aOutput.forEach((oTransport) => {
 				const oLink = oTransport.getLinkData();
 				oModel.linkDataArray.push(oLink);
 			});
-		});
+		}
+
+		this.aDemand.forEach(addData);
+		this.mProduction.forEach((aProd) => aProd.forEach(addData));
+		this.mSupply.forEach((aProd) => aProd.forEach(addData));
 
 		return oModel;
 	}

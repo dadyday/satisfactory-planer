@@ -66,7 +66,7 @@ export default {
 		return {
 			oSupply: {
 				ironPlate: 20,
-				screw: 60,
+				screw: 50,
 			},
 			oDemand: {
 			//	ironPlate: 10,

@@ -20,6 +20,7 @@ export default class Production {
 	mPort = new Map;
 
 	constructor(type, receipe = null) {
+		this.id = this.constructor.lastId++;
 		this.setBuilding(type);
 		this.setReceipe(receipe);
 		this.initPorts();
@@ -59,8 +60,16 @@ export default class Production {
 		return oPort;
 	}
 
-	addOutput(oTransport) {
-		this.aOutput.push(oTransport);
+	createTransport(item, count, oTarget) {
+		var oTransp = this.findOutput(item, oTarget);
+		if (oTransp) {
+			oTransp.count += count;
+		}
+		else {
+			oTransp = new Transport(item, count, this, oTarget);
+			this.aOutput.push(oTransp);
+			oTarget.aInput.push(oTransp);
+		}
 	}
 
 	findOutput(item, oTarget) {
@@ -72,9 +81,6 @@ export default class Production {
 		return null;
 	}
 
-	addInput(oTransport) {
-		this.aInput.push(oTransport);
-	}
 
 	/* p     d=0.5  d=-0.5
 		----- ------ ------
@@ -119,14 +125,7 @@ export default class Production {
 		var cnt = delta * this.oReceipe.mOutput.get(item);
 		const rest = count - cnt;
 
-		const oTransp = this.findOutput(item, oTarget);
-		if (oTransp) {
-			oTransp.count += cnt;
-		}
-		else {
-			new Transport(item, cnt, this, oTarget);
-		}
-
+		this.createTransport(item, cnt, oTarget);
 		this.increaseProductivity(delta, oScheme)
 		return rest;
 	}
@@ -135,10 +134,10 @@ export default class Production {
 		this.productivity += delta;
 
 		this.oReceipe.mInput.forEach((cnt, itm) => {
-			oScheme.addInQuantity(itm, cnt * delta, this);
+			oScheme.addInputQuantity(itm, cnt * delta, this);
 		});
 		this.oReceipe.mOutput.forEach((cnt, itm) => {
-			oScheme.addOutQuantity(itm, cnt * delta, this);
+			oScheme.addOutputQuantity(itm, cnt * delta, this);
 		});
 	}
 
@@ -153,7 +152,8 @@ export default class Production {
 
 	getNodeData() {
 		var oData = {
-			id: this.id ?? (this.id = this.constructor.lastId++),
+			id: this.id,
+			detail: this.oReceipe?.name ?? '',
 			receipe: this.oReceipe?.id ?? '',
 			ports: this.oReceipe?.getItems() ?? [],
 		};

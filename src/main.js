@@ -10,6 +10,10 @@ Map.prototype.getInit = function (key, initValue = null) {
 	return this.get(key);
 };
 
+Number.prototype.minMax = function (min, max) {
+	return Math.min(Math.max(this, min), max);
+}
+
 Vue.config.productionTip = false
 Vue.prototype.$dump = window.$dump = (...arg) => { console.log(...arg); return arg[0]; };
 Vue.prototype.$_ = window.$_ = _;

@@ -67,14 +67,18 @@ export default {
 	},
 	methods: {
 		pushModel() {
-			const aStore = Store.get('model', []);
-			aStore.push(this.go.save());
-			Store.set('model', aStore.slice(-20));
+			const oModel = this.go.save();
+			Store.set('blueprint', oModel);
+			// const aStore = Store.get('model', []);
+			// aStore.push(this.go.save());
+			// Store.set('model', aStore.slice(-20));
 		},
 		popModel() {
-			const aStore = Store.get('model', []);
-			this.applyModel(aStore.pop() ?? {});
-			Store.set('model', aStore.slice(-20));
+			const oModel = Store.get('blueprint');
+			this.applyModel(oModel);
+			// const aStore = Store.get('model', []);
+			// this.applyModel(aStore.pop() ?? {});
+			// Store.set('model', aStore.slice(-20));
 		},
 		empty() {
 			this.applyModel({});

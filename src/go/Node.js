@@ -54,7 +54,7 @@ export default class Node {
 					maxSize: new go.Size(80, 40),
 					stroke: "white",
 					font: "9pt sans-serif"
-				}, new go.Binding("text", "receipe", this.getReceipName)),
+				}, new go.Binding("text", "detail")),
 			),
 		);
 
@@ -176,10 +176,6 @@ export default class Node {
 
 	static getPos(aPos) {
 		return new go.Point(...aPos);
-	}
-
-	static getReceipName(receipe) {
-		return Receipe.get(receipe).name;
 	}
 
 }

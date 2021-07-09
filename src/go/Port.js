@@ -46,7 +46,7 @@ export default class Port {
 				toMaxLinks: 1,
 
 				margin: new go.Margin(...swap(0, 9.5)),
-				click: () => alert("port clicked ..."),
+				click: (...aArg) => this.portClicked(...aArg),
 			},
 			oShape,
 			$(go.Picture, '',
@@ -64,8 +64,14 @@ export default class Port {
 		return oPanel;
 	}
 
+	static portClicked(oEv, oPort) {
+		console.log("port clicked ...", oPort, oPort.data);
+	}
+
 	static getSource(oPort, oNodeData) {
+		if (!oNodeData.receipe) return;
 		const oReceipe = Receipe.get(oNodeData.receipe);
+		if (!oReceipe) console.log(oNodeData)
 		const [item, ] = oReceipe.getPortItem(oPort);
 		const oItem = Item.get(item);
 		//$dump('src', oPort, oNodeData, aItem);

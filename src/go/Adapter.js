@@ -24,8 +24,8 @@ export default class GoAdapter {
 	}
 
 	load(oData) {
-		this.oDiagram.model.nodeDataArray = oData.nodeDataArray ?? [];
-		this.oDiagram.model.linkDataArray = oData.linkDataArray ?? [];
+		this.oDiagram.model.nodeDataArray = oData?.nodeDataArray ?? [];
+		this.oDiagram.model.linkDataArray = oData?.linkDataArray ?? [];
 	}
 
 	save() {
