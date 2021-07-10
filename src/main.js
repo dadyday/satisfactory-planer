@@ -18,6 +18,13 @@ Vue.config.productionTip = false
 Vue.prototype.$dump = window.$dump = (...arg) => { console.log(...arg); return arg[0]; };
 Vue.prototype.$_ = window.$_ = _;
 
+import Wrap from "./utils/wrap.js";
+Vue.component("Wrap", Wrap);
+import { Splitpanes, Pane } from 'splitpanes'
+import 'splitpanes/dist/splitpanes.css'
+Vue.component("Split", Splitpanes);
+Vue.component("Pane", Pane);
+
 initData();
 
 new Vue({

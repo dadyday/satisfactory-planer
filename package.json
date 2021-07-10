@@ -12,6 +12,7 @@
 		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
 		"gojs": "^2.1.41",
+		"splitpanes": "^2.3.6",
 		"store": "^2.0.12",
 		"underscore": "^1.13.1",
 		"vue": "^2.6.11",
@@ -42,7 +43,7 @@
 			"parser": "babel-eslint"
 		},
 		"rules": {
-			 "no-unused-vars": "off"
+			"no-unused-vars": "off"
 		},
 		"globals": {
 			"$dump": true,

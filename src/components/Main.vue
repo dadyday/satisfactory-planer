@@ -1,60 +1,66 @@
 <template>
 	<div id="main">
-		<World :palette="modeNodes" :scheme="oScheme" v-model="model" />
-		<div>
-			<div class="indent">
-				<b style="display:inline-block; width:6em">Verfügbar:</b>
-				<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
-					:item="item" :count="count"
-					editable @update:count="setSupply(item, $event)"
-					deletable @delete="delSupply(item)"
-				/>
-				<Item item="" :count="0" editable selectable addable @add="addSupply(...$event)"/>
-			</div>
+		<Split horizontal class="default-theme">
+			<Pane>
+				<World :palette="modeNodes" :scheme="oScheme" v-model="model" />
+			</Pane>
+			<Pane>
+				<div>
+					<div class="indent">
+						<b style="display:inline-block; width:6em">Verfügbar:</b>
+						<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
+							:item="item" :count="count"
+							editable @update:count="setSupply(item, $event)"
+							deletable @delete="delSupply(item)"
+						/>
+						<Item item="" :count="0" editable selectable addable @add="addSupply(...$event)"/>
+					</div>
 
-			<hr/>
+					<hr/>
 
-			<div class="indent">
-				<b style="display:inline-block; width:6em">Benötigt:</b>
-				<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
-					:item="item" :count="count"
-					editable @update:count="setDemand(item, $event)"
-					deletable @delete="delDemand(item)"
-				/>
-				<Item item="" :count="0" editable selectable addable @add="addDemand(...$event)"/>
-			</div>
+					<div class="indent">
+						<b style="display:inline-block; width:6em">Benötigt:</b>
+						<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
+							:item="item" :count="count"
+							editable @update:count="setDemand(item, $event)"
+							deletable @delete="delDemand(item)"
+						/>
+						<Item item="" :count="0" editable selectable addable @add="addDemand(...$event)"/>
+					</div>
 
-			<hr/>
+					<hr/>
 
-			<button @click="run">Run!</button>
-			<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
-			<table v-if="oScheme" class="indent">
-				<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
-					<td><Item :item="item"/></td>
-					<td class="spacer"></td>
-					<td><Item :item="item" :count="oQuant.demand" label="Benötigt" /></td>
-					<td><Item :item="item" :count="oQuant.rest" label="Überschuss" /></td>
-					<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
-					<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
-					<td><Item :item="item" :count="oQuant.supply" label="Verfügbar" /></td>
-				</tr>
-			</table>
-			<hr />
-			<table v-if="oScheme" class="indent">
-				<template v-for="[item, aProd] in oScheme.mProduction">
-					<tr v-for="oProd, i in aProd" :key="item+i+rdm">
-						<td>
-							<Production
-								:obj="oProd"
-								editable
-								@update:productivity="updateProd(oProd, $event)"
-							/>
-						</td>
-						<td class="spacer"></td>
-					</tr>
-				</template>
-			</table>
-		</div>
+					<button @click="run">Run!</button>
+					<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
+					<table v-if="oScheme" class="indent">
+						<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
+							<td><Item :item="item"/></td>
+							<td class="spacer"></td>
+							<td><Item :item="item" :count="oQuant.demand" label="Benötigt" /></td>
+							<td><Item :item="item" :count="oQuant.rest" label="Überschuss" /></td>
+							<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
+							<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
+							<td><Item :item="item" :count="oQuant.supply" label="Verfügbar" /></td>
+						</tr>
+					</table>
+					<hr />
+					<table v-if="oScheme" class="indent">
+						<template v-for="[item, aProd] in oScheme.mProduction">
+							<tr v-for="oProd, i in aProd" :key="item+i+rdm">
+								<td>
+									<Production
+										:obj="oProd"
+										editable
+										@update:productivity="updateProd(oProd, $event)"
+									/>
+								</td>
+								<td class="spacer"></td>
+							</tr>
+						</template>
+					</table>
+				</div>
+			</Pane>
+		</Split>
 	</div>
 </template>
 
@@ -134,6 +140,9 @@ export default {
 </script>
 
 <style>
+#main {
+	height: 100%;
+}
 .indent {
 	margin-left:1em;
 }

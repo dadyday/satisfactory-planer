@@ -42,6 +42,7 @@ export default class GoAdapter {
 			"nodeTemplateMap":   oTemplateMap,
 			"model":             new go.GraphLinksModel(aModelData),
 			"initialAutoScale":  go.Diagram.UniformToFill,
+			//"initialScale":      0.5
 		});
 		this.oPalette.model.nodeCategoryProperty = "type";
 	}

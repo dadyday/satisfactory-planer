@@ -1,9 +1,5 @@
 <template>
 	<Rows id="world" >
-		<Cols>
-			<div id="palette" />
-			<div id="diagram" />
-		</Cols>
 		<Cols id="menu">
 			<button @click="empty">New</button>
 			<button @click="load">Load</button>
@@ -15,20 +11,26 @@
 				<ParseReceipe />
 			</Dropdown>
 		</Cols>
+		<Split vertical>
+			<Pane id="palette" size="15em"/>
+			<Pane id="diagram" />
+		</Split>
 	</Rows>
 </template>
 
 <style lang="scss">
-#menu {
-}
-#palette, #diagram {
-	width:160px;
-	height:400px;
-	background-color: #dadae8;
-	border: solid 1px #889;
-}
-#diagram {
-	width:1200px;
+#world {
+	#menu {
+	}
+	#palette, #diagram {
+		width:160px;
+		min-height:400px;
+		background-color: #dadae8;
+		border: solid 1px #889;
+	}
+	#diagram {
+		width:1200px;
+	}
 }
 </style>
 
