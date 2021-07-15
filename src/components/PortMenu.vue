@@ -1,19 +1,12 @@
 <template>
 	<div class="card" :style="{ top, left }">
-		<div><b>Produktion</b></div>
+		<div><b>Port</b></div>
+		<div><small>{{ name }}</small></div>
 		<hr/>
 		<div>
 			<Select
-				:list="buildingList" listKey="type" listValue="name"
-				v-model="buildingValue"
-			>
-			</Select>
-		</div>
-		<div>
-			<Select
-				empty="- kein -"
-				:list="receipeList" listKey="id" listValue="name"
-				v-model="receipeValue"
+				:list="itemList" listValue="name"
+				v-model="itemValue"
 			>
 			</Select>
 		</div>
@@ -21,61 +14,48 @@
 </template>
 
 <script>
-import { Production, Building, Receipe } from '../entity';
+import { Production, Building, Receipe, Item } from '../entity';
 
 export default {
 	props: {
-		type: String,
-		obj: Object,
+		production: Object,
+		portId: String,
 		x: Number,
 		y: Number,
 	},
 	data() {
 		return {
-			oProd: this.obj ?? new Production(this.type),
-			selecting: false,
+			oProd: this.production,
+			inOut: this.portId.substring(0,2) == 'in',
 		};
 	},
 	computed: {
 		left() { return this.x + 'px' },
 		top() { return this.y + 'px' },
 
-		buildingList() {
-			return Building.getAll();
+		name() {
+			return this.oProd.oReceipe.name;
 		},
-		buildingValue: {
+
+		itemList() {
+			const mRet = new Map;
+			const map = this.inOut ? 'mInput' : 'mOutput';
+			this.oProd.oReceipe[map].forEach((count, item) => {
+				mRet.set(item, Item.get(item));
+			})
+			return mRet;
+		},
+		itemValue: {
 			get() {
-				return this.oProd.oBuilding?.type ?? null;
+				return this.oProd.getPortItem(this.portId);
 			},
 			set(value) {
-				this.oProd.setBuilding(value);
-				this.$emit('update', this.oProd);
-			}
-		},
-		receipeList() {
-			return Receipe.getByBuilding(this.oProd.oBuilding?.type ?? null);
-		},
-		receipeValue: {
-			get() {
-				return this.oProd.oReceipe?.id ?? null;
-			},
-			set(value) {
-				this.oProd.setReceipe(value);
-				//this.$emit('production', value);
+				this.oProd.setPortItem(this.portId, value);
 				this.$emit('update', this.oProd);
 			}
 		}
 	},
 	methods: {
-		startSelecting() {
-			this.selecting = true;
-			setTimeout(() => {
-				this.$refs.select.focus();
-			}, 100);
-		},
-		endSelecting() {
-			this.selecting = false;
-		},
 	},
 };
 

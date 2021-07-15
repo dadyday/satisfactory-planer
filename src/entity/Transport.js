@@ -23,9 +23,9 @@ export default class Transport {
 		//this.id = this.type+id;
 		return {
 			from:       this.oSource?.id ?? '',
-			fromPortId: this.oSource?.getItemPort(false, this.item)?.id ?? '',
+			fromPortId: this.oSource?.getItemPortId(false, this.item) ?? '',
 			to:         this.oTarget?.id ?? '',
-			toPortId:   this.oTarget?.getItemPort(true, this.item)?.id ?? '',
+			toPortId:   this.oTarget?.getItemPortId(true, this.item) ?? '',
 		};
 
 	}

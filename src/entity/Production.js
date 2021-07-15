@@ -23,7 +23,6 @@ export default class Production {
 		this.id = this.constructor.lastId++;
 		this.setBuilding(type);
 		this.setReceipe(receipe);
-		this.initPorts();
 	}
 
 	setBuilding(type = null) {
@@ -40,24 +39,43 @@ export default class Production {
 		if (this.oReceipe) {
 			this.setBuilding(this.oReceipe.type);
 		}
+		this.initPorts();
 	}
 
 	initPorts() {
-		$_.each(this.oBuilding.aPort, (oPort) => {
-			const key = oPort.inOut + oPort.type;
-			this.mFreePort.getInit(key, []).push(oPort);
+		const mFreePort = new Map;
+		this.oBuilding.aPort.forEach(oPort => {
+			const key = (oPort.inOut ? 'in' : 'out') + oPort.type;
+			mFreePort.getInit(key, []).push(oPort);
+			this.mPort.setDefault(oPort.id, null);
 		});
+
+		const setter = (inOut, item) => {
+			const key = (inOut ? 'in' : 'out') + Item.get(item).portType;
+			const oPort = mFreePort.get(key)?.shift() ?? null;
+			if (oPort) this.mPort.set(oPort.id, item);
+		};
+
+		if (this.oReceipe) {
+			this.oReceipe.mInput.forEach((count, item) => setter(true, item));
+			this.oReceipe.mOutput.forEach((count, item) => setter(false, item));
+		}
 	}
 
-	getItemPort(inOut, item) {
-		const key = inOut + item;
-		var oPort = this.mPort.get(key) ?? null;
-		if (!oPort) {
-			const free = inOut + Item.get(item).portType;
-			oPort = this.mFreePort.get(free)?.shift() ?? null;
-			if (oPort) this.mPort.set(key, oPort);
-		}
-		return oPort;
+	getItemPortId(inOut, item) {
+		const ret = [...this.mPort.entries()].find(([p, i]) => item == i && (inOut ? 'i' : 'o') == p.charAt(0));
+		return ret[0];
+	}
+
+	getPortItem(portId) {
+		return this.mPort.get(portId);
+	}
+
+	setPortItem(portId, item) {
+		//const oldId = this.oProd.getItemPortId(this.inOut, value);
+		//this.oProd.setPortItem(oldId, null);
+		this.mPort.set(portId, item);
+		this.initPorts();
 	}
 
 	createTransport(item, count, oTarget) {
@@ -155,7 +173,9 @@ export default class Production {
 			id: this.id,
 			detail: this.oReceipe?.name ?? '',
 			receipe: this.oReceipe?.id ?? '',
-			ports: this.oReceipe?.getItems() ?? [],
+
+			// ports: this.oReceipe?.getItems() ?? [],
+			ports: Object.fromEntries(this.mPort),
 		};
 		Object.assign(oData, this.oBuilding.getNodeData());
 		return oData;

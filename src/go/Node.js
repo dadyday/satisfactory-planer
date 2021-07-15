@@ -4,7 +4,7 @@ var $ = go.GraphObject.make;
 import Port from './Port';
 
 import vueHelper from '../helper';
-import Card from "../components/ProdCard.vue";
+import CtxMenu from "../components/ProdCard.vue";
 import { Production, Receipe } from "../entity";
 
 
@@ -41,7 +41,7 @@ export default class Node {
 					row: 0,
 					column: 1,
 					margin: 3,
-					maxSize: new go.Size(80, NaN),
+					maxSize: new go.Size(100, NaN),
 					stroke: "white",
 					font: "bold 10pt sans-serif",
 				}, new go.Binding("text", "name")),
@@ -51,10 +51,11 @@ export default class Node {
 					column: 1,
 					margin: 3,
 					editable: true,
-					maxSize: new go.Size(80, 40),
+					maxSize: new go.Size(100, 40),
 					stroke: "white",
 					font: "9pt sans-serif"
 				}, new go.Binding("text", "detail")),
+				new go.Binding("angle", 'drawangle', (a) => { return -a; }),
 			),
 		);
 
@@ -103,7 +104,7 @@ export default class Node {
 				show: (oNode, oDiagram) => {
 					const oProduction = Production.createFromNodeData(oNode.data);
 					const oPos = oDiagram.lastInput.viewPoint;
-					oMenu = vueHelper.createComponent(oDiagram.div, Card, {
+					oMenu = vueHelper.createComponent(oDiagram.div, CtxMenu, {
 						obj: oProduction,
 						x: oPos.x,
 						y: oPos.y,

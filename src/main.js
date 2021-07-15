@@ -9,6 +9,9 @@ Map.prototype.getInit = function (key, initValue = null) {
 	if (!this.has(key)) this.set(key, initValue);
 	return this.get(key);
 };
+Map.prototype.setDefault = function (key, defaultValue = null) {
+	if (!this.has(key)) this.set(key, defaultValue);
+};
 
 Number.prototype.minMax = function (min, max) {
 	return Math.min(Math.max(this, min), max);
