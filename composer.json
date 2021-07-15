@@ -1,0 +1,12 @@
+{
+    "name": "dady/planer",
+    "authors": [
+        {
+            "name": "dadyday",
+            "email": "github.com@holgerheyne.de"
+        }
+    ],
+    "require": {
+        "tracy/tracy": "^2.8"
+    }
+}
