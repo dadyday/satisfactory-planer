@@ -14,10 +14,7 @@ export default class Production {
 	productivity = 0.0;
 	aInput = []; // Array of Transport objects
 	aOutput = []; // Array of Transport objects
-	//mFreePort = new Map({true: new Map, false: new Map}); // map of inOut -> portType -> Port
-	//mPort = new Map({true: new Map, false: new Map}); // map of inOut -> item -> Port
-	mFreePort = new Map;
-	mPort = new Map;
+	mPort = new Map; // map of portId -> item
 
 	constructor(type, receipe = null) {
 		this.id = this.constructor.lastId++;
@@ -43,28 +40,68 @@ export default class Production {
 	}
 
 	initPorts() {
-		const mFreePort = new Map;
+		// builing ioType: [portId]
+		// ibelt: [in0, in1, in2], ipipe: [in3], obelt: [out0]
+		const mPort = new Map
 		this.oBuilding.aPort.forEach(oPort => {
-			const key = (oPort.inOut ? 'in' : 'out') + oPort.type;
-			mFreePort.getInit(key, []).push(oPort);
+			const key = (oPort.inOut ? 'i' : 'o') + oPort.type;
+			mPort.getInit(key, []).push(oPort.id);
 			this.mPort.setDefault(oPort.id, null);
 		});
 
-		const setter = (inOut, item) => {
-			const key = (inOut ? 'in' : 'out') + Item.get(item).portType;
-			const oPort = mFreePort.get(key)?.shift() ?? null;
-			if (oPort) this.mPort.set(oPort.id, item);
-		};
-
+		// receipe ioType: [item]
+		// ibelt: [ironRod, screw], ipipe: [water], obelt: [reinforced]
+		const mItem = new Map
 		if (this.oReceipe) {
-			this.oReceipe.mInput.forEach((count, item) => setter(true, item));
-			this.oReceipe.mOutput.forEach((count, item) => setter(false, item));
+			const func = (io, item) => {
+				const key = io + Item.get(item).portType;
+				mItem.getInit(key, []).push(item);
+			};
+			this.oReceipe.mInput.forEach((count, item) => func('i', item));
+			this.oReceipe.mOutput.forEach((count, item) => func('o', item));
 		}
+
+		// production portId: item
+		// {in0: -, in1: -, in2: screw, in3: -}
+		this.mPort.forEach((item, portId) => {
+			if (!item) return;
+			const key = portId.charAt(0) + Item.get(item).portType;
+			const p = mPort.getInit(key, []).indexOf(portId);
+			const i = mItem.getInit(key, []).indexOf(item);
+
+			//$dump(key, portId, p, item, i);
+			if (p < 0) this.mPort.delete(portId)
+			else {
+				mPort.get(key).splice(p,1);
+				if (i < 0) this.mPort.set(portId, null);
+				else {
+					mItem.get(key).splice(i,1);
+				}
+			}
+		});
+		//$dump('----', mPort, mItem, this.mPort);
+
+		// result portId: item
+		// {in0: ironRod, in1: -, in2: screw, in3: water}
+		mItem.forEach((aItem, key) => {
+			const aPort = mPort.get(key);
+			aItem.forEach((item) => {
+				const portId = aPort.shift();
+				//$dump(key, item, portId);
+				this.mPort.set(portId, item);
+			});
+		});
 	}
 
 	getItemPortId(inOut, item) {
-		const ret = [...this.mPort.entries()].find(([p, i]) => item == i && (inOut ? 'i' : 'o') == p.charAt(0));
-		return ret[0];
+		const io = (inOut ? 'i' : 'o');
+		var ret = null;
+		this.mPort.forEach((itm, prt) => {
+			if (!ret && itm == item && prt.charAt(0) == io) {
+				ret = prt;
+			}
+		});
+		return ret;
 	}
 
 	getPortItem(portId) {
@@ -72,8 +109,11 @@ export default class Production {
 	}
 
 	setPortItem(portId, item) {
-		//const oldId = this.oProd.getItemPortId(this.inOut, value);
-		//this.oProd.setPortItem(oldId, null);
+		const oldId = this.getItemPortId(portId.charAt(0) == 'i', item);
+		if (oldId) {
+			$dump(oldId, item)
+			this.mPort.set(oldId, null);
+		}
 		this.mPort.set(portId, item);
 		this.initPorts();
 	}
@@ -165,6 +205,7 @@ export default class Production {
 		const oProd = new Production(oData.type, oData.receipe);
 		oProd.id = oData.id;
 		oProd.productivity = oData.productivity;
+		$_.forEach(oData.ports, (item, portId) => oProd.mPort.set(portId, item));
 		return oProd;
 	}
 

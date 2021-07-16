@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Production, Building, Receipe, Item } from '../entity';
+import { Item } from '../entity';
 
 export default {
 	props: {
@@ -40,7 +40,7 @@ export default {
 		itemList() {
 			const mRet = new Map;
 			const map = this.inOut ? 'mInput' : 'mOutput';
-			this.oProd.oReceipe[map].forEach((count, item) => {
+			this.oProd.oReceipe[map].forEach((_, item) => {
 				mRet.set(item, Item.get(item));
 			})
 			return mRet;
