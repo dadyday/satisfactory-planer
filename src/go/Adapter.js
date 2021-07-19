@@ -2,6 +2,7 @@ import go from 'gojs';
 var $ = go.GraphObject.make;
 
 import Node from './Node';
+import  { Production } from "../entity";
 
 export default class GoAdapter {
 
@@ -78,6 +79,33 @@ export default class GoAdapter {
 
 		this.oDiagram.addDiagramListener('PartRotated', (ev) => {
 			ev.subject.angle = Math.round(ev.subject.angle / 90) * 90;
+		});
+		this.oDiagram.addDiagramListener("LinkDrawn", (ev) => {
+			const oLinkData = ev.subject.data;
+			const oFromNode = this.oDiagram.findNodeForKey(oLinkData.from);
+			const oToNode = this.oDiagram.findNodeForKey(oLinkData.to);
+
+			if (oFromNode && oToNode) {
+				const oOutProd = Production.createFromNodeData(oFromNode.data);
+				const oInProd = Production.createFromNodeData(oToNode.data);
+
+				var item = oOutProd.getPortItem(oLinkData.fromPortId);
+				if (item) {
+					oInProd.setPortItem(oLinkData.toPortId, item);
+				}
+				else {
+					item = oInProd.getPortItem(oLinkData.toPortId);
+					if (item) {
+						oOutProd.setPortItem(oLinkData.fromPortId, item);
+					}
+				}
+				$dump(oOutProd, oInProd, item)
+
+				this.oDiagram.model.commit((oModel) => {
+					oModel.assignAllDataProperties(oFromNode.data, oOutProd.getNodeData());
+					oModel.assignAllDataProperties(oToNode.data, oInProd.getNodeData());
+				});
+			}
 		});
 
 
