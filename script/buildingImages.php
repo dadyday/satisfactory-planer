@@ -1,4 +1,7 @@
 <?php
+# https://satisfactory.fandom.com/wiki/Category:Production_buildings
+# https://satisfactory.fandom.com/wiki/Category:Building_icons
+
 $aBuilding = [
 	'Assembler',
 	'Blender',
@@ -25,9 +28,11 @@ foreach ($aBuilding as &$item) {
 	$url = "https://satisfactory.fandom.com/wiki/$name";
 	$content = file_get_contents($url);
 
+	# https://static.wikia.nocookie.net/satisfactory_gamepedia_en/images/6/6d/Refinery.png/revision/latest/scale-to-width-down/120?cb=20201110180115
 	if (preg_match('~<img.*src="('.$imgBase.'/\w/\w\w/'.$name.'.png/.*/scale-to-width-down/)128~', $content, $aMatch)) {
 		//print_r($aMatch);
 		$item = [
+			$aMatch[0],
 			$aMatch[1],
 			$name,
 		];

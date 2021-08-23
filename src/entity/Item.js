@@ -5,12 +5,14 @@ export default class Item {
 	id = '';
 	name = 'none';
 	portType = null;
+	isFluid = false;
 	stackSize = 0;
 	imgName = '';
 
 	constructor(id, name, portType, stackSize, imgName = null) {
 		this.name = name;
 		this.portType = portType;
+		this.isFluid = portType == 'pipe';
 		this.stackSize = stackSize;
 		this.imgName = (imgName ?? id).replace(/([A-Z]+)/g, '_$1').toLowerCase();
 	}

@@ -13,19 +13,38 @@ export default class Port {
 		var i = 0, o = 0;
 		for (var oPort of aPort) {
 			const id = oPort.inOut ? 'in'+(i++) : 'out'+(o++);
+			for (var f1 = 0; f1 < oPort.offset; f1++) {
+				oSide[oPort.side].push(this.makePort(id, oPort, true));
+			}
 			oSide[oPort.side].push(this.makePort(id, oPort));
+			for (var f2 = 0; f2 > oPort.offset; f2--) {
+				oSide[oPort.side].push(this.makePort(id, oPort, true));
+			}
 		}
 
 		return oSide;
 	}
 
-	static makePort(id, oPort) {
+	static makePort(id, oPort, dummy = false) {
 		const hor = oPort.side == 'top' || oPort.side == 'bottom';
 		const swap = function (x, y) {
 			return hor ? [x, y] : [y, x];
 		};
 		const side = oPort.side.charAt(0).toUpperCase() + oPort.side.substring(1);
 		const oSpot = go.Spot[side];
+
+		if (dummy) {
+			return $(go.Panel, "Auto", {
+					margin: new go.Margin(...swap(0, 9.5)),
+					click: (...aArg) => this.portClicked(...aArg),
+					contextMenu: this.makeContextMenu(),
+				},
+				$(go.Shape, "RoundedRectangle", {
+					fill: "#0000",
+					strokeWidth: 0,
+					desiredSize: new go.Size(...swap(21, 4))})
+			);
+		}
 
 		const oShape = $(go.Shape, "RoundedRectangle", {
 			fill: oPort.inOut ? "#fc0" : "#0c0",

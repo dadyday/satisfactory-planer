@@ -86,7 +86,7 @@ export default class Production {
 		mItem.forEach((aItem, key) => {
 			const aPort = mPort.get(key);
 			aItem.forEach((item) => {
-				const portId = aPort.shift();
+				const portId = aPort?.shift() ?? null;
 				//$dump(key, item, portId);
 				this.mPort.set(portId, item);
 			});

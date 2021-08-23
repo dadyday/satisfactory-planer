@@ -13,10 +13,10 @@ export default class Building {
 	aPort = [];
 	aLayer = [];
 
-	constructor(type, name, w, h, layer, aPort) {
+	constructor(type, name, w, h, layer, aPort, imgName = null) {
 		this.type = type;
 		this.name = name;
-		this.imgName = type.replace(/([A-Z]+)/g, '_$1').toLowerCase();
+		this.imgName = imgName ?? type.replace(/([A-Z]+)/g, '_$1').toLowerCase();
 		this.oSize = { width: w*10, height: h*10 };
 		this.aPort = aPort;
 		if (layer & 2) this.aLayer.push('elevated');
@@ -48,7 +48,7 @@ export default class Building {
 
 	static register(type, aData) {
 		// smelter: ['Smelter', 9, 6, 3, [ ['belt', true, 0, top], ['belt', false, 0] ]]
-		const [name, width, height, layerFlags, aPortData] = aData;
+		const [name, width, height, layerFlags, aPortData, imgName] = aData;
 
 		const aPort = []; var i = 0, o = 0;
 		$_.each(aPortData, (aData) => {
@@ -57,7 +57,7 @@ export default class Building {
 			aPort.push(new Port(type, inOut, pos, offset, side));
 		});
 
-		const oBuilding = new Building(type, name, width, height, layerFlags, aPort);
+		const oBuilding = new Building(type, name, width, height, layerFlags, aPort, imgName);
 		this.mList.set(type, oBuilding);
 	}
 

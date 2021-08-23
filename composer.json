@@ -7,6 +7,8 @@
         }
     ],
     "require": {
-        "tracy/tracy": "^2.8"
+        "tracy/tracy": "^2.8",
+        "nette/utils": "^3.2",
+        "jawira/case-converter": "^3.4"
     }
 }

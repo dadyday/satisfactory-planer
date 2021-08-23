@@ -15,7 +15,18 @@ export default class Port {
 		this.inOut = inOut;
 		this.pos = pos;
 		this.offset = offset;
-		this.side = side ? side : (!inOut ? 'left' : 'right');
+		switch (side) {
+			case 'top':
+			case 'bottom':
+			case 'left':
+			case 'right':
+				this.side = side;
+				break;
+			case 'above':
+			case null:
+				this.side = !inOut ? 'left' : 'right';
+				break;
+		}
 	}
 
 }

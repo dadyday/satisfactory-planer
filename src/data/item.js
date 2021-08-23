@@ -1,5 +1,6 @@
-
+import Items from './item.json';
 export default {
+	...Items,
 // iron tier 0
 	ironOre:     ['Eisenerz', 'belt', 100],
 	copperOre:   ['Kupfererz', 'belt', 100],

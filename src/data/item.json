@@ -1,0 +1,582 @@
+{
+    "aluminumIngot": [
+        "Aluminum Ingot",
+        "belt",
+        null
+    ],
+    "aluminumCasing": [
+        "Aluminum Casing",
+        "belt",
+        null
+    ],
+    "biomass": [
+        "Biomass",
+        "belt",
+        null
+    ],
+    "coal": [
+        "Coal",
+        "belt",
+        null
+    ],
+    "alienCarapace": [
+        "Alien Carapace",
+        "belt",
+        null
+    ],
+    "alienOrgans": [
+        "Alien Organs",
+        "belt",
+        null
+    ],
+    "leaves": [
+        "Leaves",
+        "belt",
+        null
+    ],
+    "mycelia": [
+        "Mycelia",
+        "belt",
+        null
+    ],
+    "wood": [
+        "Wood",
+        "belt",
+        null
+    ],
+    "wire": [
+        "Wire",
+        "belt",
+        null
+    ],
+    "cable": [
+        "Cable",
+        "belt",
+        null
+    ],
+    "ironIngot": [
+        "Iron Ingot",
+        "belt",
+        null
+    ],
+    "screw": [
+        "Screw",
+        "belt",
+        null
+    ],
+    "cateriumIngot": [
+        "Caterium Ingot",
+        "belt",
+        null
+    ],
+    "flowerPetals": [
+        "Flower Petals",
+        "belt",
+        null
+    ],
+    "colorCartridge": [
+        "Color Cartridge",
+        "belt",
+        null
+    ],
+    "limestone": [
+        "Limestone",
+        "belt",
+        null
+    ],
+    "concrete": [
+        "Concrete",
+        "belt",
+        null
+    ],
+    "copperIngot": [
+        "Copper Ingot",
+        "belt",
+        null
+    ],
+    "copperPowder": [
+        "Copper Powder",
+        "belt",
+        null
+    ],
+    "copperSheet": [
+        "Copper Sheet",
+        "belt",
+        null
+    ],
+    "plastic": [
+        "Plastic",
+        "belt",
+        null
+    ],
+    "emptyCanister": [
+        "Empty Canister",
+        "belt",
+        null
+    ],
+    "emptyFluidTank": [
+        "Empty Fluid Tank",
+        "belt",
+        null
+    ],
+    "ironPlate": [
+        "Iron Plate",
+        "belt",
+        null
+    ],
+    "ironRod": [
+        "Iron Rod",
+        "belt",
+        null
+    ],
+    "greenPowerSlug": [
+        "Green Power Slug",
+        "belt",
+        null
+    ],
+    "powerShard": [
+        "Power Shard",
+        "belt",
+        null
+    ],
+    "yellowPowerSlug": [
+        "Yellow Power Slug",
+        "belt",
+        null
+    ],
+    "purplePowerSlug": [
+        "Purple Power Slug",
+        "belt",
+        null
+    ],
+    "rawQuartz": [
+        "Raw Quartz",
+        "belt",
+        null
+    ],
+    "quartzCrystal": [
+        "Quartz Crystal",
+        "belt",
+        null
+    ],
+    "quickwire": [
+        "Quickwire",
+        "belt",
+        null
+    ],
+    "silica": [
+        "Silica",
+        "belt",
+        null
+    ],
+    "solidBiofuel": [
+        "Solid Biofuel",
+        "belt",
+        null
+    ],
+    "spikedRebar": [
+        "Spiked Rebar",
+        "belt",
+        null
+    ],
+    "steelIngot": [
+        "Steel Ingot",
+        "belt",
+        null
+    ],
+    "steelBeam": [
+        "Steel Beam",
+        "belt",
+        null
+    ],
+    "steelPipe": [
+        "Steel Pipe",
+        "belt",
+        null
+    ],
+    "rubber": [
+        "Rubber",
+        "belt",
+        null
+    ],
+    "reinforcedIronPlate": [
+        "Reinforced Iron Plate",
+        "belt",
+        null
+    ],
+    "aiLimiter": [
+        "AI Limiter",
+        "belt",
+        null
+    ],
+    "alcladAluminumSheet": [
+        "Alclad Aluminum Sheet",
+        "belt",
+        null
+    ],
+    "adaptiveControlUnit": [
+        "Adaptive Control Unit",
+        "belt",
+        null
+    ],
+    "supercomputer": [
+        "Supercomputer",
+        "belt",
+        null
+    ],
+    "assemblyDirectorSystem": [
+        "Assembly Director System",
+        "belt",
+        null
+    ],
+    "stator": [
+        "Stator",
+        "belt",
+        null
+    ],
+    "automatedWiring": [
+        "Automated Wiring",
+        "belt",
+        null
+    ],
+    "sulfur": [
+        "Sulfur",
+        "belt",
+        null
+    ],
+    "blackPowder": [
+        "Black Powder",
+        "belt",
+        null
+    ],
+    "modularFrame": [
+        "Modular Frame",
+        "belt",
+        null
+    ],
+    "circuitBoard": [
+        "Circuit Board",
+        "belt",
+        null
+    ],
+    "compactedCoal": [
+        "Compacted Coal",
+        "belt",
+        null
+    ],
+    "rotor": [
+        "Rotor",
+        "belt",
+        null
+    ],
+    "crystalOscillator": [
+        "Crystal Oscillator",
+        "belt",
+        null
+    ],
+    "computer": [
+        "Computer",
+        "belt",
+        null
+    ],
+    "electromagneticControlRod": [
+        "Electromagnetic Control Rod",
+        "belt",
+        null
+    ],
+    "motor": [
+        "Motor",
+        "belt",
+        null
+    ],
+    "petroleumCoke": [
+        "Petroleum Coke",
+        "belt",
+        null
+    ],
+    "highSpeed Connector": [
+        "High-Speed Connector",
+        "belt",
+        null
+    ],
+    "encasedIndustrialBeam": [
+        "Encased Industrial Beam",
+        "belt",
+        null
+    ],
+    "plutoniumPellet": [
+        "Plutonium Pellet",
+        "belt",
+        null
+    ],
+    "encasedPlutoniumCell": [
+        "Encased Plutonium Cell",
+        "belt",
+        null
+    ],
+    "fabric": [
+        "Fabric",
+        "belt",
+        null
+    ],
+    "heatSink": [
+        "Heat Sink",
+        "belt",
+        null
+    ],
+    "nobelisk": [
+        "Nobelisk",
+        "belt",
+        null
+    ],
+    "radioControlUnit": [
+        "Radio Control Unit",
+        "belt",
+        null
+    ],
+    "coolingSystem": [
+        "Cooling System",
+        "belt",
+        null
+    ],
+    "pressureConversionCube": [
+        "Pressure Conversion Cube",
+        "belt",
+        null
+    ],
+    "plutoniumFuelRod": [
+        "Plutonium Fuel Rod",
+        "belt",
+        null
+    ],
+    "fusedModularFrame": [
+        "Fused Modular Frame",
+        "belt",
+        null
+    ],
+    "smartPlating": [
+        "Smart Plating",
+        "belt",
+        null
+    ],
+    "versatileFramework": [
+        "Versatile Framework",
+        "belt",
+        null
+    ],
+    "heavyModularFrame": [
+        "Heavy Modular Frame",
+        "belt",
+        null
+    ],
+    "portableMiner": [
+        "Portable Miner",
+        "belt",
+        null
+    ],
+    "beacon": [
+        "Beacon",
+        "belt",
+        null
+    ],
+    "battery": [
+        "Battery",
+        "belt",
+        null
+    ],
+    "gasFilter": [
+        "Gas Filter",
+        "belt",
+        null
+    ],
+    "uranium": [
+        "Uranium",
+        "belt",
+        null
+    ],
+    "encasedUraniumCell": [
+        "Encased Uranium Cell",
+        "belt",
+        null
+    ],
+    "iodineInfusedFilter": [
+        "Iodine Infused Filter",
+        "belt",
+        null
+    ],
+    "magneticFieldGenerator": [
+        "Magnetic Field Generator",
+        "belt",
+        null
+    ],
+    "modularEngine": [
+        "Modular Engine",
+        "belt",
+        null
+    ],
+    "rifleCartridge": [
+        "Rifle Cartridge",
+        "belt",
+        null
+    ],
+    "turboMotor": [
+        "Turbo Motor",
+        "belt",
+        null
+    ],
+    "thermalPropulsionRocket": [
+        "Thermal Propulsion Rocket",
+        "belt",
+        null
+    ],
+    "packagedNitrogenGas": [
+        "Packaged Nitrogen Gas",
+        "belt",
+        null
+    ],
+    "uraniumFuelRod": [
+        "Uranium Fuel Rod",
+        "belt",
+        null
+    ],
+    "cateriumOre": [
+        "Caterium Ore",
+        "belt",
+        null
+    ],
+    "copperOre": [
+        "Copper Ore",
+        "belt",
+        null
+    ],
+    "ironOre": [
+        "Iron Ore",
+        "belt",
+        null
+    ],
+    "aluminumScrap": [
+        "Aluminum Scrap",
+        "belt",
+        null
+    ],
+    "bauxite": [
+        "Bauxite",
+        "belt",
+        null
+    ],
+    "water": [
+        "Water",
+        "pipe",
+        null
+    ],
+    "aluminaSolution": [
+        "Alumina Solution",
+        "pipe",
+        null
+    ],
+    "heavyOilResidue": [
+        "Heavy Oil Residue",
+        "pipe",
+        null
+    ],
+    "packagedWater": [
+        "Packaged Water",
+        "belt",
+        null
+    ],
+    "packagedFuel": [
+        "Packaged Fuel",
+        "belt",
+        null
+    ],
+    "crudeOil": [
+        "Crude Oil",
+        "pipe",
+        null
+    ],
+    "fuel": [
+        "Fuel",
+        "pipe",
+        null
+    ],
+    "polymerResin": [
+        "Polymer Resin",
+        "belt",
+        null
+    ],
+    "liquidBiofuel": [
+        "Liquid Biofuel",
+        "pipe",
+        null
+    ],
+    "sulfuricAcid": [
+        "Sulfuric Acid",
+        "pipe",
+        null
+    ],
+    "turbofuel": [
+        "Turbofuel",
+        "pipe",
+        null
+    ],
+    "nitrogenGas": [
+        "Nitrogen Gas",
+        "pipe",
+        null
+    ],
+    "uraniumWaste": [
+        "Uranium Waste",
+        "belt",
+        null
+    ],
+    "nitricAcid": [
+        "Nitric Acid",
+        "pipe",
+        null
+    ],
+    "nonFissile Uranium": [
+        "Non-fissile Uranium",
+        "belt",
+        null
+    ],
+    "packagedAluminaSolution": [
+        "Packaged Alumina Solution",
+        "belt",
+        null
+    ],
+    "packagedHeavyOilResidue": [
+        "Packaged Heavy Oil Residue",
+        "belt",
+        null
+    ],
+    "packagedLiquidBiofuel": [
+        "Packaged Liquid Biofuel",
+        "belt",
+        null
+    ],
+    "packagedNitricAcid": [
+        "Packaged Nitric Acid",
+        "belt",
+        null
+    ],
+    "packagedOil": [
+        "Packaged Oil",
+        "belt",
+        null
+    ],
+    "packagedSulfuricAcid": [
+        "Packaged Sulfuric Acid",
+        "belt",
+        null
+    ],
+    "packagedTurbofuel": [
+        "Packaged Turbofuel",
+        "belt",
+        null
+    ],
+    "nuclearPasta": [
+        "Nuclear Pasta",
+        "belt",
+        null
+    ]
+}

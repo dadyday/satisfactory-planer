@@ -11,6 +11,7 @@ export default class Scheme {
 	mProduction = new Map;
 	aDemand = [];
 	canCreate = true;
+	aSeries = [];
 
 	constructor(oDemand = {}, oSupply = {}, canCreate = true) {
 		this.canCreate = canCreate;
@@ -49,7 +50,8 @@ export default class Scheme {
 	createStorage(item, count, inOut = true) {
 		const oInput = {}, oOutput = {};
 		if (inOut) oInput[item] = count; else oOutput[item] = count;
-		const oReceipe = new Receipe('store', 'container', Item.get(item).name, oOutput, oInput);
+		const oItem = Item.get(item);
+		const oReceipe = new Receipe('store', oItem.isFluid ? 'buffer' : 'container', oItem.name, oOutput, oInput);
 		const oProd = oReceipe.createProduction();
 		return oProd;
 	}
@@ -77,7 +79,15 @@ export default class Scheme {
 	 */
 	createProduction(item, count, oTarget) {
 		if (!this.canCreate) return;
-		const oReceipe = Receipe.getByOutput(item);
+		var oReceipe = Receipe.getByOutput(item);
+		//if (oReceipe.isUnpack) oReceipe = Receipe.getByOutput(item, 1);
+
+		this.aSeries.push(oReceipe);
+		if (this.aSeries.length > 30) {
+			console.error('too much steps', this.aSeries);
+			return;
+		}
+
 		while (count > 0.0001) {
 			const oProd = oReceipe.createProduction();
 			count = oProd.increaseCapacity(item, count, oTarget, this);

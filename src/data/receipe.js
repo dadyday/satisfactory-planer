@@ -1,9 +1,21 @@
-
+import Receipes from './receipe.json';
 export default {
+	...Receipes,
+
 	store: ['container', '', {}, {}],
 
 	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
 	copperOre: ['minerMk1', 'Kupfererz', {copperOre: 60}, {} ],
+	limestone: ['minerMk1', 'Sandstein', {limestone: 60}, {} ],
+	coal:      ['minerMk1', 'Kohle', {coal: 60}, {} ],
+	cateriumOre: ['minerMk1', 'Cateriumerz', {cateriumOre: 60}, {} ],
+	rawQuartz:   ['minerMk1', 'Rowquarz', {rawQuartz: 60}, {} ],
+	sulfur:      ['minerMk1', 'Schwefel', {sulfur: 60}, {} ],
+	bauxite:     ['minerMk1', 'Bauxit', {bauxite: 60}, {} ],
+	uranium:     ['minerMk1', 'Uran', {uranium: 60}, {} ],
+	samOre:      ['minerMk1', 'SAM', {samOre: 60}, {} ],
+
+	crudeOil:   ['oilExtractor', 'Rohöl', {crudeOil: 60}, {} ],
 
 	ironIngot:    ['smelter', 'Eisenbarren', {ironIngot: 30}, {ironOre: 30} ],
 	copperIngot:  ['smelter', 'Kupferbarren', {copperIngot: 30}, {copperOre: 30} ],

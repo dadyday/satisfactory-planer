@@ -9,6 +9,7 @@ export default class Receipe {
 	id;
 	type; // id of Building
 	name = 'none';
+	isUnpack = false;
 	mOutput = new Map; // Map of item: count
 	mInput = new Map; // Map of item: count
 
@@ -16,6 +17,7 @@ export default class Receipe {
 		this.id = id;
 		this.type = type;
 		this.name = name ?? 'none';
+		this.isUnpack = this.name.match(/^unpackage/i);
 		this.mOutput = new Map(Object.entries(oOutput));
 		this.mInput = new Map(Object.entries(oInput));
 	}
@@ -82,7 +84,15 @@ export default class Receipe {
 			console.warn(`no receipe found for item '${item}'`);
 			return null;
 		}
-		return aReceipe[pos];
+
+		var oReceipe = aReceipe[pos] ?? null;
+		if (oReceipe && oReceipe.isUnpack) {
+			oReceipe = aReceipe[pos+1] ?? null;
+		}
+		if (!oReceipe) {
+			oReceipe = aReceipe[pos] ?? null;
+		}
+		return oReceipe;
 	}
 
 }

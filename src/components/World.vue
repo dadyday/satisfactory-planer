@@ -112,7 +112,7 @@ export default {
 			$_.map(oModel.nodeDataArray, (oNode) => {
 				const aOld = $_.get(aType, '_'+oNode.type);
 				if (aOld) {
-					const oOld = aOld.shift();
+					const oOld = aOld?.shift() ?? null;
 					if (oOld) {
 						oNode.pos = oOld.pos;
 						oNode.orient = oOld.orient;
