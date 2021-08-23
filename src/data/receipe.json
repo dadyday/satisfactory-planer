@@ -7,7 +7,8 @@
         },
         {
             "aluminumIngot": 6
-        }
+        },
+        false
     ],
     "biocoal": [
         "construct",
@@ -17,7 +18,8 @@
         },
         {
             "biomass": 40
-        }
+        },
+        true
     ],
     "biomass(AlienCarapace)": [
         "construct",
@@ -27,7 +29,8 @@
         },
         {
             "alienCarapace": 4
-        }
+        },
+        false
     ],
     "biomass(AlienOrgans)": [
         "construct",
@@ -37,7 +40,8 @@
         },
         {
             "alienOrgans": 8
-        }
+        },
+        false
     ],
     "biomass(Leaves)": [
         "construct",
@@ -47,7 +51,8 @@
         },
         {
             "leaves": 50
-        }
+        },
+        false
     ],
     "biomass(Mycelia)": [
         "construct",
@@ -57,7 +62,8 @@
         },
         {
             "mycelia": 40
-        }
+        },
+        false
     ],
     "biomass(Wood)": [
         "construct",
@@ -67,7 +73,8 @@
         },
         {
             "wood": 16
-        }
+        },
+        false
     ],
     "cable": [
         "construct",
@@ -77,7 +84,8 @@
         },
         {
             "wire": 4
-        }
+        },
+        false
     ],
     "castScrew": [
         "construct",
@@ -87,7 +95,8 @@
         },
         {
             "ironIngot": 120
-        }
+        },
+        true
     ],
     "cateriumWire": [
         "construct",
@@ -97,7 +106,8 @@
         },
         {
             "cateriumIngot": 4
-        }
+        },
+        true
     ],
     "charcoal": [
         "construct",
@@ -107,7 +117,8 @@
         },
         {
             "wood": 4
-        }
+        },
+        true
     ],
     "colorCartridge": [
         "construct",
@@ -117,7 +128,8 @@
         },
         {
             "flowerPetals": 40
-        }
+        },
+        false
     ],
     "concrete": [
         "construct",
@@ -127,7 +139,8 @@
         },
         {
             "limestone": 12
-        }
+        },
+        false
     ],
     "copperPowder": [
         "construct",
@@ -137,7 +150,8 @@
         },
         {
             "copperIngot": 180
-        }
+        },
+        false
     ],
     "copperSheet": [
         "construct",
@@ -147,7 +161,8 @@
         },
         {
             "copperIngot": 12
-        }
+        },
+        false
     ],
     "emptyCanister": [
         "construct",
@@ -157,7 +172,8 @@
         },
         {
             "plastic": 8
-        }
+        },
+        false
     ],
     "emptyFluidTank": [
         "construct",
@@ -167,7 +183,8 @@
         },
         {
             "aluminumIngot": 1
-        }
+        },
+        false
     ],
     "ironPlate": [
         "construct",
@@ -177,7 +194,8 @@
         },
         {
             "ironIngot": 18
-        }
+        },
+        false
     ],
     "ironRod": [
         "construct",
@@ -187,7 +205,8 @@
         },
         {
             "ironIngot": 4
-        }
+        },
+        false
     ],
     "ironWire": [
         "construct",
@@ -197,7 +216,8 @@
         },
         {
             "ironIngot": 120
-        }
+        },
+        true
     ],
     "powerShard(1)": [
         "construct",
@@ -207,7 +227,8 @@
         },
         {
             "greenPowerSlug": 8
-        }
+        },
+        false
     ],
     "powerShard(2)": [
         "construct",
@@ -217,7 +238,8 @@
         },
         {
             "yellowPowerSlug": 12
-        }
+        },
+        false
     ],
     "powerShard(5)": [
         "construct",
@@ -227,7 +249,8 @@
         },
         {
             "purplePowerSlug": 24
-        }
+        },
+        false
     ],
     "quartzCrystal": [
         "construct",
@@ -237,7 +260,8 @@
         },
         {
             "rawQuartz": 40
-        }
+        },
+        false
     ],
     "quickwire": [
         "construct",
@@ -247,7 +271,8 @@
         },
         {
             "cateriumIngot": 5
-        }
+        },
+        false
     ],
     "screw": [
         "construct",
@@ -257,7 +282,8 @@
         },
         {
             "ironRod": 6
-        }
+        },
+        false
     ],
     "silica": [
         "construct",
@@ -267,7 +293,8 @@
         },
         {
             "rawQuartz": 24
-        }
+        },
+        false
     ],
     "solidBiofuel": [
         "construct",
@@ -277,7 +304,8 @@
         },
         {
             "biomass": 32
-        }
+        },
+        false
     ],
     "spikedRebar": [
         "construct",
@@ -287,7 +315,8 @@
         },
         {
             "ironRod": 4
-        }
+        },
+        false
     ],
     "steelBeam": [
         "construct",
@@ -297,7 +326,8 @@
         },
         {
             "steelIngot": 16
-        }
+        },
+        false
     ],
     "steelCanister": [
         "construct",
@@ -307,7 +337,8 @@
         },
         {
             "steelIngot": 9
-        }
+        },
+        true
     ],
     "steelPipe": [
         "construct",
@@ -317,7 +348,8 @@
         },
         {
             "steelIngot": 18
-        }
+        },
+        false
     ],
     "steelRod": [
         "construct",
@@ -327,7 +359,8 @@
         },
         {
             "steelIngot": 5
-        }
+        },
+        true
     ],
     "steelScrew": [
         "construct",
@@ -337,7 +370,8 @@
         },
         {
             "steelBeam": 12
-        }
+        },
+        true
     ],
     "wire": [
         "construct",
@@ -347,7 +381,8 @@
         },
         {
             "copperIngot": 4
-        }
+        },
+        false
     ],
     "adheredIronPlate": [
         "assembler",
@@ -358,7 +393,8 @@
         {
             "ironPlate": 48,
             "rubber": 16
-        }
+        },
+        true
     ],
     "aiLimiter": [
         "assembler",
@@ -369,7 +405,8 @@
         {
             "copperSheet": 60,
             "quickwire": 240
-        }
+        },
+        false
     ],
     "alcladAluminumSheet": [
         "assembler",
@@ -380,7 +417,8 @@
         {
             "aluminumIngot": 18,
             "copperIngot": 6
-        }
+        },
+        false
     ],
     "alternate:AlcladCasing": [
         "assembler",
@@ -391,7 +429,8 @@
         {
             "aluminumIngot": 160,
             "copperIngot": 80
-        }
+        },
+        true
     ],
     "assemblyDirectorSystem": [
         "assembler",
@@ -402,7 +441,8 @@
         {
             "adaptiveControlUnit": 160,
             "supercomputer": 80
-        }
+        },
+        false
     ],
     "automatedWiring": [
         "assembler",
@@ -413,7 +453,8 @@
         {
             "stator": 24,
             "cable": 480
-        }
+        },
+        false
     ],
     "blackPowder": [
         "assembler",
@@ -424,7 +465,8 @@
         {
             "coal": 8,
             "sulfur": 16
-        }
+        },
+        false
     ],
     "boltedFrame": [
         "assembler",
@@ -435,7 +477,8 @@
         {
             "reinforcedIronPlate": 72,
             "screw": 1344
-        }
+        },
+        true
     ],
     "boltedIronPlate": [
         "assembler",
@@ -446,7 +489,8 @@
         {
             "ironPlate": 216,
             "screw": 600
-        }
+        },
+        true
     ],
     "cateriumCircuitBoard": [
         "assembler",
@@ -457,7 +501,8 @@
         {
             "plastic": 480,
             "quickwire": 1440
-        }
+        },
+        true
     ],
     "cheapSilica": [
         "assembler",
@@ -468,7 +513,8 @@
         {
             "rawQuartz": 48,
             "limestone": 80
-        }
+        },
+        true
     ],
     "circuitBoard": [
         "assembler",
@@ -479,7 +525,8 @@
         {
             "copperSheet": 16,
             "plastic": 32
-        }
+        },
+        false
     ],
     "coatedIronCanister": [
         "assembler",
@@ -490,7 +537,8 @@
         {
             "ironPlate": 8,
             "copperSheet": 4
-        }
+        },
+        true
     ],
     "coatedIronPlate": [
         "assembler",
@@ -501,7 +549,8 @@
         {
             "ironIngot": 120,
             "plastic": 24
-        }
+        },
+        true
     ],
     "compactedCoal": [
         "assembler",
@@ -512,7 +561,8 @@
         {
             "coal": 60,
             "sulfur": 60
-        }
+        },
+        true
     ],
     "copperRotor": [
         "assembler",
@@ -523,7 +573,8 @@
         {
             "copperSheet": 96,
             "screw": 832
-        }
+        },
+        true
     ],
     "crystalComputer": [
         "assembler",
@@ -534,7 +585,8 @@
         {
             "circuitBoard": 512,
             "crystalOscillator": 192
-        }
+        },
+        true
     ],
     "electricMotor": [
         "assembler",
@@ -545,7 +597,8 @@
         {
             "electromagneticControlRod": 16,
             "rotor": 32
-        }
+        },
+        true
     ],
     "electrodeCircuitBoard": [
         "assembler",
@@ -556,7 +609,8 @@
         {
             "rubber": 72,
             "petroleumCoke": 108
-        }
+        },
+        true
     ],
     "electromagneticConnectionRod": [
         "assembler",
@@ -567,7 +621,8 @@
         {
             "stator": 30,
             "highSpeed Connector": 15
-        }
+        },
+        true
     ],
     "electromagneticControlRod": [
         "assembler",
@@ -578,7 +633,8 @@
         {
             "stator": 90,
             "aiLimiter": 60
-        }
+        },
+        false
     ],
     "encasedIndustrialBeam": [
         "assembler",
@@ -589,7 +645,8 @@
         {
             "steelBeam": 40,
             "concrete": 50
-        }
+        },
+        false
     ],
     "encasedIndustrialPipe": [
         "assembler",
@@ -600,7 +657,8 @@
         {
             "steelPipe": 105,
             "concrete": 75
-        }
+        },
+        true
     ],
     "encasedPlutoniumCell": [
         "assembler",
@@ -611,7 +669,8 @@
         {
             "plutoniumPellet": 24,
             "concrete": 48
-        }
+        },
+        false
     ],
     "fabric": [
         "assembler",
@@ -622,7 +681,8 @@
         {
             "mycelia": 4,
             "biomass": 20
-        }
+        },
+        false
     ],
     "fineBlackPowder": [
         "assembler",
@@ -633,7 +693,8 @@
         {
             "sulfur": 32,
             "compactedCoal": 16
-        }
+        },
+        true
     ],
     "fineConcrete": [
         "assembler",
@@ -644,7 +705,8 @@
         {
             "silica": 72,
             "limestone": 288
-        }
+        },
+        true
     ],
     "fusedQuickwire": [
         "assembler",
@@ -655,7 +717,8 @@
         {
             "cateriumIngot": 8,
             "copperIngot": 40
-        }
+        },
+        true
     ],
     "fusedWire": [
         "assembler",
@@ -666,7 +729,8 @@
         {
             "copperIngot": 80,
             "cateriumIngot": 20
-        }
+        },
+        true
     ],
     "heatExchanger": [
         "assembler",
@@ -677,7 +741,8 @@
         {
             "aluminumCasing": 18,
             "rubber": 18
-        }
+        },
+        true
     ],
     "heatSink": [
         "assembler",
@@ -688,7 +753,8 @@
         {
             "alcladAluminumSheet": 40,
             "copperSheet": 24
-        }
+        },
+        false
     ],
     "insulatedCable": [
         "assembler",
@@ -699,7 +765,8 @@
         {
             "wire": 108,
             "rubber": 72
-        }
+        },
+        true
     ],
     "modularFrame": [
         "assembler",
@@ -710,7 +777,8 @@
         {
             "reinforcedIronPlate": 180,
             "ironRod": 720
-        }
+        },
+        false
     ],
     "motor": [
         "assembler",
@@ -721,7 +789,8 @@
         {
             "rotor": 24,
             "stator": 24
-        }
+        },
+        false
     ],
     "nobelisk": [
         "assembler",
@@ -732,7 +801,8 @@
         {
             "blackPowder": 100,
             "steelPipe": 200
-        }
+        },
+        false
     ],
     "ocSupercomputer": [
         "assembler",
@@ -743,7 +813,8 @@
         {
             "radioControlUnit": 60,
             "coolingSystem": 60
-        }
+        },
+        true
     ],
     "plutoniumFuelUnit": [
         "assembler",
@@ -754,7 +825,8 @@
         {
             "encasedPlutoniumCell": 2400,
             "pressureConversionCube": 120
-        }
+        },
+        true
     ],
     "pressureConversionCube": [
         "assembler",
@@ -765,7 +837,8 @@
         {
             "fusedModularFrame": 60,
             "radioControlUnit": 120
-        }
+        },
+        false
     ],
     "quickwireCable": [
         "assembler",
@@ -776,7 +849,8 @@
         {
             "quickwire": 72,
             "rubber": 48
-        }
+        },
+        true
     ],
     "quickwireStator": [
         "assembler",
@@ -787,7 +861,8 @@
         {
             "steelPipe": 60,
             "quickwire": 225
-        }
+        },
+        true
     ],
     "reinforcedIronPlate": [
         "assembler",
@@ -798,7 +873,8 @@
         {
             "ironPlate": 72,
             "screw": 144
-        }
+        },
+        false
     ],
     "rotor": [
         "assembler",
@@ -809,7 +885,8 @@
         {
             "ironRod": 75,
             "screw": 375
-        }
+        },
+        false
     ],
     "rubberConcrete": [
         "assembler",
@@ -820,7 +897,8 @@
         {
             "limestone": 120,
             "rubber": 24
-        }
+        },
+        true
     ],
     "siliconCircuitBoard": [
         "assembler",
@@ -831,7 +909,8 @@
         {
             "copperSheet": 264,
             "silica": 264
-        }
+        },
+        true
     ],
     "smartPlating": [
         "assembler",
@@ -842,7 +921,8 @@
         {
             "reinforcedIronPlate": 30,
             "rotor": 30
-        }
+        },
+        false
     ],
     "stator": [
         "assembler",
@@ -853,7 +933,8 @@
         {
             "steelPipe": 36,
             "wire": 96
-        }
+        },
+        false
     ],
     "steelCoatedPlate": [
         "assembler",
@@ -864,7 +945,8 @@
         {
             "steelIngot": 72,
             "plastic": 48
-        }
+        },
+        true
     ],
     "steelRotor": [
         "assembler",
@@ -875,7 +957,8 @@
         {
             "steelPipe": 24,
             "wire": 72
-        }
+        },
+        true
     ],
     "steeledFrame": [
         "assembler",
@@ -886,7 +969,8 @@
         {
             "reinforcedIronPlate": 120,
             "steelPipe": 600
-        }
+        },
+        true
     ],
     "stitchedIronPlate": [
         "assembler",
@@ -897,7 +981,8 @@
         {
             "ironPlate": 320,
             "wire": 640
-        }
+        },
+        true
     ],
     "versatileFramework": [
         "assembler",
@@ -908,7 +993,8 @@
         {
             "modularFrame": 24,
             "steelBeam": 288
-        }
+        },
+        false
     ],
     "adaptiveControlUnit": [
         "manufacturer",
@@ -921,7 +1007,8 @@
             "circuitBoard": 1200,
             "heavyModularFrame": 240,
             "computer": 240
-        }
+        },
+        false
     ],
     "automatedMiner": [
         "manufacturer",
@@ -934,7 +1021,8 @@
             "steelPipe": 240,
             "ironRod": 240,
             "ironPlate": 120
-        }
+        },
+        true
     ],
     "beacon": [
         "manufacturer",
@@ -947,7 +1035,8 @@
             "ironRod": 8,
             "wire": 120,
             "cable": 16
-        }
+        },
+        false
     ],
     "cateriumComputer": [
         "manufacturer",
@@ -959,7 +1048,8 @@
             "circuitBoard": 112,
             "quickwire": 448,
             "rubber": 192
-        }
+        },
+        true
     ],
     "classicBattery": [
         "manufacturer",
@@ -972,7 +1062,8 @@
             "alcladAluminumSheet": 56,
             "plastic": 64,
             "wire": 96
-        }
+        },
+        true
     ],
     "computer": [
         "manufacturer",
@@ -985,7 +1076,8 @@
             "cable": 216,
             "plastic": 432,
             "screw": 1248
-        }
+        },
+        false
     ],
     "crystalBeacon": [
         "manufacturer",
@@ -997,7 +1089,8 @@
             "steelBeam": 480,
             "steelPipe": 1920,
             "crystalOscillator": 120
-        }
+        },
+        true
     ],
     "crystalOscillator": [
         "manufacturer",
@@ -1009,7 +1102,8 @@
             "quartzCrystal": 4320,
             "cable": 3360,
             "reinforcedIronPlate": 600
-        }
+        },
+        false
     ],
     "flexibleFramework": [
         "manufacturer",
@@ -1021,7 +1115,8 @@
             "modularFrame": 16,
             "steelBeam": 96,
             "rubber": 128
-        }
+        },
+        true
     ],
     "gasFilter": [
         "manufacturer",
@@ -1033,7 +1128,8 @@
             "coal": 40,
             "rubber": 16,
             "fabric": 16
-        }
+        },
+        false
     ],
     "heavyEncasedFrame": [
         "manufacturer",
@@ -1046,7 +1142,8 @@
             "encasedIndustrialBeam": 640,
             "steelPipe": 2304,
             "concrete": 1408
-        }
+        },
+        true
     ],
     "heavyFlexibleFrame": [
         "manufacturer",
@@ -1059,7 +1156,8 @@
             "encasedIndustrialBeam": 48,
             "rubber": 320,
             "screw": 1664
-        }
+        },
+        true
     ],
     "heavyModularFrame": [
         "manufacturer",
@@ -1072,7 +1170,8 @@
             "steelPipe": 450,
             "encasedIndustrialBeam": 150,
             "screw": 3000
-        }
+        },
+        false
     ],
     "highSpeed Connector": [
         "manufacturer",
@@ -1084,7 +1183,8 @@
             "quickwire": 896,
             "cable": 160,
             "circuitBoard": 16
-        }
+        },
+        false
     ],
     "highSpeed Wiring": [
         "manufacturer",
@@ -1096,7 +1196,8 @@
             "stator": 64,
             "wire": 1280,
             "highSpeed Connector": 32
-        }
+        },
+        true
     ],
     "infusedUraniumCell": [
         "manufacturer",
@@ -1109,7 +1210,8 @@
             "silica": 36,
             "sulfur": 60,
             "quickwire": 180
-        }
+        },
+        true
     ],
     "insulatedCrystalOscillator": [
         "manufacturer",
@@ -1121,7 +1223,8 @@
             "quartzCrystal": 320,
             "rubber": 224,
             "aiLimiter": 32
-        }
+        },
+        true
     ],
     "iodineInfusedFilter": [
         "manufacturer",
@@ -1133,7 +1236,8 @@
             "gasFilter": 16,
             "quickwire": 128,
             "aluminumCasing": 16
-        }
+        },
+        false
     ],
     "magneticFieldGenerator": [
         "manufacturer",
@@ -1145,7 +1249,8 @@
             "versatileFramework": 600,
             "electromagneticControlRod": 240,
             "battery": 1200
-        }
+        },
+        false
     ],
     "modularEngine": [
         "manufacturer",
@@ -1157,7 +1262,8 @@
             "motor": 120,
             "rubber": 900,
             "smartPlating": 120
-        }
+        },
+        false
     ],
     "plasticSmartPlating": [
         "manufacturer",
@@ -1169,7 +1275,8 @@
             "reinforcedIronPlate": 24,
             "rotor": 24,
             "plastic": 72
-        }
+        },
+        true
     ],
     "plutoniumFuelRod": [
         "manufacturer",
@@ -1182,7 +1289,8 @@
             "steelBeam": 4320,
             "electromagneticControlRod": 1440,
             "heatSink": 2400
-        }
+        },
+        false
     ],
     "radioConnectionUnit": [
         "manufacturer",
@@ -1194,7 +1302,8 @@
             "heatSink": 64,
             "highSpeed Connector": 32,
             "quartzCrystal": 192
-        }
+        },
+        true
     ],
     "radioControlSystem": [
         "manufacturer",
@@ -1207,7 +1316,8 @@
             "circuitBoard": 400,
             "aluminumCasing": 2400,
             "rubber": 1200
-        }
+        },
+        true
     ],
     "radioControlUnit": [
         "manufacturer",
@@ -1219,7 +1329,8 @@
             "aluminumCasing": 1536,
             "crystalOscillator": 48,
             "computer": 48
-        }
+        },
+        false
     ],
     "rifleCartridge": [
         "manufacturer",
@@ -1232,7 +1343,8 @@
             "steelPipe": 200,
             "blackPowder": 200,
             "rubber": 200
-        }
+        },
+        false
     ],
     "rigourMotor": [
         "manufacturer",
@@ -1244,7 +1356,8 @@
             "rotor": 144,
             "stator": 144,
             "crystalOscillator": 48
-        }
+        },
+        true
     ],
     "seismicNobelisk": [
         "manufacturer",
@@ -1256,7 +1369,8 @@
             "blackPowder": 320,
             "steelPipe": 320,
             "crystalOscillator": 40
-        }
+        },
+        true
     ],
     "silicon highSpeed Connector": [
         "manufacturer",
@@ -1268,7 +1382,8 @@
             "quickwire": 2400,
             "silica": 1000,
             "circuitBoard": 80
-        }
+        },
+        true
     ],
     "superState Computer": [
         "manufacturer",
@@ -1281,7 +1396,8 @@
             "electromagneticControlRod": 100,
             "battery": 1000,
             "wire": 2250
-        }
+        },
+        true
     ],
     "supercomputer": [
         "manufacturer",
@@ -1294,7 +1410,8 @@
             "aiLimiter": 64,
             "highSpeed Connector": 96,
             "plastic": 896
-        }
+        },
+        false
     ],
     "thermalPropulsionRocket": [
         "manufacturer",
@@ -1307,7 +1424,8 @@
             "turboMotor": 240,
             "coolingSystem": 720,
             "fusedModularFrame": 240
-        }
+        },
+        false
     ],
     "turboElectricMotor": [
         "manufacturer",
@@ -1320,7 +1438,8 @@
             "radioControlUnit": 576,
             "electromagneticControlRod": 320,
             "rotor": 448
-        }
+        },
+        true
     ],
     "turboMotor": [
         "manufacturer",
@@ -1333,7 +1452,8 @@
             "radioControlUnit": 64,
             "motor": 128,
             "rubber": 768
-        }
+        },
+        false
     ],
     "turboPressureMotor": [
         "manufacturer",
@@ -1346,7 +1466,8 @@
             "pressureConversionCube": 32,
             "packagedNitrogenGas": 768,
             "stator": 256
-        }
+        },
+        true
     ],
     "uraniumFuelRod": [
         "manufacturer",
@@ -1358,7 +1479,8 @@
             "encasedUraniumCell": 7500,
             "encasedIndustrialBeam": 450,
             "electromagneticControlRod": 750
-        }
+        },
+        false
     ],
     "uraniumFuelUnit": [
         "manufacturer",
@@ -1371,7 +1493,8 @@
             "electromagneticControlRod": 3000,
             "crystalOscillator": 900,
             "beacon": 1800
-        }
+        },
+        true
     ],
     "cateriumIngot": [
         "smelter",
@@ -1381,7 +1504,8 @@
         },
         {
             "cateriumOre": 12
-        }
+        },
+        false
     ],
     "copperIngot": [
         "smelter",
@@ -1391,7 +1515,8 @@
         },
         {
             "copperOre": 2
-        }
+        },
+        false
     ],
     "ironIngot": [
         "smelter",
@@ -1401,7 +1526,8 @@
         },
         {
             "ironOre": 2
-        }
+        },
+        false
     ],
     "pureAluminumIngot": [
         "smelter",
@@ -1411,7 +1537,8 @@
         },
         {
             "aluminumScrap": 4
-        }
+        },
+        true
     ],
     "aluminumIngot": [
         "foundry",
@@ -1422,7 +1549,8 @@
         {
             "aluminumScrap": 24,
             "silica": 20
-        }
+        },
+        false
     ],
     "cokeSteelIngot": [
         "foundry",
@@ -1433,7 +1561,8 @@
         {
             "ironOre": 180,
             "petroleumCoke": 180
-        }
+        },
+        true
     ],
     "compactedSteelIngot": [
         "foundry",
@@ -1444,7 +1573,8 @@
         {
             "ironOre": 96,
             "compactedCoal": 48
-        }
+        },
+        true
     ],
     "copperAlloyIngot": [
         "foundry",
@@ -1455,7 +1585,8 @@
         {
             "copperOre": 120,
             "ironOre": 60
-        }
+        },
+        true
     ],
     "ironAlloyIngot": [
         "foundry",
@@ -1466,7 +1597,8 @@
         {
             "ironOre": 12,
             "copperOre": 12
-        }
+        },
+        true
     ],
     "solidSteelIngot": [
         "foundry",
@@ -1477,7 +1609,8 @@
         {
             "ironIngot": 6,
             "coal": 6
-        }
+        },
+        true
     ],
     "steelIngot": [
         "foundry",
@@ -1488,7 +1621,8 @@
         {
             "ironOre": 12,
             "coal": 12
-        }
+        },
+        false
     ],
     "aluminaSolution": [
         "refinery",
@@ -1500,7 +1634,8 @@
         {
             "bauxite": 72,
             "water": 108
-        }
+        },
+        false
     ],
     "aluminumScrap": [
         "refinery",
@@ -1512,7 +1647,8 @@
         {
             "aluminaSolution": 4,
             "coal": 2
-        }
+        },
+        false
     ],
     "coatedCable": [
         "refinery",
@@ -1523,7 +1659,8 @@
         {
             "wire": 40,
             "heavyOilResidue": 16
-        }
+        },
+        true
     ],
     "dilutedPackagedFuel": [
         "refinery",
@@ -1534,7 +1671,8 @@
         {
             "heavyOilResidue": 2,
             "packagedWater": 4
-        }
+        },
+        true
     ],
     "electrode  Aluminum Scrap": [
         "refinery",
@@ -1546,7 +1684,8 @@
         {
             "aluminaSolution": 48,
             "petroleumCoke": 16
-        }
+        },
+        true
     ],
     "fuel": [
         "refinery",
@@ -1557,7 +1696,8 @@
         },
         {
             "crudeOil": 36
-        }
+        },
+        false
     ],
     "heavyOilResidue": [
         "refinery",
@@ -1568,7 +1708,8 @@
         },
         {
             "crudeOil": 18
-        }
+        },
+        true
     ],
     "liquidBiofuel": [
         "refinery",
@@ -1579,7 +1720,8 @@
         {
             "solidBiofuel": 24,
             "water": 12
-        }
+        },
+        false
     ],
     "petroleumCoke": [
         "refinery",
@@ -1589,7 +1731,8 @@
         },
         {
             "heavyOilResidue": 24
-        }
+        },
+        false
     ],
     "plastic": [
         "refinery",
@@ -1600,7 +1743,8 @@
         },
         {
             "crudeOil": 18
-        }
+        },
+        false
     ],
     "polyesterFabric": [
         "refinery",
@@ -1611,7 +1755,8 @@
         {
             "polymerResin": 192,
             "water": 120
-        }
+        },
+        true
     ],
     "polymerResin": [
         "refinery",
@@ -1622,7 +1767,8 @@
         },
         {
             "crudeOil": 36
-        }
+        },
+        true
     ],
     "pureCateriumIngot": [
         "refinery",
@@ -1633,7 +1779,8 @@
         {
             "cateriumOre": 10,
             "water": 10
-        }
+        },
+        true
     ],
     "pureCopperIngot": [
         "refinery",
@@ -1644,7 +1791,8 @@
         {
             "copperOre": 144,
             "water": 96
-        }
+        },
+        true
     ],
     "pureIronIngot": [
         "refinery",
@@ -1655,7 +1803,8 @@
         {
             "ironOre": 84,
             "water": 48
-        }
+        },
+        true
     ],
     "pureQuartzCrystal": [
         "refinery",
@@ -1666,7 +1815,8 @@
         {
             "rawQuartz": 72,
             "water": 40
-        }
+        },
+        true
     ],
     "recycledPlastic": [
         "refinery",
@@ -1677,7 +1827,8 @@
         {
             "rubber": 72,
             "fuel": 72
-        }
+        },
+        true
     ],
     "recycledRubber": [
         "refinery",
@@ -1688,7 +1839,8 @@
         {
             "plastic": 72,
             "fuel": 72
-        }
+        },
+        true
     ],
     "residualFuel": [
         "refinery",
@@ -1698,7 +1850,8 @@
         },
         {
             "heavyOilResidue": 36
-        }
+        },
+        false
     ],
     "residualPlastic": [
         "refinery",
@@ -1709,7 +1862,8 @@
         {
             "polymerResin": 36,
             "water": 12
-        }
+        },
+        false
     ],
     "residualRubber": [
         "refinery",
@@ -1720,7 +1874,8 @@
         {
             "polymerResin": 24,
             "water": 24
-        }
+        },
+        false
     ],
     "rubber": [
         "refinery",
@@ -1731,7 +1886,8 @@
         },
         {
             "crudeOil": 18
-        }
+        },
+        false
     ],
     "sloppyAlumina": [
         "refinery",
@@ -1742,7 +1898,8 @@
         {
             "bauxite": 30,
             "water": 30
-        }
+        },
+        true
     ],
     "steamedCopperSheet": [
         "refinery",
@@ -1753,7 +1910,8 @@
         {
             "copperIngot": 24,
             "water": 24
-        }
+        },
+        true
     ],
     "sulfuricAcid": [
         "refinery",
@@ -1764,7 +1922,8 @@
         {
             "sulfur": 30,
             "water": 30
-        }
+        },
+        false
     ],
     "turboHeavyFuel": [
         "refinery",
@@ -1775,7 +1934,8 @@
         {
             "heavyOilResidue": 40,
             "compactedCoal": 32
-        }
+        },
+        true
     ],
     "turbofuel": [
         "refinery",
@@ -1786,7 +1946,8 @@
         {
             "fuel": 96,
             "compactedCoal": 64
-        }
+        },
+        true
     ],
     "wetConcrete": [
         "refinery",
@@ -1797,7 +1958,8 @@
         {
             "limestone": 18,
             "water": 15
-        }
+        },
+        true
     ],
     "battery": [
         "blender",
@@ -1810,7 +1972,8 @@
             "sulfuricAcid": 6,
             "aluminaSolution": 6,
             "aluminumCasing": 3
-        }
+        },
+        false
     ],
     "coolingDevice": [
         "blender",
@@ -1822,7 +1985,8 @@
             "heatSink": 160,
             "motor": 32,
             "nitrogenGas": 768
-        }
+        },
+        true
     ],
     "coolingSystem": [
         "blender",
@@ -1835,7 +1999,8 @@
             "rubber": 20,
             "water": 50,
             "nitrogenGas": 250
-        }
+        },
+        false
     ],
     "dilutedFuel": [
         "blender",
@@ -1846,7 +2011,8 @@
         {
             "heavyOilResidue": 30,
             "water": 60
-        }
+        },
+        true
     ],
     "encasedUraniumCell": [
         "blender",
@@ -1859,7 +2025,8 @@
             "uranium": 120,
             "concrete": 36,
             "sulfuricAcid": 96
-        }
+        },
+        false
     ],
     "fertileUranium": [
         "blender",
@@ -1873,7 +2040,8 @@
             "uraniumWaste": 60,
             "nitricAcid": 36,
             "sulfuricAcid": 60
-        }
+        },
+        true
     ],
     "fusedModularFrame": [
         "blender",
@@ -1885,7 +2053,8 @@
             "heavyModularFrame": 40,
             "aluminumCasing": 2000,
             "nitrogenGas": 1000
-        }
+        },
+        false
     ],
     "heatFused Frame": [
         "blender",
@@ -1898,7 +2067,8 @@
             "aluminumIngot": 1000,
             "nitricAcid": 160,
             "fuel": 200
-        }
+        },
+        true
     ],
     "instantScrap": [
         "blender",
@@ -1912,7 +2082,8 @@
             "coal": 60,
             "sulfuricAcid": 30,
             "water": 36
-        }
+        },
+        true
     ],
     "nitricAcid": [
         "blender",
@@ -1924,7 +2095,8 @@
             "nitrogenGas": 72,
             "water": 18,
             "ironPlate": 6
-        }
+        },
+        false
     ],
     "nonFissile Uranium": [
         "blender",
@@ -1938,7 +2110,8 @@
             "silica": 240,
             "nitricAcid": 144,
             "sulfuricAcid": 144
-        }
+        },
+        false
     ],
     "turboBlendFuel": [
         "blender",
@@ -1951,7 +2124,8 @@
             "heavyOilResidue": 32,
             "sulfur": 24,
             "petroleumCoke": 24
-        }
+        },
+        true
     ],
     "packagedAluminaSolution": [
         "packager",
@@ -1962,7 +2136,8 @@
         {
             "aluminaSolution": 2,
             "emptyCanister": 2
-        }
+        },
+        false
     ],
     "packagedFuel": [
         "packager",
@@ -1973,7 +2148,8 @@
         {
             "fuel": 6,
             "emptyCanister": 6
-        }
+        },
+        false
     ],
     "packagedHeavyOilResidue": [
         "packager",
@@ -1984,7 +2160,8 @@
         {
             "heavyOilResidue": 8,
             "emptyCanister": 8
-        }
+        },
+        false
     ],
     "packagedLiquidBiofuel": [
         "packager",
@@ -1995,7 +2172,8 @@
         {
             "liquidBiofuel": 6,
             "emptyCanister": 6
-        }
+        },
+        false
     ],
     "packagedNitricAcid": [
         "packager",
@@ -2006,7 +2184,8 @@
         {
             "nitricAcid": 2,
             "emptyFluidTank": 2
-        }
+        },
+        false
     ],
     "packagedNitrogenGas": [
         "packager",
@@ -2017,7 +2196,8 @@
         {
             "nitrogenGas": 4,
             "emptyFluidTank": 1
-        }
+        },
+        false
     ],
     "packagedOil": [
         "packager",
@@ -2028,7 +2208,8 @@
         {
             "crudeOil": 8,
             "emptyCanister": 8
-        }
+        },
+        false
     ],
     "packagedSulfuricAcid": [
         "packager",
@@ -2039,7 +2220,8 @@
         {
             "sulfuricAcid": 6,
             "emptyCanister": 6
-        }
+        },
+        false
     ],
     "packagedTurbofuel": [
         "packager",
@@ -2050,7 +2232,8 @@
         {
             "turbofuel": 12,
             "emptyCanister": 12
-        }
+        },
+        false
     ],
     "packagedWater": [
         "packager",
@@ -2061,7 +2244,8 @@
         {
             "water": 4,
             "emptyCanister": 4
-        }
+        },
+        false
     ],
     "unpackageAluminaSolution": [
         "packager",
@@ -2072,7 +2256,8 @@
         },
         {
             "packagedAluminaSolution": 2
-        }
+        },
+        false
     ],
     "unpackageFuel": [
         "packager",
@@ -2083,7 +2268,8 @@
         },
         {
             "packagedFuel": 4
-        }
+        },
+        false
     ],
     "unpackageHeavyOilResidue": [
         "packager",
@@ -2094,7 +2280,8 @@
         },
         {
             "packagedHeavyOilResidue": 12
-        }
+        },
+        false
     ],
     "unpackageLiquidBiofuel": [
         "packager",
@@ -2105,7 +2292,8 @@
         },
         {
             "packagedLiquidBiofuel": 4
-        }
+        },
+        false
     ],
     "unpackageNitricAcid": [
         "packager",
@@ -2116,7 +2304,8 @@
         },
         {
             "packagedNitricAcid": 3
-        }
+        },
+        false
     ],
     "unpackageNitrogenGas": [
         "packager",
@@ -2127,7 +2316,8 @@
         },
         {
             "packagedNitrogenGas": 1
-        }
+        },
+        false
     ],
     "unpackageOil": [
         "packager",
@@ -2138,7 +2328,8 @@
         },
         {
             "packagedOil": 4
-        }
+        },
+        false
     ],
     "unpackageSulfuricAcid": [
         "packager",
@@ -2149,7 +2340,8 @@
         },
         {
             "packagedSulfuricAcid": 1
-        }
+        },
+        false
     ],
     "unpackageTurbofuel": [
         "packager",
@@ -2160,7 +2352,8 @@
         },
         {
             "packagedTurbofuel": 12
-        }
+        },
+        false
     ],
     "unpackageWater": [
         "packager",
@@ -2171,7 +2364,8 @@
         },
         {
             "packagedWater": 2
-        }
+        },
+        false
     ],
     "instantPlutoniumCell": [
         "particleAccelerator",
@@ -2182,7 +2376,8 @@
         {
             "nonFissile Uranium": 18000,
             "aluminumCasing": 2400
-        }
+        },
+        true
     ],
     "nuclearPasta": [
         "particleAccelerator",
@@ -2193,7 +2388,8 @@
         {
             "copperPowder": 24000,
             "pressureConversionCube": 120
-        }
+        },
+        false
     ],
     "plutoniumPellet": [
         "particleAccelerator",
@@ -2204,6 +2400,7 @@
         {
             "nonFissile Uranium": 6000,
             "uraniumWaste": 1500
-        }
+        },
+        false
     ]
 }

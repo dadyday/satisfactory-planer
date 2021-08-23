@@ -82,13 +82,14 @@ class ReceipeParser {
 
 		foreach($aParsed as $aProp) {
 			$time = $aProp['time'];
+			$alt = $aProp['alt'];
 
 			$aIn = array_reduce_assoc($aProp['in'], $addItem, []);
 			$aOut = array_reduce_assoc($aProp['out'], $addItem, []);
 
 			$name = $aProp['name'];
 			$key = Convert::camel($name);
-			$this->aReceipe[$key] = [$building, $name, $aOut, $aIn];
+			$this->aReceipe[$key] = [$building, $name, $aOut, $aIn, $alt];
 		}
 	}
 
@@ -102,6 +103,7 @@ class ReceipeParser {
 			if (!$oTr->td) continue;
 			$name = trim($oTr->td[0]);
 			$time = (int) $oTr->td[1];
+			$alt = isset($oTr->td[0]->a->span);
 
 			$aIn = []; $i = 0;
 			foreach ($oTr->td[2]->b as $oB) {
@@ -125,6 +127,7 @@ class ReceipeParser {
 			$aParsed[] = [
 				'name' => $name,
 				'time' => $time,
+				'alt' => $alt,
 				'in' => $aIn,
 				'out' => $aOut,
 			];
