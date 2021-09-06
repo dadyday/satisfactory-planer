@@ -4,7 +4,6 @@
 			<img :src="src" :alt="itemValue" />
 		</div>
 		<div class="times" v-show="hasCount" @mousedown="startEditing">
-			<span>&times;</span>
 			<input type="text"
 				ref="edit"
 				v-show="editable && editing"
@@ -12,7 +11,7 @@
 				:style="{width:inputWidth}"
 				@blur="endEditing"
 			/>
-			<span v-show="!editable || !editing">{{ countValue }}</span>
+			<span v-show="!editable || !editing">{{ showedCountValue }}</span>
 		</div>
 		<div class="name" v-if="!short" @click="startSelecting">
 			<select
@@ -82,8 +81,8 @@ export default {
 			return this.editing || !isNaN(this.count);
 		},
 		inputWidth() {
-			const val = ''+parseInt(this.countVal || 0);
-			const l = Math.max(val.length, 1);
+			const val = ''+parseFloat(this.countVal || 0);
+			const l = Math.max(val.length, 4);
 			return (l * inputSize + inputOffset) + 'px';
 		},
 		itemValue: {
@@ -96,12 +95,22 @@ export default {
 				this.$emit('update:item', value);
 			},
 		},
+		showedCountValue() {
+			if (this.countVal == 0) {
+				return ' - ';
+			}
+			const c = Math.round(1 / this.countVal);
+			if (c > 1) {
+				return '1/'+c+'';
+			}
+			return Math.round(this.countVal)+'';
+		},
 		countValue: {
 			get: function() {
 				return this.countVal;
 			},
 			set: function(value) {
-				this.countVal = parseInt(value) || 0;
+				this.countVal = parseFloat(value) || 0;
 			},
 		},
 		name() {
@@ -115,7 +124,9 @@ export default {
 		},
 	},
 	mounted() {
-		this.countVal = Math.ceil(this.count || 0).toFixed();
+		this.countVal = this.count >= 1 ?
+			Math.ceil(this.count || 0).toFixed() :
+			this.count;
 		if (!inputSize) {
 			inputSize = this.getTextWidth(this.$refs.edit, '0123456789') / 10;
 		}

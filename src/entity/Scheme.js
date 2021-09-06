@@ -83,7 +83,7 @@ export default class Scheme {
 		//if (oReceipe.isUnpack) oReceipe = Receipe.getByOutput(item, 1);
 
 		this.aSeries.push(oReceipe);
-		if (this.aSeries.length > 30) {
+		if (this.aSeries.length > 300) {
 			console.error('too much steps', this.aSeries);
 			return;
 		}

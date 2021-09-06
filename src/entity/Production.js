@@ -65,7 +65,10 @@ export default class Production {
 		// {in0: -, in1: -, in2: screw, in3: -}
 		this.mPort.forEach((item, portId) => {
 			if (!item) return;
-			const key = portId.charAt(0) + Item.get(item).portType;
+			if (!portId) {
+				console.log(this.mPort.entries())
+			}
+			const key = (portId ? portId.charAt(0) : 'i') + Item.get(item).portType;
 			const p = mPort.getInit(key, []).indexOf(portId);
 			const i = mItem.getInit(key, []).indexOf(item);
 

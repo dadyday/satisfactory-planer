@@ -36,11 +36,11 @@
 						<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 							<td><Item :item="item"/></td>
 							<td class="spacer"></td>
-							<td><Item :item="item" :count="oQuant.demand" label="Benötigt" /></td>
-							<td><Item :item="item" :count="oQuant.rest" label="Überschuss" /></td>
-							<td><Item :item="item" :count="oQuant.in" label="Verarbeitet" /></td>
-							<td><Item :item="item" :count="oQuant.out" label="Produziert" /></td>
-							<td><Item :item="item" :count="oQuant.supply" label="Verfügbar" /></td>
+							<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" label="Benötigt" /></td>
+							<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest" label="Überschuss" /></td>
+							<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" label="Verarbeitet" /></td>
+							<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" label="Produziert" /></td>
+							<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" label="Verfügbar" /></td>
 						</tr>
 					</table>
 					<hr />
@@ -71,15 +71,16 @@ export default {
 	data() {
 		return {
 			oSupply: {
-				ironPlate: 20,
-				screw: 50,
+			//	ironPlate: 20,
+			//	screw: 50,
 			},
 			oDemand: {
 			//	ironPlate: 10,
 			//	ironRod: 10,
 			//	screw: 20,
 			//	reinforced: 5,
-				plastic: 1,
+			//	plastic: 1,
+				heavyModularFrame: 0.5,
 			},
 			oScheme: null,
 			createProd: true,
