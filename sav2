@@ -1,0 +1,253 @@
+{
+	"nodeDataArray": [
+		{
+			"id": 13,
+			"detail": "Verstärkte Eisenplatte",
+			"receipe": "store",
+			"ports": {
+				"in0": "reinforced",
+				"out0": null
+			},
+			"type": "container",
+			"name": "Container",
+			"layer": "elevated",
+			"orient": 2,
+			"pos": [
+				-320,
+				-20
+			],
+			"drawangle": 180
+		},
+		{
+			"id": 14,
+			"detail": "Verstärkte Eisenplatte",
+			"receipe": "reinforced",
+			"ports": {
+				"in0": "ironPlate",
+				"in1": "screw",
+				"out0": "reinforced"
+			},
+			"type": "assembler",
+			"name": "Assembler",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-320,
+				80
+			],
+			"drawangle": 0
+		},
+		{
+			"id": 15,
+			"detail": "Eisenplatte",
+			"receipe": "ironPlate",
+			"ports": {
+				"in0": "ironIngot",
+				"out0": "ironPlate"
+			},
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 3,
+			"pos": [
+				-140,
+				-40
+			],
+			"drawangle": 270
+		},
+		{
+			"id": 16,
+			"detail": "Eisenbarren",
+			"receipe": "ironIngot",
+			"ports": {
+				"in0": "ironOre",
+				"out0": "ironIngot"
+			},
+			"type": "smelter",
+			"name": "Schmelzer",
+			"layer": "elevated",
+			"orient": 1,
+			"pos": [
+				20,
+				-40
+			],
+			"drawangle": 90
+		},
+		{
+			"id": 17,
+			"detail": "Eisenerz",
+			"receipe": "ironOre",
+			"ports": {
+				"out0": "ironOre"
+			},
+			"type": "minerMk1",
+			"name": "Miner MK.1",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				400,
+				80
+			],
+			"drawangle": 0
+		},
+		{
+			"id": 18,
+			"detail": "Schrauben",
+			"receipe": "screw",
+			"ports": {
+				"in0": "ironRod",
+				"out0": "screw"
+			},
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 1,
+			"pos": [
+				-140,
+				200
+			],
+			"drawangle": 90
+		},
+		{
+			"id": 19,
+			"detail": "Eisenstange",
+			"receipe": "ironRod",
+			"ports": {
+				"in0": "ironIngot",
+				"out0": "ironRod"
+			},
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 3,
+			"pos": [
+				-60,
+				200
+			],
+			"drawangle": 270
+		},
+		{
+			"id": 11,
+			"detail": "Eisenplatte",
+			"receipe": "store",
+			"ports": {
+				"in0": null,
+				"out0": "ironPlate"
+			},
+			"type": "container",
+			"name": "Container",
+			"layer": "elevated",
+			"orient": 3,
+			"pos": [
+				-200,
+				-40
+			],
+			"drawangle": 270
+		},
+		{
+			"id": 12,
+			"detail": "Schrauben",
+			"receipe": "store",
+			"ports": {
+				"in0": null,
+				"out0": "screw"
+			},
+			"type": "container",
+			"name": "Container",
+			"layer": "elevated",
+			"orient": 1,
+			"pos": [
+				-200,
+				200
+			],
+			"drawangle": 90
+		},
+		{
+			"id": 10,
+			"detail": "Radio Control System",
+			"receipe": "radioControlSystem",
+			"ports": {
+				"in0": "rubber",
+				"in1": "circuitBoard",
+				"in2": "aluminumCasing",
+				"in3": null,
+				"out0": "radioControlUnit"
+			},
+			"type": "manufacturer",
+			"name": "Manufacturer",
+			"layer": "elevated",
+			"orient": 0,
+			"key": -10,
+			"pos": [
+				-640,
+				20
+			],
+			"drawangle": 0
+		}
+	],
+	"linkDataArray": [
+		{
+			"from": 14,
+			"fromPortId": "out0",
+			"to": 13,
+			"toPortId": "in0",
+			"id": -1
+		},
+		{
+			"from": 15,
+			"fromPortId": "out0",
+			"to": 14,
+			"toPortId": "in0",
+			"id": -2
+		},
+		{
+			"from": 16,
+			"fromPortId": "out0",
+			"to": 15,
+			"toPortId": "in0",
+			"id": -3
+		},
+		{
+			"from": 16,
+			"fromPortId": "out0",
+			"to": 19,
+			"toPortId": "in0",
+			"id": -4
+		},
+		{
+			"from": 17,
+			"fromPortId": "out0",
+			"to": 16,
+			"toPortId": "in0",
+			"id": -5
+		},
+		{
+			"from": 18,
+			"fromPortId": "out0",
+			"to": 14,
+			"toPortId": "in1",
+			"id": -6
+		},
+		{
+			"from": 19,
+			"fromPortId": "out0",
+			"to": 18,
+			"toPortId": "in0",
+			"id": -7
+		},
+		{
+			"from": 11,
+			"fromPortId": "out0",
+			"to": 14,
+			"toPortId": "in0",
+			"id": -8
+		},
+		{
+			"from": 12,
+			"fromPortId": "out0",
+			"to": 14,
+			"toPortId": "in1",
+			"id": -9
+		}
+	]
+}
