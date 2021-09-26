@@ -35,6 +35,8 @@ export default class Scheme {
 			this.createProduction(item, count, oStore);
 		});
 		//this.calcProduction();
+
+		this.sortProduction();
 	}
 
 	initQuantity(item) {
@@ -95,6 +97,20 @@ export default class Scheme {
 				this.mProduction.getInit(item, []).push(oProd);
 			})
 		}
+	}
+
+	sortProduction() {
+		const aTemp = [...this.mProduction.entries()];
+		aTemp.sort((aLeft, aRight) => {
+			const oLeft = Item.get(aLeft[0]);
+			const oRight = Item.get(aRight[0]);
+			console.log(oLeft, oRight);
+			if (oLeft.tier > oRight.tier) return -1;
+			if (oLeft.tier < oRight.tier) return 1;
+			if (oLeft.milestone > oRight.milestone) return -1;
+			if (oLeft.milestone < oRight.milestone) return 1;
+			return 0;
+		})
 	}
 
 	/**

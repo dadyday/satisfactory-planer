@@ -1,97 +1,141 @@
 <template>
-	<div id="main">
-		<Split horizontal class="default-theme">
-			<Pane>
-				<World :palette="modeNodes" :scheme="oScheme" v-model="model" />
+	<div id="main" :style="{height: bodyHeight + 'px'}">
+		<Split horizontal class="default-theme" first-splitter>
+			<Pane style="overflow-y: scroll">
+				<World :palette="modeNodes" :scheme="oDrawedScheme" v-model="model" />
 			</Pane>
-			<Pane>
-				<div>
-					<div class="indent">
-						<b style="display:inline-block; width:6em">Verfügbar:</b>
-						<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
-							:item="item" :count="count"
-							editable @update:count="setSupply(item, $event)"
-							deletable @delete="delSupply(item)"
-						/>
-						<Item item="" :count="0" editable selectable addable @add="addSupply(...$event)"/>
-					</div>
+			<Pane style="overflow-y: scroll">
+				<Rows>
+					<Cols>
+						<button @click="run">Run!</button>
+						<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
+						<button @click="draw">Draw!</button>
+					</Cols>
 
-					<hr/>
+					<Cols>
+						<div class="indent">
+							<b class="inline">Verfügbar:</b>
+							<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
+								:item="item" :count="count"
+								editable @update:count="setSupply(item, $event)"
+								deletable @delete="delSupply(item)"
+							/>
+							<Item item="" :count="0" editable selectable addable @add="addSupply(...$event)"/>
+						</div>
+					</Cols>
 
-					<div class="indent">
-						<b style="display:inline-block; width:6em">Benötigt:</b>
-						<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
-							:item="item" :count="count"
-							editable @update:count="setDemand(item, $event)"
-							deletable @delete="delDemand(item)"
-						/>
-						<Item item="" :count="0" editable selectable addable @add="addDemand(...$event)"/>
-					</div>
+					<Cols>
+						<div class="indent">
+							<b class="inline">Benötigt:</b>
+							<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
+								:item="item" :count="count"
+								editable @update:count="setDemand(item, $event)"
+								deletable @delete="delDemand(item)"
+							/>
+							<Item item="" :count="0" editable selectable addable @add="addDemand(...$event)"/>
+						</div>
+					</Cols>
 
-					<hr/>
+				</Rows>
+				<Rows>
+					<Cols>
+						<div>
+							<b class="inline">Gegenstände:</b>
+							<table v-if="oScheme" class="indent">
+								<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
+									<td><Item :item="item"/></td>
+									<td class="spacer"></td>
+									<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" label="Benötigt" /></td>
+									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest" label="Überschuss" /></td>
+									<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" label="Verarbeitet" /></td>
+									<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" label="Produziert" /></td>
+									<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" label="Verfügbar" /></td>
+								</tr>
+							</table>
+						</div>
 
-					<button @click="run">Run!</button>
-					<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
-					<table v-if="oScheme" class="indent">
-						<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
-							<td><Item :item="item"/></td>
-							<td class="spacer"></td>
-							<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" label="Benötigt" /></td>
-							<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest" label="Überschuss" /></td>
-							<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" label="Verarbeitet" /></td>
-							<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" label="Produziert" /></td>
-							<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" label="Verfügbar" /></td>
-						</tr>
-					</table>
-					<hr />
-					<table v-if="oScheme" class="indent">
-						<template v-for="[item, aProd] in oScheme.mProduction">
-							<tr v-for="oProd, i in aProd" :key="item+i+rdm">
-								<td>
-									<Production
-										:obj="oProd"
-										editable
-										@update:productivity="updateProd(oProd, $event)"
-									/>
-								</td>
-								<td class="spacer"></td>
-							</tr>
-						</template>
-					</table>
-				</div>
+						<div>
+							<b class="inline">Produktion:</b>
+							<table v-if="oScheme" class="indent">
+								<template v-for="[item, aProd] in oScheme.mProduction">
+									<tr v-for="oProd, i in aProd" :key="item+i+rdm">
+										<td>
+											<Production
+												:obj="oProd"
+												editable
+												@update:productivity="updateProd(oProd, $event)"
+											/>
+										</td>
+										<td class="spacer"></td>
+									</tr>
+								</template>
+							</table>
+						</div>
+					</Cols>
+				</Rows>
+
 			</Pane>
 		</Split>
 	</div>
 </template>
 
+<style lang="scss">
+#main {
+}
+.indent {
+	margin-left: 0.5em;
+}
+.inline {
+	display: inline-block;
+	width: 6em;
+	height: 2em;
+}
+.spacer {
+	content: "   "
+}
+.frame {
+	border: solid 1px;
+	padding:0.5em 0;
+}
+.splitpanes--horizontal > .splitpanes__splitter {
+	height: 10px !important;
+}
+.splitpanes--vertical > .splitpanes__splitter {
+	width: 10px !important;
+}
+</style>
+
 <script>
 import { Building, Scheme } from '../entity';
+import Store from 'store';
 
 export default {
 	data() {
 		return {
-			oSupply: {
-			//	ironPlate: 20,
-			//	screw: 50,
-			},
-			oDemand: {
-			//	ironPlate: 10,
-			//	ironRod: 10,
-			//	screw: 20,
-			//	reinforced: 5,
-			//	plastic: 1,
-				heavyModularFrame: 0.5,
-			},
+			bodyHeight: 600,
+			oSupply: {},
+			oDemand: {},
 			oScheme: null,
 			createProd: true,
 			rdm: 0,
 			model: '',
+			oDrawedScheme: null,
 		};
 	},
 	computed: {
 		modeNodes() {
 			return Building.getAll();
 		}
+	},
+	mounted() {
+		// create an Observer instance
+		const self = this;
+		const resizeObserver = new ResizeObserver(entries => {
+			const height = entries[0].target.clientHeight;
+			self.bodyHeight = height - 20;
+		});
+		resizeObserver.observe(document.documentElement);
+		this.load();
 	},
 	methods: {
 		setDemand(item, count) {
@@ -127,31 +171,33 @@ export default {
 
 
 		run() {
-			this.oScheme = new Scheme(this.oDemand, this.oSupply, this.createProd);
 			this.refresh();
+		},
+		draw() {
+			this.oDrawedScheme = this.oScheme;
 		},
 		updateProd(oProd, productivity) {
 			oProd.changeProductivity(productivity, this.oScheme);
 			this.refresh();
 		},
 		refresh() {
+			this.save();
+			this.oScheme = new Scheme(this.oDemand, this.oSupply, this.createProd);
 			this.rdm = Math.random() * 10000;
-		}
+		},
+		load() {
+			const aSetting = Store.get('setting');
+			this.oDemand = aSetting[0] ?? this.oDemand;
+			this.oSupply = aSetting[1] ?? this.oSupply;
+			this.createProd = aSetting[2] ?? this.createProd;
+		},
+		save() {
+			Store.set('setting', [
+				this.oDemand,
+				this.oSupply,
+				this.createProd,
+			]);
+		},
 	},
 }
 </script>
-
-<style>
-#main {
-	height: 100%;
-}
-.indent {
-	margin-left:1em;
-}
-.inline {
-	display: inline-block;
-}
-.spacer {
-	content: "   "
-}
-</style>

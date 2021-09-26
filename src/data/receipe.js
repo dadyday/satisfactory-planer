@@ -37,8 +37,8 @@ export default {
 	adheredReinforced: ['assembler', 'Verklebte Eisenplatte', {reinforced:3.75}, {ironPlate:11.25, rubber:3.75} ],
 
 	rotor: ['assembler', 'Rotor', {rotor:4}, {ironRod:20, screw:100} ],
-	copperRotor: ['assembler', 'Kupfer Rotor', {rotor:11.25}, {copperSheet:22.5, screw:195} ],
-	steelRotor: ['assembler', 'Stahl Rotor', {rotor:5}, {steelPipe:10, wire:30} ],
+//	copperRotor: ['assembler', 'Kupfer Rotor', {rotor:11.25}, {copperSheet:22.5, screw:195} ],
+//	steelRotor: ['assembler', 'Stahl Rotor', {rotor:5}, {steelPipe:10, wire:30} ],
 
 	crystalOscillator: ['manufacturer', 'Kristall Oszillator', {crystalOscillator: 1}, {quartzCrystal: 18, cable: 14, reinforcedIronPlate: 2.5}, false, 120, 3300, undefined, ],
 	insulatedCrystalOscillator: ['manufacturer', 'Isolierter Kristall Oszillator', {crystalOscillator: 1.875}, {quartzCrystal: 18.75, rubber: 13.125, aILimiter: 1.875}, true, 32, 1760, 5, ],
