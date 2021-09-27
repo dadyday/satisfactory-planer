@@ -55,7 +55,7 @@ class Importer {
 		$aFluid = $oParam->fluids ?? [];
 		foreach ($aFluid as $fluid) {
 			$oItem = $this->oDb->get('item', $fluid);
-			$oItem->type = 'pipe';
+			$oItem->portType = 'pipe';
 		}
 
 		$cmp = function($oA, $oB) {
@@ -82,7 +82,7 @@ class Importer {
 
 		$addItem = function($aRet, $name, $count, $time, $out) {
 			$oItem = $this->oDb->updateOrCreate('item', $name, [
-				'type' => 'belt',
+				'portType' => 'belt',
 				($out ? 'product' : 'ingredient') => true,
 			]);
 

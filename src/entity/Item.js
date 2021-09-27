@@ -9,6 +9,11 @@ export default class Item {
 	stackSize = 0;
 	imgName = '';
 
+	ingredient = false;
+	product = false;
+	tier = null;
+	milestone = null;
+
 	constructor(id, name, portType, stackSize, imgName = null) {
 		this.name = name;
 		this.portType = portType;
@@ -26,11 +31,19 @@ export default class Item {
 
 	static mList = new Map();
 
+	static register(id, oData) {
+		const oInst = new Item(id, oData.name, oData.type);
+		Object.assign(oInst, oData);
+		//Object.setPrototypeOf(oData, Item.prototype);
+		this.mList.set(id, oInst);
+	}
+
+	/*
 	static register(id, aData) {
 		const [name, portType, stackSize, imgName] = aData;
 		const oItem = new Item(id, name, portType, stackSize, imgName);
 		this.mList.set(id, oItem);
-	}
+	}	//*/
 
 	static registerAll(oItemData) {
 		new Map(Object.entries(oItemData)).forEach((aData, item) => {
@@ -44,6 +57,20 @@ export default class Item {
 
 	static getAll() {
 		return this.mList;
+	}
+
+	static getTierGroups() {
+		const mTier = new Map;
+		this.each((item) => {
+			if (!mTier.has(item.tier)) {
+				mTier.set(item.tier, {
+					tier: 'Tier '+item.tier,
+					items: [],
+				});
+			}
+			mTier.get(item.tier).items.push(item);
+		});
+		return mTier;
 	}
 
 	static each(func) {

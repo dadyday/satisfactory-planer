@@ -14,7 +14,15 @@
 			<span v-show="!editable || !editing">{{ showedCountValue }}</span>
 		</div>
 		<div class="name" v-if="!short" @click="startSelecting">
-			<select
+			<Select
+				ref="select"
+				v-show="selectable && selecting"
+				:list="itemList" listKey="id" listValue="name" empty="- kein -"
+				v-model="itemValue"
+				@close="endSelecting"
+			>
+			</Select>
+			<!--Select
 				ref="select"
 				v-show="selectable && selecting"
 				v-model="itemValue"
@@ -29,7 +37,7 @@
 				>
 					{{ oSub.name }}
 				</option>
-			</select>
+			</Select-->
 			<span v-show="!selectable || !selecting">{{ name }}</span>
 		</div>
 		<div class="button" >
@@ -38,10 +46,6 @@
 		</div>
 	</Entity>
 </template>
-
-<style lang="scss">
-</style>
-
 
 <script>
 import { Item } from '../entity';
@@ -120,7 +124,7 @@ export default {
 			return this.oItem.imageUrl();
 		},
 		itemList() {
-			return Item.getAll();
+			return Item.getAll(); //getTierGroups();
 		},
 	},
 	mounted() {
@@ -136,7 +140,7 @@ export default {
 			this.editing = this.editable;
 			setTimeout(() => {
 				this.$refs.edit.focus();
-			}, 100);
+			}, 1);
 		},
 		endEditing() {
 			this.editing = false;
@@ -144,9 +148,10 @@ export default {
 		},
 		startSelecting() {
 			this.selecting = this.selectable;
-			setTimeout(() => {
-				this.$refs.select.focus();
-			}, 100);
+			this.$refs.select.open();
+		},
+		endSelecting() {
+			this.selecting = false;
 		},
 		getWidth(el, text) {
 			return this.getTextWidth(el, text);

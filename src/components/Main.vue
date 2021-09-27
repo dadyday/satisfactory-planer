@@ -1,7 +1,7 @@
 <template>
 	<div id="main" :style="{height: bodyHeight + 'px'}">
 		<Split horizontal class="default-theme" first-splitter>
-			<Pane style="overflow-y: scroll">
+			<Pane style="overflow-y: hidden">
 				<World :palette="modeNodes" :scheme="oDrawedScheme" v-model="model" />
 			</Pane>
 			<Pane style="overflow-y: scroll">
@@ -20,7 +20,7 @@
 								editable @update:count="setSupply(item, $event)"
 								deletable @delete="delSupply(item)"
 							/>
-							<Item item="" :count="0" editable selectable addable @add="addSupply(...$event)"/>
+							<Item item="" selectable addable @add="addSupply(...$event)"/>
 						</div>
 					</Cols>
 
@@ -32,7 +32,7 @@
 								editable @update:count="setDemand(item, $event)"
 								deletable @delete="delDemand(item)"
 							/>
-							<Item item="" :count="0" editable selectable addable @add="addDemand(...$event)"/>
+							<Item item="" selectable addable @add="addDemand(...$event)"/>
 						</div>
 					</Cols>
 
@@ -143,9 +143,7 @@ export default {
 			this.run();
 		},
 		addDemand(item, count) {
-			if (this.oDemand[item]) {
-				count += this.oDemand[item];
-			}
+			count = this.oDemand[item] ?? 0;
 			this.setDemand(item, count);
 		},
 		delDemand(item) {
@@ -158,9 +156,7 @@ export default {
 			this.run();
 		},
 		addSupply(item, count) {
-			if (this.oSupply[item]) {
-				count += this.oSupply[item];
-			}
+			count = this.oSupply[item] ?? 0;
 			this.setSupply(item, count);
 		},
 		delSupply(item) {
