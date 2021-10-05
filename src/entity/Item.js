@@ -20,7 +20,8 @@ export default class Item {
 		this.portType = portType;
 		this.isFluid = portType == 'pipe';
 		this.stackSize = stackSize;
-		this.imgName = (imgName ?? id).replace(/([A-Z]+)/g, '_$1').toLowerCase();
+		//this.imgName = (imgName ?? id).replace(/([A-Z]+)/g, '_$1').toLowerCase();
+		this.imgName = (imgName ?? name).replace(/\s+/g, '_').toLowerCase();
 		this.image = `img/item/big/${this.imgName}.png`
 	}
 
