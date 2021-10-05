@@ -17,7 +17,8 @@
 			<Select
 				ref="select"
 				v-show="selectable && selecting"
-				:list="itemList" listKey="id" listValue="name" empty="- kein -"
+				:list="itemList" listKey="id" listValue="name" listImage="image" empty="- kein -"
+				groupBy="tier"
 				v-model="itemValue"
 				@close="endSelecting"
 			>

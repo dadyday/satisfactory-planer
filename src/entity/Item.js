@@ -8,6 +8,7 @@ export default class Item {
 	isFluid = false;
 	stackSize = 0;
 	imgName = '';
+	image = '';
 
 	ingredient = false;
 	product = false;
@@ -20,10 +21,11 @@ export default class Item {
 		this.isFluid = portType == 'pipe';
 		this.stackSize = stackSize;
 		this.imgName = (imgName ?? id).replace(/([A-Z]+)/g, '_$1').toLowerCase();
+		this.image = `img/item/big/${this.imgName}.png`
 	}
 
 	imageUrl() {
-		return `img/item/big/${this.imgName}.png`;
+		return this.image;
 	}
 
 
