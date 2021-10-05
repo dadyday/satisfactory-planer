@@ -62,6 +62,25 @@ export default class Item {
 		return this.mList;
 	}
 
+	static getBy(oFilter) {
+		return new Map([...this.mList].filter(([key, item]) => {
+			for (var index in oFilter) {
+				const [, prop, op] = /^(\w+)\s*(in|[<>!=]*)$/.exec(index);
+				const is = item[prop];
+				const should = oFilter[index];
+
+				switch (op) {
+					case '':
+						if (is == should) break;
+						return false;
+					default:
+						console.warn(`invalid compare operator '${op}'`);
+				}
+			}
+			return true;
+		}));
+	}
+
 	static getTierGroups() {
 		const mTier = new Map;
 		this.each((item) => {

@@ -20,7 +20,7 @@
 								editable @update:count="setSupply(item, $event)"
 								deletable @delete="delSupply(item)"
 							/>
-							<Item item="" selectable addable @add="addSupply(...$event)"/>
+							<Item item="" :filters="{'ingredient': true}" selectable addable @add="addSupply(...$event)"/>
 						</div>
 					</Cols>
 
@@ -32,7 +32,7 @@
 								editable @update:count="setDemand(item, $event)"
 								deletable @delete="delDemand(item)"
 							/>
-							<Item item="" selectable addable @add="addDemand(...$event)"/>
+							<Item item="" :filters="{'product': true}" selectable addable @add="addDemand(...$event)"/>
 						</div>
 					</Cols>
 

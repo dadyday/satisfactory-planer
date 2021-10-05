@@ -63,7 +63,8 @@ export default {
 		editable: Boolean,
 		selectable: Boolean,
 		deletable: Boolean,
-		addable: Boolean
+		addable: Boolean,
+		filters: Object,
 	},
 	emits: [
 		'update:count',
@@ -125,7 +126,7 @@ export default {
 			return this.oItem.imageUrl();
 		},
 		itemList() {
-			return Item.getAll(); //getTierGroups();
+			return Item.getBy(this.filters); //getTierGroups();
 		},
 	},
 	mounted() {
