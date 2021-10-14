@@ -1,7 +1,5 @@
 
 export default {
-	lift: ['', 3, 3, 3, [
-	]],
 	container: ['Container', 10, 5, 3, [
 		['belt', true],
 		['belt', false],
@@ -18,24 +16,29 @@ export default {
 		['belt', true, 0, 'top'], ['belt', true, 0], ['belt', true, 0, 'bottom'],
 		['belt', false],
 	]],
+	lift: ['', 3, 3, 3, [
+	]],
 	minerMk1: ['Miner MK.1', 14, 6, 3, [
 		['belt', false, 0],
 	]],
-	oilExtractor: ['Öl Förderer', 20, 12, 3, [
+	waterExtractor:   ['Wasserpumpe', 20, 20, 2, [
+		['pipe', false, 0]
+	]],
+	oilExtractor: ['Ölpumpe', 20, 12, 3, [
 		['pipe', false, 0],
 	]],
 	smelter: ['Schmelzer', 9, 6, 2, [
 		['belt', true, 0],
 		['belt', false, 0],
 	]],
-	construct: ['Konstruktor', 10, 8, 2, [
-		['belt', true, 0],
-		['belt', false, 0],
-	], 'constructor'],
 	foundry: ['Giesserei', 9, 10, 2, [
 		['belt', true, 0], ['belt', true, 0],
 		['belt', false, -1],
 	]],
+	construct: ['Konstruktor', 10, 8, 2, [
+		['belt', true, 0],
+		['belt', false, 0],
+	], 'constructor'],
 	assembler: ['Assembler', 15, 10, 2, [
 		['belt', true, 0], ['belt', true, 0],
 		['belt', false, 0],
@@ -61,9 +64,6 @@ export default {
 		['belt', false, 0, 'right'],
 	]],
 /*
-	extractor:   ['Wasser', 20, 20, 2, [
-		['pipe', false, 0]
-	]],
 	coal:        ['Kohlekraftwerk', 26, 10, 2, [
 		['pipe', true, -2],
 		['belt', true, 2]

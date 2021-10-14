@@ -14,7 +14,16 @@
 			<span v-show="!editable || !editing">{{ showedCountValue }}</span>
 		</div>
 		<div class="name" v-if="!short" @click="startSelecting">
-			<select
+			<Select
+				ref="select"
+				v-show="selectable && selecting"
+				:list="itemList" listKey="id" listValue="name" listImage="image" empty="- kein -"
+				groupBy="tier"
+				v-model="itemValue"
+				@close="endSelecting"
+			>
+			</Select>
+			<!--Select
 				ref="select"
 				v-show="selectable && selecting"
 				v-model="itemValue"
@@ -29,7 +38,7 @@
 				>
 					{{ oSub.name }}
 				</option>
-			</select>
+			</Select-->
 			<span v-show="!selectable || !selecting">{{ name }}</span>
 		</div>
 		<div class="button" >
@@ -39,12 +48,9 @@
 	</Entity>
 </template>
 
-<style lang="scss">
-</style>
-
-
 <script>
 import { Item } from '../entity';
+import bigRat from 'big-rational';
 
 var	inputSize = 0;
 const inputOffset = 0;
@@ -58,7 +64,8 @@ export default {
 		editable: Boolean,
 		selectable: Boolean,
 		deletable: Boolean,
-		addable: Boolean
+		addable: Boolean,
+		filters: Object,
 	},
 	emits: [
 		'update:count',
@@ -96,21 +103,14 @@ export default {
 			},
 		},
 		showedCountValue() {
-			if (this.countVal == 0) {
-				return ' - ';
-			}
-			const c = Math.round(1 / this.countVal);
-			if (c > 1) {
-				return '1/'+c+'';
-			}
-			return Math.round(this.countVal)+'';
+			return parseFloat(this.countVal).rationalize();
 		},
 		countValue: {
 			get: function() {
 				return this.countVal;
 			},
 			set: function(value) {
-				this.countVal = parseFloat(value) || 0;
+				this.countVal = value;
 			},
 		},
 		name() {
@@ -120,13 +120,11 @@ export default {
 			return this.oItem.imageUrl();
 		},
 		itemList() {
-			return Item.getAll();
+			return Item.getBy(this.filters); //getTierGroups();
 		},
 	},
 	mounted() {
-		this.countVal = this.count >= 1 ?
-			Math.ceil(this.count || 0).toFixed() :
-			this.count;
+		this.countVal = parseFloat(this.count);
 		if (!inputSize) {
 			inputSize = this.getTextWidth(this.$refs.edit, '0123456789') / 10;
 		}
@@ -136,17 +134,18 @@ export default {
 			this.editing = this.editable;
 			setTimeout(() => {
 				this.$refs.edit.focus();
-			}, 100);
+			}, 1);
 		},
 		endEditing() {
 			this.editing = false;
-			this.$emit('update:count', this.countValue);
+			this.$emit('update:count', bigRat(this.countValue).valueOf());
 		},
 		startSelecting() {
 			this.selecting = this.selectable;
-			setTimeout(() => {
-				this.$refs.select.focus();
-			}, 100);
+			this.$refs.select.open();
+		},
+		endSelecting() {
+			this.selecting = false;
 		},
 		getWidth(el, text) {
 			return this.getTextWidth(el, text);

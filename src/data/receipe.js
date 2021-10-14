@@ -3,7 +3,7 @@ export default {
 	...Receipes,
 
 	store: ['container', '', {}, {}],
-
+//*
 	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
 	copperOre: ['minerMk1', 'Kupfererz', {copperOre: 60}, {} ],
 	limestone: ['minerMk1', 'Sandstein', {limestone: 60}, {} ],
@@ -15,6 +15,7 @@ export default {
 	uranium:     ['minerMk1', 'Uran', {uranium: 60}, {} ],
 	samOre:      ['minerMk1', 'SAM', {samOre: 60}, {} ],
 
+	water:      ['waterExtractor', 'Wasser', {water: 60}, {} ],
 	crudeOil:   ['oilExtractor', 'Rohöl', {crudeOil: 60}, {} ],
 
 	ironIngot:    ['smelter', 'Eisenbarren', {ironIngot: 30}, {ironOre: 30} ],
@@ -37,11 +38,12 @@ export default {
 	adheredReinforced: ['assembler', 'Verklebte Eisenplatte', {reinforced:3.75}, {ironPlate:11.25, rubber:3.75} ],
 
 	rotor: ['assembler', 'Rotor', {rotor:4}, {ironRod:20, screw:100} ],
-	copperRotor: ['assembler', 'Kupfer Rotor', {rotor:11.25}, {copperSheet:22.5, screw:195} ],
-	steelRotor: ['assembler', 'Stahl Rotor', {rotor:5}, {steelPipe:10, wire:30} ],
+//	copperRotor: ['assembler', 'Kupfer Rotor', {rotor:11.25}, {copperSheet:22.5, screw:195} ],
+//	steelRotor: ['assembler', 'Stahl Rotor', {rotor:5}, {steelPipe:10, wire:30} ],
 
 	crystalOscillator: ['manufacturer', 'Kristall Oszillator', {crystalOscillator: 1}, {quartzCrystal: 18, cable: 14, reinforcedIronPlate: 2.5}, false, 120, 3300, undefined, ],
 	insulatedCrystalOscillator: ['manufacturer', 'Isolierter Kristall Oszillator', {crystalOscillator: 1.875}, {quartzCrystal: 18.75, rubber: 13.125, aILimiter: 1.875}, true, 32, 1760, 5, ],
 
 	radioControlSystem: ['manufacturer', 'Radio Control System', {radioControlUnit: 4.5}, {crystalOscillator: 1.5, circuitBoard: 15, aluminumCasing: 90, rubber: 45}, true, 40, 733.33, 7, ],
+//*/
 }

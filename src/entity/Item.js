@@ -1,49 +1,40 @@
+import Entity from './Entity';
 
+export default class Item extends Entity {
 
-export default class Item {
+	// ingredient = false;
+	// product = false;
+	// tier = null;
+	// milestone = null;
 
-	id = '';
-	name = 'none';
-	portType = null;
-	isFluid = false;
-	stackSize = 0;
-	imgName = '';
+	constructor(id, name, oData = {}) {
+		super(id, name, oData);
 
-	constructor(id, name, portType, stackSize, imgName = null) {
-		this.name = name;
-		this.portType = portType;
-		this.isFluid = portType == 'pipe';
-		this.stackSize = stackSize;
-		this.imgName = (imgName ?? id).replace(/([A-Z]+)/g, '_$1').toLowerCase();
+		this.fluid = this.type == 'pipe';
+		this.imgName = (this.imgName ?? this.name).replace(/\s+/g, '_').toLowerCase();
+		this.image = `img/item/big/${this.imgName}.png`
 	}
 
 	imageUrl() {
-		return `img/item/big/${this.imgName}.png`;
+		return this.image;
 	}
 
-
-	//** statics **********************************
-
-	static mList = new Map();
-
-	static register(id, aData) {
-		const [name, portType, stackSize, imgName] = aData;
-		const oItem = new Item(id, name, portType, stackSize, imgName);
-		this.mList.set(id, oItem);
+	static get(id) {
+		return super.get(id) ?? new this(null, 'none');
 	}
 
-	static registerAll(oItemData) {
-		new Map(Object.entries(oItemData)).forEach((aData, item) => {
-			this.register(item, aData);
+	static getTierGroups() {
+		const mTier = new Map;
+		this.each((item) => {
+			if (!mTier.has(item.tier)) {
+				mTier.set(item.tier, {
+					tier: 'Tier '+item.tier,
+					items: [],
+				});
+			}
+			mTier.get(item.tier).items.push(item);
 		});
-	}
-
-	static get(item) {
-		return this.mList.get(item) ?? new Item(null, '-- kein --', null, 0, 'none');
-	}
-
-	static getAll() {
-		return this.mList;
+		return mTier;
 	}
 
 	static each(func) {

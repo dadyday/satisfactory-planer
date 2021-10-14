@@ -21,7 +21,7 @@
 			</select>
 			<span v-show="!selectable || !selecting">{{ name }}</span>
 		</div>
-		<div class="times" @mousedown="startEditing">
+		<div @mousedown="startEditing" :class="{times, full: oProd.full}">
 			<input type="number"
 				ref="edit"
 				v-show="editable && editing"
@@ -39,7 +39,9 @@
 			<Item v-for="[item, count], i in oProd.oReceipe.mOutput"
 				:item="item" :count="oProd.productivity*count" short :key="'out'+i"/>
 		</div>
-		<div>
+		<div class="button" >
+			<button class="add" v-if="addable" @click="add">&plus;</button>
+			<button class="remove red" v-if="deletable" @click="del">&times;</button>
 		</div>
 	</Entity>
 </template>
@@ -54,6 +56,8 @@ export default {
 		label: String,
 		editable: Boolean,
 		selectable: Boolean,
+		addable: Boolean,
+		deletable: Boolean,
 	},
 	data() {
 		return {
@@ -70,7 +74,8 @@ export default {
 	},
 	computed: {
 		name() {
-			return this.label ?? this.oProd.oBuilding.name + ' - ' + this.oProd.oReceipe.name;
+			return this.label ?? this.oProd.name;
+			// return this.label ?? this.oProd.oBuilding.name + ' - ' + this.oProd.oReceipe.name;
 		},
 		alt() {
 			return this.oProd.name;
@@ -120,6 +125,19 @@ export default {
 				this.$refs.select.focus();
 			}, 100);
 		},
+		del() {
+			this.prodValue = 0;
+			this.$emit('delete', this.prodValue);
+		},
+		add() {
+			this.$emit('add', [this.oProd, this.prodValue]);
+		},
 	},
 }
 </script>
+
+<style>
+.full {
+	color: red;
+}
+</style>

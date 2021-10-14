@@ -3,10 +3,10 @@
         "construct",
         "Aluminum Casing",
         {
-            "aluminumCasing": 4
+            "aluminumCasing": 60
         },
         {
-            "aluminumIngot": 6
+            "aluminumIngot": 90
         },
         false
     ],
@@ -14,10 +14,10 @@
         "construct",
         "Biocoal",
         {
-            "coal": 48
+            "coal": 45.0
         },
         {
-            "biomass": 40
+            "biomass": 37.5
         },
         true
     ],
@@ -25,10 +25,10 @@
         "construct",
         "Biomass (Alien Carapace)",
         {
-            "biomass": 400
+            "biomass": 1500
         },
         {
-            "alienCarapace": 4
+            "alienCarapace": 15
         },
         false
     ],
@@ -36,10 +36,10 @@
         "construct",
         "Biomass (Alien Organs)",
         {
-            "biomass": 1600
+            "biomass": 1500.0
         },
         {
-            "alienOrgans": 8
+            "alienOrgans": 7.5
         },
         false
     ],
@@ -47,10 +47,10 @@
         "construct",
         "Biomass (Leaves)",
         {
-            "biomass": 25
+            "biomass": 60
         },
         {
-            "leaves": 50
+            "leaves": 120
         },
         false
     ],
@@ -58,10 +58,10 @@
         "construct",
         "Biomass (Mycelia)",
         {
-            "biomass": 40
+            "biomass": 150
         },
         {
-            "mycelia": 40
+            "mycelia": 150
         },
         false
     ],
@@ -69,10 +69,10 @@
         "construct",
         "Biomass (Wood)",
         {
-            "biomass": 80
+            "biomass": 300
         },
         {
-            "wood": 16
+            "wood": 60
         },
         false
     ],
@@ -80,10 +80,10 @@
         "construct",
         "Cable",
         {
-            "cable": 2
+            "cable": 30
         },
         {
-            "wire": 4
+            "wire": 60
         },
         false
     ],
@@ -91,10 +91,10 @@
         "construct",
         "Cast Screw",
         {
-            "screw": 480
+            "screw": 50.0
         },
         {
-            "ironIngot": 120
+            "ironIngot": 12.5
         },
         true
     ],
@@ -102,10 +102,10 @@
         "construct",
         "Caterium Wire",
         {
-            "wire": 32
+            "wire": 120
         },
         {
-            "cateriumIngot": 4
+            "cateriumIngot": 15
         },
         true
     ],
@@ -113,10 +113,10 @@
         "construct",
         "Charcoal",
         {
-            "coal": 40
+            "coal": 150
         },
         {
-            "wood": 4
+            "wood": 15
         },
         true
     ],
@@ -124,10 +124,10 @@
         "construct",
         "Color Cartridge",
         {
-            "colorCartridge": 80
+            "colorCartridge": 75.0
         },
         {
-            "flowerPetals": 40
+            "flowerPetals": 37.5
         },
         false
     ],
@@ -135,10 +135,10 @@
         "construct",
         "Concrete",
         {
-            "concrete": 4
+            "concrete": 15
         },
         {
-            "limestone": 12
+            "limestone": 45
         },
         false
     ],
@@ -146,10 +146,10 @@
         "construct",
         "Copper Powder",
         {
-            "copperPowder": 30
+            "copperPowder": 50
         },
         {
-            "copperIngot": 180
+            "copperIngot": 300
         },
         false
     ],
@@ -157,10 +157,10 @@
         "construct",
         "Copper Sheet",
         {
-            "copperSheet": 6
+            "copperSheet": 10
         },
         {
-            "copperIngot": 12
+            "copperIngot": 20
         },
         false
     ],
@@ -168,10 +168,10 @@
         "construct",
         "Empty Canister",
         {
-            "emptyCanister": 16
+            "emptyCanister": 60
         },
         {
-            "plastic": 8
+            "plastic": 30
         },
         false
     ],
@@ -179,10 +179,10 @@
         "construct",
         "Empty Fluid Tank",
         {
-            "emptyFluidTank": 1
+            "emptyFluidTank": 60
         },
         {
-            "aluminumIngot": 1
+            "aluminumIngot": 60
         },
         false
     ],
@@ -190,10 +190,10 @@
         "construct",
         "Iron Plate",
         {
-            "ironPlate": 12
+            "ironPlate": 20
         },
         {
-            "ironIngot": 18
+            "ironIngot": 30
         },
         false
     ],
@@ -201,10 +201,10 @@
         "construct",
         "Iron Rod",
         {
-            "ironRod": 4
+            "ironRod": 15
         },
         {
-            "ironIngot": 4
+            "ironIngot": 15
         },
         false
     ],
@@ -212,10 +212,10 @@
         "construct",
         "Iron Wire",
         {
-            "wire": 216
+            "wire": 22.5
         },
         {
-            "ironIngot": 120
+            "ironIngot": 12.5
         },
         true
     ],
@@ -223,10 +223,10 @@
         "construct",
         "Power Shard (1)",
         {
-            "powerShard": 8
+            "powerShard": 7.5
         },
         {
-            "greenPowerSlug": 8
+            "greenPowerSlug": 7.5
         },
         false
     ],
@@ -234,10 +234,10 @@
         "construct",
         "Power Shard (2)",
         {
-            "powerShard": 24
+            "powerShard": 10
         },
         {
-            "yellowPowerSlug": 12
+            "yellowPowerSlug": 5
         },
         false
     ],
@@ -245,10 +245,10 @@
         "construct",
         "Power Shard (5)",
         {
-            "powerShard": 120
+            "powerShard": 12.5
         },
         {
-            "purplePowerSlug": 24
+            "purplePowerSlug": 2.5
         },
         false
     ],
@@ -256,10 +256,10 @@
         "construct",
         "Quartz Crystal",
         {
-            "quartzCrystal": 24
+            "quartzCrystal": 22.5
         },
         {
-            "rawQuartz": 40
+            "rawQuartz": 37.5
         },
         false
     ],
@@ -267,10 +267,10 @@
         "construct",
         "Quickwire",
         {
-            "quickwire": 25
+            "quickwire": 60
         },
         {
-            "cateriumIngot": 5
+            "cateriumIngot": 12
         },
         false
     ],
@@ -278,10 +278,10 @@
         "construct",
         "Screw",
         {
-            "screw": 24
+            "screw": 40
         },
         {
-            "ironRod": 6
+            "ironRod": 10
         },
         false
     ],
@@ -289,10 +289,10 @@
         "construct",
         "Silica",
         {
-            "silica": 40
+            "silica": 37.5
         },
         {
-            "rawQuartz": 24
+            "rawQuartz": 22.5
         },
         false
     ],
@@ -300,10 +300,10 @@
         "construct",
         "Solid Biofuel",
         {
-            "solidBiofuel": 16
+            "solidBiofuel": 60
         },
         {
-            "biomass": 32
+            "biomass": 120
         },
         false
     ],
@@ -311,10 +311,10 @@
         "construct",
         "Spiked Rebar",
         {
-            "spikedRebar": 4
+            "spikedRebar": 15
         },
         {
-            "ironRod": 4
+            "ironRod": 15
         },
         false
     ],
@@ -322,10 +322,10 @@
         "construct",
         "Steel Beam",
         {
-            "steelBeam": 4
+            "steelBeam": 15
         },
         {
-            "steelIngot": 16
+            "steelIngot": 60
         },
         false
     ],
@@ -333,10 +333,10 @@
         "construct",
         "Steel Canister",
         {
-            "emptyCanister": 6
+            "emptyCanister": 40
         },
         {
-            "steelIngot": 9
+            "steelIngot": 60
         },
         true
     ],
@@ -344,10 +344,10 @@
         "construct",
         "Steel Pipe",
         {
-            "steelPipe": 12
+            "steelPipe": 20
         },
         {
-            "steelIngot": 18
+            "steelIngot": 30
         },
         false
     ],
@@ -355,10 +355,10 @@
         "construct",
         "Steel Rod",
         {
-            "ironRod": 20
+            "ironRod": 48
         },
         {
-            "steelIngot": 5
+            "steelIngot": 12
         },
         true
     ],
@@ -366,10 +366,10 @@
         "construct",
         "Steel Screw",
         {
-            "screw": 624
+            "screw": 260
         },
         {
-            "steelBeam": 12
+            "steelBeam": 5
         },
         true
     ],
@@ -377,10 +377,10 @@
         "construct",
         "Wire",
         {
-            "wire": 8
+            "wire": 30
         },
         {
-            "copperIngot": 4
+            "copperIngot": 15
         },
         false
     ],
@@ -388,11 +388,11 @@
         "assembler",
         "Adhered Iron Plate",
         {
-            "reinforcedIronPlate": 16
+            "reinforcedIronPlate": 3.75
         },
         {
-            "ironPlate": 48,
-            "rubber": 16
+            "ironPlate": 11.25,
+            "rubber": 3.75
         },
         true
     ],
@@ -400,11 +400,11 @@
         "assembler",
         "AI Limiter",
         {
-            "aiLimiter": 12
+            "aiLimiter": 5
         },
         {
-            "copperSheet": 60,
-            "quickwire": 240
+            "copperSheet": 25,
+            "quickwire": 100
         },
         false
     ],
@@ -412,11 +412,11 @@
         "assembler",
         "Alclad Aluminum Sheet",
         {
-            "alcladAluminumSheet": 18
+            "alcladAluminumSheet": 30
         },
         {
-            "aluminumIngot": 18,
-            "copperIngot": 6
+            "aluminumIngot": 30,
+            "copperIngot": 10
         },
         false
     ],
@@ -424,11 +424,11 @@
         "assembler",
         "Alternate: Alclad Casing",
         {
-            "aluminumCasing": 120
+            "aluminumCasing": 112.5
         },
         {
-            "aluminumIngot": 160,
-            "copperIngot": 80
+            "aluminumIngot": 150.0,
+            "copperIngot": 75.0
         },
         true
     ],
@@ -436,11 +436,11 @@
         "assembler",
         "Assembly Director System",
         {
-            "assemblyDirectorSystem": 80
+            "assemblyDirectorSystem": 0.75
         },
         {
-            "adaptiveControlUnit": 160,
-            "supercomputer": 80
+            "adaptiveControlUnit": 1.5,
+            "supercomputer": 0.75
         },
         false
     ],
@@ -448,11 +448,11 @@
         "assembler",
         "Automated Wiring",
         {
-            "automatedWiring": 24
+            "automatedWiring": 2.5
         },
         {
-            "stator": 24,
-            "cable": 480
+            "stator": 2.5,
+            "cable": 50.0
         },
         false
     ],
@@ -460,11 +460,11 @@
         "assembler",
         "Black Powder",
         {
-            "blackPowder": 8
+            "blackPowder": 7.5
         },
         {
-            "coal": 8,
-            "sulfur": 16
+            "coal": 7.5,
+            "sulfur": 15.0
         },
         false
     ],
@@ -472,11 +472,11 @@
         "assembler",
         "Bolted Frame",
         {
-            "modularFrame": 48
+            "modularFrame": 5.0
         },
         {
-            "reinforcedIronPlate": 72,
-            "screw": 1344
+            "reinforcedIronPlate": 7.5,
+            "screw": 140.0
         },
         true
     ],
@@ -484,11 +484,11 @@
         "assembler",
         "Bolted Iron Plate",
         {
-            "reinforcedIronPlate": 36
+            "reinforcedIronPlate": 15
         },
         {
-            "ironPlate": 216,
-            "screw": 600
+            "ironPlate": 90,
+            "screw": 250
         },
         true
     ],
@@ -496,11 +496,11 @@
         "assembler",
         "Caterium Circuit Board",
         {
-            "circuitBoard": 336
+            "circuitBoard": 8.75
         },
         {
-            "plastic": 480,
-            "quickwire": 1440
+            "plastic": 12.5,
+            "quickwire": 37.5
         },
         true
     ],
@@ -508,11 +508,11 @@
         "assembler",
         "Cheap Silica",
         {
-            "silica": 112
+            "silica": 26.25
         },
         {
-            "rawQuartz": 48,
-            "limestone": 80
+            "rawQuartz": 11.25,
+            "limestone": 18.75
         },
         true
     ],
@@ -520,11 +520,11 @@
         "assembler",
         "Circuit Board",
         {
-            "circuitBoard": 8
+            "circuitBoard": 7.5
         },
         {
-            "copperSheet": 16,
-            "plastic": 32
+            "copperSheet": 15.0,
+            "plastic": 30.0
         },
         false
     ],
@@ -532,11 +532,11 @@
         "assembler",
         "Coated Iron Canister",
         {
-            "emptyCanister": 16
+            "emptyCanister": 60
         },
         {
-            "ironPlate": 8,
-            "copperSheet": 4
+            "ironPlate": 30,
+            "copperSheet": 15
         },
         true
     ],
@@ -544,11 +544,11 @@
         "assembler",
         "Coated Iron Plate",
         {
-            "ironPlate": 180
+            "ironPlate": 75
         },
         {
-            "ironIngot": 120,
-            "plastic": 24
+            "ironIngot": 50,
+            "plastic": 10
         },
         true
     ],
@@ -556,11 +556,11 @@
         "assembler",
         "Compacted Coal",
         {
-            "compactedCoal": 60
+            "compactedCoal": 25
         },
         {
-            "coal": 60,
-            "sulfur": 60
+            "coal": 25,
+            "sulfur": 25
         },
         true
     ],
@@ -568,11 +568,11 @@
         "assembler",
         "Copper Rotor",
         {
-            "rotor": 48
+            "rotor": 11.25
         },
         {
-            "copperSheet": 96,
-            "screw": 832
+            "copperSheet": 22.5,
+            "screw": 195.0
         },
         true
     ],
@@ -580,11 +580,11 @@
         "assembler",
         "Crystal Computer",
         {
-            "computer": 192
+            "computer": 2.8125
         },
         {
-            "circuitBoard": 512,
-            "crystalOscillator": 192
+            "circuitBoard": 7.5,
+            "crystalOscillator": 2.8125
         },
         true
     ],
@@ -592,11 +592,11 @@
         "assembler",
         "Electric Motor",
         {
-            "motor": 32
+            "motor": 7.5
         },
         {
-            "electromagneticControlRod": 16,
-            "rotor": 32
+            "electromagneticControlRod": 3.75,
+            "rotor": 7.5
         },
         true
     ],
@@ -604,11 +604,11 @@
         "assembler",
         "Electrode Circuit Board",
         {
-            "circuitBoard": 12
+            "circuitBoard": 5
         },
         {
-            "rubber": 72,
-            "petroleumCoke": 108
+            "rubber": 30,
+            "petroleumCoke": 45
         },
         true
     ],
@@ -616,11 +616,11 @@
         "assembler",
         "Electromagnetic Connection Rod",
         {
-            "electromagneticControlRod": 30
+            "electromagneticControlRod": 8
         },
         {
-            "stator": 30,
-            "highSpeed Connector": 15
+            "stator": 8,
+            "highSpeed Connector": 4
         },
         true
     ],
@@ -628,11 +628,11 @@
         "assembler",
         "Electromagnetic Control Rod",
         {
-            "electromagneticControlRod": 60
+            "electromagneticControlRod": 4
         },
         {
-            "stator": 90,
-            "aiLimiter": 60
+            "stator": 6,
+            "aiLimiter": 4
         },
         false
     ],
@@ -640,11 +640,11 @@
         "assembler",
         "Encased Industrial Beam",
         {
-            "encasedIndustrialBeam": 10
+            "encasedIndustrialBeam": 6
         },
         {
-            "steelBeam": 40,
-            "concrete": 50
+            "steelBeam": 24,
+            "concrete": 30
         },
         false
     ],
@@ -652,11 +652,11 @@
         "assembler",
         "Encased Industrial Pipe",
         {
-            "encasedIndustrialBeam": 15
+            "encasedIndustrialBeam": 4
         },
         {
-            "steelPipe": 105,
-            "concrete": 75
+            "steelPipe": 28,
+            "concrete": 20
         },
         true
     ],
@@ -664,11 +664,11 @@
         "assembler",
         "Encased Plutonium Cell",
         {
-            "encasedPlutoniumCell": 12
+            "encasedPlutoniumCell": 5
         },
         {
-            "plutoniumPellet": 24,
-            "concrete": 48
+            "plutoniumPellet": 10,
+            "concrete": 20
         },
         false
     ],
@@ -676,11 +676,11 @@
         "assembler",
         "Fabric",
         {
-            "fabric": 4
+            "fabric": 15
         },
         {
-            "mycelia": 4,
-            "biomass": 20
+            "mycelia": 15,
+            "biomass": 75
         },
         false
     ],
@@ -688,11 +688,11 @@
         "assembler",
         "Fine Black Powder",
         {
-            "blackPowder": 64
+            "blackPowder": 15.0
         },
         {
-            "sulfur": 32,
-            "compactedCoal": 16
+            "sulfur": 7.5,
+            "compactedCoal": 3.75
         },
         true
     ],
@@ -700,11 +700,11 @@
         "assembler",
         "Fine Concrete",
         {
-            "concrete": 240
+            "concrete": 25.0
         },
         {
-            "silica": 72,
-            "limestone": 288
+            "silica": 7.5,
+            "limestone": 30.0
         },
         true
     ],
@@ -712,11 +712,11 @@
         "assembler",
         "Fused Quickwire",
         {
-            "quickwire": 96
+            "quickwire": 90.0
         },
         {
-            "cateriumIngot": 8,
-            "copperIngot": 40
+            "cateriumIngot": 7.5,
+            "copperIngot": 37.5
         },
         true
     ],
@@ -724,11 +724,11 @@
         "assembler",
         "Fused Wire",
         {
-            "wire": 600
+            "wire": 90
         },
         {
-            "copperIngot": 80,
-            "cateriumIngot": 20
+            "copperIngot": 12,
+            "cateriumIngot": 3
         },
         true
     ],
@@ -736,11 +736,11 @@
         "assembler",
         "Heat Exchanger",
         {
-            "heatSink": 6
+            "heatSink": 10
         },
         {
-            "aluminumCasing": 18,
-            "rubber": 18
+            "aluminumCasing": 30,
+            "rubber": 30
         },
         true
     ],
@@ -748,11 +748,11 @@
         "assembler",
         "Heat Sink",
         {
-            "heatSink": 8
+            "heatSink": 7.5
         },
         {
-            "alcladAluminumSheet": 40,
-            "copperSheet": 24
+            "alcladAluminumSheet": 37.5,
+            "copperSheet": 22.5
         },
         false
     ],
@@ -760,11 +760,11 @@
         "assembler",
         "Insulated Cable",
         {
-            "cable": 240
+            "cable": 100
         },
         {
-            "wire": 108,
-            "rubber": 72
+            "wire": 45,
+            "rubber": 30
         },
         true
     ],
@@ -772,11 +772,11 @@
         "assembler",
         "Modular Frame",
         {
-            "modularFrame": 120
+            "modularFrame": 2
         },
         {
-            "reinforcedIronPlate": 180,
-            "ironRod": 720
+            "reinforcedIronPlate": 3,
+            "ironRod": 12
         },
         false
     ],
@@ -784,11 +784,11 @@
         "assembler",
         "Motor",
         {
-            "motor": 12
+            "motor": 5
         },
         {
-            "rotor": 24,
-            "stator": 24
+            "rotor": 10,
+            "stator": 10
         },
         false
     ],
@@ -796,11 +796,11 @@
         "assembler",
         "Nobelisk",
         {
-            "nobelisk": 20
+            "nobelisk": 3
         },
         {
-            "blackPowder": 100,
-            "steelPipe": 200
+            "blackPowder": 15,
+            "steelPipe": 30
         },
         false
     ],
@@ -808,11 +808,11 @@
         "assembler",
         "OC Supercomputer",
         {
-            "supercomputer": 20
+            "supercomputer": 3
         },
         {
-            "radioControlUnit": 60,
-            "coolingSystem": 60
+            "radioControlUnit": 9,
+            "coolingSystem": 9
         },
         true
     ],
@@ -820,11 +820,11 @@
         "assembler",
         "Plutonium Fuel Unit",
         {
-            "plutoniumFuelRod": 120
+            "plutoniumFuelRod": 0.5
         },
         {
-            "encasedPlutoniumCell": 2400,
-            "pressureConversionCube": 120
+            "encasedPlutoniumCell": 10.0,
+            "pressureConversionCube": 0.5
         },
         true
     ],
@@ -832,11 +832,11 @@
         "assembler",
         "Pressure Conversion Cube",
         {
-            "pressureConversionCube": 60
+            "pressureConversionCube": 1
         },
         {
-            "fusedModularFrame": 60,
-            "radioControlUnit": 120
+            "fusedModularFrame": 1,
+            "radioControlUnit": 2
         },
         false
     ],
@@ -844,11 +844,11 @@
         "assembler",
         "Quickwire Cable",
         {
-            "cable": 264
+            "cable": 27.5
         },
         {
-            "quickwire": 72,
-            "rubber": 48
+            "quickwire": 7.5,
+            "rubber": 5.0
         },
         true
     ],
@@ -856,11 +856,11 @@
         "assembler",
         "Quickwire Stator",
         {
-            "stator": 30
+            "stator": 8
         },
         {
-            "steelPipe": 60,
-            "quickwire": 225
+            "steelPipe": 16,
+            "quickwire": 60
         },
         true
     ],
@@ -868,11 +868,11 @@
         "assembler",
         "Reinforced Iron Plate",
         {
-            "reinforcedIronPlate": 12
+            "reinforcedIronPlate": 5
         },
         {
-            "ironPlate": 72,
-            "screw": 144
+            "ironPlate": 30,
+            "screw": 60
         },
         false
     ],
@@ -880,11 +880,11 @@
         "assembler",
         "Rotor",
         {
-            "rotor": 15
+            "rotor": 4
         },
         {
-            "ironRod": 75,
-            "screw": 375
+            "ironRod": 20,
+            "screw": 100
         },
         false
     ],
@@ -892,11 +892,11 @@
         "assembler",
         "Rubber Concrete",
         {
-            "concrete": 108
+            "concrete": 45
         },
         {
-            "limestone": 120,
-            "rubber": 24
+            "limestone": 50,
+            "rubber": 10
         },
         true
     ],
@@ -904,11 +904,11 @@
         "assembler",
         "Silicon Circuit Board",
         {
-            "circuitBoard": 120
+            "circuitBoard": 12.5
         },
         {
-            "copperSheet": 264,
-            "silica": 264
+            "copperSheet": 27.5,
+            "silica": 27.5
         },
         true
     ],
@@ -916,11 +916,11 @@
         "assembler",
         "Smart Plating",
         {
-            "smartPlating": 30
+            "smartPlating": 2
         },
         {
-            "reinforcedIronPlate": 30,
-            "rotor": 30
+            "reinforcedIronPlate": 2,
+            "rotor": 2
         },
         false
     ],
@@ -928,11 +928,11 @@
         "assembler",
         "Stator",
         {
-            "stator": 12
+            "stator": 5
         },
         {
-            "steelPipe": 36,
-            "wire": 96
+            "steelPipe": 15,
+            "wire": 40
         },
         false
     ],
@@ -940,11 +940,11 @@
         "assembler",
         "Steel Coated Plate",
         {
-            "ironPlate": 432
+            "ironPlate": 45.0
         },
         {
-            "steelIngot": 72,
-            "plastic": 48
+            "steelIngot": 7.5,
+            "plastic": 5.0
         },
         true
     ],
@@ -952,11 +952,11 @@
         "assembler",
         "Steel Rotor",
         {
-            "rotor": 12
+            "rotor": 5
         },
         {
-            "steelPipe": 24,
-            "wire": 72
+            "steelPipe": 10,
+            "wire": 30
         },
         true
     ],
@@ -964,11 +964,11 @@
         "assembler",
         "Steeled Frame",
         {
-            "modularFrame": 180
+            "modularFrame": 3
         },
         {
-            "reinforcedIronPlate": 120,
-            "steelPipe": 600
+            "reinforcedIronPlate": 2,
+            "steelPipe": 10
         },
         true
     ],
@@ -976,11 +976,11 @@
         "assembler",
         "Stitched Iron Plate",
         {
-            "reinforcedIronPlate": 96
+            "reinforcedIronPlate": 5.625
         },
         {
-            "ironPlate": 320,
-            "wire": 640
+            "ironPlate": 18.75,
+            "wire": 37.5
         },
         true
     ],
@@ -988,11 +988,11 @@
         "assembler",
         "Versatile Framework",
         {
-            "versatileFramework": 48
+            "versatileFramework": 5.0
         },
         {
-            "modularFrame": 24,
-            "steelBeam": 288
+            "modularFrame": 2.5,
+            "steelBeam": 30.0
         },
         false
     ],
@@ -1000,13 +1000,13 @@
         "manufacturer",
         "Adaptive Control Unit",
         {
-            "adaptiveControlUnit": 240
+            "adaptiveControlUnit": 1.0
         },
         {
-            "automatedWiring": 1800,
-            "circuitBoard": 1200,
-            "heavyModularFrame": 240,
-            "computer": 240
+            "automatedWiring": 7.5,
+            "circuitBoard": 5.0,
+            "heavyModularFrame": 1.0,
+            "computer": 1.0
         },
         false
     ],
@@ -1014,13 +1014,13 @@
         "manufacturer",
         "Automated Miner",
         {
-            "portableMiner": 60
+            "portableMiner": 1
         },
         {
-            "motor": 60,
-            "steelPipe": 240,
-            "ironRod": 240,
-            "ironPlate": 120
+            "motor": 1,
+            "steelPipe": 4,
+            "ironRod": 4,
+            "ironPlate": 2
         },
         true
     ],
@@ -1028,13 +1028,13 @@
         "manufacturer",
         "Beacon",
         {
-            "beacon": 8
+            "beacon": 7.5
         },
         {
-            "ironPlate": 24,
-            "ironRod": 8,
-            "wire": 120,
-            "cable": 16
+            "ironPlate": 22.5,
+            "ironRod": 7.5,
+            "wire": 112.5,
+            "cable": 15.0
         },
         false
     ],
@@ -1042,12 +1042,12 @@
         "manufacturer",
         "Caterium Computer",
         {
-            "computer": 16
+            "computer": 3.75
         },
         {
-            "circuitBoard": 112,
-            "quickwire": 448,
-            "rubber": 192
+            "circuitBoard": 26.25,
+            "quickwire": 105.0,
+            "rubber": 45.0
         },
         true
     ],
@@ -1055,13 +1055,13 @@
         "manufacturer",
         "Classic Battery",
         {
-            "battery": 32
+            "battery": 30.0
         },
         {
-            "sulfur": 48,
-            "alcladAluminumSheet": 56,
-            "plastic": 64,
-            "wire": 96
+            "sulfur": 45.0,
+            "alcladAluminumSheet": 52.5,
+            "plastic": 60.0,
+            "wire": 90.0
         },
         true
     ],
@@ -1069,13 +1069,13 @@
         "manufacturer",
         "Computer",
         {
-            "computer": 24
+            "computer": 2.5
         },
         {
-            "circuitBoard": 240,
-            "cable": 216,
-            "plastic": 432,
-            "screw": 1248
+            "circuitBoard": 25.0,
+            "cable": 22.5,
+            "plastic": 45.0,
+            "screw": 130.0
         },
         false
     ],
@@ -1083,12 +1083,12 @@
         "manufacturer",
         "Crystal Beacon",
         {
-            "beacon": 2400
+            "beacon": 10.0
         },
         {
-            "steelBeam": 480,
-            "steelPipe": 1920,
-            "crystalOscillator": 120
+            "steelBeam": 2.0,
+            "steelPipe": 8.0,
+            "crystalOscillator": 0.5
         },
         true
     ],
@@ -1096,12 +1096,12 @@
         "manufacturer",
         "Crystal Oscillator",
         {
-            "crystalOscillator": 240
+            "crystalOscillator": 1.0
         },
         {
-            "quartzCrystal": 4320,
-            "cable": 3360,
-            "reinforcedIronPlate": 600
+            "quartzCrystal": 18.0,
+            "cable": 14.0,
+            "reinforcedIronPlate": 2.5
         },
         false
     ],
@@ -1109,12 +1109,12 @@
         "manufacturer",
         "Flexible Framework",
         {
-            "versatileFramework": 32
+            "versatileFramework": 7.5
         },
         {
-            "modularFrame": 16,
-            "steelBeam": 96,
-            "rubber": 128
+            "modularFrame": 3.75,
+            "steelBeam": 22.5,
+            "rubber": 30.0
         },
         true
     ],
@@ -1122,12 +1122,12 @@
         "manufacturer",
         "Gas Filter",
         {
-            "gasFilter": 8
+            "gasFilter": 7.5
         },
         {
-            "coal": 40,
-            "rubber": 16,
-            "fabric": 16
+            "coal": 37.5,
+            "rubber": 15.0,
+            "fabric": 15.0
         },
         false
     ],
@@ -1135,13 +1135,13 @@
         "manufacturer",
         "Heavy Encased Frame",
         {
-            "heavyModularFrame": 192
+            "heavyModularFrame": 2.8125
         },
         {
-            "modularFrame": 512,
-            "encasedIndustrialBeam": 640,
-            "steelPipe": 2304,
-            "concrete": 1408
+            "modularFrame": 7.5,
+            "encasedIndustrialBeam": 9.375,
+            "steelPipe": 33.75,
+            "concrete": 20.625
         },
         true
     ],
@@ -1149,13 +1149,13 @@
         "manufacturer",
         "Heavy Flexible Frame",
         {
-            "heavyModularFrame": 16
+            "heavyModularFrame": 3.75
         },
         {
-            "modularFrame": 80,
-            "encasedIndustrialBeam": 48,
-            "rubber": 320,
-            "screw": 1664
+            "modularFrame": 18.75,
+            "encasedIndustrialBeam": 11.25,
+            "rubber": 75.0,
+            "screw": 390.0
         },
         true
     ],
@@ -1163,13 +1163,13 @@
         "manufacturer",
         "Heavy Modular Frame",
         {
-            "heavyModularFrame": 30
+            "heavyModularFrame": 2
         },
         {
-            "modularFrame": 150,
-            "steelPipe": 450,
-            "encasedIndustrialBeam": 150,
-            "screw": 3000
+            "modularFrame": 10,
+            "steelPipe": 30,
+            "encasedIndustrialBeam": 10,
+            "screw": 200
         },
         false
     ],
@@ -1177,12 +1177,12 @@
         "manufacturer",
         "High-Speed Connector",
         {
-            "highSpeed Connector": 16
+            "highSpeed Connector": 3.75
         },
         {
-            "quickwire": 896,
-            "cable": 160,
-            "circuitBoard": 16
+            "quickwire": 210.0,
+            "cable": 37.5,
+            "circuitBoard": 3.75
         },
         false
     ],
@@ -1190,12 +1190,12 @@
         "manufacturer",
         "High-Speed Wiring",
         {
-            "automatedWiring": 128
+            "automatedWiring": 7.5
         },
         {
-            "stator": 64,
-            "wire": 1280,
-            "highSpeed Connector": 32
+            "stator": 3.75,
+            "wire": 75.0,
+            "highSpeed Connector": 1.875
         },
         true
     ],
@@ -1203,13 +1203,13 @@
         "manufacturer",
         "Infused Uranium Cell",
         {
-            "encasedUraniumCell": 48
+            "encasedUraniumCell": 20
         },
         {
-            "uranium": 60,
-            "silica": 36,
-            "sulfur": 60,
-            "quickwire": 180
+            "uranium": 25,
+            "silica": 15,
+            "sulfur": 25,
+            "quickwire": 75
         },
         true
     ],
@@ -1217,12 +1217,12 @@
         "manufacturer",
         "Insulated Crystal Oscillator",
         {
-            "crystalOscillator": 32
+            "crystalOscillator": 1.875
         },
         {
-            "quartzCrystal": 320,
-            "rubber": 224,
-            "aiLimiter": 32
+            "quartzCrystal": 18.75,
+            "rubber": 13.125,
+            "aiLimiter": 1.875
         },
         true
     ],
@@ -1230,12 +1230,12 @@
         "manufacturer",
         "Iodine Infused Filter",
         {
-            "iodineInfusedFilter": 16
+            "iodineInfusedFilter": 3.75
         },
         {
-            "gasFilter": 16,
-            "quickwire": 128,
-            "aluminumCasing": 16
+            "gasFilter": 3.75,
+            "quickwire": 30.0,
+            "aluminumCasing": 3.75
         },
         false
     ],
@@ -1243,12 +1243,12 @@
         "manufacturer",
         "Magnetic Field Generator",
         {
-            "magneticFieldGenerator": 240
+            "magneticFieldGenerator": 1.0
         },
         {
-            "versatileFramework": 600,
-            "electromagneticControlRod": 240,
-            "battery": 1200
+            "versatileFramework": 2.5,
+            "electromagneticControlRod": 1.0,
+            "battery": 5.0
         },
         false
     ],
@@ -1256,12 +1256,12 @@
         "manufacturer",
         "Modular Engine",
         {
-            "modularEngine": 60
+            "modularEngine": 1
         },
         {
-            "motor": 120,
-            "rubber": 900,
-            "smartPlating": 120
+            "motor": 2,
+            "rubber": 15,
+            "smartPlating": 2
         },
         false
     ],
@@ -1269,12 +1269,12 @@
         "manufacturer",
         "Plastic Smart Plating",
         {
-            "smartPlating": 48
+            "smartPlating": 5.0
         },
         {
-            "reinforcedIronPlate": 24,
-            "rotor": 24,
-            "plastic": 72
+            "reinforcedIronPlate": 2.5,
+            "rotor": 2.5,
+            "plastic": 7.5
         },
         true
     ],
@@ -1282,13 +1282,13 @@
         "manufacturer",
         "Plutonium Fuel Rod",
         {
-            "plutoniumFuelRod": 240
+            "plutoniumFuelRod": 0.25
         },
         {
-            "encasedPlutoniumCell": 7200,
-            "steelBeam": 4320,
-            "electromagneticControlRod": 1440,
-            "heatSink": 2400
+            "encasedPlutoniumCell": 7.5,
+            "steelBeam": 4.5,
+            "electromagneticControlRod": 1.5,
+            "heatSink": 2.5
         },
         false
     ],
@@ -1296,12 +1296,12 @@
         "manufacturer",
         "Radio Connection Unit",
         {
-            "radioControlUnit": 16
+            "radioControlUnit": 3.75
         },
         {
-            "heatSink": 64,
-            "highSpeed Connector": 32,
-            "quartzCrystal": 192
+            "heatSink": 15.0,
+            "highSpeed Connector": 7.5,
+            "quartzCrystal": 45.0
         },
         true
     ],
@@ -1309,13 +1309,13 @@
         "manufacturer",
         "Radio Control System",
         {
-            "radioControlUnit": 120
+            "radioControlUnit": 4.5
         },
         {
-            "crystalOscillator": 40,
-            "circuitBoard": 400,
-            "aluminumCasing": 2400,
-            "rubber": 1200
+            "crystalOscillator": 1.5,
+            "circuitBoard": 15.0,
+            "aluminumCasing": 90.0,
+            "rubber": 45.0
         },
         true
     ],
@@ -1323,12 +1323,12 @@
         "manufacturer",
         "Radio Control Unit",
         {
-            "radioControlUnit": 96
+            "radioControlUnit": 2.5
         },
         {
-            "aluminumCasing": 1536,
-            "crystalOscillator": 48,
-            "computer": 48
+            "aluminumCasing": 40.0,
+            "crystalOscillator": 1.25,
+            "computer": 1.25
         },
         false
     ],
@@ -1336,13 +1336,13 @@
         "manufacturer",
         "Rifle Cartridge",
         {
-            "rifleCartridge": 100
+            "rifleCartridge": 15
         },
         {
-            "beacon": 20,
-            "steelPipe": 200,
-            "blackPowder": 200,
-            "rubber": 200
+            "beacon": 3,
+            "steelPipe": 30,
+            "blackPowder": 30,
+            "rubber": 30
         },
         false
     ],
@@ -1350,12 +1350,12 @@
         "manufacturer",
         "Rigour Motor",
         {
-            "motor": 288
+            "motor": 7.5
         },
         {
-            "rotor": 144,
-            "stator": 144,
-            "crystalOscillator": 48
+            "rotor": 3.75,
+            "stator": 3.75,
+            "crystalOscillator": 1.25
         },
         true
     ],
@@ -1363,12 +1363,12 @@
         "manufacturer",
         "Seismic Nobelisk",
         {
-            "nobelisk": 160
+            "nobelisk": 6.0
         },
         {
-            "blackPowder": 320,
-            "steelPipe": 320,
-            "crystalOscillator": 40
+            "blackPowder": 12.0,
+            "steelPipe": 12.0,
+            "crystalOscillator": 1.5
         },
         true
     ],
@@ -1376,12 +1376,12 @@
         "manufacturer",
         "Silicon High-Speed Connector",
         {
-            "highSpeed Connector": 80
+            "highSpeed Connector": 3.0
         },
         {
-            "quickwire": 2400,
-            "silica": 1000,
-            "circuitBoard": 80
+            "quickwire": 90.0,
+            "silica": 37.5,
+            "circuitBoard": 3.0
         },
         true
     ],
@@ -1389,13 +1389,13 @@
         "manufacturer",
         "Super-State Computer",
         {
-            "supercomputer": 100
+            "supercomputer": 2.4
         },
         {
-            "computer": 150,
-            "electromagneticControlRod": 100,
-            "battery": 1000,
-            "wire": 2250
+            "computer": 3.5999999999999996,
+            "electromagneticControlRod": 2.4,
+            "battery": 24.0,
+            "wire": 54.0
         },
         true
     ],
@@ -1403,13 +1403,13 @@
         "manufacturer",
         "Supercomputer",
         {
-            "supercomputer": 32
+            "supercomputer": 1.875
         },
         {
-            "computer": 64,
-            "aiLimiter": 64,
-            "highSpeed Connector": 96,
-            "plastic": 896
+            "computer": 3.75,
+            "aiLimiter": 3.75,
+            "highSpeed Connector": 5.625,
+            "plastic": 52.5
         },
         false
     ],
@@ -1417,13 +1417,13 @@
         "manufacturer",
         "Thermal Propulsion Rocket",
         {
-            "thermalPropulsionRocket": 240
+            "thermalPropulsionRocket": 1.0
         },
         {
-            "modularEngine": 600,
-            "turboMotor": 240,
-            "coolingSystem": 720,
-            "fusedModularFrame": 240
+            "modularEngine": 2.5,
+            "turboMotor": 1.0,
+            "coolingSystem": 3.0,
+            "fusedModularFrame": 1.0
         },
         false
     ],
@@ -1431,13 +1431,13 @@
         "manufacturer",
         "Turbo Electric Motor",
         {
-            "turboMotor": 192
+            "turboMotor": 2.8125
         },
         {
-            "motor": 448,
-            "radioControlUnit": 576,
-            "electromagneticControlRod": 320,
-            "rotor": 448
+            "motor": 6.5625,
+            "radioControlUnit": 8.4375,
+            "electromagneticControlRod": 4.6875,
+            "rotor": 6.5625
         },
         true
     ],
@@ -1445,13 +1445,13 @@
         "manufacturer",
         "Turbo Motor",
         {
-            "turboMotor": 32
+            "turboMotor": 1.875
         },
         {
-            "coolingSystem": 128,
-            "radioControlUnit": 64,
-            "motor": 128,
-            "rubber": 768
+            "coolingSystem": 7.5,
+            "radioControlUnit": 3.75,
+            "motor": 7.5,
+            "rubber": 45.0
         },
         false
     ],
@@ -1459,13 +1459,13 @@
         "manufacturer",
         "Turbo Pressure Motor",
         {
-            "turboMotor": 64
+            "turboMotor": 3.75
         },
         {
-            "motor": 128,
-            "pressureConversionCube": 32,
-            "packagedNitrogenGas": 768,
-            "stator": 256
+            "motor": 7.5,
+            "pressureConversionCube": 1.875,
+            "packagedNitrogenGas": 45.0,
+            "stator": 15.0
         },
         true
     ],
@@ -1473,12 +1473,12 @@
         "manufacturer",
         "Uranium Fuel Rod",
         {
-            "uraniumFuelRod": 150
+            "uraniumFuelRod": 0.4
         },
         {
-            "encasedUraniumCell": 7500,
-            "encasedIndustrialBeam": 450,
-            "electromagneticControlRod": 750
+            "encasedUraniumCell": 20.0,
+            "encasedIndustrialBeam": 1.2000000000000002,
+            "electromagneticControlRod": 2.0
         },
         false
     ],
@@ -1486,13 +1486,13 @@
         "manufacturer",
         "Uranium Fuel Unit",
         {
-            "uraniumFuelRod": 900
+            "uraniumFuelRod": 0.6000000000000001
         },
         {
-            "encasedUraniumCell": 30000,
-            "electromagneticControlRod": 3000,
-            "crystalOscillator": 900,
-            "beacon": 1800
+            "encasedUraniumCell": 20.0,
+            "electromagneticControlRod": 2.0,
+            "crystalOscillator": 0.6000000000000001,
+            "beacon": 1.2000000000000002
         },
         true
     ],
@@ -1500,10 +1500,10 @@
         "smelter",
         "Caterium Ingot",
         {
-            "cateriumIngot": 4
+            "cateriumIngot": 15
         },
         {
-            "cateriumOre": 12
+            "cateriumOre": 45
         },
         false
     ],
@@ -1511,10 +1511,10 @@
         "smelter",
         "Copper Ingot",
         {
-            "copperIngot": 2
+            "copperIngot": 30
         },
         {
-            "copperOre": 2
+            "copperOre": 30
         },
         false
     ],
@@ -1522,10 +1522,10 @@
         "smelter",
         "Iron Ingot",
         {
-            "ironIngot": 2
+            "ironIngot": 30
         },
         {
-            "ironOre": 2
+            "ironOre": 30
         },
         false
     ],
@@ -1533,10 +1533,10 @@
         "smelter",
         "Pure Aluminum Ingot",
         {
-            "aluminumIngot": 2
+            "aluminumIngot": 30
         },
         {
-            "aluminumScrap": 4
+            "aluminumScrap": 60
         },
         true
     ],
@@ -1544,11 +1544,11 @@
         "foundry",
         "Aluminum Ingot",
         {
-            "aluminumIngot": 16
+            "aluminumIngot": 60
         },
         {
-            "aluminumScrap": 24,
-            "silica": 20
+            "aluminumScrap": 90,
+            "silica": 75
         },
         false
     ],
@@ -1556,11 +1556,11 @@
         "foundry",
         "Coke Steel Ingot",
         {
-            "steelIngot": 240
+            "steelIngot": 100
         },
         {
-            "ironOre": 180,
-            "petroleumCoke": 180
+            "ironOre": 75,
+            "petroleumCoke": 75
         },
         true
     ],
@@ -1568,11 +1568,11 @@
         "foundry",
         "Compacted Steel Ingot",
         {
-            "steelIngot": 160
+            "steelIngot": 37.5
         },
         {
-            "ironOre": 96,
-            "compactedCoal": 48
+            "ironOre": 22.5,
+            "compactedCoal": 11.25
         },
         true
     ],
@@ -1580,11 +1580,11 @@
         "foundry",
         "Copper Alloy Ingot",
         {
-            "copperIngot": 240
+            "copperIngot": 100
         },
         {
-            "copperOre": 120,
-            "ironOre": 60
+            "copperOre": 50,
+            "ironOre": 25
         },
         true
     ],
@@ -1592,11 +1592,11 @@
         "foundry",
         "Iron Alloy Ingot",
         {
-            "ironIngot": 30
+            "ironIngot": 50
         },
         {
-            "ironOre": 12,
-            "copperOre": 12
+            "ironOre": 20,
+            "copperOre": 20
         },
         true
     ],
@@ -1604,11 +1604,11 @@
         "foundry",
         "Solid Steel Ingot",
         {
-            "steelIngot": 9
+            "steelIngot": 60
         },
         {
-            "ironIngot": 6,
-            "coal": 6
+            "ironIngot": 40,
+            "coal": 40
         },
         true
     ],
@@ -1616,11 +1616,11 @@
         "foundry",
         "Steel Ingot",
         {
-            "steelIngot": 12
+            "steelIngot": 45
         },
         {
-            "ironOre": 12,
-            "coal": 12
+            "ironOre": 45,
+            "coal": 45
         },
         false
     ],
@@ -1628,12 +1628,12 @@
         "refinery",
         "Alumina Solution",
         {
-            "aluminaSolution": 72,
-            "silica": 30
+            "aluminaSolution": 120,
+            "silica": 50
         },
         {
-            "bauxite": 72,
-            "water": 108
+            "bauxite": 120,
+            "water": 180
         },
         false
     ],
@@ -1641,12 +1641,12 @@
         "refinery",
         "Aluminum Scrap",
         {
-            "aluminumScrap": 6,
-            "water": 2
+            "aluminumScrap": 360,
+            "water": 120
         },
         {
-            "aluminaSolution": 4,
-            "coal": 2
+            "aluminaSolution": 240,
+            "coal": 120
         },
         false
     ],
@@ -1654,11 +1654,11 @@
         "refinery",
         "Coated Cable",
         {
-            "cable": 72
+            "cable": 67.5
         },
         {
-            "wire": 40,
-            "heavyOilResidue": 16
+            "wire": 37.5,
+            "heavyOilResidue": 15.0
         },
         true
     ],
@@ -1666,11 +1666,11 @@
         "refinery",
         "Diluted Packaged Fuel",
         {
-            "packagedFuel": 4
+            "packagedFuel": 60
         },
         {
-            "heavyOilResidue": 2,
-            "packagedWater": 4
+            "heavyOilResidue": 30,
+            "packagedWater": 60
         },
         true
     ],
@@ -1678,12 +1678,12 @@
         "refinery",
         "Electrode - Aluminum Scrap",
         {
-            "aluminumScrap": 80,
-            "water": 28
+            "aluminumScrap": 300,
+            "water": 105
         },
         {
-            "aluminaSolution": 48,
-            "petroleumCoke": 16
+            "aluminaSolution": 180,
+            "petroleumCoke": 60
         },
         true
     ],
@@ -1691,11 +1691,11 @@
         "refinery",
         "Fuel",
         {
-            "fuel": 24,
-            "polymerResin": 18
+            "fuel": 40,
+            "polymerResin": 30
         },
         {
-            "crudeOil": 36
+            "crudeOil": 60
         },
         false
     ],
@@ -1703,11 +1703,11 @@
         "refinery",
         "Heavy Oil Residue",
         {
-            "heavyOilResidue": 24,
-            "polymerResin": 12
+            "heavyOilResidue": 40,
+            "polymerResin": 20
         },
         {
-            "crudeOil": 18
+            "crudeOil": 30
         },
         true
     ],
@@ -1715,11 +1715,11 @@
         "refinery",
         "Liquid Biofuel",
         {
-            "liquidBiofuel": 16
+            "liquidBiofuel": 60
         },
         {
-            "solidBiofuel": 24,
-            "water": 12
+            "solidBiofuel": 90,
+            "water": 45
         },
         false
     ],
@@ -1727,10 +1727,10 @@
         "refinery",
         "Petroleum Coke",
         {
-            "petroleumCoke": 72
+            "petroleumCoke": 120
         },
         {
-            "heavyOilResidue": 24
+            "heavyOilResidue": 40
         },
         false
     ],
@@ -1738,11 +1738,11 @@
         "refinery",
         "Plastic",
         {
-            "plastic": 12,
-            "heavyOilResidue": 6
+            "plastic": 20,
+            "heavyOilResidue": 10
         },
         {
-            "crudeOil": 18
+            "crudeOil": 30
         },
         false
     ],
@@ -1750,11 +1750,11 @@
         "refinery",
         "Polyester Fabric",
         {
-            "fabric": 12
+            "fabric": 5
         },
         {
-            "polymerResin": 192,
-            "water": 120
+            "polymerResin": 80,
+            "water": 50
         },
         true
     ],
@@ -1762,11 +1762,11 @@
         "refinery",
         "Polymer Resin",
         {
-            "polymerResin": 78,
-            "heavyOilResidue": 12
+            "polymerResin": 130,
+            "heavyOilResidue": 20
         },
         {
-            "crudeOil": 36
+            "crudeOil": 60
         },
         true
     ],
@@ -1774,11 +1774,11 @@
         "refinery",
         "Pure Caterium Ingot",
         {
-            "cateriumIngot": 5
+            "cateriumIngot": 12
         },
         {
-            "cateriumOre": 10,
-            "water": 10
+            "cateriumOre": 24,
+            "water": 24
         },
         true
     ],
@@ -1786,11 +1786,11 @@
         "refinery",
         "Pure Copper Ingot",
         {
-            "copperIngot": 360
+            "copperIngot": 37.5
         },
         {
-            "copperOre": 144,
-            "water": 96
+            "copperOre": 15.0,
+            "water": 10.0
         },
         true
     ],
@@ -1798,11 +1798,11 @@
         "refinery",
         "Pure Iron Ingot",
         {
-            "ironIngot": 156
+            "ironIngot": 65
         },
         {
-            "ironOre": 84,
-            "water": 48
+            "ironOre": 35,
+            "water": 20
         },
         true
     ],
@@ -1810,11 +1810,11 @@
         "refinery",
         "Pure Quartz Crystal",
         {
-            "quartzCrystal": 56
+            "quartzCrystal": 52.5
         },
         {
-            "rawQuartz": 72,
-            "water": 40
+            "rawQuartz": 67.5,
+            "water": 37.5
         },
         true
     ],
@@ -1822,11 +1822,11 @@
         "refinery",
         "Recycled Plastic",
         {
-            "plastic": 144
+            "plastic": 60
         },
         {
-            "rubber": 72,
-            "fuel": 72
+            "rubber": 30,
+            "fuel": 30
         },
         true
     ],
@@ -1834,11 +1834,11 @@
         "refinery",
         "Recycled Rubber",
         {
-            "rubber": 144
+            "rubber": 60
         },
         {
-            "plastic": 72,
-            "fuel": 72
+            "plastic": 30,
+            "fuel": 30
         },
         true
     ],
@@ -1846,10 +1846,10 @@
         "refinery",
         "Residual Fuel",
         {
-            "fuel": 24
+            "fuel": 40
         },
         {
-            "heavyOilResidue": 36
+            "heavyOilResidue": 60
         },
         false
     ],
@@ -1857,11 +1857,11 @@
         "refinery",
         "Residual Plastic",
         {
-            "plastic": 12
+            "plastic": 20
         },
         {
-            "polymerResin": 36,
-            "water": 12
+            "polymerResin": 60,
+            "water": 20
         },
         false
     ],
@@ -1869,11 +1869,11 @@
         "refinery",
         "Residual Rubber",
         {
-            "rubber": 12
+            "rubber": 20
         },
         {
-            "polymerResin": 24,
-            "water": 24
+            "polymerResin": 40,
+            "water": 40
         },
         false
     ],
@@ -1881,11 +1881,11 @@
         "refinery",
         "Rubber",
         {
-            "rubber": 12,
-            "heavyOilResidue": 12
+            "rubber": 20,
+            "heavyOilResidue": 20
         },
         {
-            "crudeOil": 18
+            "crudeOil": 30
         },
         false
     ],
@@ -1893,11 +1893,11 @@
         "refinery",
         "Sloppy Alumina",
         {
-            "aluminaSolution": 36
+            "aluminaSolution": 240
         },
         {
-            "bauxite": 30,
-            "water": 30
+            "bauxite": 200,
+            "water": 200
         },
         true
     ],
@@ -1905,11 +1905,11 @@
         "refinery",
         "Steamed Copper Sheet",
         {
-            "copperSheet": 24
+            "copperSheet": 22.5
         },
         {
-            "copperIngot": 24,
-            "water": 24
+            "copperIngot": 22.5,
+            "water": 22.5
         },
         true
     ],
@@ -1917,11 +1917,11 @@
         "refinery",
         "Sulfuric Acid",
         {
-            "sulfuricAcid": 30
+            "sulfuricAcid": 50
         },
         {
-            "sulfur": 30,
-            "water": 30
+            "sulfur": 50,
+            "water": 50
         },
         false
     ],
@@ -1929,11 +1929,11 @@
         "refinery",
         "Turbo Heavy Fuel",
         {
-            "turbofuel": 32
+            "turbofuel": 30.0
         },
         {
-            "heavyOilResidue": 40,
-            "compactedCoal": 32
+            "heavyOilResidue": 37.5,
+            "compactedCoal": 30.0
         },
         true
     ],
@@ -1941,11 +1941,11 @@
         "refinery",
         "Turbofuel",
         {
-            "turbofuel": 80
+            "turbofuel": 18.75
         },
         {
-            "fuel": 96,
-            "compactedCoal": 64
+            "fuel": 22.5,
+            "compactedCoal": 15.0
         },
         true
     ],
@@ -1953,11 +1953,11 @@
         "refinery",
         "Wet Concrete",
         {
-            "concrete": 12
+            "concrete": 80
         },
         {
-            "limestone": 18,
-            "water": 15
+            "limestone": 120,
+            "water": 100
         },
         true
     ],
@@ -1965,13 +1965,13 @@
         "blender",
         "Battery",
         {
-            "battery": 3,
-            "water": 3
+            "battery": 20,
+            "water": 30.0
         },
         {
-            "sulfuricAcid": 6,
-            "aluminaSolution": 6,
-            "aluminumCasing": 3
+            "sulfuricAcid": 50.0,
+            "aluminaSolution": 40,
+            "aluminumCasing": 20
         },
         false
     ],
@@ -1979,12 +1979,12 @@
         "blender",
         "Cooling Device",
         {
-            "coolingSystem": 64
+            "coolingSystem": 3.75
         },
         {
-            "heatSink": 160,
-            "motor": 32,
-            "nitrogenGas": 768
+            "heatSink": 9.375,
+            "motor": 1.875,
+            "nitrogenGas": 45.0
         },
         true
     ],
@@ -1992,13 +1992,13 @@
         "blender",
         "Cooling System",
         {
-            "coolingSystem": 10
+            "coolingSystem": 6
         },
         {
-            "heatSink": 20,
-            "rubber": 20,
-            "water": 50,
-            "nitrogenGas": 250
+            "heatSink": 12,
+            "rubber": 12,
+            "water": 30,
+            "nitrogenGas": 150
         },
         false
     ],
@@ -2006,11 +2006,11 @@
         "blender",
         "Diluted Fuel",
         {
-            "fuel": 60
+            "fuel": 100
         },
         {
-            "heavyOilResidue": 30,
-            "water": 60
+            "heavyOilResidue": 50,
+            "water": 100
         },
         true
     ],
@@ -2018,13 +2018,13 @@
         "blender",
         "Encased Uranium Cell",
         {
-            "encasedUraniumCell": 60,
-            "sulfuricAcid": 24
+            "encasedUraniumCell": 25,
+            "sulfuricAcid": 10
         },
         {
-            "uranium": 120,
-            "concrete": 36,
-            "sulfuricAcid": 96
+            "uranium": 50,
+            "concrete": 15,
+            "sulfuricAcid": 40
         },
         false
     ],
@@ -2032,14 +2032,14 @@
         "blender",
         "Fertile Uranium",
         {
-            "nonFissile Uranium": 240,
-            "water": 96
+            "nonFissile Uranium": 100,
+            "water": 40
         },
         {
-            "uranium": 60,
-            "uraniumWaste": 60,
-            "nitricAcid": 36,
-            "sulfuricAcid": 60
+            "uranium": 25,
+            "uraniumWaste": 25,
+            "nitricAcid": 15,
+            "sulfuricAcid": 25
         },
         true
     ],
@@ -2047,12 +2047,12 @@
         "blender",
         "Fused Modular Frame",
         {
-            "fusedModularFrame": 40
+            "fusedModularFrame": 1.5
         },
         {
-            "heavyModularFrame": 40,
-            "aluminumCasing": 2000,
-            "nitrogenGas": 1000
+            "heavyModularFrame": 1.5,
+            "aluminumCasing": 75.0,
+            "nitrogenGas": 37.5
         },
         false
     ],
@@ -2060,13 +2060,13 @@
         "blender",
         "Heat-Fused Frame",
         {
-            "fusedModularFrame": 20
+            "fusedModularFrame": 3
         },
         {
-            "heavyModularFrame": 20,
-            "aluminumIngot": 1000,
-            "nitricAcid": 160,
-            "fuel": 200
+            "heavyModularFrame": 3,
+            "aluminumIngot": 150,
+            "nitricAcid": 24,
+            "fuel": 30
         },
         true
     ],
@@ -2074,14 +2074,14 @@
         "blender",
         "Instant Scrap",
         {
-            "aluminumScrap": 180,
-            "water": 30
+            "aluminumScrap": 300,
+            "water": 50
         },
         {
-            "bauxite": 90,
-            "coal": 60,
-            "sulfuricAcid": 30,
-            "water": 36
+            "bauxite": 150,
+            "coal": 100,
+            "sulfuricAcid": 50,
+            "water": 60
         },
         true
     ],
@@ -2089,12 +2089,12 @@
         "blender",
         "Nitric Acid",
         {
-            "nitricAcid": 18
+            "nitricAcid": 30
         },
         {
-            "nitrogenGas": 72,
-            "water": 18,
-            "ironPlate": 6
+            "nitrogenGas": 120,
+            "water": 30,
+            "ironPlate": 10
         },
         false
     ],
@@ -2102,14 +2102,14 @@
         "blender",
         "Non-fissile Uranium",
         {
-            "nonFissile Uranium": 480,
-            "water": 144
+            "nonFissile Uranium": 50.0,
+            "water": 15.0
         },
         {
-            "uraniumWaste": 360,
-            "silica": 240,
-            "nitricAcid": 144,
-            "sulfuricAcid": 144
+            "uraniumWaste": 37.5,
+            "silica": 25.0,
+            "nitricAcid": 15.0,
+            "sulfuricAcid": 15.0
         },
         false
     ],
@@ -2117,13 +2117,13 @@
         "blender",
         "Turbo Blend Fuel",
         {
-            "turbofuel": 48
+            "turbofuel": 45.0
         },
         {
-            "fuel": 16,
-            "heavyOilResidue": 32,
-            "sulfur": 24,
-            "petroleumCoke": 24
+            "fuel": 15.0,
+            "heavyOilResidue": 30.0,
+            "sulfur": 22.5,
+            "petroleumCoke": 22.5
         },
         true
     ],
@@ -2131,11 +2131,11 @@
         "packager",
         "Packaged Alumina Solution",
         {
-            "packagedAluminaSolution": 2
+            "packagedAluminaSolution": 120
         },
         {
-            "aluminaSolution": 2,
-            "emptyCanister": 2
+            "aluminaSolution": 120,
+            "emptyCanister": 120
         },
         false
     ],
@@ -2143,11 +2143,11 @@
         "packager",
         "Packaged Fuel",
         {
-            "packagedFuel": 6
+            "packagedFuel": 40
         },
         {
-            "fuel": 6,
-            "emptyCanister": 6
+            "fuel": 40,
+            "emptyCanister": 40
         },
         false
     ],
@@ -2155,11 +2155,11 @@
         "packager",
         "Packaged Heavy Oil Residue",
         {
-            "packagedHeavyOilResidue": 8
+            "packagedHeavyOilResidue": 30
         },
         {
-            "heavyOilResidue": 8,
-            "emptyCanister": 8
+            "heavyOilResidue": 30,
+            "emptyCanister": 30
         },
         false
     ],
@@ -2167,11 +2167,11 @@
         "packager",
         "Packaged Liquid Biofuel",
         {
-            "packagedLiquidBiofuel": 6
+            "packagedLiquidBiofuel": 40
         },
         {
-            "liquidBiofuel": 6,
-            "emptyCanister": 6
+            "liquidBiofuel": 40,
+            "emptyCanister": 40
         },
         false
     ],
@@ -2179,11 +2179,11 @@
         "packager",
         "Packaged Nitric Acid",
         {
-            "packagedNitricAcid": 2
+            "packagedNitricAcid": 30
         },
         {
-            "nitricAcid": 2,
-            "emptyFluidTank": 2
+            "nitricAcid": 30,
+            "emptyFluidTank": 30
         },
         false
     ],
@@ -2191,11 +2191,11 @@
         "packager",
         "Packaged Nitrogen Gas",
         {
-            "packagedNitrogenGas": 1
+            "packagedNitrogenGas": 60
         },
         {
-            "nitrogenGas": 4,
-            "emptyFluidTank": 1
+            "nitrogenGas": 240,
+            "emptyFluidTank": 60
         },
         false
     ],
@@ -2203,11 +2203,11 @@
         "packager",
         "Packaged Oil",
         {
-            "packagedOil": 8
+            "packagedOil": 30
         },
         {
-            "crudeOil": 8,
-            "emptyCanister": 8
+            "crudeOil": 30,
+            "emptyCanister": 30
         },
         false
     ],
@@ -2215,11 +2215,11 @@
         "packager",
         "Packaged Sulfuric Acid",
         {
-            "packagedSulfuricAcid": 6
+            "packagedSulfuricAcid": 40
         },
         {
-            "sulfuricAcid": 6,
-            "emptyCanister": 6
+            "sulfuricAcid": 40,
+            "emptyCanister": 40
         },
         false
     ],
@@ -2227,11 +2227,11 @@
         "packager",
         "Packaged Turbofuel",
         {
-            "packagedTurbofuel": 12
+            "packagedTurbofuel": 20
         },
         {
-            "turbofuel": 12,
-            "emptyCanister": 12
+            "turbofuel": 20,
+            "emptyCanister": 20
         },
         false
     ],
@@ -2239,11 +2239,11 @@
         "packager",
         "Packaged Water",
         {
-            "packagedWater": 4
+            "packagedWater": 60
         },
         {
-            "water": 4,
-            "emptyCanister": 4
+            "water": 60,
+            "emptyCanister": 60
         },
         false
     ],
@@ -2251,11 +2251,11 @@
         "packager",
         "Unpackage Alumina Solution",
         {
-            "aluminaSolution": 2,
-            "emptyCanister": 2
+            "aluminaSolution": 120,
+            "emptyCanister": 120
         },
         {
-            "packagedAluminaSolution": 2
+            "packagedAluminaSolution": 120
         },
         false
     ],
@@ -2263,11 +2263,11 @@
         "packager",
         "Unpackage Fuel",
         {
-            "fuel": 4,
-            "emptyCanister": 4
+            "fuel": 60,
+            "emptyCanister": 60
         },
         {
-            "packagedFuel": 4
+            "packagedFuel": 60
         },
         false
     ],
@@ -2275,11 +2275,11 @@
         "packager",
         "Unpackage Heavy Oil Residue",
         {
-            "heavyOilResidue": 12,
-            "emptyCanister": 12
+            "heavyOilResidue": 20,
+            "emptyCanister": 20
         },
         {
-            "packagedHeavyOilResidue": 12
+            "packagedHeavyOilResidue": 20
         },
         false
     ],
@@ -2287,11 +2287,11 @@
         "packager",
         "Unpackage Liquid Biofuel",
         {
-            "liquidBiofuel": 4,
-            "emptyCanister": 4
+            "liquidBiofuel": 60,
+            "emptyCanister": 60
         },
         {
-            "packagedLiquidBiofuel": 4
+            "packagedLiquidBiofuel": 60
         },
         false
     ],
@@ -2299,11 +2299,11 @@
         "packager",
         "Unpackage Nitric Acid",
         {
-            "nitricAcid": 3,
-            "emptyFluidTank": 3
+            "nitricAcid": 20,
+            "emptyFluidTank": 20
         },
         {
-            "packagedNitricAcid": 3
+            "packagedNitricAcid": 20
         },
         false
     ],
@@ -2311,11 +2311,11 @@
         "packager",
         "Unpackage Nitrogen Gas",
         {
-            "nitrogenGas": 4,
-            "emptyFluidTank": 1
+            "nitrogenGas": 240,
+            "emptyFluidTank": 60
         },
         {
-            "packagedNitrogenGas": 1
+            "packagedNitrogenGas": 60
         },
         false
     ],
@@ -2323,11 +2323,11 @@
         "packager",
         "Unpackage Oil",
         {
-            "crudeOil": 4,
-            "emptyCanister": 4
+            "crudeOil": 60,
+            "emptyCanister": 60
         },
         {
-            "packagedOil": 4
+            "packagedOil": 60
         },
         false
     ],
@@ -2335,11 +2335,11 @@
         "packager",
         "Unpackage Sulfuric Acid",
         {
-            "sulfuricAcid": 1,
-            "emptyCanister": 1
+            "sulfuricAcid": 60,
+            "emptyCanister": 60
         },
         {
-            "packagedSulfuricAcid": 1
+            "packagedSulfuricAcid": 60
         },
         false
     ],
@@ -2347,11 +2347,11 @@
         "packager",
         "Unpackage Turbofuel",
         {
-            "turbofuel": 12,
-            "emptyCanister": 12
+            "turbofuel": 20,
+            "emptyCanister": 20
         },
         {
-            "packagedTurbofuel": 12
+            "packagedTurbofuel": 20
         },
         false
     ],
@@ -2359,11 +2359,11 @@
         "packager",
         "Unpackage Water",
         {
-            "water": 2,
-            "emptyCanister": 2
+            "water": 120,
+            "emptyCanister": 120
         },
         {
-            "packagedWater": 2
+            "packagedWater": 120
         },
         false
     ],
@@ -2371,11 +2371,11 @@
         "particleAccelerator",
         "Instant Plutonium Cell",
         {
-            "encasedPlutoniumCell": 2400
+            "encasedPlutoniumCell": 10.0
         },
         {
-            "nonFissile Uranium": 18000,
-            "aluminumCasing": 2400
+            "nonFissile Uranium": 75.0,
+            "aluminumCasing": 10.0
         },
         true
     ],
@@ -2383,11 +2383,11 @@
         "particleAccelerator",
         "Nuclear Pasta",
         {
-            "nuclearPasta": 120
+            "nuclearPasta": 0.5
         },
         {
-            "copperPowder": 24000,
-            "pressureConversionCube": 120
+            "copperPowder": 100.0,
+            "pressureConversionCube": 0.5
         },
         false
     ],
@@ -2395,11 +2395,11 @@
         "particleAccelerator",
         "Plutonium Pellet",
         {
-            "plutoniumPellet": 1800
+            "plutoniumPellet": 30
         },
         {
-            "nonFissile Uranium": 6000,
-            "uraniumWaste": 1500
+            "nonFissile Uranium": 100,
+            "uraniumWaste": 25
         },
         false
     ]

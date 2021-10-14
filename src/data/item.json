@@ -1,582 +1,955 @@
 {
-    "aluminumIngot": [
-        "Aluminum Ingot",
-        "belt",
-        null
-    ],
-    "aluminumCasing": [
-        "Aluminum Casing",
-        "belt",
-        null
-    ],
-    "biomass": [
-        "Biomass",
-        "belt",
-        null
-    ],
-    "coal": [
-        "Coal",
-        "belt",
-        null
-    ],
-    "alienCarapace": [
-        "Alien Carapace",
-        "belt",
-        null
-    ],
-    "alienOrgans": [
-        "Alien Organs",
-        "belt",
-        null
-    ],
-    "leaves": [
-        "Leaves",
-        "belt",
-        null
-    ],
-    "mycelia": [
-        "Mycelia",
-        "belt",
-        null
-    ],
-    "wood": [
-        "Wood",
-        "belt",
-        null
-    ],
-    "wire": [
-        "Wire",
-        "belt",
-        null
-    ],
-    "cable": [
-        "Cable",
-        "belt",
-        null
-    ],
-    "ironIngot": [
-        "Iron Ingot",
-        "belt",
-        null
-    ],
-    "screw": [
-        "Screw",
-        "belt",
-        null
-    ],
-    "cateriumIngot": [
-        "Caterium Ingot",
-        "belt",
-        null
-    ],
-    "flowerPetals": [
-        "Flower Petals",
-        "belt",
-        null
-    ],
-    "colorCartridge": [
-        "Color Cartridge",
-        "belt",
-        null
-    ],
-    "limestone": [
-        "Limestone",
-        "belt",
-        null
-    ],
-    "concrete": [
-        "Concrete",
-        "belt",
-        null
-    ],
-    "copperIngot": [
-        "Copper Ingot",
-        "belt",
-        null
-    ],
-    "copperPowder": [
-        "Copper Powder",
-        "belt",
-        null
-    ],
-    "copperSheet": [
-        "Copper Sheet",
-        "belt",
-        null
-    ],
-    "plastic": [
-        "Plastic",
-        "belt",
-        null
-    ],
-    "emptyCanister": [
-        "Empty Canister",
-        "belt",
-        null
-    ],
-    "emptyFluidTank": [
-        "Empty Fluid Tank",
-        "belt",
-        null
-    ],
-    "ironPlate": [
-        "Iron Plate",
-        "belt",
-        null
-    ],
-    "ironRod": [
-        "Iron Rod",
-        "belt",
-        null
-    ],
-    "greenPowerSlug": [
-        "Green Power Slug",
-        "belt",
-        null
-    ],
-    "powerShard": [
-        "Power Shard",
-        "belt",
-        null
-    ],
-    "yellowPowerSlug": [
-        "Yellow Power Slug",
-        "belt",
-        null
-    ],
-    "purplePowerSlug": [
-        "Purple Power Slug",
-        "belt",
-        null
-    ],
-    "rawQuartz": [
-        "Raw Quartz",
-        "belt",
-        null
-    ],
-    "quartzCrystal": [
-        "Quartz Crystal",
-        "belt",
-        null
-    ],
-    "quickwire": [
-        "Quickwire",
-        "belt",
-        null
-    ],
-    "silica": [
-        "Silica",
-        "belt",
-        null
-    ],
-    "solidBiofuel": [
-        "Solid Biofuel",
-        "belt",
-        null
-    ],
-    "spikedRebar": [
-        "Spiked Rebar",
-        "belt",
-        null
-    ],
-    "steelIngot": [
-        "Steel Ingot",
-        "belt",
-        null
-    ],
-    "steelBeam": [
-        "Steel Beam",
-        "belt",
-        null
-    ],
-    "steelPipe": [
-        "Steel Pipe",
-        "belt",
-        null
-    ],
-    "rubber": [
-        "Rubber",
-        "belt",
-        null
-    ],
-    "reinforcedIronPlate": [
-        "Reinforced Iron Plate",
-        "belt",
-        null
-    ],
-    "aiLimiter": [
-        "AI Limiter",
-        "belt",
-        null
-    ],
-    "alcladAluminumSheet": [
-        "Alclad Aluminum Sheet",
-        "belt",
-        null
-    ],
-    "adaptiveControlUnit": [
-        "Adaptive Control Unit",
-        "belt",
-        null
-    ],
-    "supercomputer": [
-        "Supercomputer",
-        "belt",
-        null
-    ],
-    "assemblyDirectorSystem": [
-        "Assembly Director System",
-        "belt",
-        null
-    ],
-    "stator": [
-        "Stator",
-        "belt",
-        null
-    ],
-    "automatedWiring": [
-        "Automated Wiring",
-        "belt",
-        null
-    ],
-    "sulfur": [
-        "Sulfur",
-        "belt",
-        null
-    ],
-    "blackPowder": [
-        "Black Powder",
-        "belt",
-        null
-    ],
-    "modularFrame": [
-        "Modular Frame",
-        "belt",
-        null
-    ],
-    "circuitBoard": [
-        "Circuit Board",
-        "belt",
-        null
-    ],
-    "compactedCoal": [
-        "Compacted Coal",
-        "belt",
-        null
-    ],
-    "rotor": [
-        "Rotor",
-        "belt",
-        null
-    ],
-    "crystalOscillator": [
-        "Crystal Oscillator",
-        "belt",
-        null
-    ],
-    "computer": [
-        "Computer",
-        "belt",
-        null
-    ],
-    "electromagneticControlRod": [
-        "Electromagnetic Control Rod",
-        "belt",
-        null
-    ],
-    "motor": [
-        "Motor",
-        "belt",
-        null
-    ],
-    "petroleumCoke": [
-        "Petroleum Coke",
-        "belt",
-        null
-    ],
-    "highSpeed Connector": [
-        "High-Speed Connector",
-        "belt",
-        null
-    ],
-    "encasedIndustrialBeam": [
-        "Encased Industrial Beam",
-        "belt",
-        null
-    ],
-    "plutoniumPellet": [
-        "Plutonium Pellet",
-        "belt",
-        null
-    ],
-    "encasedPlutoniumCell": [
-        "Encased Plutonium Cell",
-        "belt",
-        null
-    ],
-    "fabric": [
-        "Fabric",
-        "belt",
-        null
-    ],
-    "heatSink": [
-        "Heat Sink",
-        "belt",
-        null
-    ],
-    "nobelisk": [
-        "Nobelisk",
-        "belt",
-        null
-    ],
-    "radioControlUnit": [
-        "Radio Control Unit",
-        "belt",
-        null
-    ],
-    "coolingSystem": [
-        "Cooling System",
-        "belt",
-        null
-    ],
-    "pressureConversionCube": [
-        "Pressure Conversion Cube",
-        "belt",
-        null
-    ],
-    "plutoniumFuelRod": [
-        "Plutonium Fuel Rod",
-        "belt",
-        null
-    ],
-    "fusedModularFrame": [
-        "Fused Modular Frame",
-        "belt",
-        null
-    ],
-    "smartPlating": [
-        "Smart Plating",
-        "belt",
-        null
-    ],
-    "versatileFramework": [
-        "Versatile Framework",
-        "belt",
-        null
-    ],
-    "heavyModularFrame": [
-        "Heavy Modular Frame",
-        "belt",
-        null
-    ],
-    "portableMiner": [
-        "Portable Miner",
-        "belt",
-        null
-    ],
-    "beacon": [
-        "Beacon",
-        "belt",
-        null
-    ],
-    "battery": [
-        "Battery",
-        "belt",
-        null
-    ],
-    "gasFilter": [
-        "Gas Filter",
-        "belt",
-        null
-    ],
-    "uranium": [
-        "Uranium",
-        "belt",
-        null
-    ],
-    "encasedUraniumCell": [
-        "Encased Uranium Cell",
-        "belt",
-        null
-    ],
-    "iodineInfusedFilter": [
-        "Iodine Infused Filter",
-        "belt",
-        null
-    ],
-    "magneticFieldGenerator": [
-        "Magnetic Field Generator",
-        "belt",
-        null
-    ],
-    "modularEngine": [
-        "Modular Engine",
-        "belt",
-        null
-    ],
-    "rifleCartridge": [
-        "Rifle Cartridge",
-        "belt",
-        null
-    ],
-    "turboMotor": [
-        "Turbo Motor",
-        "belt",
-        null
-    ],
-    "thermalPropulsionRocket": [
-        "Thermal Propulsion Rocket",
-        "belt",
-        null
-    ],
-    "packagedNitrogenGas": [
-        "Packaged Nitrogen Gas",
-        "belt",
-        null
-    ],
-    "uraniumFuelRod": [
-        "Uranium Fuel Rod",
-        "belt",
-        null
-    ],
-    "cateriumOre": [
-        "Caterium Ore",
-        "belt",
-        null
-    ],
-    "copperOre": [
-        "Copper Ore",
-        "belt",
-        null
-    ],
-    "ironOre": [
-        "Iron Ore",
-        "belt",
-        null
-    ],
-    "aluminumScrap": [
-        "Aluminum Scrap",
-        "belt",
-        null
-    ],
-    "bauxite": [
-        "Bauxite",
-        "belt",
-        null
-    ],
-    "water": [
-        "Water",
-        "pipe",
-        null
-    ],
-    "aluminaSolution": [
-        "Alumina Solution",
-        "pipe",
-        null
-    ],
-    "heavyOilResidue": [
-        "Heavy Oil Residue",
-        "pipe",
-        null
-    ],
-    "packagedWater": [
-        "Packaged Water",
-        "belt",
-        null
-    ],
-    "packagedFuel": [
-        "Packaged Fuel",
-        "belt",
-        null
-    ],
-    "crudeOil": [
-        "Crude Oil",
-        "pipe",
-        null
-    ],
-    "fuel": [
-        "Fuel",
-        "pipe",
-        null
-    ],
-    "polymerResin": [
-        "Polymer Resin",
-        "belt",
-        null
-    ],
-    "liquidBiofuel": [
-        "Liquid Biofuel",
-        "pipe",
-        null
-    ],
-    "sulfuricAcid": [
-        "Sulfuric Acid",
-        "pipe",
-        null
-    ],
-    "turbofuel": [
-        "Turbofuel",
-        "pipe",
-        null
-    ],
-    "nitrogenGas": [
-        "Nitrogen Gas",
-        "pipe",
-        null
-    ],
-    "uraniumWaste": [
-        "Uranium Waste",
-        "belt",
-        null
-    ],
-    "nitricAcid": [
-        "Nitric Acid",
-        "pipe",
-        null
-    ],
-    "nonFissile Uranium": [
-        "Non-fissile Uranium",
-        "belt",
-        null
-    ],
-    "packagedAluminaSolution": [
-        "Packaged Alumina Solution",
-        "belt",
-        null
-    ],
-    "packagedHeavyOilResidue": [
-        "Packaged Heavy Oil Residue",
-        "belt",
-        null
-    ],
-    "packagedLiquidBiofuel": [
-        "Packaged Liquid Biofuel",
-        "belt",
-        null
-    ],
-    "packagedNitricAcid": [
-        "Packaged Nitric Acid",
-        "belt",
-        null
-    ],
-    "packagedOil": [
-        "Packaged Oil",
-        "belt",
-        null
-    ],
-    "packagedSulfuricAcid": [
-        "Packaged Sulfuric Acid",
-        "belt",
-        null
-    ],
-    "packagedTurbofuel": [
-        "Packaged Turbofuel",
-        "belt",
-        null
-    ],
-    "nuclearPasta": [
-        "Nuclear Pasta",
-        "belt",
-        null
-    ]
+    "ironOre": {
+        "id": "ironOre",
+        "name": "Iron Ore",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 0
+    },
+    "ironIngot": {
+        "id": "ironIngot",
+        "name": "Iron Ingot",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 0,
+        "milestone": 0
+    },
+    "ironPlate": {
+        "id": "ironPlate",
+        "name": "Iron Plate",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 0
+    },
+    "ironRod": {
+        "id": "ironRod",
+        "name": "Iron Rod",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 0
+    },
+    "copperOre": {
+        "id": "copperOre",
+        "name": "Copper Ore",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 2
+    },
+    "cable": {
+        "id": "cable",
+        "name": "Cable",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 2
+    },
+    "copperIngot": {
+        "id": "copperIngot",
+        "name": "Copper Ingot",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 0,
+        "milestone": 2
+    },
+    "wire": {
+        "id": "wire",
+        "name": "Wire",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 0,
+        "milestone": 2
+    },
+    "limestone": {
+        "id": "limestone",
+        "name": "Limestone",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 3
+    },
+    "concrete": {
+        "id": "concrete",
+        "name": "Concrete",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 3
+    },
+    "reinforcedIronPlate": {
+        "id": "reinforcedIronPlate",
+        "name": "Reinforced Iron Plate",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 3
+    },
+    "screw": {
+        "id": "screw",
+        "name": "Screw",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 0,
+        "milestone": 3
+    },
+    "copperSheet": {
+        "id": "copperSheet",
+        "name": "Copper Sheet",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 2,
+        "milestone": 21
+    },
+    "modularFrame": {
+        "id": "modularFrame",
+        "name": "Modular Frame",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 2,
+        "milestone": 21
+    },
+    "rotor": {
+        "id": "rotor",
+        "name": "Rotor",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 2,
+        "milestone": 21
+    },
+    "smartPlating": {
+        "id": "smartPlating",
+        "name": "Smart Plating",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 2,
+        "milestone": 21
+    },
+    "solidBiofuel": {
+        "id": "solidBiofuel",
+        "name": "Solid Biofuel",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 2,
+        "milestone": 22
+    },
+    "coal": {
+        "id": "coal",
+        "name": "Coal",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 3,
+        "milestone": 31
+    },
+    "steelBeam": {
+        "id": "steelBeam",
+        "name": "Steel Beam",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 3,
+        "milestone": 33
+    },
+    "steelIngot": {
+        "id": "steelIngot",
+        "name": "Steel Ingot",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 3,
+        "milestone": 33
+    },
+    "steelPipe": {
+        "id": "steelPipe",
+        "name": "Steel Pipe",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 3,
+        "milestone": 33
+    },
+    "versatileFramework": {
+        "id": "versatileFramework",
+        "name": "Versatile Framework",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 3,
+        "milestone": 33
+    },
+    "automatedWiring": {
+        "id": "automatedWiring",
+        "name": "Automated Wiring",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 4,
+        "milestone": 41
+    },
+    "encasedIndustrialBeam": {
+        "id": "encasedIndustrialBeam",
+        "name": "Encased Industrial Beam",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 4,
+        "milestone": 41
+    },
+    "heavyModularFrame": {
+        "id": "heavyModularFrame",
+        "name": "Heavy Modular Frame",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 4,
+        "milestone": 41
+    },
+    "motor": {
+        "id": "motor",
+        "name": "Motor",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 4,
+        "milestone": 41
+    },
+    "stator": {
+        "id": "stator",
+        "name": "Stator",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 4,
+        "milestone": 41
+    },
+    "circuitBoard": {
+        "id": "circuitBoard",
+        "name": "Circuit Board",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "crudeOil": {
+        "id": "crudeOil",
+        "name": "Crude Oil",
+        "type": "pipe",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "fuel": {
+        "id": "fuel",
+        "name": "Fuel",
+        "type": "pipe",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "heavyOilResidue": {
+        "id": "heavyOilResidue",
+        "name": "Heavy Oil Residue",
+        "type": "pipe",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "petroleumCoke": {
+        "id": "petroleumCoke",
+        "name": "Petroleum Coke",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "plastic": {
+        "id": "plastic",
+        "name": "Plastic",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "polymerResin": {
+        "id": "polymerResin",
+        "name": "Polymer Resin",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "rubber": {
+        "id": "rubber",
+        "name": "Rubber",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 51
+    },
+    "adaptiveControlUnit": {
+        "id": "adaptiveControlUnit",
+        "name": "Adaptive Control Unit",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 52
+    },
+    "computer": {
+        "id": "computer",
+        "name": "Computer",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 52
+    },
+    "modularEngine": {
+        "id": "modularEngine",
+        "name": "Modular Engine",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 52
+    },
+    "emptyCanister": {
+        "id": "emptyCanister",
+        "name": "Empty Canister",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "liquidBiofuel": {
+        "id": "liquidBiofuel",
+        "name": "Liquid Biofuel",
+        "type": "pipe",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "packagedFuel": {
+        "id": "packagedFuel",
+        "name": "Packaged Fuel",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "packagedHeavyOilResidue": {
+        "id": "packagedHeavyOilResidue",
+        "name": "Packaged Heavy Oil Residue",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "packagedLiquidBiofuel": {
+        "id": "packagedLiquidBiofuel",
+        "name": "Packaged Liquid Biofuel",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "packagedOil": {
+        "id": "packagedOil",
+        "name": "Packaged Oil",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "packagedWater": {
+        "id": "packagedWater",
+        "name": "Packaged Water",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 5,
+        "milestone": 53
+    },
+    "cateriumOre": {
+        "id": "cateriumOre",
+        "name": "Caterium Ore",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 6,
+        "milestone": 61
+    },
+    "bauxite": {
+        "id": "bauxite",
+        "name": "Bauxite",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "rawQuartz": {
+        "id": "rawQuartz",
+        "name": "Raw Quartz",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "alcladAluminumSheet": {
+        "id": "alcladAluminumSheet",
+        "name": "Alclad Aluminum Sheet",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "aluminaSolution": {
+        "id": "aluminaSolution",
+        "name": "Alumina Solution",
+        "type": "pipe",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "aluminumCasing": {
+        "id": "aluminumCasing",
+        "name": "Aluminum Casing",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "aluminumIngot": {
+        "id": "aluminumIngot",
+        "name": "Aluminum Ingot",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "aluminumScrap": {
+        "id": "aluminumScrap",
+        "name": "Aluminum Scrap",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "packagedAluminaSolution": {
+        "id": "packagedAluminaSolution",
+        "name": "Packaged Alumina Solution",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "radioControlUnit": {
+        "id": "radioControlUnit",
+        "name": "Radio Control Unit",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "silica": {
+        "id": "silica",
+        "name": "Silica",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "water": {
+        "id": "water",
+        "name": "Water",
+        "type": "pipe",
+        "ingredient": true,
+        "product": true,
+        "tier": 7,
+        "milestone": 71
+    },
+    "assemblyDirectorSystem": {
+        "id": "assemblyDirectorSystem",
+        "name": "Assembly Director System",
+        "type": "belt",
+        "product": true,
+        "tier": 7,
+        "milestone": 73
+    },
+    "sulfur": {
+        "id": "sulfur",
+        "name": "Sulfur",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 73
+    },
+    "battery": {
+        "id": "battery",
+        "name": "Battery",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 73
+    },
+    "packagedSulfuricAcid": {
+        "id": "packagedSulfuricAcid",
+        "name": "Packaged Sulfuric Acid",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 73
+    },
+    "sulfuricAcid": {
+        "id": "sulfuricAcid",
+        "name": "Sulfuric Acid",
+        "type": "pipe",
+        "product": true,
+        "ingredient": true,
+        "tier": 7,
+        "milestone": 73
+    },
+    "supercomputer": {
+        "id": "supercomputer",
+        "name": "Supercomputer",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 7,
+        "milestone": 73
+    },
+    "iodineInfusedFilter": {
+        "id": "iodineInfusedFilter",
+        "name": "Iodine Infused Filter",
+        "type": "belt",
+        "product": true,
+        "tier": 7,
+        "milestone": 74
+    },
+    "magneticFieldGenerator": {
+        "id": "magneticFieldGenerator",
+        "name": "Magnetic Field Generator",
+        "type": "belt",
+        "product": true,
+        "tier": 8,
+        "milestone": 81
+    },
+    "uraniumFuelRod": {
+        "id": "uraniumFuelRod",
+        "name": "Uranium Fuel Rod",
+        "type": "belt",
+        "product": true,
+        "tier": 8,
+        "milestone": 81
+    },
+    "uranium": {
+        "id": "uranium",
+        "name": "Uranium",
+        "type": "belt",
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 81
+    },
+    "electromagneticControlRod": {
+        "id": "electromagneticControlRod",
+        "name": "Electromagnetic Control Rod",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 81
+    },
+    "encasedUraniumCell": {
+        "id": "encasedUraniumCell",
+        "name": "Encased Uranium Cell",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 81
+    },
+    "coolingSystem": {
+        "id": "coolingSystem",
+        "name": "Cooling System",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 82
+    },
+    "emptyFluidTank": {
+        "id": "emptyFluidTank",
+        "name": "Empty Fluid Tank",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 82
+    },
+    "fusedModularFrame": {
+        "id": "fusedModularFrame",
+        "name": "Fused Modular Frame",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 82
+    },
+    "heatSink": {
+        "id": "heatSink",
+        "name": "Heat Sink",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 82
+    },
+    "nitrogenGas": {
+        "id": "nitrogenGas",
+        "name": "Nitrogen Gas",
+        "type": "pipe",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 82
+    },
+    "packagedNitrogenGas": {
+        "id": "packagedNitrogenGas",
+        "name": "Packaged Nitrogen Gas",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 82
+    },
+    "thermalPropulsionRocket": {
+        "id": "thermalPropulsionRocket",
+        "name": "Thermal Propulsion Rocket",
+        "type": "belt",
+        "product": true,
+        "tier": 8,
+        "milestone": 83
+    },
+    "turboMotor": {
+        "id": "turboMotor",
+        "name": "Turbo Motor",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 83
+    },
+    "nuclearPasta": {
+        "id": "nuclearPasta",
+        "name": "Nuclear Pasta",
+        "type": "belt",
+        "product": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "plutoniumFuelRod": {
+        "id": "plutoniumFuelRod",
+        "name": "Plutonium Fuel Rod",
+        "type": "belt",
+        "product": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "copperPowder": {
+        "id": "copperPowder",
+        "name": "Copper Powder",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "encasedPlutoniumCell": {
+        "id": "encasedPlutoniumCell",
+        "name": "Encased Plutonium Cell",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "nitricAcid": {
+        "id": "nitricAcid",
+        "name": "Nitric Acid",
+        "type": "pipe",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "nonFissileUranium": {
+        "id": "nonFissileUranium",
+        "name": "Non-fissile Uranium",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "packagedNitricAcid": {
+        "id": "packagedNitricAcid",
+        "name": "Packaged Nitric Acid",
+        "type": "belt",
+        "product": true,
+        "ingredient": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "plutoniumPellet": {
+        "id": "plutoniumPellet",
+        "name": "Plutonium Pellet",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "pressureConversionCube": {
+        "id": "pressureConversionCube",
+        "name": "Pressure Conversion Cube",
+        "type": "belt",
+        "ingredient": true,
+        "product": true,
+        "tier": 8,
+        "milestone": 84
+    },
+    "colorCartridge": {
+        "id": "colorCartridge",
+        "name": "Color Cartridge",
+        "type": "belt",
+        "product": true
+    },
+    "nobelisk": {
+        "id": "nobelisk",
+        "name": "Nobelisk",
+        "type": "belt",
+        "product": true
+    },
+    "portableMiner": {
+        "id": "portableMiner",
+        "name": "Portable Miner",
+        "type": "belt",
+        "product": true
+    },
+    "powerShard": {
+        "id": "powerShard",
+        "name": "Power Shard",
+        "type": "belt",
+        "product": true
+    },
+    "rifleCartridge": {
+        "id": "rifleCartridge",
+        "name": "Rifle Cartridge",
+        "type": "belt",
+        "product": true
+    },
+    "spikedRebar": {
+        "id": "spikedRebar",
+        "name": "Spiked Rebar",
+        "type": "belt",
+        "product": true
+    },
+    "alienCarapace": {
+        "id": "alienCarapace",
+        "name": "Alien Carapace",
+        "type": "belt",
+        "ingredient": true
+    },
+    "alienOrgans": {
+        "id": "alienOrgans",
+        "name": "Alien Organs",
+        "type": "belt",
+        "ingredient": true
+    },
+    "flowerPetals": {
+        "id": "flowerPetals",
+        "name": "Flower Petals",
+        "type": "belt",
+        "ingredient": true
+    },
+    "greenPowerSlug": {
+        "id": "greenPowerSlug",
+        "name": "Green Power Slug",
+        "type": "belt",
+        "ingredient": true
+    },
+    "leaves": {
+        "id": "leaves",
+        "name": "Leaves",
+        "type": "belt",
+        "ingredient": true
+    },
+    "mycelia": {
+        "id": "mycelia",
+        "name": "Mycelia",
+        "type": "belt",
+        "ingredient": true
+    },
+    "purplePowerSlug": {
+        "id": "purplePowerSlug",
+        "name": "Purple Power Slug",
+        "type": "belt",
+        "ingredient": true
+    },
+    "uraniumWaste": {
+        "id": "uraniumWaste",
+        "name": "Uranium Waste",
+        "type": "belt",
+        "ingredient": true
+    },
+    "wood": {
+        "id": "wood",
+        "name": "Wood",
+        "type": "belt",
+        "ingredient": true
+    },
+    "yellowPowerSlug": {
+        "id": "yellowPowerSlug",
+        "name": "Yellow Power Slug",
+        "type": "belt",
+        "ingredient": true
+    },
+    "aiLimiter": {
+        "id": "aiLimiter",
+        "name": "AI Limiter",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "beacon": {
+        "id": "beacon",
+        "name": "Beacon",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "biomass": {
+        "id": "biomass",
+        "name": "Biomass",
+        "type": "belt",
+        "ingredient": true,
+        "product": true
+    },
+    "blackPowder": {
+        "id": "blackPowder",
+        "name": "Black Powder",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "cateriumIngot": {
+        "id": "cateriumIngot",
+        "name": "Caterium Ingot",
+        "type": "belt",
+        "ingredient": true,
+        "product": true
+    },
+    "compactedCoal": {
+        "id": "compactedCoal",
+        "name": "Compacted Coal",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "crystalOscillator": {
+        "id": "crystalOscillator",
+        "name": "Crystal Oscillator",
+        "type": "belt",
+        "ingredient": true,
+        "product": true
+    },
+    "fabric": {
+        "id": "fabric",
+        "name": "Fabric",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "gasFilter": {
+        "id": "gasFilter",
+        "name": "Gas Filter",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "highSpeedConnector": {
+        "id": "highSpeedConnector",
+        "name": "High-Speed Connector",
+        "type": "belt",
+        "ingredient": true,
+        "product": true
+    },
+    "packagedTurbofuel": {
+        "id": "packagedTurbofuel",
+        "name": "Packaged Turbofuel",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "quartzCrystal": {
+        "id": "quartzCrystal",
+        "name": "Quartz Crystal",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "quickwire": {
+        "id": "quickwire",
+        "name": "Quickwire",
+        "type": "belt",
+        "product": true,
+        "ingredient": true
+    },
+    "turbofuel": {
+        "id": "turbofuel",
+        "name": "Turbofuel",
+        "type": "pipe",
+        "product": true,
+        "ingredient": true
+    }
 }

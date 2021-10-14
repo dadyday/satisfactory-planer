@@ -6,9 +6,17 @@
             "email": "github.com@holgerheyne.de"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Planer\\": "script/src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "tracy/tracy": "^2.8",
-        "nette/utils": "^3.2",
-        "jawira/case-converter": "^3.4"
+        "nette/utils": "v3.2.x-dev",
+        "jawira/case-converter": "^3.4",
+        "dadyday/xparse": "dev-master",
     }
 }

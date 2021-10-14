@@ -1,6 +1,7 @@
 import Items from './item.json';
 export default {
 	...Items,
+/*
 // iron tier 0
 	ironOre:     ['Eisenerz', 'belt', 100],
 	copperOre:   ['Kupfererz', 'belt', 100],
@@ -22,4 +23,5 @@ export default {
 	rubber:            ['Gummi', 'belt', 100],
 
 	radioControlUnit:  ['Radioeinheit', 'belt', 100],
+//*/
 }

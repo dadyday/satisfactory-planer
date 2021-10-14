@@ -15,6 +15,7 @@ export default class Production {
 	aInput = []; // Array of Transport objects
 	aOutput = []; // Array of Transport objects
 	mPort = new Map; // map of portId -> item
+	full = true;
 
 	constructor(type, receipe = null) {
 		this.id = this.constructor.lastId++;
@@ -32,7 +33,7 @@ export default class Production {
 
 	setReceipe(receipe = null) {
 		this.oReceipe = receipe instanceof Receipe ? receipe : Receipe.get(receipe);
-		this.name = this.oReceipe?.name ?? 'none';
+		this.name = (this.oBuilding?.name + ' - ' ?? '') + (this.oReceipe?.name ?? 'none');
 		if (this.oReceipe) {
 			this.setBuilding(this.oReceipe.type);
 		}
@@ -54,7 +55,7 @@ export default class Production {
 		const mItem = new Map
 		if (this.oReceipe) {
 			const func = (io, item) => {
-				const key = io + Item.get(item).portType;
+				const key = io + Item.get(item).type;
 				mItem.getInit(key, []).push(item);
 			};
 			this.oReceipe.mInput.forEach((count, item) => func('i', item));
@@ -68,7 +69,7 @@ export default class Production {
 			if (!portId) {
 				console.log(this.mPort.entries())
 			}
-			const key = (portId ? portId.charAt(0) : 'i') + Item.get(item).portType;
+			const key = (portId ? portId.charAt(0) : 'i') + Item.get(item).type;
 			const p = mPort.getInit(key, []).indexOf(portId);
 			const i = mItem.getInit(key, []).indexOf(item);
 
@@ -178,7 +179,7 @@ export default class Production {
 		this.productivity = newValue;
 	}
 
-	increaseCapacity(item, count, oTarget, oScheme) {
+	/* REFACTOR increaseCapacity(item, count, oTarget, oScheme) {
 		const delta = Math.min(
 			1.0 - this.productivity,
 			1.0 * count / this.oReceipe.mOutput.get(item)
@@ -189,20 +190,19 @@ export default class Production {
 		this.createTransport(item, cnt, oTarget);
 		this.increaseProductivity(delta, oScheme)
 		return rest;
-	}
+	} //*/
 
-	increaseProductivity(delta, oScheme) {
+	/* REFACTOR increaseProductivity(delta, oScheme) {
 		this.productivity += delta;
-
 		this.oReceipe.mInput.forEach((cnt, itm) => {
 			oScheme.addInputQuantity(itm, cnt * delta, this);
 		});
 		this.oReceipe.mOutput.forEach((cnt, itm) => {
 			oScheme.addOutputQuantity(itm, cnt * delta, this);
 		});
-	}
+	} //*/
 
-	//** godata ***********
+//** godata ***********
 
 	static createFromNodeData(oData) {
 		const oProd = new Production(oData.type, oData.receipe);

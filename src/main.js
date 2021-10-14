@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import initData from './data';
 import _ from 'underscore';
+import numberFormat from './utils/numberFormat';
 // import 'normalize.css';
 // import '@/scss/main.scss';
 
@@ -12,9 +13,61 @@ Map.prototype.getInit = function (key, initValue = null) {
 Map.prototype.setDefault = function (key, defaultValue = null) {
 	if (!this.has(key)) this.set(key, defaultValue);
 };
+const compareValue = (item, property) => {
+	var value = null;
+	switch (typeof property) {
+		case 'function':
+			value = property(item);
+			break;
+		case 'string':
+		case 'integer':
+			value = typeof item[property] == 'function' ? item[property]() : item[property];
+			break;
+	}
+	return value;
+};
+
+const compare =	(oL, oR, properties) => {
+	for (var property of properties) {
+		var rev = false;
+		switch (typeof property) {
+			case 'string':
+				rev = property.substring(0,1) == '!';
+				property = rev ? property.substring(1) : property;
+				break;
+		}
+		oL = compareValue(oL, property);
+		oR = compareValue(oR, property);
+		if (oL != oR) {
+			const ret = rev ^ oL > oR ? -1 : 1;
+			return ret;
+		}
+	}
+	return 0;
+};
+
+Map.prototype.sortBy = function (properties) {
+	const aTemp = Array.from(this.entries());
+	aTemp.sort((l, r) => compare(l[1], r[1], properties));
+	return new Map(aTemp);
+};
+
+Array.prototype.sortBy = function (properties) {
+	console.log(properties, this);
+	return this.sort((l, r) => compare(l, r, properties));
+};
+// Object.prototype.sort = function (properties) {
+// 	const aTemp = Array.from(this.values());
+// 	aTemp.sort((l, r) => compare(l, r, properties));
+// 	return new Object(aTemp);
+// };
+
 
 Number.prototype.minMax = function (min, max) {
 	return Math.min(Math.max(this, min), max);
+}
+Number.prototype.rationalize = function (epsilon = 0.001) {
+	return numberFormat.precise(this, 2);
 }
 
 Vue.config.productionTip = false

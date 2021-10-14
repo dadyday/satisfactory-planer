@@ -20,11 +20,11 @@
 
 <style lang="scss">
 #world {
+	height: 100%;
 	#menu {
 	}
 	#palette, #diagram {
 		width:160px;
-		min-height:400px;
 		background-color: #dadae8;
 		border: solid 1px #889;
 	}

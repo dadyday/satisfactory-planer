@@ -73,7 +73,7 @@ export default {
 	box-shadow: 0.1em 0.1em 0.5em -0.2em #0008;
 	padding: 0.2em;
 	margin: 0.1em 0.2em;
-	div {
+	> div {
 		display: inline-block;
 		margin: 0 0.2em;
 		input, select, span {
@@ -83,10 +83,10 @@ export default {
 		.entity {
 			padding: 0.0em;
 			box-shadow: none;
-			margin: 0em 0.1em;
+			margin: 0 0.1em;
 		}
 	}
-	img {
+	> .icon > img {
 		width: 24px;
 		height: 24px;
 		vertical-align: middle;
@@ -94,7 +94,7 @@ export default {
 		top: -2px;
 		margin: -4px 0;
 	}
-	button {
+	> .button > button {
 		border-radius: 5em;
 		border: solid 0.5px;
 		padding: 0 0.25em;

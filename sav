@@ -1,0 +1,239 @@
+{
+	"nodeDataArray": [
+		{
+			"id": 30,
+			"detail": "Verstärkte Eisenplatte",
+			"receipe": "store",
+			"ports": "",
+			"type": "container",
+			"name": "Container",
+			"layer": "elevated",
+			"orient": 2,
+			"pos": [
+				-480,
+				-20
+			],
+			"drawangle": 180
+		},
+		{
+			"id": 31,
+			"detail": "Verstärkte Eisenplatte",
+			"receipe": "reinforced",
+			"ports": "",
+			"type": "assembler",
+			"name": "Assembler",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-480,
+				80
+			]
+		},
+		{
+			"id": 32,
+			"detail": "Eisenplatte",
+			"receipe": "ironPlate",
+			"ports": "",
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-280,
+				-20
+			]
+		},
+		{
+			"id": 35,
+			"detail": "Eisenplatte",
+			"receipe": "ironPlate",
+			"ports": "",
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-280,
+				60
+			]
+		},
+		{
+			"id": 33,
+			"detail": "Eisenbarren",
+			"receipe": "ironIngot",
+			"ports": "",
+			"type": "smelter",
+			"name": "Schmelzer",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				40,
+				-20
+			]
+		},
+		{
+			"id": 36,
+			"detail": "Eisenbarren",
+			"receipe": "ironIngot",
+			"ports": "",
+			"type": "smelter",
+			"name": "Schmelzer",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				40,
+				60
+			]
+		},
+		{
+			"id": 34,
+			"detail": "Eisenerz",
+			"receipe": "ironOre",
+			"ports": "",
+			"type": "minerMk1",
+			"name": "Miner MK.1",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				320,
+				-20
+			]
+		},
+		{
+			"id": 37,
+			"detail": "Schrauben",
+			"receipe": "screw",
+			"ports": "",
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-280,
+				260
+			]
+		},
+		{
+			"id": 38,
+			"detail": "Eisenstange",
+			"receipe": "ironRod",
+			"ports": "",
+			"type": "construct",
+			"name": "Konstruktor",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-120,
+				260
+			]
+		},
+		{
+			"id": 29,
+			"detail": "Schrauben",
+			"receipe": "store",
+			"ports": "",
+			"type": "container",
+			"name": "Container",
+			"layer": "elevated",
+			"orient": 0,
+			"pos": [
+				-280,
+				180
+			]
+		},
+		{
+			"id": 10,
+			"detail": "Radio Control System",
+			"receipe": "radioControlSystem",
+			"ports": "",
+			"type": "manufacturer",
+			"name": "Manufacturer",
+			"layer": "elevated",
+			"orient": 0,
+			"key": -10,
+			"pos": [
+				-780,
+				140
+			]
+		}
+	],
+	"linkDataArray": [
+		{
+			"from": 31,
+			"fromPortId": "out0",
+			"to": 30,
+			"toPortId": "in0",
+			"id": -1
+		},
+		{
+			"from": 32,
+			"fromPortId": "out0",
+			"to": 31,
+			"toPortId": "in0",
+			"id": -2
+		},
+		{
+			"from": 35,
+			"fromPortId": "out0",
+			"to": 31,
+			"toPortId": "in0",
+			"id": -3
+		},
+		{
+			"from": 33,
+			"fromPortId": "out0",
+			"to": 32,
+			"toPortId": "in0",
+			"id": -4
+		},
+		{
+			"from": 36,
+			"fromPortId": "out0",
+			"to": 35,
+			"toPortId": "in0",
+			"id": -5
+		},
+		{
+			"from": 36,
+			"fromPortId": "out0",
+			"to": 38,
+			"toPortId": "in0",
+			"id": -6
+		},
+		{
+			"from": 34,
+			"fromPortId": "out0",
+			"to": 33,
+			"toPortId": "in0",
+			"id": -7
+		},
+		{
+			"from": 34,
+			"fromPortId": "out0",
+			"to": 36,
+			"toPortId": "in0",
+			"id": -8
+		},
+		{
+			"from": 37,
+			"fromPortId": "out0",
+			"to": 31,
+			"toPortId": "in1",
+			"id": -9
+		},
+		{
+			"from": 38,
+			"fromPortId": "out0",
+			"to": 37,
+			"toPortId": "in0",
+			"id": -10
+		},
+		{
+			"from": 29,
+			"fromPortId": "out0",
+			"to": 31,
+			"toPortId": "in1",
+			"id": -11
+		}
+	]
+}
