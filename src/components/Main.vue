@@ -46,7 +46,7 @@
 									<td><Item :item="item"/></td>
 									<td class="spacer"></td>
 									<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" label="Benötigt" /></td>
-									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest" label="Überschuss" /></td>
+									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest > 0.0001" label="Überschuss" /></td>
 									<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" label="Verarbeitet" /></td>
 									<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" label="Produziert" /></td>
 									<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" label="Verfügbar" /></td>
@@ -57,13 +57,13 @@
 						<div>
 							<b class="inline">Produktion:</b>
 							<table v-if="oScheme" class="indent">
-								<template v-for="[item, aProd] in oScheme.mProduction">
-									<tr v-for="oProd, i in aProd" :key="item+i+rdm">
+								<template v-for="[id, aProd] in oScheme.mProduction">
+									<tr v-for="oProd, i in aProd" :key="id+i+rdm">
 										<td>
 											<Production
 												:obj="oProd"
-												editable
-												@update:productivity="updateProd(oProd, $event)"
+												editable @update:productivity="updateProd(oProd, $event)"
+												addable @add="addProd(oProd, $event)"
 											/>
 										</td>
 										<td class="spacer"></td>
@@ -173,8 +173,16 @@ export default {
 			this.oDrawedScheme = this.oScheme;
 		},
 		updateProd(oProd, productivity) {
-			oProd.changeProductivity(productivity, this.oScheme);
-			this.refresh();
+			oProd.productivity = productivity;
+			//oProd.changeProductivity(productivity, this.oScheme);
+			//this.refresh();
+		},
+		addProd(oProd) {
+			const newProd = oProd.oReceipe.createProduction();
+			this.oScheme.mProduction.get(oProd.oReceipe.id).push(newProd);
+			this.oScheme.adjustRate();
+			console.log(this.oScheme.mProduction);
+			this.rdm = Math.random() * 10000;
 		},
 		refresh() {
 			this.save();

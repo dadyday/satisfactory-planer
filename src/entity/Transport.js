@@ -12,7 +12,7 @@ export default class Transport {
 	oTarget;
 
 	constructor(item, count, oSource, oTarget) {
-		this.type = Item.get(item).portType;
+		this.type = Item.get(item).type;
 		this.item = item;
 		this.count = count;
 		this.oSource = oSource;

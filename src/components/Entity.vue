@@ -83,7 +83,7 @@ export default {
 		.entity {
 			padding: 0.0em;
 			box-shadow: none;
-			margin: 0em 0.1em;
+			margin: 0 0.1em;
 		}
 	}
 	> .icon > img {

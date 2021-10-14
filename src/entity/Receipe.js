@@ -9,6 +9,7 @@ export default class Receipe {
 	id;
 	type; // id of Building
 	name = 'none';
+	isMined = false;
 	isUnpack = false;
 	isAlt = false;
 	mOutput = new Map; // Map of item: count
@@ -18,7 +19,8 @@ export default class Receipe {
 		this.id = id;
 		this.type = type;
 		this.name = name ?? 'none';
-		this.isUnpack = this.name.match(/^unpackage/i);
+		this.isMined = !!this.type.match(/(extractor|miner)/i);
+		this.isUnpack = !!this.name.match(/^unpackage/i);
 		this.isAlt = alt ?? false;
 		if (this.isAlt) this.name = 'alt: ' + this.name;
 		this.mOutput = new Map(Object.entries(oOutput));
@@ -70,6 +72,7 @@ export default class Receipe {
 	}
 
 	static compare(oItem1, oItem2) {
+		if (oItem1.isMined != oItem2.isMined) return oItem1.isMined ? -1 : 1;
 		if (oItem1.isUnpack != oItem2.isUnpack) return oItem1.isUnpack ? 1 : -1;
 		if (oItem1.isAlt != oItem2.isAlt) return oItem1.isAlt ? 1 : -1;
 		return 0;
@@ -93,21 +96,8 @@ export default class Receipe {
 		return this.mBuildingList.get(type);
 	}
 
-	static getByOutput(item, pos = 0) {
-		const aReceipe = this.mOutputList.get(item);
-		if (!aReceipe) {
-			console.warn(`no receipe found for item '${item}'`);
-			return null;
-		}
-
-		var oReceipe = aReceipe[pos] ?? null;
-		if (oReceipe && oReceipe.isUnpack) {
-			oReceipe = aReceipe[pos+1] ?? null;
-		}
-		if (!oReceipe) {
-			oReceipe = aReceipe[pos] ?? null;
-		}
-		return oReceipe;
+	static getByOutput(item) {
+		return this.mOutputList.get(item);
 	}
 
 }

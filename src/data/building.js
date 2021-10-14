@@ -21,10 +21,10 @@ export default {
 	minerMk1: ['Miner MK.1', 14, 6, 3, [
 		['belt', false, 0],
 	]],
-	waterExtractor:   ['Wasser', 20, 20, 2, [
+	waterExtractor:   ['Wasserpumpe', 20, 20, 2, [
 		['pipe', false, 0]
 	]],
-	oilExtractor: ['Öl Förderer', 20, 12, 3, [
+	oilExtractor: ['Ölpumpe', 20, 12, 3, [
 		['pipe', false, 0],
 	]],
 	smelter: ['Schmelzer', 9, 6, 2, [

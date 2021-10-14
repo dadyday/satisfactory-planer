@@ -50,6 +50,7 @@
 
 <script>
 import { Item } from '../entity';
+import bigRat from 'big-rational';
 
 var	inputSize = 0;
 const inputOffset = 0;
@@ -102,21 +103,14 @@ export default {
 			},
 		},
 		showedCountValue() {
-			if (this.countVal == 0) {
-				return ' - ';
-			}
-			const c = Math.round(1 / this.countVal);
-			if (c > 1) {
-				return '1/'+c+'';
-			}
-			return Math.round(this.countVal)+'';
+			return parseFloat(this.countVal).rationalize();
 		},
 		countValue: {
 			get: function() {
 				return this.countVal;
 			},
 			set: function(value) {
-				this.countVal = parseFloat(value) || 0;
+				this.countVal = value;
 			},
 		},
 		name() {
@@ -130,9 +124,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.countVal = this.count >= 1 ?
-			Math.ceil(this.count || 0).toFixed() :
-			this.count;
+		this.countVal = parseFloat(this.count);
 		if (!inputSize) {
 			inputSize = this.getTextWidth(this.$refs.edit, '0123456789') / 10;
 		}
@@ -146,7 +138,7 @@ export default {
 		},
 		endEditing() {
 			this.editing = false;
-			this.$emit('update:count', this.countValue);
+			this.$emit('update:count', bigRat(this.countValue).valueOf());
 		},
 		startSelecting() {
 			this.selecting = this.selectable;

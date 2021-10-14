@@ -3,7 +3,7 @@ export default {
 	...Receipes,
 
 	store: ['container', '', {}, {}],
-
+//*
 	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
 	copperOre: ['minerMk1', 'Kupfererz', {copperOre: 60}, {} ],
 	limestone: ['minerMk1', 'Sandstein', {limestone: 60}, {} ],
@@ -45,4 +45,5 @@ export default {
 	insulatedCrystalOscillator: ['manufacturer', 'Isolierter Kristall Oszillator', {crystalOscillator: 1.875}, {quartzCrystal: 18.75, rubber: 13.125, aILimiter: 1.875}, true, 32, 1760, 5, ],
 
 	radioControlSystem: ['manufacturer', 'Radio Control System', {radioControlUnit: 4.5}, {crystalOscillator: 1.5, circuitBoard: 15, aluminumCasing: 90, rubber: 45}, true, 40, 733.33, 7, ],
+//*/
 }
