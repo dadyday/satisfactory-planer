@@ -7,8 +7,9 @@ use Xparse\Value;
 $aParam = [
 	'path' => __DIR__.'/data/',
 	'buildings' => [
+	//	'Water Extractor', 'Oil Extractor',
 		'Construct', 'Assembler', 'Manufacturer', 'Smelter', 'Foundry',
-		'Refinery', 'Blender', 'Packager','Particle Accelerator'
+		'Refinery', 'Blender', 'Packager', 'Particle Accelerator'
 	],
 	'fluids' => [
 		'Water', 'Crude Oil', 'Heavy Oil Residue', 'Fuel', 'Turbofuel', 'Liquid Biofuel',
@@ -68,6 +69,7 @@ $aParam['milestoneScheme'] = Value::list('body/table/tbody/tr[@class="firstRow"]
 $oDb = new Database;
 $oImporter = new Importer($oDb);
 $oImporter->runAll($aParam);
+dump($oImporter);
 
 $oDb->export(__DIR__.'/_temp');
 dump($oDb);

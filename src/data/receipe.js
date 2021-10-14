@@ -15,6 +15,7 @@ export default {
 	uranium:     ['minerMk1', 'Uran', {uranium: 60}, {} ],
 	samOre:      ['minerMk1', 'SAM', {samOre: 60}, {} ],
 
+	water:      ['waterExtractor', 'Wasser', {water: 60}, {} ],
 	crudeOil:   ['oilExtractor', 'Rohöl', {crudeOil: 60}, {} ],
 
 	ironIngot:    ['smelter', 'Eisenbarren', {ironIngot: 30}, {ironOre: 30} ],

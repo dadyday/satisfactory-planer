@@ -17,7 +17,6 @@ class Importer {
 		$this->oDb = $oDb ?? new Database;
 		$this->oDb->setMapping('building', [
 			'construct' => 'Constructor',
-			'extractor' => 'Water Extractor',
 		]);
 
 		$this->aReport = [

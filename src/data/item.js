@@ -23,5 +23,5 @@ export default {
 	rubber:            ['Gummi', 'belt', 100],
 
 	radioControlUnit:  ['Radioeinheit', 'belt', 100],
-*/
+//*/
 }
