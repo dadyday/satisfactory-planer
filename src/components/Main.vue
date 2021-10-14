@@ -1,10 +1,10 @@
 <template>
 	<div id="main" :style="{height: bodyHeight + 'px'}">
-		<Split horizontal class="default-theme" first-splitter>
-			<Pane style="overflow-y: hidden">
+		<Split horizontal class="default-theme" first-splitter @resized="setSize" @pane-maximize="setSize">
+			<Pane :size="size" style="overflow-y: hidden">
 				<World :palette="modeNodes" :scheme="oDrawedScheme" v-model="model" />
 			</Pane>
-			<Pane style="overflow-y: scroll">
+			<Pane :size="100-size" style="overflow-y: scroll">
 				<Rows>
 					<Cols>
 						<button @click="run">Run!</button>
@@ -112,6 +112,7 @@ import Store from 'store';
 export default {
 	data() {
 		return {
+			size: 30,
 			bodyHeight: 600,
 			oSupply: {},
 			oDemand: {},
@@ -189,17 +190,33 @@ export default {
 			this.oScheme = new Scheme(this.oDemand, this.oSupply, this.createProd);
 			this.rdm = Math.random() * 10000;
 		},
+		setSize(param) {
+			//console.log(param);
+			if (typeof param == 'array') {
+				param = param[0].size;
+			}
+			else if (typeof param == 'object') {
+				param = param.index ? param.size : 100-param.size;
+			}
+			else {
+				param = this.size;
+			}
+			this.size = Math.round(param);
+			this.save();
+		},
 		load() {
 			const aSetting = Store.get('setting');
 			this.oDemand = aSetting[0] ?? this.oDemand;
 			this.oSupply = aSetting[1] ?? this.oSupply;
 			this.createProd = aSetting[2] ?? this.createProd;
+			this.size = aSetting[3] ?? this.size;
 		},
 		save() {
 			Store.set('setting', [
 				this.oDemand,
 				this.oSupply,
 				this.createProd,
+				this.size,
 			]);
 		},
 	},
