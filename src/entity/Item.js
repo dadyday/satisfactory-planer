@@ -2,6 +2,8 @@ import Entity from './Entity';
 
 export default class Item extends Entity {
 
+	static entity = 'item';
+
 	// ingredient = false;
 	// product = false;
 	// tier = null;

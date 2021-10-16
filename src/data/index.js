@@ -1,5 +1,6 @@
 console.log('data!');
 import {
+	Entity,
 	Building,
 	Receipe,
 	Item,
@@ -9,8 +10,10 @@ import aBuildingData from './building';
 import aReceipeData from './receipe';
 import aItemData from './item';
 
-export default () => {
+export default (i18n) => {
 	Building.registerAll(aBuildingData);
 	Receipe.registerAll(aReceipeData);
+
+	Item.oI18n = i18n;
 	Item.registerAll(aItemData);
 };

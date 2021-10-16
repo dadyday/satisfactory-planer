@@ -104,7 +104,7 @@ export default class Scheme {
 	findReceipe(item, count = 1.0) {
 		//if (this.mReceipe.has(item)) return;
 
-		const aReceipe = Receipe.getByOutput(item);
+		const aReceipe = Receipe.getByOutput(item) ?? [];
 		const oReceipe = aReceipe.find((o) => !o.isUnpack && !o.isAlt);
 		if (!oReceipe) return;
 

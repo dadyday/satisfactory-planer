@@ -47,8 +47,22 @@ class Importer {
 		foreach ($aTier as $tier) {
 			$html = file_get_contents($path."/milestone/tier$tier.html");
 			$aParsed = $this->parse($html, $oParam->milestoneScheme);
-			#dump($aParsed);
+			//dump($aParsed);
 			$this->runTier($tier, $aParsed);
+		}
+
+		foreach ($this->oDb->aEntity as $entity => $aEntity) {
+			$this->runLang('en', $entity, $aEntity);
+		}
+
+		$aLang = $oParam->langs ?? [];
+		foreach ($aLang as $lang => $aEntity) {
+			foreach ($aEntity as $entity) {
+				$html = file_get_contents($path."/lang/$entity-$lang.html");
+				$aParsed = $this->parse($html, $oParam->langScheme);
+				//dump($aParsed);
+				$this->runLang($lang, $entity, $aParsed);
+			}
 		}
 
 		$aFluid = $oParam->fluids ?? [];
@@ -105,7 +119,7 @@ class Importer {
 
 		$oTier = $this->oDb->getOrCreate('tier', $tier, [
 			'name' => "Tier $tier",
-			'milstones' => [],
+			'milestones' => [],
 		]);
 
 		$relate = function ($oEntity, &$aCollection) use (&$oTier, &$milestoneId) {
@@ -168,7 +182,21 @@ class Importer {
 					$this->aReport['buildingNotFound'][] = $building;
 				}
 			}
-			$oTier->milstones[] = $milestoneId;
+			$oTier->milestones[] = $milestoneId;
+		}
+	}
+
+	function runLang($lang, $entity, $aData) {
+
+		$oLang = $this->oDb->getOrCreate('lang', $lang, [
+			'name' => "Lang $lang",
+		]);
+
+		foreach($aData as $oData) {
+			$oData = (object) $oData;
+
+			$id = $this->oDb->idOf($entity, $oData->id);
+			if ($id) $oLang->$entity[$id] = $oData->name;
 		}
 	}
 

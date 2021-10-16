@@ -38,6 +38,9 @@ $aParam = [
 			],
 		],
 	],
+	'langs' => [
+		'de' => ['item', 'building']
+	],
 ];
 
 $aParam['receipeScheme'] = Value::list('body/table/tbody/tr[td]', [
@@ -64,6 +67,14 @@ $aParam['milestoneScheme'] = Value::list('body/table/tbody/tr[@class="firstRow"]
 		'span/a[2]',
 		Value::num('text()[1]')
 	),
+]);
+$aParam['langScheme'] = Value::list('//td[contains(@class, "navbox-list")]/div/span', [
+	'id' => Value::str('a/img/@data-image-key', function($val) {
+		return str_replace('.png', '', $val);
+	}),
+	'name' => Value::str('a[2]', function($val) {
+		return utf8_decode($val);
+	})
 ]);
 
 $oDb = new Database;

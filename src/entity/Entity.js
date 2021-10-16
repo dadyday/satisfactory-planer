@@ -1,6 +1,4 @@
 
-
-
 export default class Entity {
 
 	id = '';
@@ -12,12 +10,23 @@ export default class Entity {
 		Object.assign(this, oData);
 	}
 
+	getName() {
+		return this.constructor.translate(this.id);
+	}
+
 	//** statics **********************************
 
+	static oI18n;
+	static entity = 'entity';
 	static mList = new Map();
 
+	static translate(message) {
+		return this.oI18n.t(this.entity+'.'+message);
+	}
+
 	static register(id, oData) {
-		const oInst = new this(id, oData.name, oData);
+		const name = oData.name;
+		const oInst = new this(id, name, oData);
 		this.mList.set(id, oInst);
 	}
 

@@ -18,6 +18,7 @@
 		"underscore": "^1.13.1",
 		"vue": "^2.6.11",
 		"vue-cli-plugin-import-components": "^1.0.2",
+		"vue-i18n": "^8.26.5",
 		"vue-multiselect": "^2.1.6"
 	},
 	"devDependencies": {

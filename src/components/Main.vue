@@ -192,7 +192,7 @@ export default {
 		},
 		setSize(param) {
 			//console.log(param);
-			if (typeof param == 'array') {
+			if (typeof param == Array) {
 				param = param[0].size;
 			}
 			else if (typeof param == 'object') {

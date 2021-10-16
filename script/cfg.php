@@ -4,7 +4,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 class Convert extends Jawira\CaseConverter\Convert {
 	static function __callStatic($func, $aArg) {
 		$func = 'to'.ucfirst($func);
-		//if (is_null($aArg[0])) return null;
+		if (is_null($aArg[0])) return null;
 		$oInst = new static($aArg[0]);
 		return $oInst->$func();
 	}

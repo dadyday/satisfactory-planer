@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import App from './App.vue';
-import initData from './data';
 import _ from 'underscore';
 import numberFormat from './utils/numberFormat';
 // import 'normalize.css';
@@ -88,6 +87,7 @@ Vue.prototype.$dump = window.$dump = console.log;
 //	return arg[0];
 //};
 Vue.prototype.$_ = window.$_ = _;
+Vue.prototype.$log = (...args) => { console.log(args); return args[0]; };
 
 import Wrap from "./utils/wrap.js";
 Vue.component("Wrap", Wrap);
@@ -96,8 +96,18 @@ import 'splitpanes/dist/splitpanes.css'
 Vue.component("Split", Splitpanes);
 Vue.component("Pane", Pane);
 
-initData();
+import messages from './data/lang.json';
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+const i18n = new VueI18n({
+  locale: 'de',
+  messages,
+});
+
+import initData from './data';
+initData(i18n);
 
 new Vue({
+	i18n,
 	render: h => h(App),
 }).$mount('#app')

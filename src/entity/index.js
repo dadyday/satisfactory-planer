@@ -1,4 +1,4 @@
-console.log('entity!');
+import Entity from './Building';
 import Building from './Building';
 import Port from './Port';
 import Receipe from './Receipe';
@@ -8,6 +8,7 @@ import Production from './Production';
 import Transport from './Transport';
 
 export {
+	Entity,
 	Building,
 	Port,
 	Receipe,
