@@ -2,15 +2,19 @@ import Entity from './Entity';
 
 export default class Item extends Entity {
 
-	// ingredient = false;
-	// product = false;
-	// tier = null;
-	// milestone = null;
-
 	constructor(id, oData = {}) {
-		super(id, oData);
+		super(id, {
+			name: 'none',
+			type: 'belt',
+			product: false,
+			ingredient: false,
+			tier: 'unknown',
+			milestone: null,
+			...oData
+		});
 
 		this.fluid = this.type == 'pipe';
+
 		this.imgName = (this.imgName ?? this.name ?? 'none').replace(/\s+/g, '_').toLowerCase();
 		this.image = `img/item/big/${this.imgName}.png`
 	}

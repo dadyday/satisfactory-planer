@@ -7,33 +7,34 @@ import {
 
 export default class Receipe extends Entity {
 
-	id;
-	name = 'none';
-	building; // id of Building
-	milestone = 0;
-	isMined = false;
-	isUnpack = false;
-	isAlt = false;
-	mOutput = new Map; // Map of item: count
-	mInput = new Map; // Map of item: count
+	constructor(id, oData) {
+		super(id, {
+			name: 'none',
+			building: 'unknown',
+			mined: false,
+			unpack: false,
+			alt: false,
+			tier: 'unknown',
+			milestone: null,
+			...oData
+		});
 
-	constructor(id, aData) {
-		super(id);
-		const [building, name, oOutput, oInput, alt] = aData;
+		this.name = this.name ?? 'none';
+		if (this.alt) this.name = 'alt: ' + this.name;
 
-		this.name = name ?? 'none';
-		this.building = building;
-		this.isMined = !!this.building.match(/(extractor|miner)/i);
-		this.isUnpack = !!this.name.match(/^unpackage/i);
-		this.isAlt = alt ?? false;
-		if (this.isAlt) this.name = 'alt: ' + this.name;
-		this.mOutput = new Map(Object.entries(oOutput));
-		this.mInput = new Map(Object.entries(oInput));
+		this.mined = !!this.building.match(/(extractor|miner)/i);
+		this.unpack = !!this.name.match(/^unpackage/i);
 
-		this.milestone = [...this.mOutput.keys(), ...this.mInput.keys()].reduce((item, max) => {
-			const oItem = Item.get(item);
-			return Math.max(oItem.milestone ?? 0, max);
-		}, 0);
+		this.mOutput = new Map(Object.entries(oData.out ?? {}));
+		this.mInput = new Map(Object.entries(oData.in ?? {}));
+
+		if (this.milestone < 0) {
+			/*
+			this.milestone = [...this.mOutput.keys(), ...this.mInput.keys()].reduce((item, max) => {
+				const oItem = Item.get(item);
+				return Math.max(oItem.milestone ?? 0, max);
+			}, 0); //*/
+		}
 	}
 
 	createProduction() {
@@ -82,7 +83,7 @@ export default class Receipe extends Entity {
 		super.registerAll(oDataList);
 
 		//console.log(this.mList);
-		//this.mList = this.mList.sortBy(['!isMined', 'isUnpack', 'milestone', 'isAlt']);
+		//this.mList = this.mList.sortBy(['!mMined', 'unpack', 'milestone', 'alt']);
 	}
 
 	static get(id) {

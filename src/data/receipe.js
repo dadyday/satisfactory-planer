@@ -1,7 +1,7 @@
 import Receipes from './receipe.json';
 export default {
 	...Receipes,
-
+/*
 	store: ['container', '', {}, {}],
 //*
 	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
