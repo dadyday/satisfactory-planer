@@ -102,7 +102,7 @@ import 'splitpanes/dist/splitpanes.css'
 Vue.component("Split", Splitpanes);
 Vue.component("Pane", Pane);
 
-import messages from './data/lang.json';
+import messages from './data/lang';
 import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 const i18n = new VueI18n({

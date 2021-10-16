@@ -10,6 +10,7 @@
 						<button @click="run">Run!</button>
 						<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
 						<button @click="draw">Draw!</button>
+						<Radio name="lang" v-model="$i18n.locale" :options="$i18n.messages" optionValue="id" optionLabel="name" @change="save"/>
 					</Cols>
 
 					<Cols>
@@ -192,7 +193,7 @@ export default {
 		},
 		setSize(param) {
 			//console.log(param);
-			if (typeof param == Array) {
+			if (Array.isArray(param)) {
 				param = param[0].size;
 			}
 			else if (typeof param == 'object') {
@@ -205,19 +206,21 @@ export default {
 			this.save();
 		},
 		load() {
-			const aSetting = Store.get('setting');
-			this.oDemand = aSetting[0] ?? this.oDemand;
-			this.oSupply = aSetting[1] ?? this.oSupply;
-			this.createProd = aSetting[2] ?? this.createProd;
-			this.size = aSetting[3] ?? this.size;
+			const oSetting = Store.get('setting');
+			this.oDemand = oSetting.demand ?? this.oDemand;
+			this.oSupply = oSetting.supply ?? this.oSupply;
+			this.createProd = oSetting.createProd ?? this.createProd;
+			this.size = oSetting.size ?? this.size;
+			this.$i18n.locale = oSetting.lang ?? this.$i18n.locale;
 		},
 		save() {
-			Store.set('setting', [
-				this.oDemand,
-				this.oSupply,
-				this.createProd,
-				this.size,
-			]);
+			Store.set('setting', {
+				demand: this.oDemand,
+				supply: this.oSupply,
+				createProd: this.createProd,
+				size: this.size,
+				lang: this.$i18n.locale,
+			});
 		},
 	},
 }
