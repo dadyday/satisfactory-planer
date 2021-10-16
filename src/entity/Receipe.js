@@ -1,34 +1,43 @@
+import Entity from './Entity';
 import {
-//	Building,
+	Item,
 	Production,
 } from '.';
 
 
-export default class Receipe {
+export default class Receipe extends Entity {
 
 	id;
-	type; // id of Building
 	name = 'none';
+	building; // id of Building
+	milestone = 0;
 	isMined = false;
 	isUnpack = false;
 	isAlt = false;
 	mOutput = new Map; // Map of item: count
 	mInput = new Map; // Map of item: count
 
-	constructor(id, type, name = null, oOutput = [], oInput = [], alt = null) {
-		this.id = id;
-		this.type = type;
+	constructor(id, aData) {
+		super(id);
+		const [building, name, oOutput, oInput, alt] = aData;
+
 		this.name = name ?? 'none';
-		this.isMined = !!this.type.match(/(extractor|miner)/i);
+		this.building = building;
+		this.isMined = !!this.building.match(/(extractor|miner)/i);
 		this.isUnpack = !!this.name.match(/^unpackage/i);
 		this.isAlt = alt ?? false;
 		if (this.isAlt) this.name = 'alt: ' + this.name;
 		this.mOutput = new Map(Object.entries(oOutput));
 		this.mInput = new Map(Object.entries(oInput));
+
+		this.milestone = [...this.mOutput.keys(), ...this.mInput.keys()].reduce((item, max) => {
+			const oItem = Item.get(item);
+			return Math.max(oItem.milestone ?? 0, max);
+		}, 0);
 	}
 
 	createProduction() {
-		return new Production(this.type, this);
+		return new Production(this.building, this);
 	}
 
 	getPortItem(oPort) {
@@ -47,18 +56,16 @@ export default class Receipe {
 
 	//** statics ****************************
 
-	static mList = new Map;
+	static entity = 'receipe';
+	static mList = new Map();
+
 	static mOutputList = new Map;
 	static mInputList = new Map;
 	static mBuildingList = new Map;
 
-	static create(id, aData) {
-		const [type, name, oOutput, oInput, alt] = aData;
-		return new Receipe(id, type, name, oOutput, oInput, alt);
-	}
 
-	static register(oReceipe) {
-		this.mList.set(oReceipe.id, oReceipe);
+	static register(id, oReceipe) {
+		super.register(id, oReceipe);
 
 		oReceipe.mOutput.forEach((count, item) => {
 			this.mOutputList.getInit(item, []).push(oReceipe);
@@ -68,23 +75,14 @@ export default class Receipe {
 			this.mInputList.getInit(item, []).push(oReceipe);
 		});
 
-		this.mBuildingList.getInit(oReceipe.type, []).push(oReceipe);
+		this.mBuildingList.getInit(oReceipe.building, []).push(oReceipe);
 	}
 
-	static compare(oItem1, oItem2) {
-		if (oItem1.isMined != oItem2.isMined) return oItem1.isMined ? -1 : 1;
-		if (oItem1.isUnpack != oItem2.isUnpack) return oItem1.isUnpack ? 1 : -1;
-		if (oItem1.isAlt != oItem2.isAlt) return oItem1.isAlt ? 1 : -1;
-		return 0;
-	}
+	static registerAll(oDataList) {
+		super.registerAll(oDataList);
 
-	static registerAll(oReceipeData) {
-		const aReceipe = [];
-		new Map(Object.entries(oReceipeData)).forEach((aData, id) => {
-			aReceipe.push(this.create(id, aData));
-		});
-		aReceipe.sort(this.compare);
-		aReceipe.forEach((item) => this.register(item));
+		//console.log(this.mList);
+		//this.mList = this.mList.sortBy(['!isMined', 'isUnpack', 'milestone', 'isAlt']);
 	}
 
 	static get(id) {

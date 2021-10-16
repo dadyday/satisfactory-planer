@@ -31,7 +31,7 @@ export default {
 			return this.label ?? this.oBuilding.name;
 		},
 		alt() {
-			return this.oBuilding.type;
+			return this.oBuilding.id;
 		},
 		src() {
 			return this.oBuilding.imageUrl();

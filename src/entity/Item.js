@@ -2,24 +2,28 @@ import Entity from './Entity';
 
 export default class Item extends Entity {
 
-	static entity = 'item';
-
 	// ingredient = false;
 	// product = false;
 	// tier = null;
 	// milestone = null;
 
-	constructor(id, name, oData = {}) {
-		super(id, name, oData);
+	constructor(id, oData = {}) {
+		super(id, oData);
 
 		this.fluid = this.type == 'pipe';
-		this.imgName = (this.imgName ?? this.name).replace(/\s+/g, '_').toLowerCase();
+		this.imgName = (this.imgName ?? this.name ?? 'none').replace(/\s+/g, '_').toLowerCase();
 		this.image = `img/item/big/${this.imgName}.png`
 	}
 
 	imageUrl() {
 		return this.image;
 	}
+
+	//** statics ****************************
+
+	static entity = 'item';
+	static mList = new Map();
+
 
 	static get(id) {
 		return super.get(id) ?? new this(null, 'none');
@@ -39,7 +43,4 @@ export default class Item extends Entity {
 		return mTier;
 	}
 
-	static each(func) {
-		this.mList.forEach(func);
-	}
 }

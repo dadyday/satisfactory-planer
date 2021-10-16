@@ -20,7 +20,13 @@ const compareValue = (item, property) => {
 			break;
 		case 'string':
 		case 'integer':
-			value = typeof item[property] == 'function' ? item[property]() : item[property];
+			value = item[property];
+			if (typeof value == 'undefined') {
+				console.error(`item has no property '${property}'`, item);
+			}
+			else {
+				value = typeof value  == 'function' ? value.apply(item) : value;
+			}
 			break;
 	}
 	return value;
@@ -101,6 +107,7 @@ import VueI18n from 'vue-i18n'
 Vue.use(VueI18n)
 const i18n = new VueI18n({
   locale: 'de',
+  fallbackLocale: 'en',
   messages,
 });
 

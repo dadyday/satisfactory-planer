@@ -21,7 +21,7 @@
 			</select>
 			<span v-show="!selectable || !selecting">{{ name }}</span>
 		</div>
-		<div @mousedown="startEditing" :class="{times, full: oProd.full}">
+		<div class="times" @mousedown="startEditing" :class="{full: oProd.full}">
 			<input type="number"
 				ref="edit"
 				v-show="editable && editing"
@@ -96,7 +96,7 @@ export default {
 				return this.oProd.oReceipe.name;
 			},
 			set: function(value) {
-				Receipe.getByBuilding(this.oProd.oBuilding.type).forEach((oReceipe) => {
+				Receipe.getByBuilding(this.oProd.oBuilding.id).forEach((oReceipe) => {
 					if (oReceipe.name == value) {
 						this.oProd.oReceipe = oReceipe;
 					}
@@ -105,7 +105,7 @@ export default {
 			},
 		},
 		receipeList() {
-			return Receipe.getByBuilding(this.oProd.oBuilding.type);
+			return Receipe.getByBuilding(this.oProd.oBuilding.id);
 		},
 	},
 	methods: {
