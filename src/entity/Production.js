@@ -7,8 +7,7 @@ import {
 
 
 export default class Production {
-	id = null;
-	name = ''; // Receipe name
+	name = '***deprecated***'; // Receipe name
 	oBuilding; // Building object
 	oReceipe; // Receipe object
 	productivity = 0.0;
@@ -23,6 +22,10 @@ export default class Production {
 		this.setReceipe(receipe);
 	}
 
+	getName() {
+		return 'receipe.' + this.oReceipe.id;
+	}
+
 	setBuilding(building = null) {
 		this.oBuilding = building instanceof Building ? building : Building.get(building);
 		if ((this.oBuilding?.id ?? null) != (this.oReceipe?.building ?? null)) {
@@ -32,7 +35,7 @@ export default class Production {
 
 	setReceipe(receipe = null) {
 		this.oReceipe = receipe instanceof Receipe ? receipe : Receipe.get(receipe);
-		this.name = (this.oBuilding?.name + ' - ' ?? '') + (this.oReceipe?.name ?? 'none');
+		//this.name = (this.oBuilding?.name + ' - ' ?? '') + (this.oReceipe?.name ?? 'none');
 		if (this.oReceipe) {
 			this.setBuilding(this.oReceipe.building);
 		}

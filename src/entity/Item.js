@@ -17,6 +17,7 @@ export default class Item extends Entity {
 
 		this.imgName = (this.imgName ?? this.name ?? 'none').replace(/\s+/g, '_').toLowerCase();
 		this.image = `img/item/big/${this.imgName}.png`
+		this.name = '***deprecated***';
 	}
 
 	imageUrl() {

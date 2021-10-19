@@ -1,7 +1,22 @@
-import Lang from './lang.json';
+import oLang from './lang.json';
+import merge from 'deepmerge';
 
-Lang.en.name = 'English';
-Lang.de.name = 'Deutsch';
-Lang.en.item.null = '---';
-
-export default Lang;
+export default merge(oLang, {
+	silentTranslationWarn: true,
+	silentFallbackWarn: true,
+	de: {
+		name: 'Deutsch',
+		foo: 'FuBar!',
+		item: {
+			null:      '- kein -',
+			ironIngot: 'Eisenbarren ',
+		},
+	},
+	en: {
+		name: 'English',
+		foo: 'FooBar!',
+		item: {
+			null: '- none -'
+		},
+	},
+});

@@ -67,6 +67,15 @@ Array.prototype.sortBy = function (properties) {
 // 	return new Object(aTemp);
 // };
 
+/*deepMerge = function (source) {
+	for (const key of Object.keys(source)) {
+		if (source[key] instanceof Object) {
+			this[key].deepMerge(source[key]);
+		}
+	}
+	Object.assign(this || {}, source)
+};*/
+
 
 Number.prototype.minMax = function (min, max) {
 	return Math.min(Math.max(this, min), max);

@@ -74,11 +74,11 @@ export default {
 	},
 	computed: {
 		name() {
-			return this.label ?? this.oProd.name;
+			return this.label ?? this.$t(this.oProd.getName());
 			// return this.label ?? this.oProd.oBuilding.name + ' - ' + this.oProd.oReceipe.name;
 		},
 		alt() {
-			return this.oProd.name;
+			return this.oProd.id;
 		},
 		src() {
 			return this.oProd.oBuilding?.imageUrl() ?? '';

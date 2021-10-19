@@ -7,7 +7,7 @@ import {
 
 export default class Building extends Entity {
 
-	name = '';
+	name = '**deprecated**';
 	imgName = '';
 	oSize = { width: 100, height: 100 };
 	aPort = [];
@@ -16,9 +16,7 @@ export default class Building extends Entity {
 	constructor(id, aData) {
 		super(id);
 
-		const [name, width, height, layerFlags, aPortData, imgName] = aData;
-
-		this.name = name;
+		const [width, height, layerFlags, aPortData, imgName] = aData;
 
 		this.oSize = {
 			width: width*10,

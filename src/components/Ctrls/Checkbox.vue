@@ -1,8 +1,9 @@
 <template>
-	<label>
+	<div><label>
 		<input type="checkbox" :checked="value" @change="changeValue($event)" />
-		<span>{{ label }}</span>
+		<span><slot>{{ label }}</slot></span>
 	</label>
+	</div>
 </template>
 
 <script>

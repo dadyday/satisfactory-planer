@@ -7,15 +7,15 @@
 			<Pane :size="100-size" style="overflow-y: scroll">
 				<Rows>
 					<Cols>
-						<button @click="run">Run!</button>
-						<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
-						<button @click="draw">Draw!</button>
+						<button @click="run" v-t="'run'"></button>
+						<Checkbox v-model="createProd">{{ $t('foo') }}</Checkbox>
+						<button @click="draw" v-t="'draw'"></button>
 						<Radio name="lang" v-model="$i18n.locale" :options="$i18n.messages" optionValue="id" optionLabel="name" @change="save"/>
 					</Cols>
 
 					<Cols>
 						<div class="indent">
-							<b class="inline">Verfügbar:</b>
+							<b class="inline" v-t="'Available'"></b>
 							<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
 								:item="item" :count="count"
 								editable @update:count="setSupply(item, $event)"
@@ -27,7 +27,7 @@
 
 					<Cols>
 						<div class="indent">
-							<b class="inline">Benötigt:</b>
+							<b class="inline" v-t="'Benötigt'"></b>
 							<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
 								:item="item" :count="count"
 								editable @update:count="setDemand(item, $event)"
@@ -46,11 +46,11 @@
 								<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 									<td><Item :item="item"/></td>
 									<td class="spacer"></td>
-									<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" label="Benötigt" /></td>
-									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest > 0.0001" label="Überschuss" /></td>
-									<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" label="Verarbeitet" /></td>
-									<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" label="Produziert" /></td>
-									<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" label="Verfügbar" /></td>
+									<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" :label="$t('Benötigt')" /></td>
+									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest > 0.0001" :label="$t('Überschuss')" /></td>
+									<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" :label="$t('Verarbeitet')" /></td>
+									<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" :label="$t('Produziert')" /></td>
+									<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" :label="$t('Verfügbar')" /></td>
 								</tr>
 							</table>
 						</div>
