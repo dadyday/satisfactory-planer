@@ -7,14 +7,15 @@
 			<Pane :size="100-size" style="overflow-y: scroll">
 				<Rows>
 					<Cols>
-						<button @click="run">Run!</button>
-						<Checkbox v-model="createProd" label="fehlende Produktion erzeugen" />
-						<button @click="draw">Draw!</button>
+						<button @click="run" v-t="'Berechnen'"></button>
+						<Checkbox v-model="createProd" :label="$t('Erzeuge fehlende Produktion')"></Checkbox>
+						<button @click="draw" v-t="'in Digramm übernehmen'"></button>
+						<Radio name="lang" v-model="$i18n.locale" :options="$i18n.messages" optionValue="id" optionLabel="name" @change="save"/>
 					</Cols>
 
 					<Cols>
 						<div class="indent">
-							<b class="inline">Verfügbar:</b>
+							<b class="inline" v-t="'Verfügbar'"></b>
 							<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
 								:item="item" :count="count"
 								editable @update:count="setSupply(item, $event)"
@@ -26,7 +27,7 @@
 
 					<Cols>
 						<div class="indent">
-							<b class="inline">Benötigt:</b>
+							<b class="inline" v-t="'Benötigt'"></b>
 							<Item v-for="count, item in oDemand" :key="'dmn'+item+rdm"
 								:item="item" :count="count"
 								editable @update:count="setDemand(item, $event)"
@@ -40,22 +41,22 @@
 				<Rows>
 					<Cols>
 						<div>
-							<b class="inline">Gegenstände:</b>
+							<b class="inline" v-t="'Gegenstände'"></b>
 							<table v-if="oScheme" class="indent">
 								<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 									<td><Item :item="item"/></td>
 									<td class="spacer"></td>
-									<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" label="Benötigt" /></td>
-									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest > 0.0001" label="Überschuss" /></td>
-									<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" label="Verarbeitet" /></td>
-									<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" label="Produziert" /></td>
-									<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" label="Verfügbar" /></td>
+									<td><Item :item="item" :count="oQuant.demand" v-if="oQuant.demand" :label="$t('Benötigt')" /></td>
+									<td><Item :item="item" :count="oQuant.rest" v-if="oQuant.rest > 0.0001" :label="$t('Überschuss')" /></td>
+									<td><Item :item="item" :count="oQuant.in" v-if="oQuant.in" :label="$t('Verarbeitet')" /></td>
+									<td><Item :item="item" :count="oQuant.out" v-if="oQuant.out" :label="$t('Produziert')" /></td>
+									<td><Item :item="item" :count="oQuant.supply" v-if="oQuant.supply" :label="$t('Verfügbar')" /></td>
 								</tr>
 							</table>
 						</div>
 
 						<div>
-							<b class="inline">Produktion:</b>
+							<b class="inline" v-t="'Produktion'"></b>
 							<table v-if="oScheme" class="indent">
 								<template v-for="[id, aProd] in oScheme.mProduction">
 									<tr v-for="oProd, i in aProd" :key="id+i+rdm">
@@ -192,7 +193,7 @@ export default {
 		},
 		setSize(param) {
 			//console.log(param);
-			if (typeof param == 'array') {
+			if (Array.isArray(param)) {
 				param = param[0].size;
 			}
 			else if (typeof param == 'object') {
@@ -205,19 +206,21 @@ export default {
 			this.save();
 		},
 		load() {
-			const aSetting = Store.get('setting');
-			this.oDemand = aSetting[0] ?? this.oDemand;
-			this.oSupply = aSetting[1] ?? this.oSupply;
-			this.createProd = aSetting[2] ?? this.createProd;
-			this.size = aSetting[3] ?? this.size;
+			const oSetting = Store.get('setting');
+			this.oDemand = oSetting.demand ?? this.oDemand;
+			this.oSupply = oSetting.supply ?? this.oSupply;
+			this.createProd = oSetting.createProd ?? this.createProd;
+			this.size = oSetting.size ?? this.size;
+			this.$i18n.locale = oSetting.lang ?? this.$i18n.locale;
 		},
 		save() {
-			Store.set('setting', [
-				this.oDemand,
-				this.oSupply,
-				this.createProd,
-				this.size,
-			]);
+			Store.set('setting', {
+				demand: this.oDemand,
+				supply: this.oSupply,
+				createProd: this.createProd,
+				size: this.size,
+				lang: this.$i18n.locale,
+			});
 		},
 	},
 }

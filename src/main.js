@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import App from './App.vue';
-import initData from './data';
 import _ from 'underscore';
 import numberFormat from './utils/numberFormat';
 // import 'normalize.css';
@@ -21,7 +20,13 @@ const compareValue = (item, property) => {
 			break;
 		case 'string':
 		case 'integer':
-			value = typeof item[property] == 'function' ? item[property]() : item[property];
+			value = item[property];
+			if (typeof value == 'undefined') {
+				console.error(`item has no property '${property}'`, item);
+			}
+			else {
+				value = typeof value  == 'function' ? value.apply(item) : value;
+			}
 			break;
 	}
 	return value;
@@ -62,6 +67,15 @@ Array.prototype.sortBy = function (properties) {
 // 	return new Object(aTemp);
 // };
 
+/*deepMerge = function (source) {
+	for (const key of Object.keys(source)) {
+		if (source[key] instanceof Object) {
+			this[key].deepMerge(source[key]);
+		}
+	}
+	Object.assign(this || {}, source)
+};*/
+
 
 Number.prototype.minMax = function (min, max) {
 	return Math.min(Math.max(this, min), max);
@@ -88,6 +102,7 @@ Vue.prototype.$dump = window.$dump = console.log;
 //	return arg[0];
 //};
 Vue.prototype.$_ = window.$_ = _;
+Vue.prototype.$log = (...args) => { console.log(args); return args[0]; };
 
 import Wrap from "./utils/wrap.js";
 Vue.component("Wrap", Wrap);
@@ -96,8 +111,73 @@ import 'splitpanes/dist/splitpanes.css'
 Vue.component("Split", Splitpanes);
 Vue.component("Pane", Pane);
 
-initData();
+import messages from './data/lang';
+import VueI18n from 'vue-i18n'
+Vue.use(VueI18n)
+
+const missed = { de:{}, en:{} };
+var tm;
+const i18n = new VueI18n({
+  locale: 'de',
+  fallbackLocale: 'en',
+  silentTranslationWarn: true,
+	silentFallbackWarn: true,
+	missing: (locale, message, ctx, args) => {
+		missed[locale][message] = message;
+		clearTimeout(tm);
+		tm = setTimeout(() => {
+			console.log(JSON.stringify(missed[locale], null, '	'));
+		}, 5000);
+		return message;
+	},
+  messages,
+});
+
+import initData from './data';
+initData(i18n);
+
+// https://optimizely.github.io/vuejs.org/guide/directives.html
+/*
+Vue.directive('trl', {
+	//isFn: true, // important!
+	isLiteral: true,
+	bind: (el, ctx, vnode, vnode2, ...args) => {
+		console.log(this, el, ctx, vnode, vnode2, ...args);
+		const tr = (value) => 'translated ' + value;
+		if (ctx.arg) {
+			vnode.componentInstance[ctx.arg] = tr(ctx.value);
+			//Vue.set(vnode2.componentInstance, ctx.arg, tr(ctx.value));
+			//vnode.componentInstance.$options.propsData[ctx.arg] = tr(ctx.value);
+			//const opts = {};
+			//opts[ctx.arg] = tr(ctx.value);
+			//Vue.util.mergeOptions(vnode, opts);
+		}
+		else if (isObject(ctx.value)) {
+			for (prop in ctx.value) {
+				vnode.$set(prop, tr(ctx.value[prop]));
+			}
+		}
+	}
+/*
+	update: (el, ctx, vnode, vnode2, ...args) => {
+		console.log(this, el, ctx, vnode, vnode2, ...args);
+		if (ctx.arg) {
+			vnode2.componentInstance[ctx.arg] = 'translated '+ctx.value;
+		}
+	}
+/*  bind: function (el, binding, vnode) {
+		if (binding.arg) {
+			const tr = 'translated '+binding.value;
+			vnode._props[binding.arg] = tr;
+			console.log(el, binding, vnode);
+			Vue.set(el.__vue__._props[binding.arg], tr);
+		}
+		//return VueI18n.t(el, binding, vnode);
+	}
+})
+*/
 
 new Vue({
+	i18n,
 	render: h => h(App),
 }).$mount('#app')

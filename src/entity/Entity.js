@@ -1,31 +1,37 @@
 
-
-
 export default class Entity {
 
 	id = '';
-	name = 'none';
 
-	constructor(id, name, oData) {
+	constructor(id, oData = {}) {
 		this.id = id;
-		this.name = name;
 		Object.assign(this, oData);
+	}
+
+	getName() {
+		return this.constructor.translate(this.id);
 	}
 
 	//** statics **********************************
 
-	static mList = new Map();
+	static oI18n;
+	static entity;
+	static mList;
 
-	static register(id, oData) {
-		const oInst = new this(id, oData.name, oData);
+
+	static translate(message) {
+		return this.oI18n.t(this.entity+'.'+message);
+	}
+
+	static register(id, oInst) {
 		this.mList.set(id, oInst);
 	}
 
 	static registerAll(oDataList) {
-		Object.entries(oDataList).forEach(([id, oData]) => this.register(id, oData));
-		// new Map(Object.entries(oItemData)).forEach((aData, item) => {
-		// 	this.register(item, aData);
-		// });
+		Object.entries(oDataList).forEach(([id, oData]) => {
+			const oInst = new this(id, oData);
+			this.register(id, oInst);
+		});
 	}
 
 	static get(id) {
@@ -34,6 +40,10 @@ export default class Entity {
 
 	static getAll() {
 		return this.mList;
+	}
+
+	static each(func) {
+		this.mList.forEach(func);
 	}
 
 	static getBy(oFilter) {

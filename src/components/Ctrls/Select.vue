@@ -127,19 +127,24 @@ export default {
 			return Object.values(retData);
 		},
 		getList() {
+			const itemProp = (item, prop, def) => {
+				//if (!item) throw console.log(typeof item);
+				prop = item[prop] ?? def;
+				return (typeof prop === 'function') ? prop.apply(item) : prop;
+			};
 			const handler = this.groupBy ?
 				(oRet, item, key) => {
-					const group = this.groupBy ? item[this.groupBy] : 0;
-					const image = this.listImage ? item[this.listImage] : null;
-					key = this.listKey ? item[this.listKey] : key;
-					item = this.listValue ? item[this.listValue] : item;
+					const group = itemProp(item, this.groupBy, 0);
+					const image = itemProp(item, this.listImage, null);
+					key = itemProp(item, this.listKey, key);
+					item = itemProp(item, this.listValue, item);
 					if (!oRet[group]) oRet[group] = { label: 'Tier '+group, items: [] };
 					oRet[group].items.push({ key, label: item, image });
 					return oRet;
 				} :
 				(oRet, item, key) => {
-					key = this.listKey ? item[this.listKey] : key;
-					item = this.listValue ? item[this.listValue] : item;
+					key = itemProp(item, this.listKey, key);
+					item = itemProp(item, this.listValue, item);
 					if (item && (key || key == 0)) oRet[key] = item;
 					return oRet;
 				};

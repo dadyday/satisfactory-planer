@@ -1,6 +1,7 @@
-import Items from './item.json';
-export default {
-	...Items,
+import oItems from './item.json';
+
+export default oItems;
+
 /*
 // iron tier 0
 	ironOre:     ['Eisenerz', 'belt', 100],
@@ -24,4 +25,3 @@ export default {
 
 	radioControlUnit:  ['Radioeinheit', 'belt', 100],
 //*/
-}

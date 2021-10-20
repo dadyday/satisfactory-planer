@@ -1,7 +1,22 @@
-import Receipes from './receipe.json';
-export default {
-	...Receipes,
+import oReceipes from './receipe.json';
+import merge from 'deepmerge';
 
+export default merge(oReceipes, {
+	ironOre:     {name: 'Eisenerz',    building: 'minerMk1',       out: {ironOre:     60}},
+	copperOre:   {name: 'Kupfererz',   building: 'minerMk1',       out: {copperOre:   60}},
+	limestone:   {name: 'Sandstein',   building: 'minerMk1',       out: {limestone:   60}},
+	coal:        {name: 'Kohle',       building: 'minerMk1',       out: {coal:        60}},
+	cateriumOre: {name: 'Cateriumerz', building: 'minerMk1',       out: {cateriumOre: 60}},
+	rawQuartz:   {name: 'Rowquarz',    building: 'minerMk1',       out: {rawQuartz:   60}},
+	sulfur:      {name: 'Schwefel',    building: 'minerMk1',       out: {sulfur:      60}},
+	bauxite:     {name: 'Bauxit',      building: 'minerMk1',       out: {bauxite:     60}},
+	uranium:     {name: 'Uran',        building: 'minerMk1',       out: {uranium:     60}},
+	samOre:      {name: 'SAM',         building: 'minerMk1',       out: {samOre:      60}},
+	water:       {name: 'Wasser',      building: 'waterExtractor', out: {water:       60}},
+	crudeOil:    {name: 'Rohöl',       building: 'oilExtractor',   out: {crudeOil:    60}},
+});
+
+/*
 	store: ['container', '', {}, {}],
 //*
 	ironOre:   ['minerMk1', 'Eisenerz', {ironOre: 60}, {} ],
@@ -45,5 +60,5 @@ export default {
 	insulatedCrystalOscillator: ['manufacturer', 'Isolierter Kristall Oszillator', {crystalOscillator: 1.875}, {quartzCrystal: 18.75, rubber: 13.125, aILimiter: 1.875}, true, 32, 1760, 5, ],
 
 	radioControlSystem: ['manufacturer', 'Radio Control System', {radioControlUnit: 4.5}, {crystalOscillator: 1.5, circuitBoard: 15, aluminumCasing: 90, rubber: 45}, true, 40, 733.33, 7, ],
-//*/
 }
+//*/

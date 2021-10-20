@@ -104,8 +104,8 @@ export default class Scheme {
 	findReceipe(item, count = 1.0) {
 		//if (this.mReceipe.has(item)) return;
 
-		const aReceipe = Receipe.getByOutput(item);
-		const oReceipe = aReceipe.find((o) => !o.isUnpack && !o.isAlt);
+		const aReceipe = Receipe.getByOutput(item) ?? [];
+		const oReceipe = aReceipe.find((o) => !o.unpack && !o.alt);
 		if (!oReceipe) return;
 
 		const cnt = this.takeQuantity(item, count); // nimm items aus lager
@@ -167,7 +167,7 @@ export default class Scheme {
 
 		aReceipes = Object.values(aReceipes)
 			.reverse()
-			.sortBy(['!isMined', 'milestone'])
+			.sortBy(['!mined', 'milestone'])
 		;
 
 		aReceipes.forEach((oReceipe) => {
@@ -233,7 +233,7 @@ export default class Scheme {
 	/* REFACTOR createProduction(item, count, oTarget) {
 		if (!this.canCreate) return;
 		var oReceipe = Receipe.getByOutput(item);
-		//if (oReceipe.isUnpack) oReceipe = Receipe.getByOutput(item, 1);
+		//if (oReceipe.unpack) oReceipe = Receipe.getByOutput(item, 1);
 
 		for (var oEntry of this.aSeries) {
 			if (oEntry.id == oReceipe.id) {

@@ -7,9 +7,8 @@ import {
 
 
 export default class Production {
-	id = null;
-	type; // Building id
-	name = ''; // Receipe name
+	name = '***deprecated***'; // Receipe name
+	oBuilding; // Building object
 	oReceipe; // Receipe object
 	productivity = 0.0;
 	aInput = []; // Array of Transport objects
@@ -17,33 +16,36 @@ export default class Production {
 	mPort = new Map; // map of portId -> item
 	full = true;
 
-	constructor(type, receipe = null) {
+	constructor(building = null, receipe = null) {
 		this.id = this.constructor.lastId++;
-		this.setBuilding(type);
+		this.setBuilding(building);
 		this.setReceipe(receipe);
 	}
 
-	setBuilding(type = null) {
-		this.oBuilding = type instanceof Building ? type : Building.get(type);
-		this.type = this.oBuilding.type;
-		if (this.type != this.oReceipe?.type ?? null) {
+	getName() {
+		return 'receipe.' + this.oReceipe.id;
+	}
+
+	setBuilding(building = null) {
+		this.oBuilding = building instanceof Building ? building : Building.get(building);
+		if ((this.oBuilding?.id ?? null) != (this.oReceipe?.building ?? null)) {
 			this.setReceipe(null);
 		}
 	}
 
 	setReceipe(receipe = null) {
 		this.oReceipe = receipe instanceof Receipe ? receipe : Receipe.get(receipe);
-		this.name = (this.oBuilding?.name + ' - ' ?? '') + (this.oReceipe?.name ?? 'none');
+		//this.name = (this.oBuilding?.name + ' - ' ?? '') + (this.oReceipe?.name ?? 'none');
 		if (this.oReceipe) {
-			this.setBuilding(this.oReceipe.type);
+			this.setBuilding(this.oReceipe.building);
 		}
-		this.initPorts();
+		//this.initPorts();
 	}
 
-	initPorts() {
+	/*initPorts() {
 		// builing ioType: [portId]
 		// ibelt: [in0, in1, in2], ipipe: [in3], obelt: [out0]
-		const mPort = new Map
+		const mPort = new Map();
 		this.oBuilding.aPort.forEach(oPort => {
 			const key = (oPort.inOut ? 'i' : 'o') + oPort.type;
 			mPort.getInit(key, []).push(oPort.id);
@@ -121,6 +123,7 @@ export default class Production {
 		this.mPort.set(portId, item);
 		this.initPorts();
 	}
+	*/
 
 	createTransport(item, count, oTarget) {
 		var oTransp = this.findOutput(item, oTarget);
@@ -205,7 +208,7 @@ export default class Production {
 //** godata ***********
 
 	static createFromNodeData(oData) {
-		const oProd = new Production(oData.type, oData.receipe);
+		const oProd = new Production(oData.building, oData.receipe);
 		oProd.id = oData.id;
 		oProd.productivity = oData.productivity;
 		$_.forEach(oData.ports, (item, portId) => oProd.mPort.set(portId, item));

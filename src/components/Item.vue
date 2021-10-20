@@ -17,7 +17,7 @@
 			<Select
 				ref="select"
 				v-show="selectable && selecting"
-				:list="itemList" listKey="id" listValue="name" listImage="image" empty="- kein -"
+				:list="itemList" listValue="getName" listImage="imageUrl" empty="- kein -"
 				groupBy="tier"
 				v-model="itemValue"
 				@close="endSelecting"
@@ -114,13 +114,16 @@ export default {
 			},
 		},
 		name() {
-			return this.label ?? this.oItem.name;
+			return this.label ?? this.$t('item.'+this.oItem.id);
 		},
 		src() {
 			return this.oItem.imageUrl();
 		},
 		itemList() {
-			return Item.getBy(this.filters); //getTierGroups();
+			return Item.getBy(this.filters);
+		},
+		translatedId(x) {
+			return this.$log(x);
 		},
 	},
 	mounted() {
