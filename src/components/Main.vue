@@ -7,15 +7,15 @@
 			<Pane :size="100-size" style="overflow-y: scroll">
 				<Rows>
 					<Cols>
-						<button @click="run" v-t="'run'"></button>
-						<Checkbox v-model="createProd">{{ $t('foo') }}</Checkbox>
-						<button @click="draw" v-t="'draw'"></button>
+						<button @click="run" v-t="'Berechnen'"></button>
+						<Checkbox v-model="createProd" :label="$t('Erzeuge fehlende Produktion')"></Checkbox>
+						<button @click="draw" v-t="'in Digramm übernehmen'"></button>
 						<Radio name="lang" v-model="$i18n.locale" :options="$i18n.messages" optionValue="id" optionLabel="name" @change="save"/>
 					</Cols>
 
 					<Cols>
 						<div class="indent">
-							<b class="inline" v-t="'Available'"></b>
+							<b class="inline" v-t="'Verfügbar'"></b>
 							<Item v-for="count, item in oSupply" :key="'spl'+item+rdm"
 								:item="item" :count="count"
 								editable @update:count="setSupply(item, $event)"
@@ -41,7 +41,7 @@
 				<Rows>
 					<Cols>
 						<div>
-							<b class="inline">Gegenstände:</b>
+							<b class="inline" v-t="'Gegenstände'"></b>
 							<table v-if="oScheme" class="indent">
 								<tr v-for="[item, oQuant], i in oScheme.mQuantity" :key="i+rdm">
 									<td><Item :item="item"/></td>
@@ -56,7 +56,7 @@
 						</div>
 
 						<div>
-							<b class="inline">Produktion:</b>
+							<b class="inline" v-t="'Produktion'"></b>
 							<table v-if="oScheme" class="indent">
 								<template v-for="[id, aProd] in oScheme.mProduction">
 									<tr v-for="oProd, i in aProd" :key="id+i+rdm">
