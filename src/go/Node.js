@@ -14,7 +14,8 @@ export default class Node {
 	static oLastPoint = new go.Point(0,0);
 
 	static getTemplate(oBuilding) {
-		const sz = Math.min(oBuilding.oSize.width-10, oBuilding.oSize.height-10);
+		const sz = Math.min(oBuilding.oSize.width-20, oBuilding.oSize.height-20);
+		//const sz = (oBuilding.oSize.width + oBuilding.oSize.height) /2;
 
 		var oPanel = $(go.Panel, "Auto",
 			{

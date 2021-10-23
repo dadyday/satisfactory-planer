@@ -2,6 +2,7 @@ import go from 'gojs';
 var $ = go.GraphObject.make;
 
 import Node from './Node';
+import Port from './Port';
 import  { Production } from "../entity";
 
 export default class GoAdapter {
@@ -11,12 +12,12 @@ export default class GoAdapter {
 	commandHandler;
 
 	constructor(elIdDiagram, elIdPalette, mBuilding) {
-		const oTemplateMap = new go.Map();
+		const oNodeTemplateMap = new go.Map();
 		const aModelData = [];
 
 		mBuilding.forEach((oBuilding, id) => {
 			const oProduction = oBuilding.createProduction();
-			oTemplateMap.add(id, Node.getTemplate(oBuilding));
+			oNodeTemplateMap.add(id, Node.getTemplate(oBuilding));
 			aModelData.push(oProduction.getNodeData());
 		});
 

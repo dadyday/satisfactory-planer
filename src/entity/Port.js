@@ -29,4 +29,10 @@ export default class Port {
 		}
 	}
 
+	static aType = ['belt', 'pipe'];
+
+	static getTypes() {
+		return this.aType;
+	}
+
 }

@@ -2,7 +2,7 @@
 	<div id="main" :style="{height: bodyHeight + 'px'}">
 		<Split horizontal class="default-theme" first-splitter @resized="setSize" @pane-maximize="setSize">
 			<Pane :size="size" style="overflow-y: hidden">
-				<World :palette="modeNodes" :scheme="oDrawedScheme" v-model="model" />
+				<World :scheme="oDrawedScheme" v-model="model" />
 			</Pane>
 			<Pane :size="100-size" style="overflow-y: scroll">
 				<Rows>
@@ -107,7 +107,7 @@
 </style>
 
 <script>
-import { Building, Scheme } from '../entity';
+import { Scheme } from '../entity';
 import Store from 'store';
 
 export default {
@@ -123,11 +123,6 @@ export default {
 			model: '',
 			oDrawedScheme: null,
 		};
-	},
-	computed: {
-		modeNodes() {
-			return Building.getAll();
-		}
 	},
 	mounted() {
 		// create an Observer instance

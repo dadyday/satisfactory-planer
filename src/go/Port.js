@@ -21,7 +21,6 @@ export default class Port {
 				oSide[oPort.side].push(this.makePort(id, oPort, true));
 			}
 		}
-
 		return oSide;
 	}
 
