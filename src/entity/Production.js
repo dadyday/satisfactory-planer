@@ -156,7 +156,7 @@ export default class Production {
 		0     0.5    0
 	*/
 	setDelta(delta, aIgnore = []) {
-		if (this.name == 'storage') return delta;
+		if (this.id == 'storage') return delta;
 		if ($_.contains(aIgnore, this)) return delta;
 		aIgnore.push(this);
 
@@ -218,13 +218,13 @@ export default class Production {
 	getNodeData() {
 		var oData = {
 			id: this.id,
-			detail: this.oReceipe?.name ?? '',
+			detail: this.oReceipe?.getName() ?? '',
 			receipe: this.oReceipe?.id ?? '',
 
 			// ports: this.oReceipe?.getItems() ?? [],
 			ports: Object.fromEntries(this.mPort),
 		};
-		Object.assign(oData, this.oBuilding.getNodeData());
+		Object.assign(oData, this.oBuilding?.getNodeData() ?? {});
 		return oData;
 	}
 

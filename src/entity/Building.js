@@ -48,7 +48,7 @@ export default class Building extends Entity {
 	getNodeData() {
 		return {
 			type: this.id,
-			name: this.name,
+			name: this.getName,
 			layer: this.aLayer[0],
 			orient: 0,
 		};

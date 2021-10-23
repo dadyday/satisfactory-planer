@@ -6,7 +6,7 @@ import Port from './Port';
 import vueHelper from '../helper';
 import CtxMenu from "../components/ProdCard.vue";
 import { Production, Receipe } from "../entity";
-
+import Templates from './Templates';
 
 
 export default class Node {
@@ -14,8 +14,8 @@ export default class Node {
 	static oLastPoint = new go.Point(0,0);
 
 	static getTemplate(oBuilding) {
-		const sz = Math.min(oBuilding.oSize.width-20, oBuilding.oSize.height-20);
-		//const sz = (oBuilding.oSize.width + oBuilding.oSize.height) /2;
+		//const sz = Math.min(oBuilding.oSize.width-20, oBuilding.oSize.height-20);
+		const sz = (oBuilding.oSize.width + oBuilding.oSize.height) /2;
 
 		var oPanel = $(go.Panel, "Auto",
 			{
@@ -24,7 +24,9 @@ export default class Node {
 			},
 			//new go.Binding("contextMenu", "production", oBuilding.makeContextMenu),
 			$(go.Shape, "RoundedRectangle", {
-				fill: "#fb04", stroke: "#430", strokeWidth: 2,
+				fill: '#E4D2AA', //"#fb04",
+				stroke: "#430",
+				strokeWidth: 2,
 			}),
 			$(go.Picture, oBuilding.imageUrl(),
 				{
@@ -60,7 +62,7 @@ export default class Node {
 			),
 		);
 
-		const oSide = Port.getTemplates(oBuilding.aPort);
+		const oSide = Templates.portSides(oBuilding.aPort);
 
 		var oNode = $(go.Node, "Spot",
 			{

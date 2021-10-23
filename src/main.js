@@ -5,6 +5,16 @@ import numberFormat from './utils/numberFormat';
 // import 'normalize.css';
 // import '@/scss/main.scss';
 
+window.isFunction = function(val) {
+ return val && {}.toString.call(val) === '[object Function]';
+};
+window.isObject = function(val) {
+	return typeof val === 'object' &&
+		!Array.isArray(val) &&
+		val !== null
+	;
+};
+
 Map.prototype.getInit = function (key, initValue = null) {
 	if (!this.has(key)) this.set(key, initValue);
 	return this.get(key);

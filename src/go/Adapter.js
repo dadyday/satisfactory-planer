@@ -4,15 +4,19 @@ var $ = go.GraphObject.make;
 import Node from './Node';
 import Port from './Port';
 import  { Production } from "../entity";
+import Templates from './Templates';
+import Foo from "../components/Ctrls/Foo.vue";
 
 export default class GoAdapter {
 
 	oPalette;
 	oDiagram;
 	commandHandler;
+	animation;
 
-	constructor(elIdDiagram, elIdPalette, mBuilding) {
+	constructor(elIdDiagram, elIdPalette, mBuilding, aPortType) {
 		const oNodeTemplateMap = new go.Map();
+		const oLinkTemplateMap = new go.Map();
 		const aModelData = [];
 
 		mBuilding.forEach((oBuilding, id) => {
@@ -21,13 +25,18 @@ export default class GoAdapter {
 			aModelData.push(oProduction.getNodeData());
 		});
 
-		this.initDiagram(elIdDiagram, oTemplateMap);
-		this.initPalette(elIdPalette, oTemplateMap, aModelData);
+		aPortType.forEach((type) => {
+			oLinkTemplateMap.add(type, Templates.link(type));
+		});
+
+		this.initDiagram(elIdDiagram, oNodeTemplateMap, oLinkTemplateMap);
+		this.initPalette(elIdPalette, oNodeTemplateMap, aModelData);
 	}
 
 	load(oData) {
 		this.oDiagram.model.nodeDataArray = oData?.nodeDataArray ?? [];
 		this.oDiagram.model.linkDataArray = oData?.linkDataArray ?? [];
+		//this.startAnimation();
 	}
 
 	save() {
@@ -44,37 +53,53 @@ export default class GoAdapter {
 			"nodeTemplateMap":   oTemplateMap,
 			"model":             new go.GraphLinksModel(aModelData),
 			"initialAutoScale":  go.Diagram.UniformToFill,
+			contextMenu: Templates.htmlPanel(Foo, { foo: 'bar' }),
 			//"initialScale":      0.5
 		});
 		this.oPalette.model.nodeCategoryProperty = "type";
 	}
 
-	initDiagram(elId, oTemplateMap) {
+	initDiagram(elId, oNodeTemplateMap, oLinkTemplateMap) {
+		// Animate the flow in the pipes
+
 		this.oDiagram = $(go.Diagram, elId, {
-			"initialDocumentSpot": go.Spot.Top,
-			"initialViewportSpot": go.Spot.Top,
-			"initialAutoScale": go.Diagram.Uniform,
+			"InitialLayoutCompleted":								(e) => {},
+			"initialDocumentSpot": 									go.Spot.Top,
+			"initialViewportSpot": 									go.Spot.Top,
+			"initialAutoScale": 										go.Diagram.Uniform,
 			"undoManager.isEnabled":                true, // enable Ctrl-Z to undo and Ctrl-Y to redo
 			"commandHandler.doKeyDown":             () => this.handleKey.call(this),
 			"draggingTool.gridSnapCellSize":        new go.Size(20, 20),
 			"draggingTool.isGridSnapEnabled":       true,
 			"draggingTool.gridSnapCellSpot":        new go.Spot(0,0,20,20),
-			"grid":                                 $(go.Panel, "Grid",
-				$(go.Shape, "LineH", { stroke: "lightgray", strokeWidth: 0.5 }),
-				$(go.Shape, "LineH", { stroke: "gray", strokeWidth: 0.5, interval: 8 }),
-				$(go.Shape, "LineV", { stroke: "lightgray", strokeWidth: 0.5 }),
-				$(go.Shape, "LineV", { stroke: "gray", strokeWidth: 0.5, interval: 8 })
-			),
-			"draggingTool.dragsLink":               false,
-			"linkingTool.isUnconnectedLinkValid":   true,
+			"grid":                                 Templates.grid(),
+			"draggingTool.dragsLink":               true,
+			"clickCreatingTool.archetypeNodeData":  (new Production('construct')).getNodeData(),
+
+			"linkingTool.temporaryLink":						Templates.link(),
+			"linkingTool.isValidLink": 							(fromNode, fromPort, toNode, toPort) => {
+																								return fromPort.portId[1] == toPort.portId[1];
+																							},
+			"linkingTool.insertLink": 							(fromNode, fromPort, toNode, toPort) => {
+																								const oLink = this.oDiagram.partManager.insertLink(fromNode, fromPort, toNode, toPort);
+																								this.addAnimation(oLink);
+																								return oLink;
+																							},
+			"linkingTool.isUnconnectedLinkValid":   false,
 			"linkingTool.portGravity":              20,
+			"linkingTool.archetypeLinkData":        { type: 'belt' },
+//			"linkingTool.insertLink":               (fNode, fPort, tNode, tPort) => {
+//																								console.log('create a transport', fNode, fPort, tNode, tPort);
+//																							},
+
 			"relinkingTool.isUnconnectedLinkValid": true,
 			"relinkingTool.portGravity":            20,
 			"rotatingTool.handleAngle":             45,
 			"rotatingTool.handleDistance":          0,
 			"rotatingTool.snapAngleMultiple":       90,
 			"rotatingTool.snapAngleEpsilon":        10,
-			"nodeTemplateMap":                      oTemplateMap,
+			"nodeTemplateMap":                      oNodeTemplateMap,
+			"linkTemplateMap":                      oLinkTemplateMap,
 		});
 		this.commandHandler = new go.CommandHandler();
 
@@ -90,17 +115,17 @@ export default class GoAdapter {
 				const oOutProd = Production.createFromNodeData(oFromNode.data);
 				const oInProd = Production.createFromNodeData(oToNode.data);
 
-				var item = oOutProd.getPortItem(oLinkData.fromPortId);
+				var item = null; //oOutProd.getPortItem(oLinkData.fromPortId) ?? null;
 				if (item) {
 					oInProd.setPortItem(oLinkData.toPortId, item);
 				}
 				else {
-					item = oInProd.getPortItem(oLinkData.toPortId);
+					item = null; //oInProd.getPortItem(oLinkData.toPortId);
 					if (item) {
 						oOutProd.setPortItem(oLinkData.fromPortId, item);
 					}
 				}
-				$dump(oOutProd, oInProd, item)
+				//$dump(oOutProd, oInProd, item)
 
 				this.oDiagram.model.commit((oModel) => {
 					oModel.assignAllDataProperties(oFromNode.data, oOutProd.getNodeData());
@@ -116,44 +141,37 @@ export default class GoAdapter {
 		this.oDiagram.addLayerBefore($(go.Layer, { name: "ground", opacity: 0.6, }), oFore);
 		//this.oDiagram.findLayer("elevated").opacity = 0.5;
 
-		//myDiagram.linkTemplateMap = createLinkTemplateMap();
-		this.oDiagram.linkTemplate = $(go.Link,
-			{
-				routing: go.Link.AvoidsNodes, // go.Link.Orthogonal,
-				corner: 20,
-				//curve: go.Link.JumpOver,
-				fromEndSegmentLength: 10,
-				toEndSegmentLength: 10,
-				//fromShortLength: -10,
-				//toShortLength: -10,
-				isShadowed: true,
-				shadowColor: '#aaa',
-				shadowOffset: new go.Point(5, 5),
-			},
-			$(go.Shape, {
-				isPanelMain: true,
-				stroke: "#6666",
-				strokeWidth: 16,
-			}),
-			$(go.Shape, {
-				isPanelMain: true,
-				stroke: "#888",
-				strokeWidth: 16,
-				strokeDashArray: [1, 10],
-			}),
-			$(go.Shape, { toArrow: "Triangle" }),
-			$(go.Shape, { fromArrow: "Triangle" })
-		);
-
 		this.oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
+		/*this.oDiagram.toolManager.linkingTool.copyPortProperties = (realnode, realport, tempnode, tempport, toend) => {
+			console.log(go.LinkingTool.prototype.constructor.prototype);
+			const oLinkData = this.oDiagram.toolManager.linkingTool.prototype.copyPortProperties.call(this.oDiagram.toolManager.linkingTool);
+			console.log(realnode, realport, tempnode, tempport, toend, oLinkData);
+			return oLinkData;
+		},*/
 
 		this.oDiagram.model = new go.GraphLinksModel([], []);
-		this.oDiagram.model.nodeCategoryProperty = "type";
 		this.oDiagram.model.nodeKeyProperty = "id";
+		this.oDiagram.model.nodeCategoryProperty = "type";
+		this.oDiagram.model.linkKeyProperty = "id";
 		this.oDiagram.model.linkFromPortIdProperty = "fromPortId";
 		this.oDiagram.model.linkToPortIdProperty = "toPortId";
-		this.oDiagram.model.linkKeyProperty = "id";
+		this.oDiagram.model.linkCategoryProperty = "type";
 
+	}
+
+	addAnimation(oLink) {
+		var oStripes = oLink.findObject('BELT');
+		if (oStripes) this.animation.add(oStripes, "strokeDashOffset", 8, 0);
+		oStripes = oLink.findObject('PIPE');
+		if (oStripes) this.animation.add(oStripes, "strokeDashOffset", 1, 0);
+	}
+
+	startAnimation() {
+		this.animation = new go.Animation();
+		this.animation.easing = go.Animation.EaseLinear;
+		this.animation.runCount = Infinity;
+		this.oDiagram.links.each((oLink) => this.addAnimation(oLink));
+		this.animation.start();
 	}
 
 	handleKey() {
