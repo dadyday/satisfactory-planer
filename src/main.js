@@ -112,7 +112,7 @@ Vue.prototype.$dump = window.$dump = console.log;
 //	return arg[0];
 //};
 Vue.prototype.$_ = window.$_ = _;
-Vue.prototype.$log = (...args) => { console.log(args); return args[0]; };
+Vue.prototype.$log = window.$log = (...args) => { console.log(...args); return args.at(-1); };
 
 import Wrap from "./utils/wrap.js";
 Vue.component("Wrap", Wrap);
@@ -136,7 +136,7 @@ const i18n = new VueI18n({
 		missed[locale][message] = message;
 		clearTimeout(tm);
 		tm = setTimeout(() => {
-			console.log(JSON.stringify(missed[locale], null, '	'));
+			console.log('Missed Translations', JSON.stringify(missed[locale], null, '	'));
 		}, 5000);
 		return message;
 	},

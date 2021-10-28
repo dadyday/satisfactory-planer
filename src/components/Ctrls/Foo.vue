@@ -13,7 +13,7 @@
 <script>
 export default {
 	props: {
-		foo: String,
+		foo: null,
 	},
 	model: {
 		prop: 'foo',

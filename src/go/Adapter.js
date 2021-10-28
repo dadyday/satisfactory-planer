@@ -1,9 +1,7 @@
 import go from 'gojs';
 var $ = go.GraphObject.make;
 
-import Node from './Node';
-import Port from './Port';
-import  { Production } from "../entity";
+import  { Production, Building } from "../entity";
 import Templates from './Templates';
 import Foo from "../components/Ctrls/Foo.vue";
 
@@ -15,28 +13,22 @@ export default class GoAdapter {
 	animation;
 
 	constructor(elIdDiagram, elIdPalette, mBuilding, aPortType) {
-		const oNodeTemplateMap = new go.Map();
-		const oLinkTemplateMap = new go.Map();
 		const aModelData = [];
+
 
 		mBuilding.forEach((oBuilding, id) => {
 			const oProduction = oBuilding.createProduction();
-			oNodeTemplateMap.add(id, Node.getTemplate(oBuilding));
 			aModelData.push(oProduction.getNodeData());
 		});
 
-		aPortType.forEach((type) => {
-			oLinkTemplateMap.add(type, Templates.link(type));
-		});
-
-		this.initDiagram(elIdDiagram, oNodeTemplateMap, oLinkTemplateMap);
-		this.initPalette(elIdPalette, oNodeTemplateMap, aModelData);
+		this.initDiagram(elIdDiagram);
+		this.initPalette(elIdPalette, aModelData);
 	}
 
 	load(oData) {
 		this.oDiagram.model.nodeDataArray = oData?.nodeDataArray ?? [];
 		this.oDiagram.model.linkDataArray = oData?.linkDataArray ?? [];
-		//this.startAnimation();
+		this.startAnimation();
 	}
 
 	save() {
@@ -47,19 +39,19 @@ export default class GoAdapter {
 		};
 	}
 
-	initPalette(elId, oTemplateMap, aModelData) {
+	initPalette(elId, aModelData) {
 		this.oPalette = $(go.Palette, elId, {
 			"maxSelectionCount": 1,
-			"nodeTemplateMap":   oTemplateMap,
+			"nodeTemplate":      Templates.node(),
 			"model":             new go.GraphLinksModel(aModelData),
 			"initialAutoScale":  go.Diagram.UniformToFill,
-			contextMenu: Templates.htmlPanel(Foo, { foo: 'bar' }),
+			"contextMenuTool":   null,
 			//"initialScale":      0.5
 		});
-		this.oPalette.model.nodeCategoryProperty = "type";
+		//this.oPalette.model.nodeCategoryProperty = "type";
 	}
 
-	initDiagram(elId, oNodeTemplateMap, oLinkTemplateMap) {
+	initDiagram(elId) {
 		// Animate the flow in the pipes
 
 		this.oDiagram = $(go.Diagram, elId, {
@@ -78,6 +70,7 @@ export default class GoAdapter {
 
 			"linkingTool.temporaryLink":						Templates.link(),
 			"linkingTool.isValidLink": 							(fromNode, fromPort, toNode, toPort) => {
+																								console.log(fromPort.portId, toPort.portId);
 																								return fromPort.portId[1] == toPort.portId[1];
 																							},
 			"linkingTool.insertLink": 							(fromNode, fromPort, toNode, toPort) => {
@@ -98,8 +91,10 @@ export default class GoAdapter {
 			"rotatingTool.handleDistance":          0,
 			"rotatingTool.snapAngleMultiple":       90,
 			"rotatingTool.snapAngleEpsilon":        10,
-			"nodeTemplateMap":                      oNodeTemplateMap,
-			"linkTemplateMap":                      oLinkTemplateMap,
+			"nodeTemplate":													Templates.node(),
+			"linkTemplate":													Templates.link(),
+			//"nodeTemplateMap":                      oNodeTemplateMap,
+			//"linkTemplateMap":                      oLinkTemplateMap,
 		});
 		this.commandHandler = new go.CommandHandler();
 
@@ -166,12 +161,12 @@ export default class GoAdapter {
 		if (oStripes) this.animation.add(oStripes, "strokeDashOffset", 1, 0);
 	}
 
-	startAnimation() {
+	startAnimation(run = true) {
 		this.animation = new go.Animation();
 		this.animation.easing = go.Animation.EaseLinear;
 		this.animation.runCount = Infinity;
 		this.oDiagram.links.each((oLink) => this.addAnimation(oLink));
-		this.animation.start();
+		if (run) this.animation.start();
 	}
 
 	handleKey() {

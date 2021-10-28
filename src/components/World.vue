@@ -12,8 +12,8 @@
 			</Dropdown>
 		</Cols>
 		<Split vertical>
-			<Pane id="palette" size="15em"/>
-			<Pane id="diagram" />
+			<Pane id="palette" size="15em" oncontextmenu="return false" />
+			<Pane id="diagram" oncontextmenu="return false" />
 		</Split>
 	</Rows>
 </template>

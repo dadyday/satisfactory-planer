@@ -7,6 +7,8 @@ import {
 
 
 export default class Production {
+	static lastId = 1;
+
 	name = '***deprecated***'; // Receipe name
 	oBuilding; // Building object
 	oReceipe; // Receipe object
@@ -40,6 +42,17 @@ export default class Production {
 			this.setBuilding(this.oReceipe.building);
 		}
 		//this.initPorts();
+	}
+
+	getNodeData() {
+		var oData = {
+			id: this.id,
+			building: this.oBuilding.id,
+			receipe: this.oReceipe?.id ?? null,
+
+			ports: Object.fromEntries(this.mPort),
+		};
+		return oData;
 	}
 
 	/*initPorts() {
@@ -215,25 +228,8 @@ export default class Production {
 		return oProd;
 	}
 
-	getNodeData() {
-		var oData = {
-			id: this.id,
-			detail: this.oReceipe?.getName() ?? '',
-			receipe: this.oReceipe?.id ?? '',
-
-			// ports: this.oReceipe?.getItems() ?? [],
-			ports: Object.fromEntries(this.mPort),
-		};
-		Object.assign(oData, this.oBuilding?.getNodeData() ?? {});
-		return oData;
-	}
-
 	getLinkDataList() {
 		return []
 	}
 
-
-	//** static **********************
-
-	static lastId = 1;
 }
