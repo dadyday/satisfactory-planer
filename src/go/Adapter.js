@@ -70,8 +70,10 @@ export default class GoAdapter {
 
 			"linkingTool.temporaryLink":						Templates.link(),
 			"linkingTool.isValidLink": 							(fromNode, fromPort, toNode, toPort) => {
-																								console.log(fromPort.portId, toPort.portId);
-																								return fromPort.portId[1] == toPort.portId[1];
+																								//$dump(fromNode, toNode);
+																								if (fromPort.portId[1] != toPort.portId[1]) return false;
+																								//if (fromPort.item && toPort.item) return fromPort.item == toPort.item
+																								return true;
 																							},
 			"linkingTool.insertLink": 							(fromNode, fromPort, toNode, toPort) => {
 																								const oLink = this.oDiagram.partManager.insertLink(fromNode, fromPort, toNode, toPort);

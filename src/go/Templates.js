@@ -3,13 +3,15 @@ import  { Item, Receipe, Building } from "../entity";
 
 import vueHelper from '../helper';
 import Foo from "../components/Ctrls/Foo.vue";
+import ProdCard from "../components/ProdCard.vue";
+import merge from 'deepmerge';
 
 const $$ = go.GraphObject.make;
 const $ = (type, ...args) => {
 	for (var props of args) {
-		if (!isObject(props)) continue;
+		if (!window.isObject(props)) continue;
 		for (var prop in props) {
-			if (isFunction(props[prop])) {
+			if (window.isFunction(props[prop])) {
 				args.push(
 					new go.Binding(prop, '', props[prop]) //.ofObject()
 				)
@@ -20,7 +22,6 @@ const $ = (type, ...args) => {
 	}
 	return $$(type, ...args);
 };
-//var drawingAngle = 0;
 
 const s0 = 40, s1 = 24, s2 = 20, s3 = 22, s4 = 18;
 const m0 = 0, m1 = (s0-s1)/2, m2 = 0, m3 = 0, m4 = 0;
@@ -31,6 +32,7 @@ const testGeometry = go.Geometry.parse("M0,0 h100 v100 h-100 v-100 l100,100 M0,1
 const building = (oNode) => Building.get(oNode.building);
 const receipe = (oNode) => Receipe.get(oNode.receipe);
 const imgSize = (oNode) => (building(oNode).oSize.width + building(oNode).oSize.height) /2;
+//const imgSize = (oNode) => Math.min(building(oNode).oSize.width, building(oNode).oSize.height);
 const vert = (oPort) => oPort.side == 'top' || oPort.side == 'bottom';
 const margin = (oPort, m) => swap(vert(oPort), 0, m);
 
@@ -78,7 +80,7 @@ export default class Template {
 				//angle: (oNode, oGraph) => oNode.ori = this.drawingAngle = oGraph.angle,
 				//shadowBlur
 
-				contextMenu: (oNode) => this.htmlPanel(Foo, { foo: oNode }, {}),
+				contextMenu: (oNode, oPart) => this.htmlPanel(ProdCard, { node: oNode, part: oPart }, {}),
 			},
 			new go.Binding("location", "pos", aPos => new go.Point(...aPos)).makeTwoWay(oPos => [oPos.x, oPos.y]),
 			new go.Binding("angle", "", (oNode) => this.drawingAngle = oNode.ori ?? 0).makeTwoWay((value, oNode, oModel) => oModel.setDataProperty(oNode, "ori", value)),
@@ -142,7 +144,7 @@ export default class Template {
 
 		const oPortTmpl = this.port();
 		const oTmplMap = new go.Map();
-		oTmplMap.add('', this.dummyPort());
+		//oTmplMap.add('', this.dummyPort());
 		oTmplMap.add('belt', oPortTmpl);
 		oTmplMap.add('pipe', oPortTmpl);
 
@@ -150,7 +152,7 @@ export default class Template {
 			{
 				alignment: go.Spot[spotSide],
 				alignmentFocus: new go.Spot(...oSpotParam[side]),
-				itemArray: (oNode) => building(oNode).oSide[side],
+				itemArray: (oNode) => oNode.ports[side], //building(oNode).oSide[side], //
 				itemCategoryProperty: 'type',
 				itemTemplateMap: oTmplMap,
 				//margin: (oNode) => oMargin(oNode),
@@ -158,7 +160,7 @@ export default class Template {
 		);
 	}
 
-	static dummyPort() {
+	/*static dummyPort() {
 
 		return $(go.Panel, 'Spot', {
 			desiredSize: new go.Size(s1, s1),
@@ -170,7 +172,7 @@ export default class Template {
 			// 	strokeWidth: 2,
 			// }),
 		);
-	}
+	}*/
 
 	static port() {
 		// side
@@ -200,7 +202,12 @@ export default class Template {
 				toMaxLinks: 1,
 
 				desiredSize: new go.Size(s1, s1),
-				margin: (oPort) => new go.Margin(...margin(oPort, m1)),
+				margin: (oPort) => {
+					var m = [...margin(oPort, m1), ...margin(oPort, m1)];
+					if (oPort.offset > 0) m[0] += oPort.offset*40;
+					if (oPort.offset < 0) m[2] -= oPort.offset*40;
+					return new go.Margin(...m);
+				},
 
 				//click: (...aArg) => oPort.portClicked(...aArg),
 				//contextMenu: this.htmlPanel(Foo, { foo: 'bar' }),
@@ -224,8 +231,7 @@ export default class Template {
 			$(go.Picture, {
 				height: s4,
 				width: s4,
-				source: (oPort) => Item.get(oPort.type == 'belt' ? 'ironOre' : 'water').imageUrl(),
-				//source: (o) => Item.get(o.ports[id] ?? null)?.imageUrl() ?? null, // console.log(o, id) ||
+				source: (oPort) => (Item.get(oPort.item)?.imageUrl() ?? null),
 				angle: () => -this.drawingAngle,
 			}),
 		);

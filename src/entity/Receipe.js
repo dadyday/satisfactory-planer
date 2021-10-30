@@ -91,8 +91,8 @@ export default class Receipe extends Entity {
 		return this.mList.get(id) ?? null;
 	}
 
-	static getByBuilding(type) {
-		return this.mBuildingList.get(type);
+	static getByBuilding(building) {
+		return this.getBy({building});
 	}
 
 	static getByOutput(item) {

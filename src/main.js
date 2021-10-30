@@ -114,12 +114,6 @@ Vue.prototype.$dump = window.$dump = console.log;
 Vue.prototype.$_ = window.$_ = _;
 Vue.prototype.$log = window.$log = (...args) => { console.log(...args); return args.at(-1); };
 
-import Wrap from "./utils/wrap.js";
-Vue.component("Wrap", Wrap);
-import { Splitpanes, Pane } from 'splitpanes'
-import 'splitpanes/dist/splitpanes.css'
-Vue.component("Split", Splitpanes);
-Vue.component("Pane", Pane);
 
 import messages from './data/lang';
 import VueI18n from 'vue-i18n'
@@ -142,6 +136,18 @@ const i18n = new VueI18n({
 	},
   messages,
 });
+
+
+import Wrap from "./utils/wrap.js";
+Vue.component("Wrap", Wrap);
+import { Splitpanes, Pane } from 'splitpanes'
+import 'splitpanes/dist/splitpanes.css'
+Vue.component("Split", Splitpanes);
+Vue.component("Pane", Pane);
+import VueSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+Vue.component('VueSelect', VueSelect)
+
 
 import initData from './data';
 initData(i18n);

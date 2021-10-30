@@ -178,7 +178,7 @@ export default class Scheme {
 			const oNode = oProd.getNodeData();
 			oModel.nodeDataArray.push(oNode);
 
-			console.log(oProd.aOutput);
+			//console.log(oProd.aOutput);
 			oProd.aOutput.forEach((oTransport) => {
 				const oLink = oTransport.getLinkData();
 				oModel.linkDataArray.push(oLink);

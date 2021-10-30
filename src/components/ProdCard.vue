@@ -1,81 +1,74 @@
 <template>
-	<div class="card" :style="{ top, left }">
-		<div><b>Produktion</b></div>
+	<div class="card" style="width: 300px">
+		<b>{{ ('Produktion') }}</b>
 		<hr/>
 		<div>
-			<Select
-				:list="buildingList" listKey="type" listValue="name"
-				v-model="buildingValue"
-			>
-			</Select>
+			<select v-model="building" @change="refresh">
+				<option v-for="[id, oItem] in buildingList" :value="id" :key="id">
+					{{ oItem.getName() }}
+				</option>
+			</select>
 		</div>
 		<div>
-			<Select
-				empty="- kein -"
-				:list="receipeList" listKey="id" listValue="name"
-				v-model="receipeValue"
-			>
-			</Select>
+			<select v-model="receipe" @change="refresh">
+				<option v-for="[id, oItem] in receipeList" :value="id" :key="id">
+					{{ oItem.id }}
+				</option>
+			</select>
 		</div>
+		<pre style="height: 300px; overflow:scroll">{{ node }}</pre>
+		<!--div>
+			<vue-select
+				empty="- kein -"
+				:options="receipeList" listKey="id" listValue="name"
+			>
+			</vue-select>
+		</div-->
 	</div>
 </template>
 
 <script>
 import { Production, Building, Receipe } from '../entity';
+import merge from 'deepmerge';
 
 export default {
 	props: {
-		type: String,
-		obj: Object,
-		x: Number,
-		y: Number,
+		node: Object,
+		part: Object,
 	},
 	data() {
 		return {
-			oProd: this.obj ?? new Production(this.type),
-			selecting: false,
+			oProd: new Production(this.node.building, this.node.receipe),
 		};
 	},
 	computed: {
-		left() { return this.x + 'px' },
-		top() { return this.y + 'px' },
-
+		building: {
+			get() { return this.oProd.oBuilding?.id ?? null; },
+			set(value) { this.oProd.setBuilding(value); },
+		},
+		receipe: {
+			get() { return this.oProd.oReceipe?.id ?? null; },
+			set(value) { this.oProd.setReceipe(value); },
+		},
 		buildingList() {
+			//return Array.from(Building.getAll().values());
 			return Building.getAll();
 		},
-		buildingValue: {
-			get() {
-				return this.oProd.oBuilding?.type ?? null;
-			},
-			set(value) {
-				this.oProd.setBuilding(value);
-				this.$emit('update', this.oProd);
-			}
-		},
 		receipeList() {
-			return Receipe.getByBuilding(this.oProd.oBuilding?.type ?? null);
+			return Receipe.getByBuilding(this.node.building);
 		},
-		receipeValue: {
-			get() {
-				return this.oProd.oReceipe?.id ?? null;
-			},
-			set(value) {
-				this.oProd.setReceipe(value);
-				//this.$emit('production', value);
-				this.$emit('update', this.oProd);
-			}
-		}
 	},
 	methods: {
-		startSelecting() {
-			this.selecting = true;
-			setTimeout(() => {
-				this.$refs.select.focus();
-			}, 100);
-		},
-		endSelecting() {
-			this.selecting = false;
-		},
+		refresh() {
+			const oData = this.oProd.getNodeData();
+			this.node.building = oData.building;
+			this.node.receipe = oData.receipe;
+			this.node.ports = oData.ports;
+			this.part.updateTargetBindings();
+			//this.part.diagram.updateAllTargetBindings();
+		}
+	},
+	created() {
 	},
 };
 
@@ -83,46 +76,17 @@ export default {
 
 <style lang="scss">
 .card {
-	position: absolute;
-	z-index: 1000;
-	display: inline-block;
 	background: white;
 	border-radius: 0.4em;
 	border: solid 0.5px #ccc;
 	box-shadow: 0.1em 0.1em 0.5em -0.2em #0008;
-	padding: 0.2em;
+	padding: 0.5em;
 	margin: 0.1em 0.2em;
-	div {
-		display: block;
-		margin: 0 0.2em;
-		input, select, span {
-			font-weight: bold;
-			font-size: 10pt;
-		}
-		.entity {
-			padding: 0.0em;
-			box-shadow: none;
-			margin: 0em 0.1em;
-		}
-	}
-	img {
-		width: 24px;
-		height: 24px;
-		vertical-align: middle;
-		position: relative;
-		top: -2px;
-		margin: -4px 0;
-	}
-	button {
-		border-radius: 5em;
-		border: solid 0.5px;
-		padding: 0 0.25em;
-		vertical-align: text-bottom;
-		&.red {
-			border-color: #f44;
-			background: #fee;
-			color: red;
-		}
+	.vs__search {
+
+		margin: 0;
 	}
 }
+
+
 </style>

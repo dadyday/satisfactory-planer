@@ -22,6 +22,7 @@ export default class Production {
 		this.id = this.constructor.lastId++;
 		this.setBuilding(building);
 		this.setReceipe(receipe);
+		this.initPorts();
 	}
 
 	getName() {
@@ -41,21 +42,40 @@ export default class Production {
 		if (this.oReceipe) {
 			this.setBuilding(this.oReceipe.building);
 		}
-		//this.initPorts();
+		this.initPorts();
+	}
+
+	initPorts() {
+		this.mPort = new Map;
+		if (!this.oBuilding) return;
+
+		this.oBuilding.mPort.forEach((oPort, id) => {
+			const oItem = this.oReceipe?.getPortItem(oPort) ?? null;
+			const oTransport = {
+				id: oPort.id,
+				type: oPort.type,
+				side: oPort.side,
+				inOut: oPort.inOut,
+				offset: oPort.offset,
+				item: oItem ? oItem[0] : null,
+			};
+			this.mPort.getInit(oPort.side, []).push(oTransport);
+		});
 	}
 
 	getNodeData() {
-		var oData = {
+		const oData = {
 			id: this.id,
 			building: this.oBuilding.id,
 			receipe: this.oReceipe?.id ?? null,
-
 			ports: Object.fromEntries(this.mPort),
 		};
+
 		return oData;
 	}
 
-	/*initPorts() {
+/*
+	initPorts() {
 		// builing ioType: [portId]
 		// ibelt: [in0, in1, in2], ipipe: [in3], obelt: [out0]
 		const mPort = new Map();
