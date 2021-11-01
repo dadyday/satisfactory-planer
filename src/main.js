@@ -5,6 +5,16 @@ import numberFormat from './utils/numberFormat';
 // import 'normalize.css';
 // import '@/scss/main.scss';
 
+window.isFunction = function(val) {
+ return val && {}.toString.call(val) === '[object Function]';
+};
+window.isObject = function(val) {
+	return typeof val === 'object' &&
+		!Array.isArray(val) &&
+		val !== null
+	;
+};
+
 Map.prototype.getInit = function (key, initValue = null) {
 	if (!this.has(key)) this.set(key, initValue);
 	return this.get(key);
@@ -102,14 +112,8 @@ Vue.prototype.$dump = window.$dump = console.log;
 //	return arg[0];
 //};
 Vue.prototype.$_ = window.$_ = _;
-Vue.prototype.$log = (...args) => { console.log(args); return args[0]; };
+Vue.prototype.$log = window.$log = (...args) => { console.log(...args); return args.at(-1); };
 
-import Wrap from "./utils/wrap.js";
-Vue.component("Wrap", Wrap);
-import { Splitpanes, Pane } from 'splitpanes'
-import 'splitpanes/dist/splitpanes.css'
-Vue.component("Split", Splitpanes);
-Vue.component("Pane", Pane);
 
 import messages from './data/lang';
 import VueI18n from 'vue-i18n'
@@ -126,12 +130,24 @@ const i18n = new VueI18n({
 		missed[locale][message] = message;
 		clearTimeout(tm);
 		tm = setTimeout(() => {
-			console.log(JSON.stringify(missed[locale], null, '	'));
+			console.log('Missed Translations', JSON.stringify(missed[locale], null, '	'));
 		}, 5000);
 		return message;
 	},
   messages,
 });
+
+
+import Wrap from "./utils/wrap.js";
+Vue.component("Wrap", Wrap);
+import { Splitpanes, Pane } from 'splitpanes'
+import 'splitpanes/dist/splitpanes.css'
+Vue.component("Split", Splitpanes);
+Vue.component("Pane", Pane);
+import VueSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+Vue.component('VueSelect', VueSelect)
+
 
 import initData from './data';
 initData(i18n);

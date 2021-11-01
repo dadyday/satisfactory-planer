@@ -7,6 +7,8 @@ import {
 
 
 export default class Production {
+	static lastId = 1;
+
 	name = '***deprecated***'; // Receipe name
 	oBuilding; // Building object
 	oReceipe; // Receipe object
@@ -20,6 +22,7 @@ export default class Production {
 		this.id = this.constructor.lastId++;
 		this.setBuilding(building);
 		this.setReceipe(receipe);
+		this.initPorts();
 	}
 
 	getName() {
@@ -39,10 +42,40 @@ export default class Production {
 		if (this.oReceipe) {
 			this.setBuilding(this.oReceipe.building);
 		}
-		//this.initPorts();
+		this.initPorts();
 	}
 
-	/*initPorts() {
+	initPorts() {
+		this.mPort = new Map;
+		if (!this.oBuilding) return;
+
+		this.oBuilding.mPort.forEach((oPort, id) => {
+			const oItem = this.oReceipe?.getPortItem(oPort) ?? null;
+			const oTransport = {
+				id: oPort.id,
+				type: oPort.type,
+				side: oPort.side,
+				inOut: oPort.inOut,
+				offset: oPort.offset,
+				item: oItem ? oItem[0] : null,
+			};
+			this.mPort.getInit(oPort.side, []).push(oTransport);
+		});
+	}
+
+	getNodeData() {
+		const oData = {
+			id: this.id,
+			building: this.oBuilding.id,
+			receipe: this.oReceipe?.id ?? null,
+			ports: Object.fromEntries(this.mPort),
+		};
+
+		return oData;
+	}
+
+/*
+	initPorts() {
 		// builing ioType: [portId]
 		// ibelt: [in0, in1, in2], ipipe: [in3], obelt: [out0]
 		const mPort = new Map();
@@ -156,7 +189,7 @@ export default class Production {
 		0     0.5    0
 	*/
 	setDelta(delta, aIgnore = []) {
-		if (this.name == 'storage') return delta;
+		if (this.id == 'storage') return delta;
 		if ($_.contains(aIgnore, this)) return delta;
 		aIgnore.push(this);
 
@@ -215,25 +248,8 @@ export default class Production {
 		return oProd;
 	}
 
-	getNodeData() {
-		var oData = {
-			id: this.id,
-			detail: this.oReceipe?.name ?? '',
-			receipe: this.oReceipe?.id ?? '',
-
-			// ports: this.oReceipe?.getItems() ?? [],
-			ports: Object.fromEntries(this.mPort),
-		};
-		Object.assign(oData, this.oBuilding.getNodeData());
-		return oData;
-	}
-
 	getLinkDataList() {
 		return []
 	}
 
-
-	//** static **********************
-
-	static lastId = 1;
 }

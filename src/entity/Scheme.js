@@ -156,6 +156,42 @@ export default class Scheme {
 		});
 		this.calcQuantity();
 	}
+
+	// ***************** drawing
+
+	getModel() {
+		const oModel = {
+			nodeDataArray: [],
+			linkDataArray: [],
+		};
+
+		function addData(oProd) {
+			const oNode = oProd.getNodeData();
+			oModel.nodeDataArray.push(oNode);
+			oProd.aOutput.forEach((oTransport) => {
+				const oLink = oTransport.getLinkData();
+				oModel.linkDataArray.push(oLink);
+			});
+		}
+
+		this.mProduction.forEach((aProd) => aProd.forEach((oProd) => {
+			const oNode = oProd.getNodeData();
+			oModel.nodeDataArray.push(oNode);
+
+			//console.log(oProd.aOutput);
+			oProd.aOutput.forEach((oTransport) => {
+				const oLink = oTransport.getLinkData();
+				oModel.linkDataArray.push(oLink);
+			});
+		}));
+
+		//console.log(this.mDemand);
+		//this.mDemand.forEach(addData);
+		//this.mProduction.forEach((aProd) => aProd.forEach(addData));
+		//this.mSupply.forEach((aProd) => aProd.forEach(addData));
+
+		return oModel;
+	}
 /*
 	createProduction() {
 		var aReceipes = {};
@@ -292,27 +328,4 @@ export default class Scheme {
 		})
 	} //*/
 
-	// ***************** drawing
-
-	getModel() {
-		const oModel = {
-			nodeDataArray: [],
-			linkDataArray: [],
-		};
-
-		function addData(oProd) {
-			const oNode = oProd.getNodeData();
-			oModel.nodeDataArray.push(oNode);
-			oProd.aOutput.forEach((oTransport) => {
-				const oLink = oTransport.getLinkData();
-				oModel.linkDataArray.push(oLink);
-			});
-		}
-
-		this.aDemand.forEach(addData);
-		this.mProduction.forEach((aProd) => aProd.forEach(addData));
-		this.mSupply.forEach((aProd) => aProd.forEach(addData));
-
-		return oModel;
-	}
 }

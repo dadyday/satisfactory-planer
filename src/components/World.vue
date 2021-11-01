@@ -12,8 +12,8 @@
 			</Dropdown>
 		</Cols>
 		<Split vertical>
-			<Pane id="palette" size="15em"/>
-			<Pane id="diagram" />
+			<Pane id="palette" size="15em" oncontextmenu="return false" />
+			<Pane id="diagram" oncontextmenu="return false" />
 		</Split>
 	</Rows>
 </template>
@@ -35,6 +35,7 @@
 </style>
 
 <script>
+import { Building, Port } from '../entity';
 import GoAdapter from '../go/Adapter';
 import Store from 'store';
 
@@ -46,7 +47,6 @@ export default {
 	props: {
 		model: String,
 		scheme: Object,
-		palette: Map,
 	},
 	data() {
 		return {
@@ -61,7 +61,7 @@ export default {
 		}
 	},
 	mounted() {
-		this.go = new GoAdapter('diagram', 'palette', this.palette);
+		this.go = new GoAdapter('diagram', 'palette', Building.getAll(), Port.getTypes());
 		this.go.oDiagram.addModelChangedListener((ev) => {
 			if (ev.isTransactionFinished) this.pushModel();
 		});
@@ -116,7 +116,6 @@ export default {
 					if (oOld) {
 						oNode.pos = oOld.pos;
 						oNode.orient = oOld.orient;
-						oNode.drawangle = oOld.orient * 90;
 					}
 				}
 			});

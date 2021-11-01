@@ -1,0 +1,1911 @@
+{
+  "nodeDataArray": [
+    {
+      "id": 289,
+      "building": "assembler",
+      "receipe": "versatileFramework",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "modularFrame"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "steelBeam"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "versatileFramework"
+          }
+        ]
+      },
+      "pos": [
+        -400,
+        0
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 290,
+      "building": "assembler",
+      "receipe": "modularFrame",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "reinforcedIronPlate"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironRod"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "modularFrame"
+          }
+        ]
+      },
+      "pos": [
+        -160,
+        40
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 291,
+      "building": "assembler",
+      "receipe": "reinforcedIronPlate",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironPlate"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "screw"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "reinforcedIronPlate"
+          }
+        ]
+      },
+      "pos": [
+        -160,
+        -80
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 292,
+      "building": "construct",
+      "receipe": "ironPlate",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironIngot"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "ironPlate"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        -100
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 293,
+      "building": "smelter",
+      "receipe": "ironIngot",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironOre"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "ironIngot"
+          }
+        ]
+      },
+      "pos": [
+        200,
+        -60
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 339,
+      "building": "smelter",
+      "receipe": "ironIngot",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironOre"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "ironIngot"
+          }
+        ]
+      },
+      "pos": [
+        200,
+        -20
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 294,
+      "building": "minerMk1",
+      "receipe": "ironOre",
+      "ports": {
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "ironOre"
+          }
+        ]
+      },
+      "pos": [
+        420,
+        -20
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 295,
+      "building": "construct",
+      "receipe": "screw",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironRod"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "screw"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        -260
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 340,
+      "building": "construct",
+      "receipe": "screw",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironRod"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "screw"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        -180
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 296,
+      "building": "construct",
+      "receipe": "ironRod",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironIngot"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "ironRod"
+          }
+        ]
+      },
+      "pos": [
+        200,
+        -220
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 338,
+      "building": "construct",
+      "receipe": "ironRod",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironIngot"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "ironRod"
+          }
+        ]
+      },
+      "pos": [
+        200,
+        -140
+      ],
+      "drawangle": {
+        "class": "NaN"
+      }
+    },
+    {
+      "id": 302,
+      "building": "construct",
+      "receipe": "steelBeam",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "steelIngot"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "steelBeam"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        -20
+      ]
+    },
+    {
+      "id": 303,
+      "building": "foundry",
+      "receipe": "steelIngot",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironOre"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "coal"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": -1,
+            "item": "steelIngot"
+          }
+        ]
+      },
+      "pos": [
+        200,
+        80
+      ]
+    },
+    {
+      "id": 305,
+      "building": "minerMk1",
+      "receipe": "coal",
+      "ports": {
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "coal"
+          }
+        ]
+      },
+      "pos": [
+        420,
+        40
+      ]
+    },
+    {
+      "id": 307,
+      "building": "assembler",
+      "receipe": "automatedWiring",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "stator"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "cable"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "automatedWiring"
+          }
+        ]
+      },
+      "pos": [
+        -400,
+        160
+      ]
+    },
+    {
+      "id": 308,
+      "building": "assembler",
+      "receipe": "stator",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "steelPipe"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "wire"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "stator"
+          }
+        ]
+      },
+      "pos": [
+        -160,
+        160
+      ]
+    },
+    {
+      "id": 309,
+      "building": "construct",
+      "receipe": "steelPipe",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "steelIngot"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "steelPipe"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        60
+      ]
+    },
+    {
+      "id": 313,
+      "building": "construct",
+      "receipe": "wire",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "copperIngot"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "wire"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        140
+      ]
+    },
+    {
+      "id": 314,
+      "building": "smelter",
+      "receipe": "copperIngot",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "copperOre"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "copperIngot"
+          }
+        ]
+      },
+      "pos": [
+        200,
+        180
+      ]
+    },
+    {
+      "id": 315,
+      "building": "minerMk1",
+      "receipe": "copperOre",
+      "ports": {
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "copperOre"
+          }
+        ]
+      },
+      "pos": [
+        420,
+        -80
+      ]
+    },
+    {
+      "id": 316,
+      "building": "construct",
+      "receipe": "cable",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "wire"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "cable"
+          }
+        ]
+      },
+      "pos": [
+        40,
+        220
+      ]
+    },
+    {
+      "id": 321,
+      "building": "assembler",
+      "receipe": "smartPlating",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "reinforcedIronPlate"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "rotor"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "smartPlating"
+          }
+        ]
+      },
+      "pos": [
+        -400,
+        -160
+      ]
+    },
+    {
+      "id": 330,
+      "building": "assembler",
+      "receipe": "rotor",
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "ironRod"
+          },
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": "screw"
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": "rotor"
+          }
+        ]
+      },
+      "pos": [
+        -160,
+        -200
+      ]
+    },
+    {
+      "id": 3,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        260,
+        -20
+      ]
+    },
+    {
+      "id": -25,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        140,
+        -100
+      ],
+      "ori": 90
+    },
+    {
+      "id": 4,
+      "building": "merger",
+      "receipe": null,
+      "ports": {
+        "top": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "top",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "right": [
+          {
+            "id": "ib1",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ib2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -4,
+      "pos": [
+        140,
+        -60
+      ],
+      "ori": 90
+    },
+    {
+      "id": -28,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        140,
+        60
+      ]
+    },
+    {
+      "id": -29,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        -20,
+        180
+      ],
+      "ori": 270
+    },
+    {
+      "id": -30,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        260,
+        -140
+      ],
+      "ori": 90
+    },
+    {
+      "id": -31,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        140,
+        -220
+      ]
+    },
+    {
+      "id": -32,
+      "building": "splitter",
+      "receipe": null,
+      "ports": {
+        "right": [
+          {
+            "id": "ib0",
+            "type": "belt",
+            "side": "right",
+            "inOut": true,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "top": [
+          {
+            "id": "ob0",
+            "type": "belt",
+            "side": "top",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "left": [
+          {
+            "id": "ob1",
+            "type": "belt",
+            "side": "left",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ],
+        "bottom": [
+          {
+            "id": "ob2",
+            "type": "belt",
+            "side": "bottom",
+            "inOut": false,
+            "offset": 0,
+            "item": null
+          }
+        ]
+      },
+      "key": -3,
+      "pos": [
+        140,
+        -180
+      ],
+      "ori": 270
+    }
+  ],
+  "linkDataArray": [
+    {
+      "type": "belt",
+      "from": 305,
+      "to": 303,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -1,
+      "points": [
+        357.76142374915395,
+        40,
+        341.76142374915395,
+        40,
+        297.5,
+        40,
+        297.5,
+        100,
+        253.23857625084605,
+        100,
+        237.23857625084605,
+        100
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 294,
+      "to": 3,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -2,
+      "points": [
+        357.76142374915395,
+        -20,
+        341.76142374915395,
+        -20,
+        315,
+        -20,
+        315,
+        -20,
+        288.238576250846,
+        -20,
+        272.238576250846,
+        -20
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 315,
+      "to": 293,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -3,
+      "points": [
+        357.76142374915395,
+        -80,
+        341.76142374915395,
+        -80,
+        297.5,
+        -80,
+        297.5,
+        -60,
+        253.23857625084605,
+        -60,
+        237.23857625084605,
+        -60
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 3,
+      "to": 339,
+      "fromPortId": "ob1",
+      "toPortId": "ib0",
+      "id": -4,
+      "points": [
+        247.76142374915398,
+        -20,
+        231.76142374915398,
+        -20,
+        231.76142374915398,
+        -20,
+        253.23857625084605,
+        -20,
+        253.23857625084605,
+        -20,
+        237.23857625084605,
+        -20
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 3,
+      "to": 303,
+      "fromPortId": "ob2",
+      "toPortId": "ib0",
+      "id": -5,
+      "points": [
+        260,
+        -7.76142374915397,
+        260,
+        8.23857625084603,
+        260,
+        60.00000000000001,
+        256.61928812542305,
+        60.00000000000001,
+        253.23857625084605,
+        60.00000000000001,
+        237.23857625084605,
+        60.00000000000001
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 293,
+      "to": 4,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -6,
+      "points": [
+        162.76142374915398,
+        -60,
+        146.76142374915398,
+        -60,
+        146.76142374915398,
+        -60,
+        168.23857625084602,
+        -60,
+        168.23857625084602,
+        -60,
+        152.23857625084602,
+        -60
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 339,
+      "to": 4,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -7,
+      "points": [
+        162.76142374915398,
+        -20,
+        146.76142374915398,
+        -20,
+        140,
+        -20,
+        140,
+        -31.761423749153977,
+        140,
+        -31.761423749153977,
+        140,
+        -47.76142374915398
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 4,
+      "to": -25,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -8,
+      "points": [
+        140,
+        -72.23857625084604,
+        140,
+        -88.23857625084604,
+        140,
+        -88.23857625084604,
+        140,
+        -71.76142374915398,
+        140,
+        -71.76142374915398,
+        140,
+        -87.76142374915398
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 303,
+      "to": -28,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -13,
+      "points": [
+        162.76142374915398,
+        60.00000000000001,
+        146.76142374915398,
+        60.00000000000001,
+        146.76142374915398,
+        60,
+        168.23857625084602,
+        60,
+        168.23857625084602,
+        60,
+        152.23857625084602,
+        60
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -28,
+      "to": 309,
+      "fromPortId": "ob1",
+      "toPortId": "ib0",
+      "id": -14,
+      "points": [
+        127.76142374915396,
+        60,
+        111.76142374915396,
+        60,
+        105,
+        60,
+        105,
+        60.00000000000001,
+        98.23857625084605,
+        60.00000000000001,
+        82.23857625084605,
+        60.00000000000001
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -28,
+      "to": 302,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -15,
+      "points": [
+        140,
+        47.76142374915397,
+        140,
+        31.76142374915397,
+        140,
+        31.76142374915397,
+        140,
+        -19.999999999999993,
+        98.23857625084605,
+        -19.999999999999993,
+        82.23857625084605,
+        -19.999999999999993
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 314,
+      "to": 313,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -16,
+      "points": [
+        162.76142374915398,
+        180,
+        146.76142374915398,
+        180,
+        140,
+        180,
+        140,
+        140,
+        98.23857625084605,
+        140,
+        82.23857625084605,
+        140
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -29,
+      "to": 308,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -21,
+      "points": [
+        -32.23857625084603,
+        180,
+        -48.23857625084603,
+        180,
+        -62.500000000000014,
+        180,
+        -62.500000000000014,
+        180,
+        -76.76142374915399,
+        180,
+        -92.76142374915399,
+        180
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -29,
+      "to": 316,
+      "fromPortId": "ob2",
+      "toPortId": "ib0",
+      "id": -22,
+      "points": [
+        -7.76142374915397,
+        180,
+        8.23857625084603,
+        180,
+        98.23857625084605,
+        180,
+        98.23857625084605,
+        200,
+        98.23857625084605,
+        220,
+        82.23857625084605,
+        220
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -25,
+      "to": -30,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -23,
+      "points": [
+        152.23857625084602,
+        -100,
+        168.23857625084602,
+        -100,
+        260,
+        -100,
+        260,
+        -105.88071187457699,
+        260,
+        -111.76142374915398,
+        260,
+        -127.76142374915398
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -30,
+      "to": 296,
+      "fromPortId": "ob1",
+      "toPortId": "ib0",
+      "id": -24,
+      "points": [
+        260,
+        -152.23857625084602,
+        260,
+        -168.23857625084602,
+        260,
+        -220,
+        259.11928812542305,
+        -220,
+        258.23857625084605,
+        -220,
+        242.23857625084605,
+        -220
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 309,
+      "to": 308,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -25,
+      "points": [
+        -2.238576250846032,
+        60.00000000000001,
+        -18.23857625084603,
+        60.00000000000001,
+        -47.500000000000014,
+        60.00000000000001,
+        -47.500000000000014,
+        140,
+        -76.76142374915399,
+        140,
+        -92.76142374915399,
+        140
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 308,
+      "to": 307,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -26,
+      "points": [
+        -227.23857625084602,
+        160,
+        -243.23857625084602,
+        160,
+        -280,
+        160,
+        -280,
+        140,
+        -316.761423749154,
+        140,
+        -332.761423749154,
+        140
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 290,
+      "to": 289,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -27,
+      "points": [
+        -227.23857625084602,
+        40.00000000000001,
+        -243.23857625084602,
+        40.00000000000001,
+        -280,
+        40.00000000000001,
+        -280,
+        20.000000000000007,
+        -316.761423749154,
+        20.000000000000007,
+        -332.761423749154,
+        20.000000000000007
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 292,
+      "to": 291,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -32,
+      "points": [
+        -2.238576250846032,
+        -100,
+        -18.23857625084603,
+        -100,
+        -47.500000000000014,
+        -100,
+        -47.500000000000014,
+        -100,
+        -76.76142374915399,
+        -100,
+        -92.76142374915399,
+        -100
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 291,
+      "to": 321,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -28,
+      "points": [
+        -227.23857625084602,
+        -80,
+        -243.23857625084602,
+        -80,
+        -280,
+        -80,
+        -280,
+        -140,
+        -316.761423749154,
+        -140,
+        -332.761423749154,
+        -140
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 330,
+      "to": 321,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -29,
+      "points": [
+        -227.23857625084602,
+        -200,
+        -243.23857625084602,
+        -200,
+        -280,
+        -200,
+        -280,
+        -180,
+        -316.761423749154,
+        -180,
+        -332.761423749154,
+        -180
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 302,
+      "to": 289,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -33,
+      "points": [
+        -2.238576250846032,
+        -19.999999999999993,
+        -18.23857625084603,
+        -19.999999999999993,
+        -167.50000000000003,
+        -19.999999999999993,
+        -167.50000000000003,
+        -19.999999999999993,
+        -316.761423749154,
+        -19.999999999999993,
+        -332.761423749154,
+        -19.999999999999993
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 316,
+      "to": 307,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -34,
+      "points": [
+        -2.238576250846032,
+        220,
+        -18.23857625084603,
+        220,
+        -300,
+        220,
+        -300,
+        180,
+        -316.761423749154,
+        180,
+        -332.761423749154,
+        180
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -25,
+      "to": 292,
+      "fromPortId": "ob2",
+      "toPortId": "ib0",
+      "id": -35,
+      "points": [
+        127.76142374915398,
+        -100,
+        111.76142374915398,
+        -100,
+        105.00000000000001,
+        -100,
+        105.00000000000001,
+        -100,
+        98.23857625084605,
+        -100,
+        82.23857625084605,
+        -100
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 295,
+      "to": 330,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -30,
+      "points": [
+        -2.238576250846032,
+        -260,
+        -18.23857625084603,
+        -260,
+        -60,
+        -260,
+        -60,
+        -180,
+        -76.76142374915399,
+        -180,
+        -92.76142374915399,
+        -180
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 340,
+      "to": 291,
+      "fromPortId": "ob0",
+      "toPortId": "ib1",
+      "id": -31,
+      "points": [
+        -2.238576250846032,
+        -180,
+        -18.23857625084603,
+        -180,
+        -60,
+        -180,
+        -60,
+        -60,
+        -76.76142374915399,
+        -60,
+        -92.76142374915399,
+        -60
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 296,
+      "to": -31,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -36,
+      "points": [
+        157.76142374915398,
+        -220,
+        141.76142374915398,
+        -220,
+        141.76142374915398,
+        -220,
+        168.23857625084602,
+        -220,
+        168.23857625084602,
+        -220,
+        152.23857625084602,
+        -220
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -31,
+      "to": 295,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -37,
+      "points": [
+        140,
+        -232.23857625084602,
+        140,
+        -248.23857625084602,
+        140,
+        -260,
+        119.11928812542303,
+        -260,
+        98.23857625084605,
+        -260,
+        82.23857625084605,
+        -260
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -32,
+      "to": 340,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -38,
+      "points": [
+        127.76142374915396,
+        -180,
+        111.76142374915396,
+        -180,
+        105,
+        -180,
+        105,
+        -180,
+        98.23857625084605,
+        -180,
+        82.23857625084605,
+        -180
+      ]
+    },
+    {
+      "type": "belt",
+      "from": -31,
+      "to": -32,
+      "fromPortId": "ob2",
+      "toPortId": "ib0",
+      "id": -39,
+      "points": [
+        140,
+        -207.76142374915398,
+        140,
+        -191.76142374915398,
+        140,
+        -191.76142374915398,
+        140,
+        -208.23857625084602,
+        140,
+        -208.23857625084602,
+        140,
+        -192.23857625084602
+      ]
+    },
+    {
+      "type": "belt",
+      "from": 313,
+      "to": -29,
+      "fromPortId": "ob0",
+      "toPortId": "ib0",
+      "id": -40,
+      "points": [
+        -2.238576250846032,
+        140,
+        -18.23857625084603,
+        140,
+        -20,
+        140,
+        -20,
+        145.880711874577,
+        -20,
+        151.76142374915398,
+        -20,
+        167.76142374915398
+      ]
+    }
+  ]
+}

@@ -10,8 +10,9 @@ export default class Building extends Entity {
 	name = '**deprecated**';
 	imgName = '';
 	oSize = { width: 100, height: 100 };
-	aPort = [];
+	oSide = { left: [], right: [], top: [], bottom: []};
 	aLayer = [];
+	mPort = new Map;
 
 	constructor(id, aData) {
 		super(id);
@@ -29,7 +30,12 @@ export default class Building extends Entity {
 		aPortData.forEach((aData) => {
 			const [type, inOut, offset, side] = aData;
 			const pos = inOut ? i++ : o++;
-			this.aPort.push(new Port(type, inOut, pos, offset, side));
+			const oPort = new Port(type, inOut, pos, offset, side);
+			this.mPort.set(oPort.id, oPort);
+
+			//for (var o = oPort.offset; o > 0; o--) this.oSide[oPort.side].push({});
+			this.oSide[oPort.side].push(oPort);
+			//for (var o = oPort.offset; o < 0; o++) this.oSide[oPort.side].push({});
 		});
 
 		this.imgName = imgName ?? id.replace(/([A-Z]+)/g, '_$1').toLowerCase();
@@ -48,7 +54,7 @@ export default class Building extends Entity {
 	getNodeData() {
 		return {
 			type: this.id,
-			name: this.name,
+			name: this.getName,
 			layer: this.aLayer[0],
 			orient: 0,
 		};

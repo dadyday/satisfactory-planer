@@ -23,7 +23,7 @@ export default class Receipe extends Entity {
 		if (this.alt) this.name = 'alt: ' + this.name;
 
 		this.mined = !!this.building.match(/(extractor|miner)/i);
-		this.unpack = !!this.name.match(/^unpackage/i);
+		this.unpack = !!this.id.match(/^unpackage/i);
 
 		this.mOutput = new Map(Object.entries(oData.out ?? {}));
 		this.mInput = new Map(Object.entries(oData.in ?? {}));
@@ -91,8 +91,8 @@ export default class Receipe extends Entity {
 		return this.mList.get(id) ?? null;
 	}
 
-	static getByBuilding(type) {
-		return this.mBuildingList.get(type);
+	static getByBuilding(building) {
+		return this.getBy({building});
 	}
 
 	static getByOutput(item) {

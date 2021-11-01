@@ -22,6 +22,8 @@ export default class Transport {
 	getLinkData() {
 		//this.id = this.type+id;
 		return {
+			type:       this.type,
+			item:				this.item,
 			from:       this.oSource?.id ?? '',
 			fromPortId: this.oSource?.getItemPortId(false, this.item) ?? '',
 			to:         this.oTarget?.id ?? '',
