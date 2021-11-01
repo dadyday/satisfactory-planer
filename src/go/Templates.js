@@ -352,6 +352,32 @@ export default class Template {
 			}
 			return def;
 		};
+		const savePoints = (oPoints) => {
+			const aEdge = [];
+			var i = 1;
+			var a = oPoints.get(i++);
+			while (i < oPoints.length-2) {
+				var c = oPoints.get(i++);
+				if (c.x !== a.x) aEdge.push(c.x);
+				if (c.y !== a.y) aEdge.push(c.y);
+				a = c;
+			}
+			$dump('save', oPoints, aEdge);
+			return aEdge;
+		};
+		const loadPoints = (aEdge, oPart) => {
+			const oPoints = oPart.points.copy();
+			oPoints.removeAt(2); oPoints.removeAt(2);
+			var i, swap = oPoints.get(0).y !== oPoints.get(1).y;
+			var last = oPoints.get(i = 1);
+			aEdge.forEach(value => {
+				last = new go.Point(swap ? last.x : value, swap ? value : last.y);
+				oPoints.insertAt(++i, last);
+				swap = !swap;
+			});
+			$dump('load', oPoints, aEdge);
+			return oPoints;
+		};
 
 		const oLink = $(MyLink,
 			{
@@ -365,10 +391,16 @@ export default class Template {
 				fromShortLength: sl,
 				toShortLength: sl,
 
+				relinkableFrom: true,
+				relinkableTo: true,
+				reshapable: true,
+				resegmentable: true,
+
 				isShadowed: true,
 				shadowColor: '#0002',
 				shadowOffset: new go.Point(5, 5),
 			},
+			new go.Binding("points", "points", loadPoints).makeTwoWay(savePoints),
 			$(go.Shape, {
 				isPanelMain: true,
 				strokeWidth: (link) => byType(link, 16, 14, 16),
@@ -380,6 +412,17 @@ export default class Template {
 				stroke: (link) => byType(link, this.beltColor, this.pipeColor, this.beltColor),
 				strokeWidth: (link) => byType(link, 14, 12, 14),
 				strokeDashArray: (link) => byType(link, [8,1], [15,2], [8,1]),
+				fill: $$(go.Brush, "Pattern", {
+					//pattern: (link) => document.createElement('img', { src: item.get(link.item)?.imageUrl()}),
+					pattern: () => {
+						const el = document.createElement('img');
+						el.setAttribute('src', "img/item/big/versatile_framework.png");
+						return el;
+					},
+				}),
+				width: 20,
+				height:34,
+				position: new go.Point(0,14)
 			}),
 			$(go.Shape, { toArrow: "RoundedTriangle", fill: this.inColor, }),
 			$(go.Shape, { fromArrow: "RoundedTriangle", fill: this.outColor, })
