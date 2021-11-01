@@ -116,7 +116,6 @@ export default {
 					if (oOld) {
 						oNode.pos = oOld.pos;
 						oNode.orient = oOld.orient;
-						oNode.drawangle = oOld.orient * 90;
 					}
 				}
 			});

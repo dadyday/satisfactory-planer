@@ -25,7 +25,7 @@ const $ = (type, ...args) => {
 
 const s0 = 40, s1 = 24, s2 = 20, s3 = 22, s4 = 18;
 const m0 = 0, m1 = (s0-s1)/2, m2 = 0, m3 = 0, m4 = 0;
-const off = 10, es = 20, sl = 3, r = 20;
+const off = 10, es = 16, sl = -1, r = 20;
 
 const swap = (keep, x, y) => keep ? [x, y] : [y, x];
 const testGeometry = go.Geometry.parse("M0,0 h100 v100 h-100 v-100 l100,100 M0,100,100,0", false);
@@ -44,6 +44,8 @@ export default class Template {
 	static buildingColor = '#E4D2AA'; //"#fb04",
 	static beltColor = '#A7A7AE'; //"#6666";
 	static pipeColor = '#E8AF6C'; //#fa4a";
+	static inColor = "#fc0"; //#fa4a";
+	static outColor = "#0c0"; //#fa4a";
 
 	static drawingAngle;
 
@@ -180,7 +182,7 @@ export default class Template {
 		const y = (oPort) => oPort.side == 'top' ? 0 : (oPort.side == 'bottom' ? 1 : 0.5);
 		const oSpot = (oPort) => new go.Spot(x(oPort), y(oPort));
 		// ioOut
-		const inOutColor = (oPort) => oPort.inOut ? "#fc0" : "#0c0";
+		const inOutColor = (oPort) => oPort.inOut ? this.inColor : this.outColor;
 		const oGeometry = (oPort) => oPort.inOut ?
 			go.Geometry.parse("M35,0 v10 m0,80 v10 M50,0 v10 m0,80 v10 M65,0 v10 m0,80 v10 M100,100", false) :
 			go.Geometry.parse("M30,10 l10,-10 h20 l10,10 M30,90 l10,10 h20 l10,-10 M100,100", false);
@@ -267,19 +269,27 @@ export default class Template {
 			$(go.Shape, {
 				isPanelMain: true,
 
-				strokeWidth: (link) => byType(link, 16, 14),
+				strokeWidth: (link) => byType(link, 16, 14, 16),
 				stroke: "#888",
 			}),
 			$(go.Shape, {
 				name: (link) => byType(link, 'BELT', 'PIPE', ''),
 				isPanelMain: true,
-				stroke: (link) => byType(link, this.beltColor, this.pipeColor),
-				strokeWidth: (link) => byType(link, 14, 12),
-				strokeDashArray: (link) => byType(link, [8,1], [15,2], [1,1]),
+				stroke: (link) => byType(link, this.beltColor, this.pipeColor, this.beltColor),
+				strokeWidth: (link) => byType(link, 14, 12, 14),
+				strokeDashArray: (link) => byType(link, [8,1], [15,2], [8,1]),
 			}),
-			$(go.Shape, { toArrow: "Triangle" }),
-			$(go.Shape, { fromArrow: "Triangle" })
+			$(go.Shape, { toArrow: "RoundedTriangle", fill: this.inColor, }),
+			$(go.Shape, { fromArrow: "RoundedTriangle", fill: this.outColor, })
 		);
+	}
+
+	static linkHandle(fromTo) {
+		return $(go.Shape, "RoundedRectangle", {
+			desiredSize: new go.Size(5,5),
+			fill: fromTo ? this.outColor : this.inColor,
+			segmentIndex: fromTo ? 0 : -1,
+		});
 	}
 
 	static htmlPanel(Component, oProp, oEvent) {

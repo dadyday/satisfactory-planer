@@ -63,9 +63,9 @@ export default class GoAdapter {
 			"commandHandler.doKeyDown":             () => this.handleKey.call(this),
 			"draggingTool.gridSnapCellSize":        new go.Size(20, 20),
 			"draggingTool.isGridSnapEnabled":       true,
-			"draggingTool.gridSnapCellSpot":        new go.Spot(0,0,20,20),
+			//"draggingTool.gridSnapCellSpot":        new go.Spot(0,0,40,40),
 			"grid":                                 Templates.grid(),
-			"draggingTool.dragsLink":               true,
+			"draggingTool.dragsLink":               false,
 			"clickCreatingTool.archetypeNodeData":  (new Production('construct')).getNodeData(),
 
 			"linkingTool.temporaryLink":						Templates.link(),
@@ -87,8 +87,10 @@ export default class GoAdapter {
 //																								console.log('create a transport', fNode, fPort, tNode, tPort);
 //																							},
 
-			"relinkingTool.isUnconnectedLinkValid": true,
+			"relinkingTool.isUnconnectedLinkValid": false,
 			"relinkingTool.portGravity":            20,
+			"relinkingTool.fromHandleArchetype":    Templates.linkHandle(true),
+			"relinkingTool.toHandleArchetype":      Templates.linkHandle(false),
 			"rotatingTool.handleAngle":             45,
 			"rotatingTool.handleDistance":          0,
 			"rotatingTool.snapAngleMultiple":       90,
