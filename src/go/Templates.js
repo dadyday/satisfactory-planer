@@ -70,7 +70,6 @@ export default class Template {
 		};
 		new go.Binding("prop", "", conv).makeTwoWay(backConv),
 		*/
-
 		return $(go.Node, "Spot",
 			{
 				locationSpot: go.Spot.Center,
@@ -117,7 +116,7 @@ export default class Template {
 						row: 1,
 						column: 1,
 						stroke: "white",
-						font: "9pt sans-serif",
+						font: "7pt sans-serif",
 						text: (oNode) => receipe(oNode).getName(),
 					}),
 				),
@@ -125,56 +124,72 @@ export default class Template {
 				this.portSide('left'),
 				this.portSide('bottom'),
 				this.portSide('right'),
+			//	this.portSide('middle'),
 			)
 		);
 	}
 
 	static portSide(side) {
-		const horz = side == 'top' || side == 'bottom';
-
-		const marginX = (oNode) => (oNode.oSize.width % 40) / 2;
-		const marginY = (oNode) => (oNode.oSize.height % 40) / 2;
-		const oMargin = (oNode) => new go.Margin(marginX(oNode), marginY(oNode)); //marginX(oNode), marginY(oNode));
-
-		const spotSide = side.charAt(0).toUpperCase() + side.slice(1);
-		const oSpotParam = {
-			left:   [0, 0.5, 4, 0],
-			right:  [1, 0.5, -4, 0],
-			top:    [0.5, 0, 0, 4],
-			bottom: [0.5, 1, 0, -4],
-		};
-
+		/*
 		const oPortTmpl = this.port();
 		const oTmplMap = new go.Map();
 		//oTmplMap.add('', this.dummyPort());
 		oTmplMap.add('belt', oPortTmpl);
 		oTmplMap.add('pipe', oPortTmpl);
+		//oTmplMap.add('middle', this.middelPort());
+		*/
 
-		return $(go.Panel, horz ? 'Horizontal' : 'Vertical',
-			{
-				alignment: go.Spot[spotSide],
-				alignmentFocus: new go.Spot(...oSpotParam[side]),
-				itemArray: (oNode) => oNode.ports[side], //building(oNode).oSide[side], //
-				itemCategoryProperty: 'type',
-				itemTemplateMap: oTmplMap,
-				//margin: (oNode) => oMargin(oNode),
-			},
-		);
+		const oDef = {
+			itemArray: (oNode) => oNode.ports[side], //building(oNode).oSide[side], //
+			itemTemplate: this.port(),
+			//itemCategoryProperty: 'type',
+			//itemTemplateMap: oTmplMap,
+		};
+
+		switch (side) {
+			case 'left':
+				return $(go.Panel, 'Vertical', { alignment: go.Spot.Left, alignmentFocus: new go.Spot(0, 0.5, 4, 0), ...oDef});
+			case 'right':
+				return $(go.Panel, 'Vertical', { alignment: go.Spot.Right, alignmentFocus: new go.Spot(1, 0.5, -4, 0), ...oDef});
+			case 'top':
+				return $(go.Panel, 'Horizontal', { alignment: go.Spot.Top, alignmentFocus: new go.Spot(0.5, 0, 0, 4), ...oDef});
+			case 'bottom':
+				return $(go.Panel, 'Horizontal', { alignment: go.Spot.Bottom, alignmentFocus: new go.Spot(0.5, 1, 0, -4), ...oDef});
+		//	case 'middle':
+		//		return $(go.Panel, "Auto", { alignment: go.Spot.Center, alignmentFocus: new go.Spot(0.5, 0.5, 0, 0), ...oDef});
+				/*
+					$(go.Shape, {
+						geometry: testGeometry,
+						stroke: 'red',
+						strokeWidth: 2,
+						strokeJoin: "round",
+						strokeCap: "round",
+						desiredSize: new go.Size(s3, s3),
+					}),
+					$(go.Panel, 'Spot',
+						{
+							portId: 'ib0',
+							toSpot: go.Spot.Right,
+							toLinkable: true,
+							fromLinkable: false,
+							toMaxLinks: 1,
+							desiredSize: new go.Size(s3, s3),
+						},
+					),
+					$(go.Panel, 'Spot',
+						{
+							portId: 'ob0',
+							fromSpot: go.Spot.NotRightSide,
+							fromLinkable: true,
+							toLinkable: false,
+							fromMaxLinks: 3,
+							desiredSize: new go.Size(s3, s3),
+						},
+					),
+				);
+				*/
+		}
 	}
-
-	/*static dummyPort() {
-
-		return $(go.Panel, 'Spot', {
-			desiredSize: new go.Size(s1, s1),
-			margin: (oPort) => new go.Margin(...margin(oPort, (s0-s1)/2)),
-			},
-			// $(go.Shape, {
-			// 	geometry: testGeometry,
-			// 	stroke: 'green',
-			// 	strokeWidth: 2,
-			// }),
-		);
-	}*/
 
 	static port() {
 		// side
@@ -250,13 +265,15 @@ export default class Template {
 
 		return $(go.Link,
 			{
-				//routing: go.Link.AvoidsNodes, // go.Link.Orthogonal,
-				routing: go.Link.Orthogonal,
+				routing: go.Link.AvoidsNodes,
+				adjusting: go.Link.End,
+				//routing: go.Link.Orthogonal,
 				//curve: go.Link.JumpOver,
 				corner: r,
 				//curve: go.Link.JumpOver,
 				//fromEndSegmentLength: 28,
 				//toEndSegmentLength: 28,
+				fromSpot: (oLink, oPart) => $dump(oLink, oPart.fromSpot) || oPart.fromSpot, //go.Spot.Left,
 				fromEndSegmentLength: es,
 				toEndSegmentLength: es,
 				fromShortLength: sl,
