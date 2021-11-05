@@ -9,12 +9,14 @@ export default {
 		['pipe', false],
 	], 'fluid_buffer'],
 	splitter: [4, 4, 1, [
-		['belt', true],
-		['belt', false, 0, 'top'], ['belt', false, 0], ['belt', false, 0, 'bottom'],
+		['belt'],
+		//['belt', false, 0, 'middle']
+		//['belt', false, 0, 'middle'], ['belt', false, 0, 'middle'], ['belt', false, 0, 'middle'],
 	]],
 	merger: [4, 4, 1, [
-		['belt', true, 0, 'top'], ['belt', true, 0], ['belt', true, 0, 'bottom'],
-		['belt', false],
+		['belt'],
+		//['belt', true, 0, 'top'], ['belt', true], ['belt', true, 0, 'bottom'],
+		//['belt', false],
 	]],
 	lift: [3, 3, 3, [
 	]],
