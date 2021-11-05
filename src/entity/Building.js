@@ -10,7 +10,7 @@ export default class Building extends Entity {
 	name = '**deprecated**';
 	imgName = '';
 	oSize = { width: 100, height: 100 };
-	oSide = { left: [], right: [], top: [], bottom: []};
+	oSide = { left: [], right: [], top: [], bottom: [], middle: []};
 	aLayer = [];
 	mPort = new Map;
 

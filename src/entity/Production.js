@@ -48,8 +48,11 @@ export default class Production {
 	initPorts() {
 		this.mPort = new Map;
 		if (!this.oBuilding) return;
+		const sp = this.oBuilding.id == 'splitter';
+		const mg = this.oBuilding.id == 'merger';
 
 		this.oBuilding.mPort.forEach((oPort, id) => {
+			if ((sp || mg) && id[2] != '0') return;
 			const oItem = this.oReceipe?.getPortItem(oPort) ?? null;
 			const oTransport = {
 				id: oPort.id,
@@ -58,8 +61,10 @@ export default class Production {
 				inOut: oPort.inOut,
 				offset: oPort.offset,
 				item: oItem ? oItem[0] : null,
+				split: sp,
+				merge: mg,
 			};
-			this.mPort.getInit(oPort.side, []).push(oTransport);
+			this.mPort.getInit(sp || mg ? 'middle' : oPort.side, []).push(oTransport);
 		});
 	}
 

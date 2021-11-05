@@ -58,7 +58,7 @@ export default class GoAdapter {
 			"InitialLayoutCompleted":								(e) => {},
 			"initialDocumentSpot": 									go.Spot.Top,
 			"initialViewportSpot": 									go.Spot.Top,
-			"initialAutoScale": 										go.Diagram.Uniform,
+			"initialAutoScale": 										go.Diagram.UniformToFill, //go.Diagram.Uniform,
 			"undoManager.isEnabled":                true, // enable Ctrl-Z to undo and Ctrl-Y to redo
 			"commandHandler.doKeyDown":             () => this.handleKey.call(this),
 			"draggingTool.gridSnapCellSize":        new go.Size(20, 20),
@@ -97,7 +97,7 @@ export default class GoAdapter {
 			"rotatingTool.snapAngleEpsilon":        10,
 			"nodeTemplate":													Templates.node(),
 			"linkTemplate":													Templates.link(),
-			//"nodeTemplateMap":                      oNodeTemplateMap,
+			//"nodeTemplateMap":                      { split: Templates.node() },
 			//"linkTemplateMap":                      oLinkTemplateMap,
 		});
 		this.commandHandler = new go.CommandHandler();

@@ -93,6 +93,16 @@ Number.prototype.minMax = function (min, max) {
 Number.prototype.rationalize = function (epsilon = 0.001) {
 	return numberFormat.precise(this, 2);
 }
+String.prototype.toUpperCaseFirst = function () {
+	return this[0].toUpperCase() + this.substring(1);
+}
+
+String.prototype.toCamelCase = function () {
+  return this.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+    if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
+    return index === 0 ? match.toLowerCase() : match.toUpperCase();
+  });
+}
 
 Vue.config.productionTip = false
 Vue.prototype.$dump = window.$dump = console.log;

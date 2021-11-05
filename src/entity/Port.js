@@ -18,7 +18,7 @@ export default class Port {
 		this.pos = pos;
 		this.offset = offset;
 		switch (side) {
-			case 'top': case 'bottom': case 'left': case 'right':
+			case 'top': case 'bottom': case 'left': case 'right': case 'middle':
 				this.side = side;
 				break;
 			case 'above':

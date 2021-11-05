@@ -17,6 +17,6 @@
         "tracy/tracy": "^2.8",
         "nette/utils": "v3.2.x-dev",
         "jawira/case-converter": "^3.4",
-        "dadyday/xparse": "dev-master",
+        "dadyday/xparse": "dev-master"
     }
 }
