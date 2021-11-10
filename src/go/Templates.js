@@ -24,13 +24,13 @@ const $ = (type, ...args) => {
 	return $$(type, ...args);
 };
 /* Two Way Binding
-const conv = (oNode, oGraphObj) => {
-	console.log('conv', oNode, oGraphObj);
-	return oNode.prop; // to oGraphObj.prop
+const conv = (oNodeData, oGraphObj) => {
+	console.log('conv', oNodeData, oGraphObj);
+	return oNodeData.prop; // to oGraphObj.prop
 };
-const backConv = (value, oNode, oModel) => {
-	console.log('backConv', value, oNode, oModel);
-	oModel.setDataProperty(oNode, "prop", value);
+const backConv = (value, oNodeData, oModel) => {
+	console.log('backConv', value, oNodeData, oModel);
+	oModel.setDataProperty(oNodeData, "prop", value);
 };
 new go.Binding("prop", "", conv).makeTwoWay(backConv),
 */
@@ -352,6 +352,20 @@ export default class Template {
 			}
 			return def;
 		};
+		const savePoints = (value, oLinkData, oModel) => {
+			const aPoint = [];
+			value.each(oPoint => {
+				aPoint.push(oPoint.x + ' ' + oPoint.y);
+			})
+			oModel.setDataProperty(oLinkData, "path", aPoint);
+		};
+		const loadPoints = (oLinkData, oLink) => {
+			const oList = new go.List();
+			(oLinkData.path ?? []).forEach(point => {
+				oList.add(go.Point.parse(point));
+			})
+			return oList;
+		};
 
 		const oLink = $(MyLink,
 			{
@@ -365,10 +379,23 @@ export default class Template {
 				fromShortLength: sl,
 				toShortLength: sl,
 
+				relinkableFrom: true,
+				relinkableTo: true,
+				reshapable: true,
+				resegmentable: true,
+
 				isShadowed: true,
 				shadowColor: '#0002',
 				shadowOffset: new go.Point(5, 5),
 			},
+			new go.Binding("points", "", loadPoints).makeTwoWay(savePoints),
+			$(go.Shape, {
+				name: 'HELPER',
+				isPanelMain: true,
+				strokeWidth: 20,
+				stroke: "#f00",
+				strokeDashArray: [0, 99999],
+			}),
 			$(go.Shape, {
 				isPanelMain: true,
 				strokeWidth: (link) => byType(link, 16, 14, 16),
@@ -380,6 +407,17 @@ export default class Template {
 				stroke: (link) => byType(link, this.beltColor, this.pipeColor, this.beltColor),
 				strokeWidth: (link) => byType(link, 14, 12, 14),
 				strokeDashArray: (link) => byType(link, [8,1], [15,2], [8,1]),
+				fill: $$(go.Brush, "Pattern", {
+					//pattern: (link) => document.createElement('img', { src: item.get(link.item)?.imageUrl()}),
+					pattern: () => {
+						const el = document.createElement('img');
+						el.setAttribute('src', "img/item/big/versatile_framework.png");
+						return el;
+					},
+				}),
+				width: 20,
+				height:34,
+				position: new go.Point(0,14)
 			}),
 			$(go.Shape, { toArrow: "RoundedTriangle", fill: this.inColor, }),
 			$(go.Shape, { fromArrow: "RoundedTriangle", fill: this.outColor, })

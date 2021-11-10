@@ -4,6 +4,8 @@ var $ = go.GraphObject.make;
 import  { Production, Building } from "../entity";
 import Templates from './Templates';
 import Foo from "../components/Ctrls/Foo.vue";
+import LinkLabelTool from './LinkLabelTool';
+import SnapLinkReshapingTool from './SnapLinkReshapingTool';
 
 export default class GoAdapter {
 
@@ -91,6 +93,7 @@ export default class GoAdapter {
 			"relinkingTool.portGravity":            20,
 			"relinkingTool.fromHandleArchetype":    Templates.linkHandle(true),
 			"relinkingTool.toHandleArchetype":      Templates.linkHandle(false),
+			"linkReshapingTool":                    $(SnapLinkReshapingTool),
 			"rotatingTool.handleAngle":             45,
 			"rotatingTool.handleDistance":          0,
 			"rotatingTool.snapAngleMultiple":       90,
@@ -141,6 +144,7 @@ export default class GoAdapter {
 		//this.oDiagram.findLayer("elevated").opacity = 0.5;
 
 		this.oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
+		this.oDiagram.toolManager.mouseMoveTools.insertAt(0, new LinkLabelTool());
 		/*this.oDiagram.toolManager.linkingTool.copyPortProperties = (realnode, realport, tempnode, tempport, toend) => {
 			console.log(go.LinkingTool.prototype.constructor.prototype);
 			const oLinkData = this.oDiagram.toolManager.linkingTool.prototype.copyPortProperties.call(this.oDiagram.toolManager.linkingTool);
@@ -159,10 +163,12 @@ export default class GoAdapter {
 	}
 
 	addAnimation(oLink) {
-		var oStripes = oLink.findObject('BELT');
-		if (oStripes) this.animation.add(oStripes, "strokeDashOffset", 8, 0);
-		oStripes = oLink.findObject('PIPE');
-		if (oStripes) this.animation.add(oStripes, "strokeDashOffset", 1, 0);
+		var oTarget = oLink.findObject('BELT');
+		if (oTarget) this.animation.add(oTarget, "strokeDashOffset", 8, 0);
+		oTarget = oLink.findObject('PIPE');
+		if (oTarget) this.animation.add(oTarget, "strokeDashOffset", 1, 0);
+		oTarget = oLink.findObject('ITEM');
+		if (oTarget) this.animation.add(oTarget, "position", oTarget.position, oTarget.position.copy().offset(20, 220));
 	}
 
 	startAnimation(run = true) {
