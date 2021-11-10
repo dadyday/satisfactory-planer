@@ -24,13 +24,13 @@ const $ = (type, ...args) => {
 	return $$(type, ...args);
 };
 /* Two Way Binding
-const conv = (oNode, oGraphObj) => {
-	console.log('conv', oNode, oGraphObj);
-	return oNode.prop; // to oGraphObj.prop
+const conv = (oNodeData, oGraphObj) => {
+	console.log('conv', oNodeData, oGraphObj);
+	return oNodeData.prop; // to oGraphObj.prop
 };
-const backConv = (value, oNode, oModel) => {
-	console.log('backConv', value, oNode, oModel);
-	oModel.setDataProperty(oNode, "prop", value);
+const backConv = (value, oNodeData, oModel) => {
+	console.log('backConv', value, oNodeData, oModel);
+	oModel.setDataProperty(oNodeData, "prop", value);
 };
 new go.Binding("prop", "", conv).makeTwoWay(backConv),
 */
@@ -352,31 +352,19 @@ export default class Template {
 			}
 			return def;
 		};
-		const savePoints = (oPoints) => {
-			const aEdge = [];
-			var i = 1;
-			var a = oPoints.get(i++);
-			while (i < oPoints.length-2) {
-				var c = oPoints.get(i++);
-				if (c.x !== a.x) aEdge.push(c.x);
-				if (c.y !== a.y) aEdge.push(c.y);
-				a = c;
-			}
-			$dump('save', oPoints, aEdge);
-			return aEdge;
+		const savePoints = (value, oLinkData, oModel) => {
+			const aPoint = [];
+			value.each(oPoint => {
+				aPoint.push(oPoint.x + ' ' + oPoint.y);
+			})
+			oModel.setDataProperty(oLinkData, "path", aPoint);
 		};
-		const loadPoints = (aEdge, oPart) => {
-			const oPoints = oPart.points.copy();
-			oPoints.removeAt(2); oPoints.removeAt(2);
-			var i, swap = oPoints.get(0).y !== oPoints.get(1).y;
-			var last = oPoints.get(i = 1);
-			aEdge.forEach(value => {
-				last = new go.Point(swap ? last.x : value, swap ? value : last.y);
-				oPoints.insertAt(++i, last);
-				swap = !swap;
-			});
-			$dump('load', oPoints, aEdge);
-			return oPoints;
+		const loadPoints = (oLinkData, oLink) => {
+			const oList = new go.List();
+			(oLinkData.path ?? []).forEach(point => {
+				oList.add(go.Point.parse(point));
+			})
+			return oList;
 		};
 
 		const oLink = $(MyLink,
@@ -400,7 +388,14 @@ export default class Template {
 				shadowColor: '#0002',
 				shadowOffset: new go.Point(5, 5),
 			},
-			new go.Binding("points", "points", loadPoints).makeTwoWay(savePoints),
+			new go.Binding("points", "", loadPoints).makeTwoWay(savePoints),
+			$(go.Shape, {
+				name: 'HELPER',
+				isPanelMain: true,
+				strokeWidth: 20,
+				stroke: "#f00",
+				strokeDashArray: [0, 99999],
+			}),
 			$(go.Shape, {
 				isPanelMain: true,
 				strokeWidth: (link) => byType(link, 16, 14, 16),
