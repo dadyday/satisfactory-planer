@@ -72,9 +72,15 @@ export class MyLink extends go.Link {
 		super();
 	}
 
+	xx_computeSpot(...aArg) {
+		var ret = super.computeSpot(...aArg);
+		$dump(aArg, ret);
+		return ret;
+	}
+
 	x_computeSpot(isFrom, oPort = null) {
 		var oSpot = super.computeSpot(isFrom, oPort);
-		if (isFrom) $dump(this.key, 'computeSpot', oPort.portId, unSpot(oSpot));
+		//if (isFrom) $dump(this.key, 'computeSpot', oPort.portId, unSpot(oSpot));
 
 		if (oPort && oSpot.isSide()) {
 			oPort.calculateRealSpots(this.fromNode);
@@ -156,7 +162,7 @@ export class MyLink extends go.Link {
 	x_computeThickness() {
 		var ret = super.computeThickness();
 		$dump(this.key, 'computeThickness', ret);
-		return ret;
+		return 40;
 	}
 	x_computeSpacing() {
 		var ret = super.computeSpacing();

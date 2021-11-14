@@ -1,11 +1,13 @@
 import go from 'gojs';
 import  { MyNode, MyPort, MyLink } from "./Override";
+//import SpreadingOnce from './SpreadingOnce';
 import  { Item, Receipe, Building } from "../entity";
 
 import vueHelper from '../helper';
 import Foo from "../components/Ctrls/Foo.vue";
 import ProdCard from "../components/ProdCard.vue";
 import merge from 'deepmerge';
+
 
 const $$ = go.GraphObject.make;
 const $ = (type, ...args) => {
@@ -119,13 +121,80 @@ export default class Template {
 		);
 	}
 
+/*	static linkPort() {
+		return $(MyPort, 'Spot',
+			{
+				portId: 'ob0',
+
+				fromSpot: go.Spot.NotRightSide,
+				fromLinkable: true,
+				fromMaxLinks: 3,
+
+				toSpot: go.Spot.Right,
+				toLinkable: true,
+				toMaxLinks: 1,
+
+				desiredSize: new go.Size(s1, s1),
+
+				_isLinkLabel: true,
+				segmentIndex: NaN,
+				segmentFraction: .5,
+			},
+			this.portLayoutMiddle(),
+		);
+	}
+*/
+	static linkNode(merge) {
+
+		return $('Node', "Spot",
+			{
+				locationSpot: go.Spot.Center,
+
+				rotatable: true,
+				isShadowed: true,
+				shadowColor: this.shadowColor,
+				shadowOffset: this.shadowOffset,
+				layerName: 'Foreground',
+
+				name: 'LINKLABEL',
+				segmentIndex: NaN,
+				segmentFraction: 0.75,
+			},
+			//new go.Binding('segmentIndex').makeTwoWay(),
+			new go.Binding('segmentFraction').makeTwoWay(),
+			$(go.Shape, "RoundedRectangle", {
+				width: 34,
+				height: 34,
+				parameter1: 5,
+				fill: this.buildingColor,
+				strokeWidth: 2,
+			}),
+			$(MyPort, 'Spot',
+				{
+					portId: 'ob0',
+
+					fromSpot: merge ? go.Spot.TopBottomSides : go.Spot.None,
+					fromLinkable: merge,
+					fromMaxLinks: merge ? 2 : 0,
+
+					toSpot: merge ? go.Spot.None : go.Spot.TopBottomSides,
+					toLinkable: !merge,
+					toMaxLinks: merge ? 0 : 2,
+
+					desiredSize: new go.Size(s1, s1),
+				},
+				this.portLayoutMiddle(),
+			),
+		);
+	}
+
 	static node() {
 
 		return $(MyNode, "Spot",
 			{
-				portSpreading: go.Node.SpreadingNone, //go.Node.SpreadingPacked,
+				//portSpreading: go.Node.SpreadingNone, //go.Node.SpreadingPacket
 				locationSpot: go.Spot.Center,
-				// dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, oBuilding.aLayer),
+				//dragComputation: (oNode, oPoint, oGridPoint) => this.avoidNodeOverlap(oNode, oPoint, oGridPoint, oBuilding.aLayer),
 				rotatable: true,
 				isShadowed: true,
 				shadowColor: this.shadowColor,
@@ -287,8 +356,8 @@ export default class Template {
 	}
 
 	static portLayoutMiddle() {
-		const shape = (oPort) => oPort.type == 'belt' ? 'RoundedRectangle' : 'Ellipse';
-		const shapeColor = (oPort) => oPort.type == 'belt' ? this.beltColor : this.pipeColor;
+		const shape = (oPort) => oPort.type != 'pipe' ? 'RoundedRectangle' : 'Ellipse';
+		const shapeColor = (oPort) => oPort.type != 'pipe' ? this.beltColor : this.pipeColor;
 
 		return $(go.Panel, 'Spot',
 			{
@@ -344,6 +413,32 @@ export default class Template {
 		});
 	}
 
+	static tempLink() {
+		return $(MyLink,
+			{
+				routing: go.Link.Orthogonal,
+				corner: r,
+				selectable: false,
+
+				fromEndSegmentLength: es,
+				toEndSegmentLength: es,
+				fromShortLength: sl,
+				toShortLength: sl,
+
+				isShadowed: true,
+				shadowColor: '#0002',
+				shadowOffset: new go.Point(5, 5),
+			},
+			$(go.Shape, {
+				name: 'TEMP',
+				isPanelMain: true,
+				strokeWidth: 3,
+			}),
+			$(go.Shape, { toArrow: "RoundedTriangle", fill: this.inColor, }),
+			$(go.Shape, { fromArrow: "RoundedTriangle", fill: this.outColor, })
+		);
+	}
+
 	static link()  {
 		const byType = (link, belt, pipe, def) => {
 			switch (link.fromPortId[1]) {
@@ -369,7 +464,7 @@ export default class Template {
 
 		const oLink = $(MyLink,
 			{
-				routing: go.Link.AvoidsNodes, // go.Link.Orthogonal,
+				routing: go.Link.Orthogonal, // AvoidsNodes Orthogonal
 				adjusting: go.Link.End,
 				corner: r,
 				//curve: go.Link.JumpOver,
