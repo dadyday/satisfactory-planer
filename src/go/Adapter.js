@@ -4,7 +4,7 @@ var $ = go.GraphObject.make;
 import  { Production, Building } from "../entity";
 import Templates from './Templates';
 import Foo from "../components/Ctrls/Foo.vue";
-import LinkLabelTool from './LinkLabelTool';
+import MergerLinkingTool from './MergerLinkingTool';
 import SnapLinkReshapingTool from './SnapLinkReshapingTool';
 
 export default class GoAdapter {
@@ -70,7 +70,8 @@ export default class GoAdapter {
 			"draggingTool.dragsLink":               false,
 			"clickCreatingTool.archetypeNodeData":  (new Production('construct')).getNodeData(),
 
-			"linkingTool.temporaryLink":						Templates.link(),
+			"linkingTool":                          $(MergerLinkingTool),
+			"linkingTool.temporaryLink":						Templates.tempLink(),
 			"linkingTool.isValidLink": 							(fromNode, fromPort, toNode, toPort) => {
 																								//$dump(fromNode, toNode);
 																								if (fromPort.portId[1] != toPort.portId[1]) return false;
@@ -85,27 +86,27 @@ export default class GoAdapter {
 			"linkingTool.isUnconnectedLinkValid":   false,
 			"linkingTool.portGravity":              20,
 			"linkingTool.archetypeLinkData":        { type: 'belt' },
-//			"linkingTool.insertLink":               (fNode, fPort, tNode, tPort) => {
-//																								console.log('create a transport', fNode, fPort, tNode, tPort);
-//																							},
+			//"linkingTool.archetypeLabelNodeData":   { type: 'merge' },
 
 			"relinkingTool.isUnconnectedLinkValid": false,
 			"relinkingTool.portGravity":            20,
 			"relinkingTool.fromHandleArchetype":    Templates.linkHandle(true),
 			"relinkingTool.toHandleArchetype":      Templates.linkHandle(false),
+
 			"linkReshapingTool":                    $(SnapLinkReshapingTool),
+
 			"rotatingTool.handleAngle":             45,
 			"rotatingTool.handleDistance":          0,
 			"rotatingTool.snapAngleMultiple":       90,
 			"rotatingTool.snapAngleEpsilon":        10,
 			"nodeTemplate":													Templates.node(),
 			"linkTemplate":													Templates.link(),
-			//"nodeTemplateMap":                      { split: Templates.node() },
+			//"nodeTemplateMap":                      { connect: Templates.node() },
 			//"linkTemplateMap":                      oLinkTemplateMap,
 		});
 		this.commandHandler = new go.CommandHandler();
 
-		this.oDiagram.addDiagramListener('PartRotated', (ev) => {
+		/*this.oDiagram.addDiagramListener('PartRotated', (ev) => {
 			ev.subject.angle = Math.round(ev.subject.angle / 90) * 90;
 		});
 		this.oDiagram.addDiagramListener("LinkDrawn", (ev) => {
@@ -134,7 +135,7 @@ export default class GoAdapter {
 					oModel.assignAllDataProperties(oToNode.data, oInProd.getNodeData());
 				});
 			}
-		});
+		});*/
 
 
 
@@ -143,8 +144,8 @@ export default class GoAdapter {
 		this.oDiagram.addLayerBefore($(go.Layer, { name: "ground", opacity: 0.6, }), oFore);
 		//this.oDiagram.findLayer("elevated").opacity = 0.5;
 
-		this.oDiagram.toolManager.linkingTool.temporaryLink.routing = go.Link.AvoidsNodes;
-		this.oDiagram.toolManager.mouseMoveTools.insertAt(0, new LinkLabelTool());
+
+		//this.oDiagram.toolManager.mouseMoveTools.insertAt(0, new LinkToMergerTool());
 		/*this.oDiagram.toolManager.linkingTool.copyPortProperties = (realnode, realport, tempnode, tempport, toend) => {
 			console.log(go.LinkingTool.prototype.constructor.prototype);
 			const oLinkData = this.oDiagram.toolManager.linkingTool.prototype.copyPortProperties.call(this.oDiagram.toolManager.linkingTool);
@@ -159,14 +160,17 @@ export default class GoAdapter {
 		this.oDiagram.model.linkFromPortIdProperty = "fromPortId";
 		this.oDiagram.model.linkToPortIdProperty = "toPortId";
 		this.oDiagram.model.linkCategoryProperty = "type";
+		this.oDiagram.model.linkLabelKeysProperty = "keys";
 
+		this.oDiagram.nodeTemplateMap.add("merge", Templates.linkNode(true));
+		this.oDiagram.nodeTemplateMap.add("split", Templates.linkNode(false));
 	}
 
 	addAnimation(oLink) {
 		var oTarget = oLink.findObject('BELT');
 		if (oTarget) this.animation.add(oTarget, "strokeDashOffset", 8, 0);
 		oTarget = oLink.findObject('PIPE');
-		if (oTarget) this.animation.add(oTarget, "strokeDashOffset", 1, 0);
+		if (oTarget) this.animation.add(oTarget, "strokeDashOffset", 3, 0);
 		oTarget = oLink.findObject('ITEM');
 		if (oTarget) this.animation.add(oTarget, "position", oTarget.position, oTarget.position.copy().offset(20, 220));
 	}

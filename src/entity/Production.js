@@ -9,6 +9,7 @@ import {
 export default class Production {
 	static lastId = 1;
 
+	id;
 	name = '***deprecated***'; // Receipe name
 	oBuilding; // Building object
 	oReceipe; // Receipe object
